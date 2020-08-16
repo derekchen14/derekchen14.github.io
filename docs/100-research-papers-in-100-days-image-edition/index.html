@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>100 Research Papers in 100 Days (Image Edition)</title>
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" type="text/css" href="../assets/built/screen.css%3Fv=245ecc38c2.css" />
+
+    <meta name="description" content="Research paper summaries giving intuition behind the top paper in the computer vision and image recognition field." />
+    <link rel="canonical" href="index.html" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    <link rel="amphtml" href="amp/index.html" />
+    
+    <meta property="og:site_name" content="More Than One Turn" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="100 Research Papers in 100 Days (Image Edition)" />
+    <meta property="og:description" content="Research paper summaries giving intuition behind the top paper in the computer vision and image recognition field." />
+    <meta property="og:url" content="http://localhost:2368/100-research-papers-in-100-days-image-edition/" />
+    <meta property="og:image" content="http://localhost:2368/content/images/2016/10/monalisa.jpg" />
+    <meta property="article:published_time" content="2016-10-15T14:04:00.000Z" />
+    <meta property="article:modified_time" content="2017-03-25T05:21:50.000Z" />
+    <meta property="article:tag" content="CNN" />
+    <meta property="article:tag" content="image recognition" />
+    
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="100 Research Papers in 100 Days (Image Edition)" />
+    <meta name="twitter:description" content="Research paper summaries giving intuition behind the top paper in the computer vision and image recognition field." />
+    <meta name="twitter:url" content="http://localhost:2368/100-research-papers-in-100-days-image-edition/" />
+    <meta name="twitter:image" content="http://localhost:2368/content/images/2016/10/monalisa.jpg" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Derek Chen" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="CNN, image recognition" />
+    <meta name="twitter:site" content="@derekchen14" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "More Than One Turn",
+        "url": "http://localhost:2368/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "http://localhost:2368/favicon.ico",
+            "width": 48,
+            "height": 48
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Derek Chen",
+        "image": {
+            "@type": "ImageObject",
+            "url": "//www.gravatar.com/avatar/9f3ee838eeb42849d4880676cedd85d6?s=250&d=mm&r=x",
+            "width": 250,
+            "height": 250
+        },
+        "url": "http://localhost:2368/author/derek/",
+        "sameAs": []
+    },
+    "headline": "100 Research Papers in 100 Days (Image Edition)",
+    "url": "http://localhost:2368/100-research-papers-in-100-days-image-edition/",
+    "datePublished": "2016-10-15T14:04:00.000Z",
+    "dateModified": "2017-03-25T05:21:50.000Z",
+    "image": {
+        "@type": "ImageObject",
+        "url": "http://localhost:2368/content/images/2016/10/monalisa.jpg"
+    },
+    "keywords": "CNN, image recognition",
+    "description": "Computer Vision (CNNs)\nIdentity Mappings in Deep Residual Networks [http://arxiv.org/abs/1603.05027] \n(He, Zhang, Ren, Sun) [Read: Sept 23rd]\n\n * Idea: Passing more information forward in a network by establishing\n   skip-connections can result in much deeper and more powerful networks. The\n   authors of the original ResNets now expand on this idea by tweaking the\n   connections a bit. * (1) First they experiment with the type of\n      skip-connections (as given by function h). They argue that t",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://localhost:2368/"
+    }
+}
+    </script>
+
+    <meta name="generator" content="Ghost 3.29" />
+    <link rel="alternate" type="application/rss+xml" title="More Than One Turn" href="../rss/index.html" />
+    <style>
+.page-title,
+.page-description {
+   color:#3D0F90!important;
+   text-shadow: #F7FAEB 0px 0px 0.3em;
+}
+a { color: #3399ff; }  
+.nav li a:after { display: none; }
+.nav li:before { display: none; }
+li { margin: 0.2em 0; }
+ol, ul {
+	margin: 0;
+    position: relative;
+}
+ol > li, ul > li { bottom: 0; }
+p { margin: 0 0 0.7em 0; }
+.main-header { height: 90vh; }
+
+article.post { width: 100%; }
+section.post-full-content {
+    padding: 0;
+    line-height: 1em;
+    font-size: 1.4em;
+}
+h1.site-title, h2.site-description { 
+    text-shadow: 2px 2px 3px #232522;
+} 
+    
+</style>
+
+</head>
+<body class="post-template tag-cnn tag-image-recognition">
+
+    <div class="site-wrapper">
+
+        
+
+<header class="site-header">
+    <div class="outer site-nav-main">
+    <div class="inner">
+        <nav class="site-nav">
+    <div class="site-nav-left-wrapper">
+        <div class="site-nav-left">
+                <a class="site-nav-logo" href="../index.html">More Than One Turn</a>
+            <div class="site-nav-content">
+                    <ul class="nav">
+    <li class="nav-home"><a href="../index.html">Home</a></li>
+    <li class="nav-about"><a href="http://feature.engineering/about">About</a></li>
+    <li class="nav-contact"><a href="http://feature.engineering/contact">Contact</a></li>
+</ul>
+
+                    <span class="nav-post-title dash">100 Research Papers in 100 Days (Image Edition)</span>
+            </div>
+        </div>
+    </div>
+    <div class="site-nav-right">
+            <div class="social-links">
+                    <a class="social-link social-link-tw" href="https://twitter.com/derekchen14" title="Twitter" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+</a>
+            </div>
+                <a class="rss-button" href="https://feedly.com/i/subscription/feed/http://localhost:2368/rss/" title="RSS" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="6.18" cy="17.82" r="2.18"/><path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/></svg>
+</a>
+
+    </div>
+</nav>
+    </div>
+</div></header>
+
+
+<main id="site-main" class="site-main outer">
+    <div class="inner">
+
+        <article class="post-full post tag-cnn tag-image-recognition ">
+
+            <header class="post-full-header">
+
+                <section class="post-full-tags">
+                    <a href="../tag/cnn/index.html">CNN</a>
+                </section>
+
+                <h1 class="post-full-title">100 Research Papers in 100 Days (Image Edition)</h1>
+
+
+                <div class="post-full-byline">
+
+                    <section class="post-full-byline-content">
+
+                        <ul class="author-list">
+                            <li class="author-list-item">
+
+                                <div class="author-card">
+                                    <img class="author-profile-image" src="http://www.gravatar.com/avatar/9f3ee838eeb42849d4880676cedd85d6?s=250&amp;d=mm&amp;r=x" alt="Derek Chen" />
+                                    <div class="author-info">
+                                        <h2>Derek Chen</h2>
+                                        <p>Read <a href="../author/derek/index.html">more posts</a> by this author.</p>
+                                    </div>
+                                </div>
+
+                                <a href="../author/derek/index.html" class="author-avatar">
+                                    <img class="author-profile-image" src="http://www.gravatar.com/avatar/9f3ee838eeb42849d4880676cedd85d6?s=250&amp;d=mm&amp;r=x" alt="Derek Chen" />
+                                </a>
+
+                            </li>
+                        </ul>
+
+                        <section class="post-full-byline-meta">
+                            <h4 class="author-name"><a href="../author/derek/index.html">Derek Chen</a></h4>
+                            <div class="byline-meta-content">
+                                <time class="byline-meta-date" datetime="2016-10-15">15 Oct 2016</time>
+                                <span class="byline-reading-time"><span class="bull">&bull;</span> 8 min read</span>
+                            </div>
+                        </section>
+
+                    </section>
+
+
+                </div>
+            </header>
+
+            <figure class="post-full-image">
+                <img
+                    srcset="/content/images/size/w300/2016/10/monalisa.jpg 300w,
+                            /content/images/size/w600/2016/10/monalisa.jpg 600w,
+                            /content/images/size/w1000/2016/10/monalisa.jpg 1000w,
+                            /content/images/size/w2000/2016/10/monalisa.jpg 2000w"
+                    sizes="(max-width: 800px) 400px,
+                        (max-width: 1170px) 1170px,
+                            2000px"
+                    src="http://localhost:2368/content/images/size/w2000/2016/10/monalisa.jpg"
+                    alt="100 Research Papers in 100 Days (Image Edition)"
+                />
+            </figure>
+
+            <section class="post-full-content">
+                <div class="post-content">
+                    <!--kg-card-begin: markdown--><h3 id="computervisioncnns">Computer Vision (CNNs)</h3>
+<p><a href="http://arxiv.org/abs/1603.05027"><strong>Identity Mappings in Deep Residual Networks</strong></a> <em>(He, Zhang, Ren, Sun)</em> [Read: Sept 23rd]</p>
+<ul>
+<li><strong>Idea</strong>: Passing more information forward in a network by establishing skip-connections can result in much deeper and more powerful networks. The authors of the original ResNets now expand on this idea by tweaking the connections a bit.
+<ul>
+<li>(1) First they experiment with the type of skip-connections (as given by function <em>h</em>). They argue that the best type of skip connection is simply the identity function, largely because any other type of function (scalar multiplication, dropout, gate, conv, etc.) will result in vanishing or exploding gradients. A simpler way to see this is that any manipulations on the shortcuts can hamper information propagation and lead to optimization problems.</li>
+<li>(2) In a typical ResNet, the results of the Convs are added to the results of an identity output, and then a post-activiation ReLU is applied before passing the outputs to the next block.  In the proposed &quot;pre-activation&quot; process, there is no longer a ReLU after the addition.  Instead, the identity results are allowed to flow through completely unimpeded, and a pre-processing of [Batch Norm]-&gt;[ReLU] is applied to the Conv portion before multiplying the by the weights.</li>
+<li>The authors experimented with only have ReLU, rather than BN and ReLU in the pre-activation step, as well as a number of other combinations before arriving at the final model, which yielded the best empirical results.</li>
+</ul>
+</li>
+<li><strong>Results</strong>: New pre-activation units achieve gains over previous state-of-the-art original ResNets by roughly 10% from ~5.5. to ~4.8 on ImageNet. All of these gains allow for networks of over 1000 layers!</li>
+<li><strong>Lessons</strong>: The authors believe this works well because first, the optimization is further eased since an identity mapping over a ReLU allows the signal to be passed freely backwards and forwards. Secondly, this works well because using BN as pre-activation improves regularization of the models.</li>
+</ul>
+<p><a href="https://arxiv.org/pdf/1608.06993v1.pdf"><strong>Densely Connected Convolutional Networks</strong></a> <em>(Huang, Liu, Weinberger)</em> [Read Sept 15th]</p>
+<ul>
+<li><strong>Idea</strong>: When dealing with CNNs, we've seen that passing more information over directly through ResNets or Highway Networks allows the final softmax classifier to perform better even when the networks have many layers. The authors take this one step further such that each layer obtains additional inputs from all preceding layers and passes on its own feature maps to all subsequent layers. Crucially, in contrast to ResNets, the model does not combine features through summation before they are passed into a layer, and instead the model provides all the features as separate inputs.</li>
+<li>One counter-intuitive point is that in some cases, DenseNets actually require fewer parameters than traditional networks because each subsequent layer requires fewer feature maps to perform well, and fewer feature maps overall means fewer weights to optimize. This is made possible because all layers in a DenseNet have direct access to feature maps from all preceding layers, which means that many of the feature maps (namely those from the beginning) are being reused by layers towards the end.  In turn, this reuse lowers the burden on future layers to re-learn redundant feature maps. More concretely, in traditional ConvNets, the number of maps per layer is a medium size number (~64) and the number of connections grows linearly.  In a DenseNet, the number of connections grows much faster, but the maps per layer is a small size number (~12).  Thus, even though the number of connections grows quadratically, DenseNet layers start with a smaller base, so depending on the final depth, the total number of parameters might actually end up smaller as well.</li>
+<li><strong>Results</strong>: The DenseNet beats the state-of-the-art on CIFAR-10, CIFAR-100 and SVHN by a decent margin, with improvements around 30% over previous methods.  When the depth of the DenseNet is lowered such that the total number of params is roughly equal to the total number of params in a ResNet, the DenseNet performance is consistently lower by a factor of around 11%.</li>
+<li><strong>Lessons</strong>: One potential side-effect of the more efficient use of parameters may be a tendency of DenseNets to be more robust against overfitting, which led to a lessened need for regularization. Dropout was only used for datasets without data augmentation, which are substantially smaller and thus more prone to overfitting. Separately, inspired by (He et al., 2016), composite layers that contain (Batch Norm)-(ReLU)-(ConvPool) seem to be great mechanisms for joining together network components.</li>
+</ul>
+<p><a href="https://arxiv.org/abs/1603.09382"><strong>Deep Networks with Stochastic Depth</strong></a> <em>(Huang, Sun, Liu, Sedra, Weinberger)</em> [Read Sept 26th]</p>
+<ul>
+<li><strong>Idea</strong>: The expressive power of deep ConvNets with 100s of layers leads to significant improvements in performance.  However, this does not come without a cost, since deep networks often exhibit problems of diminishing feature reuse in feed forward calculations, vanishing gradients during backprop, and slower training time.  To address these problems, the authors propose a stochastic depth procedure where the network size is randomly cut shorter during training time (and is the full length during test time). Concretely, each mini-batch has a chance of dropping a subset of layers and bypassing those layers with the identity function. Each layer is dropped based on the outcome of an independent Bernoulli random variable, whose distribution is determined by a linear decay rate such that later layers (closer to output) have a higher likelihood of being dropped than earlier layers (closer to input).</li>
+<li><strong>Results</strong>: Recall VGG-net and GoogLeNet have 19 and 22 layers respectively, from 2014.  ResNets pushed this to 152 layers last year, and now in 2016, 1000+ layers (yes, thousand) can be trained effectively.  This yields test errors below 5% on CIFAR, which is state-of-the-art during time of publication.</li>
+<li>Training time is no longer a function of total size, but rather total expected network size.  Based on the proposed survival probability scheme, this amounts to ~25% time decrease over networks of the same constant size.</li>
+<li><strong>Lessons</strong>: The random dropping of layers with stochastic depth functions a lot like the random dropping of units with dropout.  Whereas the former performs operations on depth, the latter performs operations on width.  Other notable similarities is that both seem to offer a form of regularization, as well as a makeshift ensemble of different network sizes.</li>
+</ul>
+<p><a href="https://arxiv.org/abs/1604.03640"><strong>Bridging the Gaps Between Residual Learning, Recurrent Neural Networks and Visual Cortex</strong></a> <em>(Liao, Poggio)</em> [Read Oct 3rd]</p>
+<ul>
+<li><strong>Idea</strong>: ResNets have recently shown great promise in image recognition, but often require 1000+ neural units to achieve the SOTA accuracy.  While impressive, the human brain does this with just dozens of neurons.  One advantage the brain uses is lateral connections in addition to depth connections, so the authors propose combining the ResNet (depth) with RNN-like structure (lateral) which would more closely mimic how the visual cortex operates.</li>
+<li>In particular, they reformulate the ResNet architecture to have shared weights across &quot;time-steps&quot;, where one time-step is a pass through one time-step of a ResNet block (BN-ReLU-Conv), representing the lateral connections.  Next, they layer on multiple &quot;RNN-ResNet&quot; blocks in a hierarchical fashion to simulate the depth. This is essentially the form of a stacked-RNN. Finally, there is a pre-net and post-net for input preprocessing and post-processing, all trained jointly.</li>
+<li><strong>Results</strong>: On the CIFAR-10 dataset, the new structure does <em>not</em> perform as well as original ResNets (~6% loss vs ~2% loss) by roughly a factor of 3x.  This corresponds to the roughly 3x fewer params to train (100k vs 300k) because weights are shared. Those extra weights are clearly making a difference though, and can't just be tossed away.</li>
+<li><strong>Remarks</strong>: While the biological inspiration is certainly interesting, the empirical results are lackluster.  I'm sure a future architecture will find a way to combine all the hot ideas (CNNs, Skip-connections, GRUs, Batch Norm and let's throw in Dropout too), but we are not there yet.</li>
+</ul>
+<h3 id="newdatasets">New Datasets</h3>
+<p><a href="https://arxiv.org/abs/1604.03968"><strong>Visual Storytelling</strong></a><br>
+<em>(Huang, Ferraro, Mostafazadeh, Misra, Agrawal, Devlin, Girshick, et al.)</em> [Read Oct 4th]</p>
+<ul>
+<li><strong>Ideas</strong>: Image recognition has arguably surpassed human accuracy, and yet there still lacks a sense that machines are better than humans at storytelling.  In particular, while machines can now be trained to give literal descriptions of an image (sun is setting), it still struggles to give colorful narratives filled with emotion or intent (sky is illuminated with brilliance as the gentle sun drops beneath the horizon). In order to tackle this, the authors developed a public dataset of sequences of images that offer more context about how situations evolve and give machines a chance to reason about changes over time.</li>
+<li>The dataset was created using thousands of Mechanical Turk workers, with multiple stages of processing and quality control.  Concretely, rather than having the workers simply label the images using the instruction &quot;describe all the important parts&quot;, the new instructions ask the turkers to tell a story. The authors then establish a baseline by building a network that generates stories.</li>
+<li><strong>Results</strong>: Of course, grading a story is quite difficult, so after producing stories, a panel of human judges evaluated each story depending on how much they agreed with the statement “If these were my photos, I would like using a story like this to share my experience with my friends”.  Then the authors tried a couple of different automatic evaluation techniques to find which metric most closely correlated with the human judges evaluations. To this end, the authors found that METEOR smoothed-BLEU is the most ideal automatic evaluation metric, an idea from C.Y. Lin and F.J. Och in 2004, from their talk Automatic Evaluation of Machine Translation<br>
+Quality Using Longest Common Subsequence and Skip-bigram Statistics.</li>
+<li><strong>Lessons</strong>: New dataset (SIND), great win for the community!</li>
+</ul>
+<p><a href="https://arxiv.org/abs/1604.07316"><strong>End to End Learning for Self-Driving Cars</strong></a> (<em>Bojarski, Testa, Dworakowski, Firner, Flepp, Goyal, Jackel, et al.</em>) [Read Oct 10th]</p>
+<ul>
+<li><strong>Idea</strong>: Memory Networks and CNNs trained end-to-end have shown great promise in a number of applications, so the authors from Nvidia thought about trying this to the self-driving car problem.  While straightforward, the idea is also quite ambitious because there are many more steps to driving a car than a task like image captioning, which is already quite difficult.  In particular, performing such a task would require recognizing lane markers (left to right steering), recognizing obstacles (breaking), ramping onto a highway (acceleration), recognizing signs (deceleration), different weather conditions, and much more!</li>
+<li>If done correctly though, the model would be quite a breakthrough because it could interact directly with the world, rather than interpreting its surroundings through a composition of human-selected signaling mechanisms.</li>
+<li><strong>Results</strong>: &quot;A small amount of training data from less than a hundred hours of driving was sufficient to train the car to operate in diverse conditions, on highways, local and residential roads in sunny, cloudy, and rainy conditions.&quot; Absolutely amazing, here's the video: <a href="https://drive.google.com/file/d/0B9raQzOpizn1TkRIa241ZnBEcjQ/view">https://drive.google.com/file/d/0B9raQzOpizn1TkRIa241ZnBEcjQ/view</a>.</li>
+<li>There are still parts that can be improved, but clearly self-driving cars are going to be a real thing within the next year.  For context, this paper was from April 2016.</li>
+</ul>
+<p><a href="https://arxiv.org/abs/1611.03530"><strong>Understanding deep learning requires rethinking generalization</strong></a> (<em>Zhang, Bengio, Hardt, Recht, Vinyals</em>) [Read Mar 24th]<br>
+-<strong>Idea</strong>: Neural networks have amazing power such that even given random labels or an image with random noise, the network can predict those classes with full accuracy on training data.  Of course, the same model falls apart completely on the test data because all it has done is &quot;create a hashmap&quot; that memorized all the training data.  It's not the models fault that it didn't pick up any salient features in the image - there are no meaningful features to pick up!  Thus, if the network is so successful at memorizing features, then how is it able to generalize under normal circumstances?  It seems like a network (such as Inception or AlexNet) is able thus able to learn useful features (such as lines or angles) when available, but will fall back to rote memorization when those signals aren't available.  The final takeaway is that due to this divergence, classical statistical learning theory and regularization strategy can not explain the outstanding generalization ability of deep networks.<br>
+-<strong>Remarks</strong>: This paper won ICLR best paper award, but, in my humble opinion, doesn't seem all that ground-breaking.  In particular, even though I am convinced that traditional statistical methods do not apply here, the authors don't offer an alternative.  Moreover, the result just doesn't seem that surprising.  It would not be surprising to hear that kids can memorize random vocabulary for an exam. And those same kids are also able learn vocabulary faster with the presence of useful features (for example, &quot;bilateral&quot; means two sided based on construction of prefix and suffix).  The former task is harder and would take longer to do. Similarly, we see a CNN takes longer to converge when training on random noise.  So basically, we're saying that a network can learn in multiple ways.  Maybe what's amazing is that we can't explain how the network does that?</p>
+<p>FractalNet (Larsson et al., 2016)<br>
+GoogLeNet with the “Inception module” (Szegedy et al., 2015)<br>
+Highway Networks (Srivastava et al., 2015)<br>
+Ladder Networks (Rasmus et al., 2015)<br>
+Actual CV tasks (Gardner et al., 2015) (Gatys et al., 2015)</p>
+<!--kg-card-end: markdown-->
+                </div>
+            </section>
+
+
+
+        </article>
+
+    </div>
+</main>
+
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+
+                <article class="post-card post no-image no-image">
+
+
+    <div class="post-card-content">
+
+        <a class="post-card-content-link" href="../regularization/index.html">
+
+            <header class="post-card-header">
+                <h2 class="post-card-title">L1 vs. L2 Regularization</h2>
+            </header>
+
+            <section class="post-card-excerpt">
+                    <p>It's straightforward to see that L1 and L2 regularization both prefer small numbers, but it is harder to see the intuition in how they get there.  Specifically, the L1 norm and the L2 norm differ in how they achieve their objective of small weights,</p>
+            </section>
+
+        </a>
+
+        <footer class="post-card-meta">
+            <ul class="author-list">
+                <li class="author-list-item">
+            
+                    <div class="author-name-tooltip">
+                        Derek Chen
+                    </div>
+            
+                    <a href="../author/derek/index.html" class="static-avatar">
+                        <img class="author-profile-image" src="http://www.gravatar.com/avatar/9f3ee838eeb42849d4880676cedd85d6?s=250&amp;d=mm&amp;r=x" alt="Derek Chen" />
+                    </a>
+                </li>
+            </ul>
+            <div class="post-card-byline-content">
+                <span><a href="../author/derek/index.html">Derek Chen</a></span>
+                <span class="post-card-byline-date"><time datetime="2016-10-17">17 Oct 2016</time> <span class="bull">&bull;</span> 1 min read</span>
+            </div>
+        </footer>
+
+    </div>
+
+</article>
+
+                <article class="post-card post tag-nlp tag-language-modeling tag-machine-translation tag-word-embeddings ">
+
+    <a class="post-card-image-link" href="../100-research-papers-in-100-days-2/index.html">
+        <img class="post-card-image"
+            srcset="/content/images/size/w300/2016/09/conversation4-2.png 300w,
+                    /content/images/size/w600/2016/09/conversation4-2.png 600w,
+                    /content/images/size/w1000/2016/09/conversation4-2.png 1000w,
+                    /content/images/size/w2000/2016/09/conversation4-2.png 2000w"
+            sizes="(max-width: 1000px) 400px, 700px"
+            loading="lazy"
+            src="http://localhost:2368/content/images/size/w600/2016/09/conversation4-2.png"
+            alt="100 Research Papers in 100 Days (NLP Edition)"
+        />
+    </a>
+
+    <div class="post-card-content">
+
+        <a class="post-card-content-link" href="../100-research-papers-in-100-days-2/index.html">
+
+            <header class="post-card-header">
+                    <div class="post-card-primary-tag">nlp</div>
+                <h2 class="post-card-title">100 Research Papers in 100 Days (NLP Edition)</h2>
+            </header>
+
+            <section class="post-card-excerpt">
+                    <p>The pace of machine learning research is advancing at such a breakneck pace, the only way to keep up is to read every single day.  So awhile back, 100 days</p>
+            </section>
+
+        </a>
+
+        <footer class="post-card-meta">
+            <ul class="author-list">
+                <li class="author-list-item">
+            
+                    <div class="author-name-tooltip">
+                        Derek Chen
+                    </div>
+            
+                    <a href="../author/derek/index.html" class="static-avatar">
+                        <img class="author-profile-image" src="http://www.gravatar.com/avatar/9f3ee838eeb42849d4880676cedd85d6?s=250&amp;d=mm&amp;r=x" alt="Derek Chen" />
+                    </a>
+                </li>
+            </ul>
+            <div class="post-card-byline-content">
+                <span><a href="../author/derek/index.html">Derek Chen</a></span>
+                <span class="post-card-byline-date"><time datetime="2016-10-11">11 Oct 2016</time> <span class="bull">&bull;</span> 69 min read</span>
+            </div>
+        </footer>
+
+    </div>
+
+</article>
+        </div>
+    </div>
+</aside>
+
+
+
+
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="../index.html">More Than One Turn</a> &copy; 2020</section>
+                <nav class="site-footer-nav">
+                    <a href="../index.html">Latest Posts</a>
+                    
+                    <a href="https://twitter.com/derekchen14" target="_blank" rel="noopener">Twitter</a>
+                    <a href="https://ghost.org" target="_blank" rel="noopener">Ghost</a>
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+
+
+    <script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous">
+    </script>
+    <script src="../assets/built/casper.js%3Fv=245ecc38c2"></script>
+
+    <script>
+        // Parse the URL parameter
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+        // Give the parameter a variable name
+        var action = getParameterByName('action');
+
+        $(document).ready(function () {
+            if (action == 'subscribe') {
+                $('body').addClass("subscribe-success");
+            }
+
+            $('.subscribe-success-message .subscribe-close').click(function () {
+                $('.subscribe-success-message').addClass('close');
+            });
+
+            // Reset form on opening subscrion overlay
+            $('.subscribe-button').click(function() {
+                $('.subscribe-overlay form').removeClass();
+                $('.subscribe-email').val('');
+            });
+        });
+    </script>
+
+    <script>
+    $(document).ready(function () {
+        // FitVids - start
+        var $postContent = $(".post-full-content");
+        $postContent.fitVids();
+        // FitVids - end
+
+        // Replace nav with title on scroll - start
+        Casper.stickyNavTitle({
+            navSelector: '.site-nav-main',
+            titleSelector: '.post-full-title',
+            activeClass: 'nav-post-title-active'
+        });
+        // Replace nav with title on scroll - end
+
+        // Hover on avatar
+        var hoverTimeout;
+        $('.author-list-item').hover(function () {
+            var $this = $(this);
+
+            clearTimeout(hoverTimeout);
+
+            $('.author-card').removeClass('hovered');
+            $(this).children('.author-card').addClass('hovered');
+
+        }, function () {
+            var $this = $(this);
+
+            hoverTimeout = setTimeout(function () {
+                $this.children('.author-card').removeClass('hovered');
+            }, 800);
+        });
+    });
+</script>
+
+
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+</body>
+</html>

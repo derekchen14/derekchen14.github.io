@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:media="http://search.yahoo.com/mrss/"><channel><title><![CDATA[More Than One Turn]]></title><description><![CDATA[Thoughts about Conversational AI and interactive dialogue systems.]]></description><link>http://localhost:2368/</link><image><url>http://localhost:2368/favicon.png</url><title>More Than One Turn</title><link>http://localhost:2368/</link></image><generator>Ghost 3.29</generator><lastBuildDate>Sun, 16 Aug 2020 01:31:03 GMT</lastBuildDate><atom:link href="http://localhost:2368/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Measuring Uncertainty]]></title><description><![CDATA[<p>Compared to typical goal-oriented dialogue systems, interactive dialogue agents not only aim to solve the task at hand, but also engage with the user by asking questions.  Questions can be used to push the conversation forward or to spark some new ideas, but for now we will focus on the</p>]]></description><link>http://localhost:2368/measuring-uncertainty/</link><guid isPermaLink="false">5f3346f8a690db34fce5566e</guid><dc:creator><![CDATA[Derek Chen]]></dc:creator><pubDate>Wed, 29 Jul 2020 20:06:00 GMT</pubDate><content:encoded><![CDATA[<p>Compared to typical goal-oriented dialogue systems, interactive dialogue agents not only aim to solve the task at hand, but also engage with the user by asking questions.  Questions can be used to push the conversation forward or to spark some new ideas, but for now we will focus on the use of questions to clarify understanding.  <a href="https://www.researchgate.net/profile/Matthew_Purver/publication/236273309_The_Theory_and_Use_of_Clarification_Requests_in_Dialogue/links/00b7d5313817a20f30000000/The-Theory-and-Use-of-Clarification-Requests-in-Dialogue.pdf">Clarification requests</a>, as they are referred to in the academic literature, come in many forms, but the key issues to solve are when to ask such questions and in what format.  Asking questions too often, or at inappropriate times, causes the conversation to feel disjointed or annoying.  Asking the wrong type of question causes the dialogue agent to seem incoherent or useless.</p><p>Recognizing <a href="http://localhost:2368/deciding-when-to-ask-questions-for-dialogue/">when to ask questions</a> and what questions to ask can be tackled by having a NLU module which has a interpretable and <a href="https://papers.nips.cc/paper/5658-calibrated-structured-prediction.pdf">well-calibrated</a> measure of uncertainty, often expressed as a confidence score.  If the score is low, then the model is uncertain and should ask a clarification question (even if model is unable to generate questions, it should at least abstain from offering any solutions).  If the score is higher, then the model is more certain and can ask a different set of questions.  Once the score is past a certain threshold, we can deem the model to be confident enough to formulate a reasonable recommendation.</p><p>As we study the landscape of options for measuring uncertainty, there seem to be four broad methods of generating confidence scores.  Let's examine each one in detail.</p><h3 id="-1-posterior-probabilities">(1) Posterior Probabilities</h3><p>The most straightforward manner of measuring the model's uncertainty is to <a href="https://arxiv.org/abs/1805.04604">ask the model itself</a>.  Namely, a typical classification or ranking problem will have a softmax at the end which represents the p(y|x).</p><!--kg-card-begin: markdown--><p>1A) <a href="https://arxiv.org/pdf/2006.09462">Max Item</a><br>
+If the max output of <a href="https://arxiv.org/abs/1610.02136">softmax is below some threshold</a>, then mark the model as uncertain. However, numerous papers have noted that the pure softmax is <a href="https://arxiv.org/abs/1701.06548">largely uncalibrated</a> and tends to make the model overconfident due to the exponeniating factor.  Thus, the uncalibrated logits tend to work better. There are various tricks, <a href="https://arxiv.org/abs/1706.04599">like working with temperature</a> to improve the calibration, but ultimately, you will still be looking at the likelihood of the model itself.</p>
+<p>1B) Top-K Rank<br>
+Rather than depending on just the top item, we can possibly glean some information from the other predictions.  For example, we can look at the gap between the confidence score of top two items.  If the gap is below some threshold, this indicates low confidence, so we mark the model as uncertain.  We can also think of the ratio between the top items instead.  If we generalize this further, we can look at the gap between the second and third ranked item or the first and third item.  In total, <a href="https://arxiv.org/abs/1805.04604">we can expand this to arbitrary K</a>.</p>
+<p>1C) Full distribution<br>
+If we look at the gap between certain items, the signal here is probably diminishing at a certain point.  However, looking at the <a href="https://arxiv.org/abs/2005.07174">overall entropy</a> of the entire distribution can tell us something.  Along those lines, we might also want to check the total variance of the softmax/logits.</p>
+<!--kg-card-end: markdown--><h3 id="-2-ensembles">(2) Ensembles</h3><p>On the topic of variance, ensembles are a method for inducing variance upon our model.  Essentially, we perturb the model such that it produces different outputs, and if there is high variance in the outputs, then our model is considered less certain.  The intuition is that a more confident model will still make the same prediction even if the input has been slightly shifted since the latent label has not changed.</p><!--kg-card-begin: markdown--><p>2A) Post-Training<br>
+The most common form of ensemble is one created by <a href="http://www.jmlr.org/proceedings/papers/v48/gal16.pdf">Gal and Ghahramani</a>.  In this paper, they propose MC-dropout where random masks are placed on model to simulate dropout at <a href="https://arxiv.org/pdf/2006.09462"><em>test</em> time</a>.  This brilliant insight allows us to gain a measure of uncertainty without any extra heavy lifting to come up with a new model.  Alternatively, any sort of perturbation, such as gaussian noise or brown noise can be added to the model to see its reaction.</p>
+<p>2B) Pre-Training<br>
+Of course, <a href="http://papers.nips.cc/paper/7219-simple-and-scalable-predictive-uncertainty-estimation-using-deep-ensembles.pdf">straightforward ensembles</a> can also give a sense of the variance of the outputs.  This turns out to work better, but at the cost of having to train <em>M</em> models for a better measure of uncertainty.  If we are doing all the extra work of training extra models, we don't even have to really restrict ourselves to the same architecture.  We could theoretically try M=5 different models and go off the assumption that confident prediction should hold true across all the architectures.</p>
+<!--kg-card-end: markdown--><h3 id="-3-outlier-detection">(3) Outlier Detection</h3><p>Another method of predicting uncertainty is to look at other sources of uncertainty.  The previous methods roughly falls under the bucket of epistemic uncertainty since they examine how the model performs.  Alternatively, we can also study the data for aleatoric uncertainty.  This falls under the assumption that the data varies due to natural variation in the system, but should not vary beyond some reasonable bounds.  (If this interpretation is totally wrong, feel free to comment below.)</p><!--kg-card-begin: markdown--><p>3A) Input Outliers<br>
+Although this is a false dichotomy, we can somewhat split up the data based on inputs and outputs.  By inputs, we mean looking at the distribution of the data before it is passed into the model.  For example, we might look at the n-gram distribution of a sentence and compare that to the n-grams of the average sentence in the training corpus. Additionally, we could <a href="https://arxiv.org/abs/1805.04604">pass an utterance into a Language Model</a> to get a sense of its perplexity.  In both cases, utterances that are &quot;not typical&quot; could be considered more likely to be uncertain, and dealt with accordingly.</p>
+<p>Perhaps looking at a datapoint before it is processed is too biased.  So as a practical matter, we might say that instead, the pre-computed statistic simply gives us a <a href="https://arxiv.org/abs/2002.07965">Bayesian prior</a>, after which we can use any of the other methods described to get us a better sense of the posterior likelihood of uncertainty.  Assuming we are working with sentences, we can examine the prior uncertainty of either the tokens or the sentence as a whole.</p>
+<p>3B) Output Outliers<br>
+Moving on to processed data, we can imagine passing the datapoint through our main  model to make predictions.  If the predicted class itself is rare, this can be a warning signal to <a href="https://arxiv.org/abs/2006.09462">possibly abstain</a>.  Of course rare classes do occassionally appear, or otherwise they shouldn't even be considered, so this method shouldn't be taken too far.  We could also imagine embedding the data using any embedding algorithm and then clustering the results.  Any <a href="https://arxiv.org/abs/1803.04765">embeddings that are not near any known centroids</a> can then be flagged for review.  In this sense, any tool that gives a sense of outlier detection can be used as a measure of uncertainty.</p>
+<!--kg-card-end: markdown--><h3 id="-4-second-order-methods">(4) Second-order Methods</h3><p>Finally, we can consider second-order methods where a separate model makes a prediction of the uncertainty.   Training a model to do the heavy lifting for us is actually quite ingenious, but perhaps the papers don't think of it this way, so they ironically don't aggrandize this direction as much as some of the papers which proposed the other methods.</p><!--kg-card-begin: markdown--><p>4A) Reinforcement Learning<br>
+Suppose we want to train a dialogue agent or semantic parser to ask a clarification question when it is uncertain of the situation.  Using an RL system, we can instead <a href="https://arxiv.org/abs/1911.03598">have a policy manager decide</a> when to take such an action, and simply train it with a reward signal.  The <a href="https://www.aaai.org/ojs/index.php/AAAI/article/download/4101/3979">REINFORCE algorithm can be used</a>, but certainly the whole back of tricks with RL can be used now as long as we can design some intermediate rewards for the model to follow.</p>
+<p>This ends up working quite well for certain problems, but my instinct says that it doesn't work on real-world use cases for all the same reasons why reinforcement learning often fails outside of the simulated scenarios.  We could have a model that tries to recognize the domain shift from the simulated enviroment to the real world, but then we start back at square one with some inception style behavior.</p>
+<p>4B) Direct Prediction<br>
+If the training data included a not-applicable or <a href="https://arxiv.org/abs/2004.01926">none-of-the-above</a> option, then we can possibly get a model to choose that when none of the given options fit nicely. The hard part here is that we would need to know the ground truth of when to choose this option, which pretty much never happens unless we perform data augmentation.  This gives the original model a chance to decide for itself that it is uncertain, but often does not work that well, especially on out-of-domain predictions.</p>
+<p>An interesting line of work might be to handcraft options that are known to be unclear and to also have training examples that can clearly be answered.  Efforts such as <a href="https://arxiv.org/abs/2004.10645">AmbigQA</a> and <a href="https://arxiv.org/abs/1907.06554">Qulac</a> are in the right direction, but fail to cover the nuance needed to really understand that a topic is unclear.  Oftentimes, what might be obvious to one person requires clarification from another person, so the entire dataset is a bit subjective and thus hard to generate at scale.  Given the current techniques around crowdsourcing, this is a limitation without any clear solution at the moment.</p>
+<p>4C) Predictions on Statistics<br>
+Saving the best for last, one of the most promising methods for generating a confidence score is to develop an <a href="https://arxiv.org/abs/1610.02136">uncertainty predictor</a> based on dev set.  Concretely, we can pre-train some model using the training data (D-train) to see how well it performs.  Then because we know the ground truth (either because it was part of the original dataset or because we augmented it), we can say that whenever the original model made a mistake, <a href="https://arxiv.org/abs/2004.01926">the model should have been more uncertain on that training example</a>.  To prevent overfitting, we freeze the D-train model and pass in D-dev data into the model for training the predictor.  Thus, we train a confidence estimator that can hopefully generalize to example from the D-test distribution.</p>
+<!--kg-card-end: markdown--><p><u>Takeaways</u></p><p>As we analyze all these methods of measuring uncertainty, one final thought is to consider how humans know to ask clarification questions.   How do or I know that something is unclear?  Is it just a feeling? My general thought is that we have a sense of outlier detection when asking questions, but this is only triggered when something is far outside the what we expect.  What we expect is measured likely by some external function, which implies some support for the methods under Category Four.  </p><p>However, the key is that humans have this expectation, a <a href="https://arxiv.org/abs/1902.08355">theory of mind</a> of the other individual and a general view of the world at large.   Building a comprehensive opinion of the world at large is intractable in the near future, but I remain optimistic that perhaps we can get a model to "fake it" well enough that general users either won't notice or won't care.</p>]]></content:encoded></item><item><title><![CDATA[Deciding when to Ask Questions for Dialogue]]></title><description><![CDATA[<p>Performing active learning on data annotation is to decide when the model should query the expert annotator for more samples.  Note the parallel with dialogue, which is to decide when the agent should ask a clarification question to the customer for more details on their intent.  Such a policy can</p>]]></description><link>http://localhost:2368/deciding-when-to-ask-questions-for-dialogue/</link><guid isPermaLink="false">5f3346f8a690db34fce5566d</guid><dc:creator><![CDATA[Derek Chen]]></dc:creator><pubDate>Sun, 28 Jun 2020 18:15:06 GMT</pubDate><content:encoded><![CDATA[<p>Performing active learning on data annotation is to decide when the model should query the expert annotator for more samples.  Note the parallel with dialogue, which is to decide when the agent should ask a clarification question to the customer for more details on their intent.  Such a policy can be obtained through static data with basic supervised learning or in a more interactive manner through imitation learning using algorithms such as DAgger (<a href="https://arxiv.org/abs/1011.0686">Ross 2011</a>).</p><p>We have seen in numerous papers that simply using the direct system output (ie. softmax) to measure the uncertainty of the model is highly uncalibrated (<a href="https://arxiv.org/abs/1706.04599">Guo et al. 2017</a>, <a href="https://arxiv.org/abs/1805.11783">Jiang et al. 2018</a>).  There have been various ways to deal with this issue.  For example, you can tune the confidence score with a temperature variable (<a href="https://arxiv.org/abs/1706.04599">Guo et al. 2017</a>), set a threshold to make a decision or use dropout as a bayesian approximation (<a href="https://arxiv.org/abs/1506.02142">Gal and Ghahramani 2016</a>).  However, none of these work that well (<a href="https://arxiv.org/abs/2004.01926">Feng et al. 2020</a>) in comparison to having a forecaster whose sole job is to decide whether or not to query the expert (<a href="https://papers.nips.cc/paper/5658-calibrated-structured-prediction">Kuleshov and Liang, 2015</a>).  This is intuitive because the forecaster has extra parameters to work with that allow it to learn something useful.</p><p>However, building a good forecaster is non-trivial.  Concretely, it is unclear when a forecaster should decide to ask a question.  Since the forecaster is a model, it must be trained.  But if it needs to be trained, then you must have labels.  And if you have labels, this implies you know when a model is uncertain, and the whole point of having a forecaster is that you cannot identify this situation through the logits alone.</p><p>Brantley et al. (<a href="https://arxiv.org/abs/2005.12801">2020</a>) use Apple Tasting and a difference classifier paired with a heuristic model to get around these issue.  Going in reverse, the <em>heuristic model</em> is a rule-based or generally simpler system than the main model that can offer predictions of the user intent, but may often be wrong.  Then the <em>difference classifier</em> has the job to decide if the heuristic model behaves differently from the main model.  In this sense, the heuristic model acts similar to a generator in the GAN setting (<a href="https://arxiv.org/abs/1406.2661">Goodfellow et al. 2017</a>), and the difference classifier acts similar to a discriminator.  Lastly, <em>Apple Tasting</em> (<a href="http://phillong.info/publications/apple.pdf">Helmbold et al., 2000</a>) is a framework for helping train the forecaster.  The idea is that it can be hard to build a classifier to decide which apples are tasty since you have to eat an apple to determine its value, which means you will inevitably try some bad apples.  This is identical to the problem when building a forecaster in real-life since the only way to know it made a bad prediction (asked a question to the customer when it should not have) is to allow it to make mistakes. Thus, various algorithms (such as STAP) are employed which essentially run this experiment multiple times as part of an inner loop with the data that the models have already seen so far.   Then, if the difference classifier does not perform well during this process, it should not be trusted as much and therefore it is acceptable to query the user.  As training progresses, the difference classifier will improve, and thus queries to the user will also decrease.</p><p>To me, the first insight is to use all available information -- which is to say, use both the uncertainty scores from the main model <em>and</em> a forecaster policy.  Specifically, if the main model is very certain, then avoid asking the customer any questions.  If the model is at all uncertain, even though only query the customer if the difference classifier thinks the gap between the heuristic and the main model is large.  The Apple Tasting method helps to train this, but most importantly, the forecaster is now <em>trained on the distribution it will see in real life</em>!  In other words, be decoupling the confidence score and the query decision, the forecaster only operates on examples where the system has deemed the situation to be uncertain.</p><p> The difference classifier (ie. forecaster) combined with a traditional RL policy is then similar to the policy used in conversational machine reading (<a href="https://arxiv.org/abs/1809.01494">Saeidi et al. 2018</a>) that decides whether to Inquired (ask a follow-up question) or Respond (with a Yes/No answer).  As a final step, all of these variables can be passed to a natural langauge generator which can decide on the final response. </p>]]></content:encoded></item><item><title><![CDATA[Calculating Uncertainty over Beliefs]]></title><description><![CDATA[<p>A key sub-issue in designing conversational agents is being able to reliably calculate uncertainty over the model's beliefs.  In doing so, the model would be able to recognize when it does not understand something, and appropriately ask for clarification.  Thus, we can imagine the output of an uncertainty model feeding</p>]]></description><link>http://localhost:2368/calculating-uncertainty-over-beliefs/</link><guid isPermaLink="false">5f3346f8a690db34fce5566c</guid><dc:creator><![CDATA[Derek Chen]]></dc:creator><pubDate>Sun, 05 Jan 2020 23:17:47 GMT</pubDate><content:encoded><![CDATA[<p>A key sub-issue in designing conversational agents is being able to reliably calculate uncertainty over the model's beliefs.  In doing so, the model would be able to recognize when it does not understand something, and appropriately ask for clarification.  Thus, we can imagine the output of an uncertainty model feeding into a dialogue policy manager which then decides to either retrieve an answer from the knowledge base when it feels fairly certain it knows what the customer wants, or to ask a follow-up question when it is unsure.  From a information-theory point of view, this can be seen as a model which asks questions to minimize entropy until it reaches a certain threshold, at which point it will return an answer. Beyond improving model behavior, measuring uncertainty also gives a view into how the model is thinking for improved debugging and enhanced interpretability.</p><p>A sensible way to approach such as problem is to lean on Bayesian methods which naturally offer a distribution over its posterior beliefs.  As such, it might make sense to tackle this subject using Gaussian Processes.  A Gaussian Process is a probability distribution over a number of possible functions that fit a set of points.  In simplified terms, any point from your input X can be mapped to a corresponding label Y which is its own Gaussian variable.  For points that come from your dataset <em>x</em>, the variance of the <em>y</em> is relatively low since you know actual values that <em>y</em> can take on.  For values x̂ that are far away from your dataset, you must extrapolate in order to calculate ŷ, which should lead to Gaussian variables with high variance.  For values x* that are in between the values found in your dataset, you would expect the uncertainty of y* to be somewhere in the middle since you are merely interpolating.  Overall, each one of these points requires their own Gaussian, and thus you end up with a model composed of a multi-variate Gaussian with infinite dimensions.</p><p>Of course, you can't perform inference on an infinite number of Gaussians, so we use the kernel trick to approximate the co-variance matrix.  In slightly more detail, recall that a multivariate Gaussian can be fully described by a <em>m</em>-dimensional vector of means and a <em>m </em>x <em>m</em>  co-variance matrix.   If <em>m</em> goes towards infinity, then this matrix can be described by a kernel K(x_i, x_j).  (For more details, a simple search will return many results, my favorites: <a href="https://distill.pub/2019/visual-exploration-gaussian-processes/">Distill publication</a>, <a href="https://youtu.be/92-98SYOdlY">ICL lecture video</a> or <a href="http://cs229.stanford.edu/section/cs229-gaussian_processes.pdf">Stanford lecture notes</a>).  Next, to perform inference, you can use standard equations to extract the information you know from your dataset, typically using Cholesky decomposition, which is then used to make predictions about the unknown data.  Unfortunately, performing this calculation requires inverting a matrix the size of your dataset, which operates at a speed of O(n^3).  This can work for small problems, but quickly becomes intractable for larger datasets containing hundreds of thousands of examples.  In addition to being slow, GP also has hyper-parameters to tune (namely σ and <em>l</em>) that require some domain knowledge.  There is also the problem of choosing the right kernel in the first place to serve as the prior.  Finally, Gaussian Processes require a bit of manipulation to get them to work for classification and RL problems.</p><p>In any case, the research community has shifted towards modeling the world through deep learning, which require new ideas for calculating uncertainty because neural networks are trained with gradient descent.  Luckily, the commonplace tool of dropout can be easily adapted to fit our needs in this situation.  More concretely, suppose we have a existing model that has already been trained to convergence.  Then, during test time, we simply perturb the model using dropout for the various inputs to generate random samples of the model. In this sense, we get an ensemble of models that can be averaged to give a higher confidence prediction.  More importantly, in addition to a mean, the predictions from this set of models has variance that can be empirically calculated (<a href="http://mlg.eng.cam.ac.uk/yarin/blog_3d801aa532c1ce.html">Details here</a>).  I think the key insight here is that we are not perturbing the inputs to generate noise, but rather sampling a distribution of models.  Intuitively, this is equivalent to the distribution of functions in GP being used to fit the data.  Mathematically, this can be seen as equivalent by reviewing the derivations found in the paper by Gal and Ghahramani: <a href="https://arxiv.org/abs/1506.02142">https://arxiv.org/abs/1506.02142</a>.</p><p>Even with this method though, we still face at least a number of considerable complications before being able have dialogue models that are able to reason about uncertainty.  To start, recall that our predicted belief represents a distribution over user intents, and thus we must assume a finite ontology of intents already exists that can properly approximate the meaning of utterances.   This is a non-trivial assumption, but also outside the scope of this blog post.   However, even assuming that the previous conditions are met, the dropout method still might not be sufficient because we must run a full inference pass each time just to get one sample.  Next, to get an accurate estimate of the variance for one class, there might need thousands of samples.  Then, to get an accurate estimate for all <em>n</em> classes would need <em>n</em>-thousand samples, where for real life problems <em>n</em> itself might be around a thousand.  If we view our semantic space as continuous, then this sampling method isn't even tractable.  Perhaps we could measure our uncertainty instead as the tightness of the bounds of the samples, and anything beyond a certain range would be considered "low certainty". </p><p>With that said, note that what we really want is a tool for measuring the uncertainty over user intents in the semantic space.  More specifically, we don't just need a system where its predictions are calibrated to match the likelihood; what we really want is a system where its predictions have a semantic meaning.  In other words, we have been viewing uncertainty as a single number assigned to each class, but perhaps we should be viewing certainty as a point within an embedding space.  So for example, in the restaurant domain, when the model assigns high probability to Japanese food, it also raises the probability of Chinese and Korean food because these items are more closely grouped together in the "Asian food" cluster.  At the same time if the entity that triggered the prediction was "fish", then maybe Japanese (sashimi) and Mexican (fish tacos) should concurrently increase, while the prediction shifts away from the Korean node in the embedding space.  Consequently, notice this immediately invalidates any <a href="https://arxiv.org/abs/1505.05424">Bayesian Neural Network</a> or <a href="https://arxiv.org/abs/1608.05081">Bayes by Backprop</a> approaches that capture uncertainty over the weights of the network rather than uncertainty over the understanding.  </p><p>In this sense, rather than attaching an uncertainty score to each intent in the ontology, what we needed is an embedding space of intents that still offers a measure of uncertainty.  Then, we also need a way to calculate it.</p>]]></content:encoded></item><item><title><![CDATA[AI as Feature or Foundation]]></title><description><![CDATA[<p>For awhile from 2015 to 2020 it seemed as if every start-up touted itself to be powered by AI.  The buzz around artificial intelligence has faded a bit, probably because it's clear that AGI is not just around the corner and also because the media is always looking for the</p>]]></description><link>http://localhost:2368/ai-as-feature-or-foundation/</link><guid isPermaLink="false">5f3346f8a690db34fce5566b</guid><dc:creator><![CDATA[Derek Chen]]></dc:creator><pubDate>Wed, 01 Jan 2020 23:53:56 GMT</pubDate><content:encoded><![CDATA[<p>For awhile from 2015 to 2020 it seemed as if every start-up touted itself to be powered by AI.  The buzz around artificial intelligence has faded a bit, probably because it's clear that AGI is not just around the corner and also because the media is always looking for the next shiny thing to discuss.  But for those of us in the trenches thinking about AI research every day, there remains a critical question to ask - is this latest round of AI, namely around deep learning with SGD, merely a feature to sprinkle onto existing tools and services, or is this truly a new foundation on which to build new technologies?</p><h3 id="ai-as-a-feature">AI as a Feature</h3><!--kg-card-begin: markdown--><p>When seen as a feature, AI is used to automate certain areas of a business to be more efficient and cost effective.  Some example in various industries:</p>
+<ul>
+<li>Bowery, Iron Ox - grow cabbage by efficiently identify bad batches of crops</li>
+<li>Drishti - uses ML to train factory workers with cameras</li>
+<li>Cresta, Directly - augment customer service by efficiently suggesting phrases to say</li>
+<li>Textio - write resumes or job descriptions by efficiently identifying biases</li>
+<li>Everlaw - speed up legal review by efficiently tagging relevant documents</li>
+<li>People AI - improve sales processes by autopopulating CRM</li>
+<li>Dialpad, Pindrop - listen in on conference calls, sales calls or customer service calls to offer insights or identify fraud</li>
+</ul>
+<p>In all cases above, the automated component can be tackled sufficiently well by writing complex rules and/or straightforward ML algorithms.  Moving those algorithms into the realm of Deep Learning is often not necessary, and perhaps doesn't even happen at all.</p>
+<!--kg-card-end: markdown--><h3 id="ai-as-a-foundation">AI as a Foundation</h3><p>If AI serves as the foundation of the company, then the company should not be viable without the use of advanced AI techniques.   Which AI techniques are considered sufficiently advanced is debatable.  Thus, we ground the discussion by saying that advanced AI specifically refers to the development of <a href="https://medium.com/@karpathy/software-2-0-a64152b37c35">Software 2.0</a> where programs are not written with code and rules, but rather with data.  In this sense, we are less concerned about identifying a specific cutting edge architecture or algorithm, which can quickly change from one year to the next, and instead focus on identifying the requisite factors for building companies built on data.</p><p>We believe there are three major signs that AI can indeed be the new electricity.  To start, in such a world, all AI companies will be centered around the 3A's: accumulation, annotation and application of data.  Traditional software companies might collect massive amounts of log data or tracking statistics, but AI-based companies collect this data with the explicit-goal of using this data to train models.  Thus, the data should be captured and stored in a consistent manner that makes it readily accessible to end users for building models.  Critically, the mindset should <em>not</em> be to collect as much data as possible and to <em>later on</em> figure out how to extract insights from such data.  This brings us to the second differentiator, AI companies should have dedicated teams from annotating and labeling data, which should be treated as critical department, such as marketing or human resources.  This department would have dedicated resources and headcount since the team provides unique value.  Lastly, a AI-first company has dedicated teams for building models, just as a mobile-first company has dedicated teams for building mobile apps separate from folks doing web development.</p><p>The second sign that Machine Learning is a new paradigm of software development will the advent of new model development practices.  In traditional software, we observe teams which handle writing code, QA and deployment.  If AI is a foundation, then we should see companies that spend time curating data the same way we see people writing programs.  There will be conscious effort around determining what data to label next (active learning) as well as mindful practices around debugging the quality of data (<a href="https://hazyresearch.github.io/snorkel/blog/socratic_learning.html">socratic learning</a>).  Deployment and infrastructure teams are concerned with making sure the production website stays up and does not cause any critical errors.  Similarly, AI companies should have teams dedicated to monitoring the activity of AI predictions to prevent ethical breakdowns and other catastrophes.  </p><p>Lastly, and perhaps most importantly, we will know that AI is the foundation of a new revolution in technology if we see users start to interact with machines in a qualitatively different manner.  Companies built on this technology should be able to provide services that are significantly better than previous iterations, rather than just marginal improvements over the status quo.  We should see new human-computer interaction mechanisms similar to how we now expect to be able to swipe, pinch and zoom on devices.  We will also see the development of new cultural norms, where it is now normal to see folks staring at a phone screen when on the street, in a car, on the subway or walking down the hall.   </p><h3 id="conclusion">Conclusion</h3><p>If we're honest, then we have to admit that we have punted on the main question since the analysis above mostly highlights what we <em>would</em> see if AI is the new foundation.  We have not really identified the factors that would enable AI to be new electricity.  Some promising examples that this might happen include the ability to identify objects, translate languages and generate images with super-human skill.  Additionally, the explosion of BERT and friends for various NLP tasks is an interesting starting point for exploration.  Ultimately, the future will be determined by those with a vision for turning these research advances into new ways of interacting with the world.</p>]]></content:encoded></item><item><title><![CDATA[Phases of Dialogue Adoption]]></title><description><![CDATA[<p>Dialogue systems and chatbots are going through the same cycle of adoption seen in previous technology growth curves.  As a quick primer, we note that mobile experienced the same four phases as it has expanded from technical oddity to ubiquitous usage.  In particular, in the first phase, you had a</p>]]></description><link>http://localhost:2368/phases-of-dialogue-adoption/</link><guid isPermaLink="false">5f3346f8a690db34fce5566a</guid><dc:creator><![CDATA[Derek Chen]]></dc:creator><pubDate>Tue, 04 Jun 2019 14:55:16 GMT</pubDate><content:encoded><![CDATA[<p>Dialogue systems and chatbots are going through the same cycle of adoption seen in previous technology growth curves.  As a quick primer, we note that mobile experienced the same four phases as it has expanded from technical oddity to ubiquitous usage.  In particular, in the first phase, you had a limited number of forerunners who used large brick phones.  This certainly didn't live up the promise of mobile, but it was also certainly distinct from its predecessor of the corded phone. In the second phase, there was a shift to enterprise with Palm Pre, Blackberry and other PDAs.  In the third phase, we had the original iPhone which lacked an App Store and other key functionality, but at this point you knew mobile was going to take over the world.  Finally, in the fourth phase, there was also Android, long-lasting phones with giant screens, and all the bells and whistles we expect today.</p><p>Moving our focus on dialogue systems, it seems the same pattern is playing out again:</p><!--kg-card-begin: markdown--><ol>
+<li>
+<p>Phase One: recognize basic intents to execute actions</p>
+<ul>
+<li>Alexa, Siri, Cortana (2015 - 2019)</li>
+<li>This is mainly characterized by taking a single utterance as input an resulting in the desired response</li>
+<li>On the enterprise side: schedule a meeting or call, manage a todo list, transcribe meeting notes</li>
+<li>On the consumer side: turn on the lights, set an alarm, what is the weather</li>
+</ul>
+</li>
+<li>
+<p>Phase Two: responds to requests, asks for clarification, access to KB</p>
+<ul>
+<li>Interface to apps and services (2019 - 2023)</li>
+<li>The agent is now able to handle multi-turn conversation and hold onto context over many exchanges.  The size of the ontology also becomes largely unbounded, with the structure focused only on the dialogue acts.</li>
+<li>On the enterprise side: suggested phrases for customer service or call centers, automated scripts for sales teams, resolving helpdesk tickets for IT</li>
+<li>On the consumer side: purchasing tickets for an event or movie, ordering food for common menu items, make a flight booking or restaurant reservation</li>
+</ul>
+</li>
+<li>
+<p>Phase Three: makes recommendations and pushes notifications, proactive nature</p>
+<ul>
+<li>Virtual Assistant (2023 - 2027)</li>
+<li>The agent remembers your context from past conversations and has a basic understanding of who you are and your preferences.  It is thus able to make simple recommendations without being too annoying.</li>
+<li>On the enterprise side: onboarding for new employees, read and compose short emails, we noticed everyone in your department signed up for X, would you like to as well?</li>
+<li>On the consumer side: recommend what news to read or shows to watch, give suggestion on what place to eat taking into account previously stated dietary preferences</li>
+</ul>
+</li>
+<li>
+<p>Phase Four: converses based on personalized context</p>
+<ul>
+<li>Executive Assistant (2027 - ?), timeline on this could be way off</li>
+<li>The agent is able to handle more high level tasks and has low level commonsense baked into everything it does.  It is able to infer from context what is the most likely intent for high performance in zero-shot learning settings.</li>
+<li>On the enterprise side: research a subject online to generate a summary, intuitive interaction for booking a flight, almost like talking to a co-worker</li>
+<li>On the consumer side: user no longer needs to adapt when giving instructions and can converse in natural language.  This is reading into the future, so I will leave this vague ...</li>
+</ul>
+</li>
+</ol>
+<!--kg-card-end: markdown--><p>Sometimes, the best way to understand is with an example.  So, on a more concrete level, the way this might play out:</p><!--kg-card-begin: markdown--><p><em>Phase 1:</em></p>
+<ul>
+<li>&lt;Turn on TV&gt;</li>
+<li>I'd like to watch the game.</li>
+<li>Got it, the Game Portal is on channel 312.  Would you like to go there?</li>
+<li>No</li>
+<li>OK, what would you like me to do?</li>
+<li>Watch basketball game.</li>
+<li>OK, switching to channel 253.  &lt;Shows a replay of NCAA FInal Four game.&gt;</li>
+<li>Argh, not that one!</li>
+<li>I'm sorry, I didn't get that.</li>
+<li>&lt;Manually flips through TV guide&gt;</li>
+<li>Please go to channel 261</li>
+<li>OK, switching to channel 261.</li>
+</ul>
+<p><em>Phase 2:</em></p>
+<ul>
+<li>&lt;Turn on TV&gt;</li>
+<li>I'd like to watch the game.</li>
+<li>Which game?</li>
+<li>Basketball</li>
+<li>Did you mean the NBA playoffs?</li>
+<li>Yes</li>
+<li>There are two series currently playing: Bucks vs Raptors and Warriors vs Blazers, which one do you prefer?</li>
+<li>Umm, the Warriors and Blazers</li>
+<li>Ok, switching to channel 261</li>
+</ul>
+<p><em>Phase 3:</em></p>
+<ul>
+<li>&lt;Turn on TV&gt;</li>
+<li>I'd like to watch the game.</li>
+<li>You mean the Warriors game?</li>
+<li>Yes, that's perfect!</li>
+<li>Ok, switching to channel 261</li>
+</ul>
+<p><em>Phase 4:</em></p>
+<ul>
+<li>&lt;Turn on TV&gt;</li>
+<li>Would you like to watch the Warriors game?</li>
+<li>Oh, that'd be great!</li>
+<li>Ok, switching to channel 261</li>
+</ul>
+<!--kg-card-end: markdown--><p><br>Open to thoughts and comments below!</p>]]></content:encoded></item><item><title><![CDATA[Label Formats for Intent Classification]]></title><description><![CDATA[<p>When trying to understand user belief, a NLU model attempts to track the intent over the length of the conversation.  However, what format should this intent be represented?  Is it continuous or discrete?  It it directly passed into the Policy Manager or should it be augmented first?  Hundreds of hours</p>]]></description><link>http://localhost:2368/levels-of-intent-classification/</link><guid isPermaLink="false">5f3346f8a690db34fce55669</guid><dc:creator><![CDATA[Derek Chen]]></dc:creator><pubDate>Mon, 13 May 2019 17:53:21 GMT</pubDate><content:encoded><![CDATA[<p>When trying to understand user belief, a NLU model attempts to track the intent over the length of the conversation.  However, what format should this intent be represented?  Is it continuous or discrete?  It it directly passed into the Policy Manager or should it be augmented first?  Hundreds of hours and effort will be spent finding labels for training such a model, so it seems reasonable we should agree on what format this label should take.  But considering the issue in any depth will show trade-offs in different label formats, so the answer is not immediately obvious. </p><p>To be more concrete, let's first observe the spectrum of options, ranging from more structured to less structured:</p><p><em>&lt;Most direct and interpretable, but less generalizable.  Has more structure. &gt;</em></p><!--kg-card-begin: markdown--><ol>
+<li>Output is from a rule-based model. Classifier is rules-based or works by statistical inference, so it is largely deterministic.  It is directly based on structure infused by the expert.</li>
+<li>Output is a semantic or syntactic parse, which is very still highly structured.  There is a pre-defined set of logical predicates to choose from, so building such a system is heavily dependent on an expert.  Gives highly interpretable results.</li>
+<li>Output is a intent made up of dialogue act, slot, relation, value, such as <code>inform(price &lt; $100)</code> or <code>accept(restaurant=the golden wok)</code> or  <code>open(text=good morning)</code>.  This has a flat structure, rather than a complex hierarchical parse tree, so it is less structured than before.  This has a pre-defined expert labeled ontology, and much easier to label.</li>
+<li>Output is a generic natural language tag.  It is human interpretable, but largely unrestricted.  This gets very messy quickly because the lexicon is only determined after the fact, if at all.  So there can be many tags that are very similar to each other.</li>
+<li>Output of classifier is some latent continuous vector that is then passed to a separate memory module, decoder, or other network.  Great for back-propagation and end-to-end learning, really poor for human interpretability.  Most powerful representation of user intent.  Would need to build tools to understand its hidden structure, which arises from data rather than expert labels.</li>
+</ol>
+<!--kg-card-end: markdown--><p><em>&lt;Least direct and interpretable.  Has no predefined structure.&gt;</em></p><p>Implied in the spectrum is a shift from rule-based methods to more neural-based methods.  While it may seem inevitable that everything moves into a deep learning direction, there is certainly the case to be made that we aren't there yet and also that human-interpretability matters more in certain situations than just high accuracy. As with many decisions involving trade-offs, I don't think there's a right answer overall, but there might be a right answer for your problem – so take the time to choose wisely.</p>]]></content:encoded></item><item><title><![CDATA[Tiling Tensors in PyTorch]]></title><description><![CDATA[<p>Suppose you had sample = tensor([[3,5,4]   [0,2,1]])</p><p>Then these will all return the <em>exact</em> same output:</p><ul><li>sample.repeat(2,1)</li><li>sample.view(1,-1).expand(2,-1).contiguous().view(4,3)</li><li>sample.index_select(0, tensor([0,1,0,1])</li><li>torch. cat( [sample, sample], 0 )</li></ul><!--kg-card-begin: markdown--><p>Explanations</p>]]></description><link>http://localhost:2368/tiling-tensors-in-pytorch/</link><guid isPermaLink="false">5f3346f8a690db34fce55668</guid><dc:creator><![CDATA[Derek Chen]]></dc:creator><pubDate>Mon, 11 Mar 2019 19:06:59 GMT</pubDate><content:encoded><![CDATA[<p>Suppose you had sample = tensor([[3,5,4]   [0,2,1]])</p><p>Then these will all return the <em>exact</em> same output:</p><ul><li>sample.repeat(2,1)</li><li>sample.view(1,-1).expand(2,-1).contiguous().view(4,3)</li><li>sample.index_select(0, tensor([0,1,0,1])</li><li>torch. cat( [sample, sample], 0 )</li></ul><!--kg-card-begin: markdown--><p>Explanations</p>
+<ul>
+<li>Repeat - this is the correct tool for the job</li>
+<li>Expand - meant for expanding a tensor when one of the dimensions is a singleton
+<ul>
+<li>in other words, if the sample is (4,1)  and we want to repeat (4,3)</li>
+<li>we should use sample.expand(4,3) and not sample.repeat(1,3)</li>
+</ul>
+</li>
+<li>Index Select - meant for re-ordering the items in a tensor
+<ul>
+<li>so we might have a tensor that was shuffled, and we want to shuffle it back into place</li>
+</ul>
+</li>
+<li>Concat - meant for joining together two different tensors
+<ul>
+<li>also, do not confuse with torch.stack, which would add an extra dimension</li>
+<li>concat a list of four 2x3 matrices and you will get 8x3 back</li>
+<li>stack a list of four 2x3 matrices and you will get 4x2x3 back</li>
+</ul>
+</li>
+</ul>
+<!--kg-card-end: markdown-->]]></content:encoded></item><item><title><![CDATA[Top 10  Secrets to Building Effective Dialogue Agents]]></title><description><![CDATA[<p>Some notes to remember when building intelligent task oriented dialogue agents:</p><!--kg-card-begin: markdown--><ol>
+<li>Modularity is important.  While E2E response generation is good, intepretability is better.
+<ul>
+<li>There is a draw to simply use a Seq2Seq approach with an encoder for reading user input and decoder for generating output.  However, the output becomes more</li></ul></li></ol>]]></description><link>http://localhost:2368/lessons-on-building-effective-dialogue-agents/</link><guid isPermaLink="false">5f3346f8a690db34fce55667</guid><dc:creator><![CDATA[Derek Chen]]></dc:creator><pubDate>Fri, 11 Jan 2019 19:11:28 GMT</pubDate><content:encoded><![CDATA[<p>Some notes to remember when building intelligent task oriented dialogue agents:</p><!--kg-card-begin: markdown--><ol>
+<li>Modularity is important.  While E2E response generation is good, intepretability is better.
+<ul>
+<li>There is a draw to simply use a Seq2Seq approach with an encoder for reading user input and decoder for generating output.  However, the output becomes more of a language model, and fails to perform reasoning.</li>
+<li>Moreover, the hidden state is not human readable.  Instead, this should be broken down into Intent Tracking, Policy Management and Text Generation, which allows for better interpretability.</li>
+<li>Additionally, modularity is easier to maintain and easier to delegate duties when operating in a realistic industry setting.</li>
+</ul>
+</li>
+<li>Important not to forget about optimizing auxiliary components
+<ul>
+<li>Intent tracker should include context embedder in addition to utterance embedder</li>
+<li>Intent tracker includes memory cells, likely formulated as a Recurrent Entity Network or Neural Process Network</li>
+<li>Policy manager includes soft knowledge base query mechanism</li>
+<li>Evaluation and data processing should be optimized</li>
+</ul>
+</li>
+<li>Intent tracking is a set of binary predictors
+<ul>
+<li>Multi-intent utterances occur often, even multiple slots of the same dialogue act are fairly common, such as &quot;I would like to eat Chinese or Korean food.&quot;</li>
+<li>The model actually works better since each task is now much simpler (watch for if the user wants Chinese food, rather than watch for what the user wants)</li>
+<li>This has been shown to work well in practice (from start-up)</li>
+</ul>
+</li>
+<li>Intent output should be act(slot-relation-value):
+<ul>
+<li>for example: inform(food = korean), request(address = the_missing_sock), inform(rating &gt; 3), accept(offer = the_missing_sock), inform(date &gt; today), answer(confirm = yes)</li>
+<li>between two values (such as price range) can be written as inform(price &gt; 3) and inform(price &lt; 6)</li>
+<li>this is all possible because the binary predictors allow for arbitrary combinations</li>
+<li>semantic parsing is overly complex (hard for machines to perform and hard for people to interpret), also does not necessarily give better information to the policy manager</li>
+</ul>
+</li>
+<li>Dialogue Acts are five pairs of items which constitutes a MECE set
+<ul>
+<li>request/inform</li>
+<li>open/close</li>
+<li>accept/reject</li>
+<li>question/answer</li>
+<li>acknow/confuse</li>
+<li>MECE = mutually exclusive, collectively exhaustive</li>
+</ul>
+</li>
+<li>Full Dialogue State (to be fed into RL agent) includes
+<ul>
+<li>Five items:
+<ul>
+<li>previous agent actions</li>
+<li>current user intent</li>
+<li>full frame of possible slots-value pairs</li>
+<li>turn count</li>
+<li>KB results</li>
+</ul>
+</li>
+<li>Context vector is stored for Intent Tracker, but not for Policy Manager</li>
+<li>Markov property that previous information, such as the order of past &quot;informs&quot; is not needed</li>
+</ul>
+</li>
+<li>In order to measure uncertainty, distributed soft approximation of dialogue state is necessary
+<ul>
+<li>memory stored as neural embedding</li>
+<li>a pure softmax has been shown to be overly confident, more research is needed on how to better measure &quot;uncertainty&quot;</li>
+</ul>
+</li>
+<li>In order to increase accuracy, model should ask for clarification:
+<ul>
+<li><strong>conventional</strong> clarification request (question paraphrase) - what did you want?</li>
+<li><strong>partial</strong> clarification requests (ask for relevant knowledge) - what was the area you mentioned?</li>
+<li><strong>confirmation</strong> through mention of alternatives (knowledge verification) - did you say the north part of town?</li>
+<li><strong>reformulation</strong> of information (question verification) - so basically you want asian food, right?</li>
+</ul>
+</li>
+<li>Good dialogue models have the following attributes
+<ul>
+<li>works across multiples turns, which distinguishes it from QA bots</li>
+<li>works with a knowledge base, which distinguishes it from chatbots</li>
+<li>knows whether to clarify and what type of clarification to employ using expected entropy maximization objective  (ie. it does not ask irrelevant questions and annoy the user)</li>
+</ul>
+</li>
+<li>Covers majority of real world scenarios through use of user simulator capable of generating novel examples
+<ul>
+<li>user simulator allows for fast training, since real users are expensive in time and money</li>
+<li>user simulator should be dynamic, meaning it should be trainable itself</li>
+<li>user simulator should output realistic user utterance through use of a GAN which discriminates against model generated text</li>
+<li>user simulator should be smart about switching between offering real text vs generated text as training progresses</li>
+</ul>
+</li>
+</ol>
+<!--kg-card-end: markdown-->]]></content:encoded></item><item><title><![CDATA[Intent Tracking For Task Oriented Dialogue - Best Paper Award Winner]]></title><description><![CDATA[<p>Another quarter, another class project on task oriented dialogue agents!  This quarter I completed a paper studying the details of Intent Tracking within UW Graduate Machine Learning - CSE 546.   And this time around, the paper won the award for best paper in the class!</p><figure class="kg-card kg-image-card kg-card-hascaption"><img src="http://localhost:2368/content/images/2018/12/uw_ml_final_project.jpg" class="kg-image" alt><figcaption>Poster Presentation at Paul Allen</figcaption></figure>]]></description><link>http://localhost:2368/best-paper-award-winner/</link><guid isPermaLink="false">5f3346f8a690db34fce55666</guid><dc:creator><![CDATA[Derek Chen]]></dc:creator><pubDate>Fri, 21 Dec 2018 01:46:06 GMT</pubDate><content:encoded><![CDATA[<p>Another quarter, another class project on task oriented dialogue agents!  This quarter I completed a paper studying the details of Intent Tracking within UW Graduate Machine Learning - CSE 546.   And this time around, the paper won the award for best paper in the class!</p><figure class="kg-card kg-image-card kg-card-hascaption"><img src="http://localhost:2368/content/images/2018/12/uw_ml_final_project.jpg" class="kg-image" alt><figcaption>Poster Presentation at Paul Allen Computer Science and Engineering Building</figcaption></figure><p>Dialogue agents are employed in a wide variety of interactive systems including chat widgets and voice-activated bots. Despite their prevalence, a bot’s ability to understand the user is noticeably limited with most systems heavily reliant upon rule-based models where each new skill must be entered manually. Recent research has explored the use of modular, deep-learning networks which combines the neural-based gains popularized by end-to-end models with the interpretability benefits of more structured models.</p><p>The first module within such dialogue systems is a natural language understanding unit responsible for gathering the user intent. Referred to as the belief tracker or dialog state tracker, this component aims to understand the user in any given turn. Afterwards, this information is passed to the next module, the policy manager, for deciding the agent action. Given the chosen action, the final module generates the text response. In this context, this paper focuses on building numerous belief tracking baselines, starting from a basic neural network and progressively advancing to the state-of-the-art. 					</p><p>More specifically, I explored the nuances of belief tracking by experimenting with different approaches for preprocessing the labels, designing the pipeline, and building the network architecture. In doing so, we gain a better understanding of which trade-offs matter when constructing such data-driven models, and a greater appreciation of why robust intent tracking remains an elusive goal. Overall, we find that optimization methods, intelligent decomposition, and pre-trained embeddings play a key role in determining dialogue success.</p><p>Full paper here: <a href="https://www.dropbox.com/s/qyda58bgkgwuit6/CSE546%20-%20Project%20Final%20Report.pdf?dl=0">https://www.dropbox.com/s/qyda58bgkgwuit6/CSE546%20-%20Project%20Final%20Report.pdf?dl=0</a></p>]]></content:encoded></item><item><title><![CDATA[Focus of Dialogue Agents]]></title><description><![CDATA[<p> What exactly is the task we are trying to solve in task-oriented dialogue modeling?   Is there a different goal for academic research vs industry application?  First, note that I am already segmenting into chit-chat vs. goal-oriented dialogue. Despite this, even with the realm of goal-oriented chat, there seems to be</p>]]></description><link>http://localhost:2368/focus-of-dialogue-agents/</link><guid isPermaLink="false">5f3346f8a690db34fce55665</guid><dc:creator><![CDATA[Derek Chen]]></dc:creator><pubDate>Sun, 11 Nov 2018 01:12:34 GMT</pubDate><content:encoded><![CDATA[<p> What exactly is the task we are trying to solve in task-oriented dialogue modeling?   Is there a different goal for academic research vs industry application?  First, note that I am already segmenting into chit-chat vs. goal-oriented dialogue. Despite this, even with the realm of goal-oriented chat, there seems to be different categories.  </p><p>Specifically, there seems to be at least 3 different categorizations: </p><!--kg-card-begin: markdown--><ol>
+<li><em>Information Retrieval</em> (IR)
+<ul>
+<li>Goal: better search by allowing for natural language queries, acts as internal Google engine</li>
+<li>Value-add: helps users find information when they don't know where to look, or too many places to look</li>
+<li>Use cases: Look up the company policy on X, lookup X within the customer account</li>
+<li>Examples: Does the restaurant have any vegan options? What is the status of my purchase?</li>
+<li>Downsides: Often requires access to KB which can be difficult to query</li>
+<li>Best Method: Embed all questions into some vector space (perhaps sentence embeddings, perhaps autoencoder).  Then, given a new user query, find the closest question already in the database (perhaps cosine similarity, perhaps a small FF Network).  Then return the answer associated with the known question.</li>
+</ul>
+</li>
+<li><em>Command and Control</em> (CC)
+<ul>
+<li>Goal: report the status of event, execute pre-determined action</li>
+<li>Value-add: faster than typing or tapping through mobile app</li>
+<li>Use cases: this is what Siri and Alexa are capable of doing now</li>
+<li>Examples: Weather in Milwaukee. Driving directions to Los Angeles. Music events near me on Oct 20th.</li>
+<li>Downsides: dialogue is very unnatural, certainly not multi-turn conversation</li>
+<li>Best Method: Parse input using rules and then return highest ranking action.  Frankly, it's hard to imagine neural-baesd methods working better in this task.</li>
+</ul>
+</li>
+<li><em>Recommendation System</em> (Rec)
+<ul>
+<li>Goal: offer a solution based on user constraints</li>
+<li>Value-add: offer insight into a new domain customer is unfamiliar with</li>
+<li>Use cases: shopping for clothes, shoes, handbags, restaurant recommendation</li>
+<li>Examples: Help me find a expensive hotel for last week of July.  I would like some Indian food for 4 people on the South side of town.</li>
+<li>Downsides: Really difficult to enumerate all possible options a user might want.</li>
+<li>Best Method: a framework with RNN-based belief tracker, RL-based policy manager and slot-filled templates for text generation.</li>
+</ul>
+</li>
+</ol>
+<!--kg-card-end: markdown--><p>What's really interesting is that we actually study Task 3 in academia but we treat it as if it were Task 2.  The datasets assume the user knows what he/she wants when in reality it should be more of a conversation to uncover a need, rather than  series of utterances to extract a known desire.  Otherwise, the most straightforward interface would be a single screen where users can tap on the options they want (area=south, price=cheap, food=Korean), all in a couple of seconds with no loss in fidelity.  Additionally, most real-world users care about Task 1, but we lack datasets for it.  Then again, datasets could always be better.</p><p>What can be done to build systems that survive in the real world?  It seems clear that we need to tackle recommendation and move away from limiting ourselves to thinking that virtual assistants are only capable of command execution.</p>]]></content:encoded></item><item><title><![CDATA[7) Automated Evaluation: Handling uncertainty and ambiguity in dialogue]]></title><description><![CDATA[<!--kg-card-begin: markdown--><p>Problem: Training function is imprecise (i.e. BLEU score)</p>
+<ul>
+<li>Training is imperfect because current evaluation metrics (i.e. BLEU Score) measure neither conversation fluency nor task-completion.
+<ul>
+<li>Labels are often inadequate since there are often many valid methods of answering the same query, where the gold label serves as only one</li></ul></li></ul>]]></description><link>http://localhost:2368/7-automated-evaluation-handling-uncertainty-and-ambiguity-in-dialogue/</link><guid isPermaLink="false">5f3346f8a690db34fce55664</guid><dc:creator><![CDATA[Derek Chen]]></dc:creator><pubDate>Mon, 08 Oct 2018 15:29:45 GMT</pubDate><content:encoded><![CDATA[<!--kg-card-begin: markdown--><p>Problem: Training function is imprecise (i.e. BLEU score)</p>
+<ul>
+<li>Training is imperfect because current evaluation metrics (i.e. BLEU Score) measure neither conversation fluency nor task-completion.
+<ul>
+<li>Labels are often inadequate since there are often many valid methods of answering the same query, where the gold label serves as only one such method.</li>
+<li>Training set is incomplete since you they cover only a subset of possible acceptable responses</li>
+<li>LMs train the network to be grammatically coherent, but not necessarily relevant</li>
+</ul>
+</li>
+<li>Instead, a good method should be able to more closely mimic user satisfaction
+<ol>
+<li>evaluate based on semantic similarity</li>
+<li>take context into account</li>
+</ol>
+</li>
+</ul>
+<!--kg-card-end: markdown--><!--kg-card-begin: markdown--><p>What does it mean to have high user satisfaction?</p>
+<ul>
+<li>Sentence-level fluency - sentence in isolation is valid and grammatically correct</li>
+<li>Turn-level appropriateness - sentence is natural and makes sense given the user input</li>
+<li>Dialogue-level fluency - sentence is strategically correct in getting the agent towards goal completion</li>
+<li>Overall Variation - sufficient diversity in agent responses</li>
+</ul>
+<p>How do we measure the satisfaction?</p>
+<ul>
+<li>Ask the user for feedback after each dialogue --&gt; Very inefficient/annoying</li>
+<li>Hand-craft a “user satisfaction” estimator (e.g. success/length trade-off) --&gt; We usually need to know the user goal to succeed</li>
+<li>Train a “user satisfaction” estimator using user feedback --&gt; We ask for user feedback only when we are uncertain about it</li>
+</ul>
+<!--kg-card-end: markdown--><!--kg-card-begin: markdown--><p>Quantitative Metrics</p>
+<ul>
+<li>Perplexity</li>
+<li>BLEU Score</li>
+<li>METEOR</li>
+<li>ROUGE</li>
+<li>ADEM</li>
+</ul>
+<!--kg-card-end: markdown-->]]></content:encoded></item><item><title><![CDATA[Dialog State Tracking Models]]></title><description><![CDATA[<!--kg-card-begin: markdown--><p>Thoughts on some of the latest and greatest as of mid-2018.</p>
+<ol>
+<li>
+<p><a href="https://arxiv.org/abs/1609.00777">Towards E2E RL of Dialogue Agents for Information</a> <em>aka. KB-Infobot</em> (Dhingra et al.)<br>
+a. <strong>Process:</strong> Follows the format of many traditional DST systems.  In particular, this includes a belief tracker, policy manager, database operator and text generator. This paper</p></li></ol>]]></description><link>http://localhost:2368/dialog-state-tracking-models/</link><guid isPermaLink="false">5f3346f8a690db34fce55663</guid><dc:creator><![CDATA[Derek Chen]]></dc:creator><pubDate>Sat, 16 Jun 2018 21:41:16 GMT</pubDate><content:encoded><![CDATA[<!--kg-card-begin: markdown--><p>Thoughts on some of the latest and greatest as of mid-2018.</p>
+<ol>
+<li>
+<p><a href="https://arxiv.org/abs/1609.00777">Towards E2E RL of Dialogue Agents for Information</a> <em>aka. KB-Infobot</em> (Dhingra et al.)<br>
+a. <strong>Process:</strong> Follows the format of many traditional DST systems.  In particular, this includes a belief tracker, policy manager, database operator and text generator. This paper focuses on the database querying portion by introducing a soft KB-lookup mechanism that selects items across a probability distribution rather than a hard KB-lookup which is non-differentiable.<br>
+It assumes access to a domain-specific entity-centric knowledge base (EC-KB) where all items are split intro triples of (h,r,t) which stands for head, relation, tail.  This is very similar to querying based on Key-Value Pair as in <a href="https://arxiv.org/abs/1705.05414">Key-Value Retrieval Networks for Task-Oriented Dialogue</a>.<br>
+The belief state is the set of all <em>p</em> and <em>q</em> outputs.  P is a multinomial distribution over the slot values <em>v</em>  (and thus are vectors of size V), and each Q is a scalar probability of the user knowing the value of slot <em>j</em>. Each slot is summarized into an entropy statistic over a distribution, with final size 2M + 1, where the first M is the summary of all previous <em>p</em>, M is all the <em>q</em> values (which are unchanged since they are already scalar), and 1 is the summary of the current <em>p</em> distribution.<br>
+b. <strong>Strengths:</strong> Good job in building out the system from end-to-end, with different experiments comapred to handcrafted systems.  They also test across different KB sizes.<br>
+c. <strong>Weaknesses:</strong> Final performance is not yet exciting with only 66% success rate for small KBs.  They also achieve 83%, 83% and 68% for medium, large and extra large KBs respectively, which looks better but it is odd we don't see consistent trends, but rather a bump in the middle.<br>
+d. <strong>Notes:</strong> Easy to criticize (ie. multiple networks used for belief tracking), but to be fair, that is not the goal of their paper.  As far as database operation is concerned, this is a great contribution!</p>
+</li>
+<li>
+<p><a href="https://arxiv.org/abs/1703.01008">E2E Task-Completion Neural Dialogue Systems</a> with a novel <a href="https://arxiv.org/abs/1612.05688">User Simulator</a> (Li et al.)<br>
+a. <strong>Process:</strong> Lays down a full framework for end-to-end dialogue. The first half is a user simulator that starts by randomly generating an agenda, and then uses a NLG module to translate that into natural language.  The agenda explicitly outlines a user's goal, like which movie they want to watch and what requirements they have (i.e. at 3PM, about comedy), so the user model behaves in a consistent, goal-oriented manner. Separately, this concept is extended further in <a href="https://arxiv.org/abs/1801.04871">Building a Conversational Agent Overnight with Dialogue Self-Play</a> where the authors (a) add the ability of varying user personality through a temperature mechanism and (b) greatly expand the diversity of the user dialogue by introducing Turkers paraphrasing the original text to inject human-likeness.<br>
+The second half of the framework is actual dialogue agent which includes an language understanding module to parse utterances into a semantic frame.  This is then passed into the state tracker which accumulates the semantics from each utterance, and policy learner for generating the next system action.  It is assumed that the output of the dialogue agent is simply the next action, rather than natural text, which is acceptable because the &quot;user&quot; is actually the simulator which operates under the assumption it is able to perfectly understand the agent.<br>
+b. <strong>Strengths:</strong>  The other major contribution is a method of gathering data with a User Simulator so that there are enough examples for training an RL agent. By tweaking the parameters of the simulator, the auuthors are able to show that slot-level errors have a greater impact on the system performance than intent-level ones, and that slot value replacement degrades the performance most.<br>
+To understand what this means, let's start by defining the possible intent-level errors:</p>
+<ul>
+<li><em>Within Group Error</em>: noise is from the same group of the real intent, where groups are either (a) inform intents (b) request intents or (c) other intents.  For example, the real intent is <code>request_theater</code>, which calls into the request group, but the predicted intent from LU module might be <code>request_moviename</code>.</li>
+<li><em>Between Group Error</em>: noise is from the different group. For example, a real intent <code>request_moviename</code> might be predicted as the intent <code>inform_moviename</code>.</li>
+<li><em>Random Error</em>: any mixture of the two above</li>
+</ul>
+<p>Similarly, let's also define the possible slot-level errors:</p>
+<ul>
+<li><em>Slot Deletion</em>: slot is not recognized by the LU module</li>
+<li><em>Incorrect Slot Value</em>: slot name is correctly recognized, but the slot value is wrong</li>
+<li><em>Incorrect Slot</em>: both the slot and its value are incorrectly recognized</li>
+<li><em>Random Error</em>: any mixture of the three above<br>
+Then the conclusion is that &quot;Incorrect Slot Value&quot; causes the biggest performance drop of all options.</li>
+</ul>
+<p>c. <strong>Weaknesses:</strong> While the idea sounds promising, the RL agents were asked to explore a limited number of dialogue acts. Looking at actual dialogues, it feels like the entire system can be solved using a competent rule-based system.<br>
+d. <strong>Notes:</strong> The framework itself and the results are not particularly interesting, but the many experiments analyzing model succeess are quite insightful.  They find predicting the wrong intent or slot is recoverable, but choosing the wrong value is not.  This actually makes a lot of intuitive sense because if as a listener, you recieve a mismatched signal (intent implies one thing, but slot-value pair imply another), you ask for clarification.  However, if you only get a wrong value, then you actually think you're correct, so you never bother to inquire further!</p>
+</li>
+<li>
+<p><a href="https://arxiv.org/abs/1604.04562">Network-based E2E Trainable Task-oriented Dialogue System</a> (Wen et al.)<br>
+a. <strong>Process:</strong> Generally follows traditional DST framework and includes five main components:</p>
+<ul>
+<li><em>Intent Detection</em>: maps parsed utterance into user-defined intents using LSTM, output is a hidden state vector</li>
+<li><em>Belief Tracker</em>: maps parsed utterance (and previously predicted beliefs) into a distribution of beliefs for current timestep.  This consists of a <strong>different tracker for every possible slot</strong>. There is also a distinction between inform slots (food type, area, price range) vs. request slots (address, phone number).  A CNN is used to extract features, along with n-gram embeddings surrounding the delexicalized keywords.  The key slots and values are &quot;special&quot;, so they get their part of the embedding.</li>
+<li><em>Database Operator</em>: takes in probability distribution of slots to calculate a binary truth vector that is 1 if the value is predicted to be important and 0 otherwise.  Rules are written to make sure that a value is 1, only if that value is compatible with the query. For example, if the query is &quot;food type&quot;, then values like &quot;Japanese&quot; and &quot;Indian&quot; are allowed, but values like &quot;3-star rating&quot; and &quot;expensive&quot; are not allowed.</li>
+<li><em>Policy Management</em>: maps slot probability distribution, database entities, and intent hidden vector into agent actions.  This part makes very little sense because it seems to be trained as a linear transform with SGD, rather than a reinforcement learning module.  The output is a single vector <em>o</em>, but seems to be in a vector format with no interpretable meaning, as an actual action.  Most critically, there is little justification for why the policy manager has the structure that it does.</li>
+<li><em>Text Generation</em>: uses an LSTM to generate words one-by-one until EOS.  (Can be replaced by a retrieval model for more human-like, but less generalizable responses).  Then fills in the slots based on return values of the database entity pointer.</li>
+</ul>
+<p>b. <strong>Strengths</strong>: This paper is among the first to develop an end-to-end neural system within the traditional DST framework.  In doing so, they strike a good balance between imposing too much structure (ie. rule-based systems of the past) and not enough structure (ie. pure neural models). Also proposes a new way of collecting dialogue data based on a Wizard-of-Oz framework.</p>
+<p>c. <strong>Weaknesses</strong>: Despite new dataset, the topic is still restaurant booking, so its really not that novel.  Also, the method is just having person A (acting as the agent) label person B's utterance (acting as the customer) while also providing the agent output.  This just sounds like a lot of work (and room for error) on the part of Person A.<br>
+Different belief trackers for each slot mean lots of data is needed.  Does not allow room for agent to confirm any ambiguity.  Slots are hard to identify when creating training data (and thus hard to delexicalize) which means placing a lot of confidence in the Turker to get it right. Not sure how this would perform with ambiguities found in real world data. Would have really liked to see how well the belief tracker module alone compares to hand-crafted lexicon.</p>
+<p>d. <strong>Notes</strong>: Not sure why belief tracking (ie. semantic parsing into slot-value pairs) needs to be distinguished from intent detection.  Feels like two separate networks are trained when they should be combined for weight sharing purposes.<br>
+Overall, data collection method is improved, but the lack of data issue remains largely unresolved.  Also, the architecture seems overly complicated, and finally, attention helps, as always.</p>
+</li>
+</ol>
+<p><img src="http://localhost:2368/content/images/2018/06/wen_e2e.png" alt="wen_e2e"></p>
+<ol start="4">
+<li>
+<p><a href="https://arxiv.org/abs/1606.03777">Neural Belief Tracker</a> (Mrkšić et al.)<br>
+a. <strong>Process:</strong> Encodes three inputs using either a deep NN or a convolutional NN.  It is a bit odd that an LSTM is not considered:</p>
+<ul>
+<li>Agent Utterance (ie. System Ouput) - the previous sentence, spoken by the agent.</li>
+<li>User Utterance: the current sentence, spoken by the user.</li>
+<li>Candidate Pairs: a list of all possible slot-value pairs, either inform (food type, area, price range) or request (address, phone number)<br>
+These 3 items are then passed into another layer:</li>
+<li>Semantic Decoding: calculates a similarity score between the user utterance and the candidate pair.  Checks is the user explicitly offered/requested a specific piece of information that turn.</li>
+<li>Context Modeling: uses the interaction between agent utterance and candidate pair to decide if (a) system request or (b) system confirm occured.  If the candidate pair passes this gating portion, then another similarity score is calculated to determine the impact of the user's answer.
+<ul>
+<li>System request: &quot;What price range would you like?&quot;, then area and food are not relevant.</li>
+<li>System confirm: &quot;How about Turkish food?&quot;, then any user response is referring to food type, and not price range or area.<br>
+Finally, these two outputs are mashed together in a final network to calculate the binary (yes/no) decision about whether this candidate-pair occurred in the current timestep.</li>
+</ul>
+</li>
+</ul>
+<p>b. <strong>Strengths</strong>: Delexicalization is a process where &quot;slots and values mentioned in the text are replaced with generic labels.&quot;  However, this introduces a hidden dependency of identifying slot/value mentions in text.  The authors then hit the nail on the head when they state &quot;For toy domains, one can manually construct semantic dictionaries which list the potential rephrasings for all slot value pairs ... although, this will not scale to the rich variety of user language or to general domains.&quot; User utterances are unlabeled in real world scenarios, so slot-filling becomes impossible since we don't know which slots exist, much less which values belong to them.  The solution proposed is to use dense vectors embeddings which encode meaning, and thus have a sense of semantic similarity baked in.<br>
+c. <strong>Weaknesses</strong>: Only uses n-grams, rather than full sentence encoding.  Does not use attention or other means of long-term tracking.  Makes Markovian assumption about influence of previous system dialogue acts.  Does not report final impact on task completion rate, only performs intrinsic evaluation on belief tracking.<br>
+d. <strong>Note</strong>: This paper only deals with the belief tracking component, so evaluation is performed on predicting inform-slots and request-slots, ignoring policy manangement and dialog generation.<br>
+While GloVE performed admirably, a different set of vectors Paragram-SL999 actually did best, since these embeddings are trained on paraphrases and are specifically optimized for semantic similarity, as opposed to GloVE or Word2vec which are optimized for window-context similarity.  The latter maps antonyms to similar vector spaces since the words are highly related, despite the opposing semantics.</p>
+</li>
+</ol>
+<p><img src="http://localhost:2368/content/images/2018/06/nbt_model.png" alt="nbt_model"></p>
+<ol start="5">
+<li>
+<p><a href="https://arxiv.org/abs/1805.09655">Global-Locally Self-Attentive Dialogue State Tracker</a> (Zhong, Xiong, Socher)<br>
+a. <strong>Process:</strong> Past DST models perform poorly when predicting on rare slot-value pairs since each slot requires its own tracker.  Thus, this paper uses global modules to share parameters between estimators for each slot and local modules to learn slot-specific feature representations.  The overall process is <em>very</em> similar to the NBT model above, where both include encoders for agent utterance, user utterance, and candidate slot-value pairs.  Both also produce a similarity score based on user text (semantic decoder) and based on agent's utterance (context decoder), which are then fed into a final binary-decision mixture model.  The key differences are</p>
+<ul>
+<li><em>Global-Local Encoding</em>: rather than using a deep neural network or CNN, the three encoders operate with a two step LSTM/attention process. In more detail, given the input of a tokenized utterance <em>X</em>, the encoder performs a mapping of f(X) -&gt; H, c where <em>H</em> which is the result of a BiLSTM encoder and <em>c</em> is the result of a self-attention on the encoding.</li>
+<li><em>Mixture model</em>: What makes this unit special is that rather than just one encoder with attention, as typically found in <a href="https://arxiv.org/abs/1605.07683">Learning End-to-End Goal-Oriented Dialog</a>, the encoder operates on two levels.  Namely, there is one encoder for the global level where the weights are shared across slots, and an encoder for the local level, where the weights are retrained for each slot.  The results of these two encoders are then combined in an interpolation mechanism where the mixture strength, beta, is a hyperparameter to be tuned on the dev set.</li>
+</ul>
+<p>b. <strong>Strengths</strong>: The model takes into account global context so that weights can be shared across different slots. Uses an RNN as the encoder which makes sense.<br>
+c. <strong>Weaknesses</strong>: No clear explanation of where proposed slot-value pairs come from. I think the assumption is that the model cycles through all possible pairs.<br>
+d. <strong>Notes</strong>: Would be interesting to encode with hierarchical encoders and to also see how the model performs on extrinsic measures.  Given the resources of the group, it would have been nice for them to release a new dataset.<br>
+<img src="http://localhost:2368/content/images/2018/06/GLAD_model.png" alt="GLAD_model"></p>
+</li>
+</ol>
+<!--kg-card-end: markdown-->]]></content:encoded></item><item><title><![CDATA[CS224n Poster Session 2018]]></title><description><![CDATA[<!--kg-card-begin: markdown--><p>Once again building on End-to-End Task Oriented Dialog.  Now with a Transformer:<br>
+<img src="http://localhost:2368/content/images/2018/03/cs224n_poster.png" alt="cs224n_poster"></p>
+<!--kg-card-end: markdown-->]]></description><link>http://localhost:2368/cs224n-poster-session-2018/</link><guid isPermaLink="false">5f3346f8a690db34fce55662</guid><dc:creator><![CDATA[Derek Chen]]></dc:creator><pubDate>Fri, 23 Mar 2018 15:45:45 GMT</pubDate><content:encoded><![CDATA[<!--kg-card-begin: markdown--><p>Once again building on End-to-End Task Oriented Dialog.  Now with a Transformer:<br>
+<img src="http://localhost:2368/content/images/2018/03/cs224n_poster.png" alt="cs224n_poster"></p>
+<!--kg-card-end: markdown-->]]></content:encoded></item><item><title><![CDATA[Dialog Agent Framework]]></title><description><![CDATA[end-to-end framework for developing intelligent agent for task-oriented dialogue]]></description><link>http://localhost:2368/dialog_agent_framework/</link><guid isPermaLink="false">5f3346f8a690db34fce55661</guid><dc:creator><![CDATA[Derek Chen]]></dc:creator><pubDate>Thu, 04 Jan 2018 18:09:00 GMT</pubDate><content:encoded><![CDATA[<!--kg-card-begin: markdown--><p>(aka. How the technical part of the building a intelligent agent might work)</p>
+<p>Drawing upon the insights from traditional dialog state tracking and newer models, a proposed framework includes the following key ideas:</p>
+<ul>
+<li>Break down the problem into modules (similar to DMN): this is so that components can be analyzed individually, and optimized immediately when new algorithms come out.  Also, this is just good programming practice.</li>
+<li>System should be end-to-end differentiable: take advantage of the magic of SGD</li>
+<li>Focuses on user intents: research from Stanford NLP has shown that rule-based agents can perform on par with neural-based agents by focusing on modeling user beliefs which significantly limits the amount of calculation required by the model.</li>
+<li>Closed domain: each bot handles some small section of related tasks to make the problem tractable.  Don't try to make one bot that does everything at once.</li>
+</ul>
+<p>The model takes in user input:</p>
+<ol>
+<li>Perform NLU to infer user beliefs:
+<ul>
+<li>tokenization and vocab embedding lookup</li>
+<li>lexer to find relevant entities</li>
+<li>parser to identify user intent</li>
+<li>reformulate as user query</li>
+<li><em>Best Candidate</em>: Bi-LSTM encoder with attention</li>
+</ul>
+</li>
+<li>Model query as probabilistic factor in a Bayes Net:
+<ul>
+<li>user belief modeled as (hidden) state, so solution must go beyond reflexive machine learning algorithms</li>
+<li>not a binary factor since the prediction of user intent was a probability distribution</li>
+<li>to the extent that user intent is an indicator variable (ie. did or did not click a button declaring explicit preference), then add laplace smoothing</li>
+<li>not a Markov Network or CRF since turns within a dialogue have order, and thus direction (i.e. we can't look into the future to perform smoothing)</li>
+<li>process and store query as continuous vector embedding to allow for gradients</li>
+<li><em>Best Candidate</em>: Dynamic Memory Network or EntNet</li>
+</ul>
+</li>
+<li>Performance Module:
+<ul>
+<li>Receive reward if proper API is called.  Reward signal in the form of task completion accuracy.</li>
+<li><em>Best Candidate</em>: AC3 or TRPO</li>
+</ul>
+</li>
+<li>Understanding Module:
+<ul>
+<li>Different from most models, we explicitly try to model whether or not we have a high confidence of the user intent.</li>
+<li>If low confidence, ask for follow up (i.e. &quot;What did you mean by that?&quot;) just like in real life, rather than setting user intent state as &quot;unknown&quot;</li>
+<li>Receive reward if properly predict user intent.  Reward signal in the form of positive signals.<br>
+(i.e. &quot;Thanks!&quot;)</li>
+<li>Allows model to never return generic (non-useful) answer.</li>
+</ul>
+</li>
+<li>GAN for generating agent response:
+<ul>
+<li>Discriminator measures coherency of agent output</li>
+<li>Humanlike-ness and interesting-ness are secondary</li>
+<li>Generator probably a GRU Decoder with beam search</li>
+</ul>
+</li>
+</ol>
+<p>As a first pass, if a rule-based method or IR can find answers, use that rather than passing to neural-based agent which may take time.  Additionally, fallbacks need to be implemented in case nothing useful is found. Attach speech recognition and TTS modules if desired.</p>
+<p>Critically, limiting usage to small domains allows agent to tractably approximate full state space of user intents.  Scalability comes from connecting multiple such agents together rather than having one agent that can do it all.  Consequently, the process for building (and training and KBP) for many agents must be incredibly simple.  Furthermore, this implies that each agent should be able to work independently of all other agents.</p>
+<p>In conjunction, similar to how ensembles always win data science competitions, all the smaller agents form a super-agent with superior capabilities.</p>
+<!--kg-card-end: markdown-->]]></content:encoded></item><item><title><![CDATA[Task-Oriented Dialog Agents]]></title><description><![CDATA[<!--kg-card-begin: markdown--><p><img src="http://localhost:2368/content/images/2017/12/cs221_poster_resized.jpeg" alt="cs221_poster"></p>
+<p><a href="https://www.dropbox.com/s/o573a81j4dms6jv/goal-oriented-dialog-cs229.pdf?dl=0">Link to 1st Paper</a></p>
+<p><a href="https://www.dropbox.com/s/gd5pb3166lst6sw/goal-oriented-dialog-cs221.pdf?dl=0">Link to 2nd Paper</a></p>
+<p><strong>Description</strong></p>
+<p>The past five years has seen an explosion in dialog agents, including voice-activated bots such as Siri, chatbots on Slack, or email-based bots for scheduling meetings.  As the prevalence of such personal assistants continues to grow, so too does the desire</p>]]></description><link>http://localhost:2368/task-oriented-dialog-agents/</link><guid isPermaLink="false">5f3346f8a690db34fce5565f</guid><dc:creator><![CDATA[Derek Chen]]></dc:creator><pubDate>Sun, 03 Dec 2017 20:42:05 GMT</pubDate><content:encoded><![CDATA[<!--kg-card-begin: markdown--><p><img src="http://localhost:2368/content/images/2017/12/cs221_poster_resized.jpeg" alt="cs221_poster"></p>
+<p><a href="https://www.dropbox.com/s/o573a81j4dms6jv/goal-oriented-dialog-cs229.pdf?dl=0">Link to 1st Paper</a></p>
+<p><a href="https://www.dropbox.com/s/gd5pb3166lst6sw/goal-oriented-dialog-cs221.pdf?dl=0">Link to 2nd Paper</a></p>
+<p><strong>Description</strong></p>
+<p>The past five years has seen an explosion in dialog agents, including voice-activated bots such as Siri, chatbots on Slack, or email-based bots for scheduling meetings.  As the prevalence of such personal assistants continues to grow, so too does the desire for increased capabilities. However, many of these so-called intelligent agents fall short of expectations, often failing to return any useful information to the user.  If the abilities of dialog agents were incrementally improved though, it would not be hard to imagine reaching a tipping point where a number of real-world tasks are replaced or automated by such systems.  Consequently, the main goal of this project is to apply techniques and ideas from class to build an effective task-oriented dialog system.  As a stretch goal, we hope to expand on the state-of-the-art accuracy currently occupied by various sequence-to-sequence learning algorithms.</p>
+<p><strong>Scope and Challenges</strong></p>
+<p>Building a task-oriented dialog agent can be seen as a language modeling problem where the input is sentences from a user or customer, and the output is a generated sentence along with any pertinent information required to help the user complete their task.  More specifically, the user might desire to find a place to eat, and the job of the agent is to complete a coherent conversation while also finding a restaurant meeting the user’s criteria.<br>
+The scope of our project is purely chat based, which is to say we are not planning to build a SDS (spoken dialog system) like Alexa, and so we will not be transcribing speech or generating audio.  Additionally, our bot is focused only on task-oriented dialog, and is not geared towards open-domain chit-chat. Even with those limitations, numerous challenges remain.<br>
+Concretely, a task-oriented bot will need to process user input, model user intent, query a KB for a desired object, and generate a meaningful, coherent response.  Furthermore, the agent should manage to do this across multiple turns, for multiple objects, and possibly while the user changes their mind halfway through the dialog.  To address these challenges, we will use RNNs and beam search to generate responses.  We also have to model beliefs, which is like the “state” of the user.</p>
+<p><strong>Evaluation</strong></p>
+<p>For this project, we will be using data from two separate sources.  First, we will be working with Task 6 from the BaBI Dialog Dataset, put together by Facebook and described in detail within Learning End-to-End Goal-Oriented Dialog.  This data is based off the DSTC2 (Dialog State Tracking Challenge) organized by the University of Cambridge.  Second, we will be working with a multi-domain car-related dataset from Stanford NLP group found in Key-Value Retrieval Networks for Task-Oriented Dialogue, created in collaboration with Ford Motor Company.  The bAbI dataset employs per-turn accuracy and per-dialog accuracy to gauge progress, while the car dataset relies on Entity F1-score.  Additionally, we will also look to word overlap metrics such as BLEU to measure language modeling success.  Finally, we plan to randomly sample from various dialogs to perform human evaluation on whether or not a task was successfully completed.</p>
+<p>For the baseline and oracle, we randomly selected data from the datasets and set up a program to display dialogs.  Then for 50 examples per task, the agent is graded on the per-turn and per-dialog accuracy.  We define per-turn accuracy as the number of correct api calls and responses given by the agent, and the per-dialog accuracy as getting all turns correct in an example.<br>
+To implement a baseline, we use TF-IDF matching to select a response for a query from a list of 2000+ candidate responses.   More specifically, we have set up a pipeline with SK-Learn to vectorize the query, and then select the response with the closest cosine distance.</p>
+<!--kg-card-end: markdown-->]]></content:encoded></item></channel></rss>

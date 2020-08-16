@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>Getting Started with Machine Learning in Python</title>
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" type="text/css" href="../assets/built/screen.css%3Fv=245ecc38c2.css" />
+
+    <link rel="canonical" href="index.html" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    <link rel="amphtml" href="amp/index.html" />
+    
+    <meta property="og:site_name" content="More Than One Turn" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Getting Started with Machine Learning in Python" />
+    <meta property="og:description" content="Recently, you&#x27;ve read numerous HN articles telling you machine learning is the future. You&#x27;ve heard that Google uses it for search, Facebook uses it to detect faces, and Netflix uses it for recommendations.  Your interest is sufficiently piqued.  But you might still be left wondering, &amp;quot;How do I get" />
+    <meta property="og:url" content="http://localhost:2368/getting-started-with-machine-learning-in-python/" />
+    <meta property="article:published_time" content="2015-12-26T00:56:22.000Z" />
+    <meta property="article:modified_time" content="2015-12-26T17:23:43.000Z" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Getting Started with Machine Learning in Python" />
+    <meta name="twitter:description" content="Recently, you&#x27;ve read numerous HN articles telling you machine learning is the future. You&#x27;ve heard that Google uses it for search, Facebook uses it to detect faces, and Netflix uses it for recommendations.  Your interest is sufficiently piqued.  But you might still be left wondering, &amp;quot;How do I get" />
+    <meta name="twitter:url" content="http://localhost:2368/getting-started-with-machine-learning-in-python/" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Derek Chen" />
+    <meta name="twitter:site" content="@derekchen14" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "More Than One Turn",
+        "url": "http://localhost:2368/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "http://localhost:2368/favicon.ico",
+            "width": 48,
+            "height": 48
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Derek Chen",
+        "image": {
+            "@type": "ImageObject",
+            "url": "//www.gravatar.com/avatar/9f3ee838eeb42849d4880676cedd85d6?s=250&d=mm&r=x",
+            "width": 250,
+            "height": 250
+        },
+        "url": "http://localhost:2368/author/derek/",
+        "sameAs": []
+    },
+    "headline": "Getting Started with Machine Learning in Python",
+    "url": "http://localhost:2368/getting-started-with-machine-learning-in-python/",
+    "datePublished": "2015-12-26T00:56:22.000Z",
+    "dateModified": "2015-12-26T17:23:43.000Z",
+    "description": "Recently, you&#x27;ve read numerous HN articles telling you machine learning is the\nfuture. You&#x27;ve heard that Google uses it for search\n[http://www.bloomberg.com/news/articles/2015-10-26/google-turning-its-lucrative-web-search-over-to-ai-machines]\n, Facebook uses it to detect faces\n[http://fortune.com/2015/06/15/facebook-ai-moments/], and Netflix uses it for \nrecommendations\n[http://techblog.netflix.com/2012/04/netflix-recommendations-beyond-5-stars.hml]\n. Your interest is sufficiently piqued. But yo",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://localhost:2368/"
+    }
+}
+    </script>
+
+    <meta name="generator" content="Ghost 3.29" />
+    <link rel="alternate" type="application/rss+xml" title="More Than One Turn" href="../rss/index.html" />
+    <style>
+.page-title,
+.page-description {
+   color:#3D0F90!important;
+   text-shadow: #F7FAEB 0px 0px 0.3em;
+}
+a { color: #3399ff; }  
+.nav li a:after { display: none; }
+.nav li:before { display: none; }
+li { margin: 0.2em 0; }
+ol, ul {
+	margin: 0;
+    position: relative;
+}
+ol > li, ul > li { bottom: 0; }
+p { margin: 0 0 0.7em 0; }
+.main-header { height: 90vh; }
+
+article.post { width: 100%; }
+section.post-full-content {
+    padding: 0;
+    line-height: 1em;
+    font-size: 1.4em;
+}
+h1.site-title, h2.site-description { 
+    text-shadow: 2px 2px 3px #232522;
+} 
+    
+</style>
+
+</head>
+<body class="post-template">
+
+    <div class="site-wrapper">
+
+        
+
+<header class="site-header">
+    <div class="outer site-nav-main">
+    <div class="inner">
+        <nav class="site-nav">
+    <div class="site-nav-left-wrapper">
+        <div class="site-nav-left">
+                <a class="site-nav-logo" href="../index.html">More Than One Turn</a>
+            <div class="site-nav-content">
+                    <ul class="nav">
+    <li class="nav-home"><a href="../index.html">Home</a></li>
+    <li class="nav-about"><a href="http://feature.engineering/about">About</a></li>
+    <li class="nav-contact"><a href="http://feature.engineering/contact">Contact</a></li>
+</ul>
+
+                    <span class="nav-post-title dash">Getting Started with Machine Learning in Python</span>
+            </div>
+        </div>
+    </div>
+    <div class="site-nav-right">
+            <div class="social-links">
+                    <a class="social-link social-link-tw" href="https://twitter.com/derekchen14" title="Twitter" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+</a>
+            </div>
+                <a class="rss-button" href="https://feedly.com/i/subscription/feed/http://localhost:2368/rss/" title="RSS" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="6.18" cy="17.82" r="2.18"/><path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/></svg>
+</a>
+
+    </div>
+</nav>
+    </div>
+</div></header>
+
+
+<main id="site-main" class="site-main outer">
+    <div class="inner">
+
+        <article class="post-full post no-image no-image">
+
+            <header class="post-full-header">
+
+
+                <h1 class="post-full-title">Getting Started with Machine Learning in Python</h1>
+
+
+                <div class="post-full-byline">
+
+                    <section class="post-full-byline-content">
+
+                        <ul class="author-list">
+                            <li class="author-list-item">
+
+                                <div class="author-card">
+                                    <img class="author-profile-image" src="http://www.gravatar.com/avatar/9f3ee838eeb42849d4880676cedd85d6?s=250&amp;d=mm&amp;r=x" alt="Derek Chen" />
+                                    <div class="author-info">
+                                        <h2>Derek Chen</h2>
+                                        <p>Read <a href="../author/derek/index.html">more posts</a> by this author.</p>
+                                    </div>
+                                </div>
+
+                                <a href="../author/derek/index.html" class="author-avatar">
+                                    <img class="author-profile-image" src="http://www.gravatar.com/avatar/9f3ee838eeb42849d4880676cedd85d6?s=250&amp;d=mm&amp;r=x" alt="Derek Chen" />
+                                </a>
+
+                            </li>
+                        </ul>
+
+                        <section class="post-full-byline-meta">
+                            <h4 class="author-name"><a href="../author/derek/index.html">Derek Chen</a></h4>
+                            <div class="byline-meta-content">
+                                <time class="byline-meta-date" datetime="2015-12-26">26 Dec 2015</time>
+                                <span class="byline-reading-time"><span class="bull">&bull;</span> 5 min read</span>
+                            </div>
+                        </section>
+
+                    </section>
+
+
+                </div>
+            </header>
+
+
+            <section class="post-full-content">
+                <div class="post-content">
+                    <!--kg-card-begin: markdown--><p>Recently, you've read numerous HN articles telling you machine learning is the future. You've heard that Google uses it for <a href="http://www.bloomberg.com/news/articles/2015-10-26/google-turning-its-lucrative-web-search-over-to-ai-machines">search</a>, Facebook uses it to <a href="http://fortune.com/2015/06/15/facebook-ai-moments/">detect faces</a>, and Netflix uses it for <a href="http://techblog.netflix.com/2012/04/netflix-recommendations-beyond-5-stars.hml">recommendations</a>.  Your interest is sufficiently piqued.  But you might still be left wondering, <em>&quot;How do I get started?&quot;</em></p>
+<p>Well, assuming you've gone through the famous [ML course](https <a href="http://www.coursera.org/">//www.coursera.org</a> machine learning) taught by Andrew Ng, you should already know that the general process includes:</p>
+<ul>
+<li>Input lots of data</li>
+<li>(magic) ???</li>
+<li>Profit</li>
+</ul>
+<p>Ok, so maybe you know that it's actually a lot more complicated:</p>
+<ul>
+<li>Data Gathering (10% of your time)</li>
+<li>Exploratory Data Analysis (30% of your time)</li>
+<li>Pre-processing and Cleaning (30% of your time)</li>
+<li>Training and Optimization (20% of your time)</li>
+<li>Presenting Results (10% of your time)</li>
+</ul>
+<p>But what tools do you use for each of these phases? What libraries are even available? In other words, now that you have a basic grasp of the ideas involved, what are the next steps?</p>
+<h3 id="thebasics">The Basics</h3>
+<p>A bit of common sense can go a long way when starting out -- pick tools you already know, pick an ecosystem with a vibrant community, pick a library with lots of documentation.  For example, let's assume you have an existing toolset chosen from previous projects, such as your language (R vs. Python vs. Java) and text editor (Sublime Text vs. Jupyter Notebooks vs. Emacs) of choice.  If you're comfortable with those tools, keep using them!</p>
+<p>However, the explosion of choices soon forces a more strategic approach to selecting the right tools for building machine learning pipelines. When evaluating your options, a useful framework is the combination of speed, power, and longevity:</p>
+<ul>
+<li><strong>Speed</strong> means you can get up and running sooner</li>
+<li><strong>Power</strong> means that once you get going, you can get a lot more done</li>
+<li><strong>Longevity</strong> means your decision will have lasting value, such that it is worth the investment to learn a new tool</li>
+</ul>
+<p>As an example, when applying this framework, you might choose to study <a href="https://en.wikipedia.org/wiki/Decision_tree">Decision Trees</a> for <em>speed</em>, <a href="https://en.wikipedia.org/wiki/Support_vector_machine">Support Vector Machines</a> for <em>power</em>, and <a href="https://en.wikipedia.org/wiki/Recurrent_neural_network">Recurrent Neural Nets</a> for <em>longevity</em>.  This is not to say that Decision Trees are not powerful (indeed performance for GBMs rivals SVMs), but simply that getting started with training and understanding the intuition behind Decision Trees can happen much faster.  Roughly speaking, these three buckets correspond to finding a balance between the short-term, medium-term, and  long-term view.</p>
+<h3 id="theoptions">The Options</h3>
+<p><em>Choosing an algorithm</em> - the first decision you might encounter that leaves you scratching your head is which algorithm to use when training your model.  The list is <a href="https://en.wikipedia.org/wiki/List_of_machine_learning_concepts">quite long</a>.  However, this is a red herring since depending on what your company or project requires, it should be clear which algorithms are best suited to get the job done.  For example, kNN is great for unsupervised clustering and convolutional neural nets are great for image recognition, but you wouldn't really use one algorithm in the place of the other.</p>
+<p>Additionally, once you have narrowed the field down to smaller batch of reasonable candidates, you can just choose to train using the entire collection and then pick the algorithm that gives the best result.  Or even better, aggregate all the algorithms together to get <a href="https://en.wikipedia.org/wiki/Ensemble_learning">a super result</a>. Thus, rather than spending time figuring out which algorithm is the &quot;best&quot;, start instead by determining what you want to build.</p>
+<p><em>Data Gathering</em> - As mentioned above, gathering and storing data is where real machine learning starts. Good sources of data include the <a href="https://archive.ics.uci.edu/ml/datasets.html">UCI Machine Learning Repository</a> and <a href="http://aws.amazon.com/public-data-sets/">Amazon Public Datasets</a>, but there are many <a href="http://www.kdnuggets.com/datasets/index.html">more options</a> as well.  Additionally, you might want to create your own data by <a href="http://scrapy.org/">scraping the internet</a> or <a href="https://www.kimonolabs.com/">using a service</a>.  Then there's the question of how to store the data - flat files, csv, json, <a href="https://www.reddit.com/r/Python/comments/3wa22v/120gb_csv_is_this_something_i_can_handle_in_python">sql database</a>?  Furthermore, even if the data is directly available from a Kaggle competition, just downloading can take awhile.  Although data gathering is quite straightforward, the process should not be discounted since it is also quite time-consuming.</p>
+<p><em>Exploratory Data Analysis</em> - If you're just starting out with data analysis, Excel is probably your best friend.  As you scale up though, you should also level up into either <a href="http://pandas.pydata.org/">Pandas</a> or R.  Given that this post is about Python, the option here is relatively straightforward.  The work in EDA truly comes down to performing the due diligence for discovering insights and feature engineering.  Protip: be sure to take advantage of <code>df.shape</code>, <code>df.describe()</code>, and <code>pd.unique(df.col_name.ravel())</code>.</p>
+<p><em>Pre-processing and Cleaning</em> - While you could do quite a bit of munging using just Pandas, <a href="http://scikit-learn.org/stable/index.html">SK-Learn</a> offers a wide range of pre-built methods to do all the things every tutorial suggests, including <a href="http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html">scaling</a> or normalization, <a href="http://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html">principal components analysis</a>, and <a href="http://scikit-learn.org/stable/modules/feature_selection.html">feature selection</a>.  Additionally, SK-Learn also has great libraries and a super simple API for fitting and predicting all the basic machine learning algorithms.  Even if you plan to move onto more advanced work in the future, Scikit Learn is definitely the place to begin.</p>
+<p><em>Training and Optimization</em> - If the goal is simply to get your feet wet in machine learning, SK-Learn alone will suffice.  Although, all the hype these days is about deep learning with neural networks that contain dozens of layers and millions of parameters – something SK-Learn was not built to handle. For this purpose, you might have heard about Google open-sourcing <a href="https://www.tensorflow.org/">Tensorflow</a>, a software library based upon what they use internally for machine learning.</p>
+<p>You might immediately conclude TensorFlow is the way to go, but unfortunately the reality is a bit more complicated.  If being backed by a large tech company is your concern, then Microsoft released <a href="https://github.com/Microsoft/DMTK">DMTK</a> and Facebook has contributed <a href="http://torch.ch/">Torch</a>.  If you want strong research foundations and wide adoption, then <a href="http://caffe.berkeleyvision.org/">Caffe</a> and <a href="http://deeplearning.net/software/theano/">Theano</a> are prime options.  For enterprise use with Java, <a href="http://deeplearning4j.org/">DeepLearning4J</a> and <a href="http://h2o.ai/">H20.ai</a> have open source packages as well.  <a href="http://metamind.com">MetaMind</a> and <a href="http://www.clarifai.com/">Clarifai</a> offer direct APIs so you don't have to code at all! The long tail of options can get quite overwhelming, so instead let's take a step back to evaluate our goals again.</p>
+<p>Which tools will help with <em>speed</em>?  SK-Learn is the clear winner with the easiest set-up, especially if you are already using it for preprocessing tasks.  Which tools are the most <em>powerful</em>? <a href="http://localhost:2368/getting-started-with-machine-learning-in-python/keras.io">Keras</a>, <a href="http://lasagne.readthedocs.org/en/latest/user/tutorial.html">Lasagne</a> and <a href="http://blocks.readthedocs.org/en/latest/">Blocks</a> all offer clean APIs built on top of the lower level libraries, so you get the benefits of academic strength without requiring a PhD for operation.  For <em>longevity</em>, I would suggest taking the time to learn TensorFlow or Theano.  To help you make a decision, <a href="https://github.com/zer0n/deepframeworks/blob/master/README.md">this evaluation</a> offers an amazing breakdown.</p>
+<p><em>Presenting Results</em> - When choosing your <a href="http://pbpython.com/visualization-tools-1.html">visualization tool</a>, keep in mind whether your final outcome is a research paper, blog post or PowerPoint since that naturally guide your decision.  Some common options include ggplot, bokeh, seaborn or  matplotlib.  For business settings, exporting to Excel for graphing is always an option.  If the end goal is an actual product that uses machine learning, <a href="https://s3.amazonaws.com/h2o-release/h2o/rel-markov/1/docs-website/userguide/scorePOJO.html">embeddable objects</a> or <a href="https://www.tensorflow.org/versions/master/how_tos/variables/index.html">variables</a> are great containers for holding your final results.</p>
+<h3 id="thewinners">The Winners</h3>
+<p>For getting started, I would recommend pulling data from Kaggle or Data Driven, importing Pandas and SK-Learn into Sublime, and just aim to submit a CSV result.  At this point, more so than anyone on the Leaderboard, your greatest competition is getting yourself motivated enough to take the first step.  After a couple months, you might end up with an <a href="https://github.com/derekchen14/e2eflow">end to end flow</a> similar to mine which utilizes Keras for training and Pandas for everything else.</p>
+<p>Why Keras over Lasange or Blocks?  The latter two are geared towards <a href="https://news.ycombinator.com/item?id=9284251">academic use</a>, while the former is geared towards real-world applications.  Given that I am a product manager and not a post-doc, the decision is pretty simple.  Why Pandas?  When you can use just <em>one</em> tool for analyzing, processing, munging and visualizing data, there's no reason to complicate matters further by adding other pieces to the puzzle.</p>
+<p><strong>Parting Thoughts</strong></p>
+<p>Overall, I hope you now have a good starting point with a number of decisions you will encounter when performing machine learning.  More importantly, I hope to have given you a set of pragmatic criteria to consider when deciding what tools to use because any recommendation quickly grows outdated as the ecosystem evolves.  Agree or disagree with the winners chosen?  Let me know in the comments below.</p>
+<!--kg-card-end: markdown-->
+                </div>
+            </section>
+
+
+
+        </article>
+
+    </div>
+</main>
+
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+
+                <article class="post-card post tag-gpu tag-aws no-image no-image">
+
+
+    <div class="post-card-content">
+
+        <a class="post-card-content-link" href="../training-on-big-data/index.html">
+
+            <header class="post-card-header">
+                    <div class="post-card-primary-tag">gpu</div>
+                <h2 class="post-card-title">Deep Learning using GPUs in the Cloud</h2>
+            </header>
+
+            <section class="post-card-excerpt">
+                    <p>Recent advances in Deep Learning have come about for a couple of key reasons, not the least of which is the enormous growth of available data.  But if overwhelming amounts of data are required to reach peak performance, how does one actually go about</p>
+            </section>
+
+        </a>
+
+        <footer class="post-card-meta">
+            <ul class="author-list">
+                <li class="author-list-item">
+            
+                    <div class="author-name-tooltip">
+                        Derek Chen
+                    </div>
+            
+                    <a href="../author/derek/index.html" class="static-avatar">
+                        <img class="author-profile-image" src="http://www.gravatar.com/avatar/9f3ee838eeb42849d4880676cedd85d6?s=250&amp;d=mm&amp;r=x" alt="Derek Chen" />
+                    </a>
+                </li>
+            </ul>
+            <div class="post-card-byline-content">
+                <span><a href="../author/derek/index.html">Derek Chen</a></span>
+                <span class="post-card-byline-date"><time datetime="2016-01-11">11 Jan 2016</time> <span class="bull">&bull;</span> 6 min read</span>
+            </div>
+        </footer>
+
+    </div>
+
+</article>
+
+                <article class="post-card post tag-machine-learning no-image no-image">
+
+
+    <div class="post-card-content">
+
+        <a class="post-card-content-link" href="../the-hype-of-machine-learning/index.html">
+
+            <header class="post-card-header">
+                    <div class="post-card-primary-tag">machine-learning</div>
+                <h2 class="post-card-title">The Hype of Machine Learning</h2>
+            </header>
+
+            <section class="post-card-excerpt">
+                    <p>Many folks in the tech industry are skeptical about the hype of machine learning, since the world has been promised to them before, but the reality hasn't really panned out.  In fact this has happened so many times, there is a term for this</p>
+            </section>
+
+        </a>
+
+        <footer class="post-card-meta">
+            <ul class="author-list">
+                <li class="author-list-item">
+            
+                    <div class="author-name-tooltip">
+                        Derek Chen
+                    </div>
+            
+                    <a href="../author/derek/index.html" class="static-avatar">
+                        <img class="author-profile-image" src="http://www.gravatar.com/avatar/9f3ee838eeb42849d4880676cedd85d6?s=250&amp;d=mm&amp;r=x" alt="Derek Chen" />
+                    </a>
+                </li>
+            </ul>
+            <div class="post-card-byline-content">
+                <span><a href="../author/derek/index.html">Derek Chen</a></span>
+                <span class="post-card-byline-date"><time datetime="2015-11-22">22 Nov 2015</time> <span class="bull">&bull;</span> 3 min read</span>
+            </div>
+        </footer>
+
+    </div>
+
+</article>
+        </div>
+    </div>
+</aside>
+
+
+
+
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="../index.html">More Than One Turn</a> &copy; 2020</section>
+                <nav class="site-footer-nav">
+                    <a href="../index.html">Latest Posts</a>
+                    
+                    <a href="https://twitter.com/derekchen14" target="_blank" rel="noopener">Twitter</a>
+                    <a href="https://ghost.org" target="_blank" rel="noopener">Ghost</a>
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+
+
+    <script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous">
+    </script>
+    <script src="../assets/built/casper.js%3Fv=245ecc38c2"></script>
+
+    <script>
+        // Parse the URL parameter
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+        // Give the parameter a variable name
+        var action = getParameterByName('action');
+
+        $(document).ready(function () {
+            if (action == 'subscribe') {
+                $('body').addClass("subscribe-success");
+            }
+
+            $('.subscribe-success-message .subscribe-close').click(function () {
+                $('.subscribe-success-message').addClass('close');
+            });
+
+            // Reset form on opening subscrion overlay
+            $('.subscribe-button').click(function() {
+                $('.subscribe-overlay form').removeClass();
+                $('.subscribe-email').val('');
+            });
+        });
+    </script>
+
+    <script>
+    $(document).ready(function () {
+        // FitVids - start
+        var $postContent = $(".post-full-content");
+        $postContent.fitVids();
+        // FitVids - end
+
+        // Replace nav with title on scroll - start
+        Casper.stickyNavTitle({
+            navSelector: '.site-nav-main',
+            titleSelector: '.post-full-title',
+            activeClass: 'nav-post-title-active'
+        });
+        // Replace nav with title on scroll - end
+
+        // Hover on avatar
+        var hoverTimeout;
+        $('.author-list-item').hover(function () {
+            var $this = $(this);
+
+            clearTimeout(hoverTimeout);
+
+            $('.author-card').removeClass('hovered');
+            $(this).children('.author-card').addClass('hovered');
+
+        }, function () {
+            var $this = $(this);
+
+            hoverTimeout = setTimeout(function () {
+                $this.children('.author-card').removeClass('hovered');
+            }, 800);
+        });
+    });
+</script>
+
+
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+</body>
+</html>

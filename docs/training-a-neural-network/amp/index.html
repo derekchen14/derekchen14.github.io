@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html ⚡>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <title>Training a Neural Network</title>
+
+    <link rel="canonical" href="../index.html" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    
+    <meta property="og:site_name" content="More Than One Turn" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Training a Neural Network" />
+    <meta property="og:description" content="(aka. Living a Successful Life)  One way to look at training a neural network is that you are minimizing a cost function to increase accuracy.  This is done through gradient descent, not trying to calculate the hessian.  Because the overall search space is non-convex and complicated.  One way to look" />
+    <meta property="og:url" content="http://localhost:2368/training-a-neural-network/" />
+    <meta property="article:published_time" content="2016-10-22T17:37:58.000Z" />
+    <meta property="article:modified_time" content="2016-10-28T23:59:08.000Z" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Training a Neural Network" />
+    <meta name="twitter:description" content="(aka. Living a Successful Life)  One way to look at training a neural network is that you are minimizing a cost function to increase accuracy.  This is done through gradient descent, not trying to calculate the hessian.  Because the overall search space is non-convex and complicated.  One way to look" />
+    <meta name="twitter:url" content="http://localhost:2368/training-a-neural-network/" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Derek Chen" />
+    <meta name="twitter:site" content="@derekchen14" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "More Than One Turn",
+        "url": "http://localhost:2368/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "http://localhost:2368/favicon.ico",
+            "width": 48,
+            "height": 48
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Derek Chen",
+        "image": {
+            "@type": "ImageObject",
+            "url": "//www.gravatar.com/avatar/9f3ee838eeb42849d4880676cedd85d6?s=250&d=mm&r=x",
+            "width": 250,
+            "height": 250
+        },
+        "url": "http://localhost:2368/author/derek/",
+        "sameAs": []
+    },
+    "headline": "Training a Neural Network",
+    "url": "http://localhost:2368/training-a-neural-network/",
+    "datePublished": "2016-10-22T17:37:58.000Z",
+    "dateModified": "2016-10-28T23:59:08.000Z",
+    "description": "(aka. Living a Successful Life)\n\nOne way to look at training a neural network is that you are minimizing a cost\nfunction to increase accuracy. This is done through gradient descent, not trying\nto calculate the hessian. Because the overall search space is non-convex and\ncomplicated.\n\nOne way to look at trying to live a successful life is that you are minimizing\nthe resources you spend (e.g. time and money) to increase your happiness. This\nis done through getting better every day, not trying to ha",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://localhost:2368/"
+    }
+}
+    </script>
+
+    <meta name="generator" content="Ghost 3.29" />
+    <link rel="alternate" type="application/rss+xml" title="More Than One Turn" href="../../rss/index.html" />
+
+    <style amp-custom>
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
+
+    html {
+        overflow-x: hidden;
+        overflow-y: scroll;
+        font-size: 62.5%;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    }
+
+    body {
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+        color: #3a4145;
+        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;
+        font-size: 1.7rem;
+        line-height: 1.55em;
+        font-weight: 400;
+        font-style: normal;
+        background: #fff;
+        scroll-behavior: smooth;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    p,
+    ul,
+    ol,
+    li,
+    dl,
+    dd,
+    hr,
+    pre,
+    form,
+    table,
+    video,
+    figure,
+    figcaption,
+    blockquote {
+        margin: 0;
+        padding: 0;
+    }
+
+    ul[class],
+    ol[class] {
+        padding: 0;
+        list-style: none;
+    }
+
+    img {
+        display: block;
+        max-width: 100%;
+    }
+
+    input,
+    button,
+    select,
+    textarea {
+        font: inherit;
+        -webkit-appearance: none;
+    }
+
+    fieldset {
+        margin: 0;
+        padding: 0;
+        border: 0;
+    }
+
+    label {
+        display: block;
+        font-size: 0.9em;
+        font-weight: 700;
+    }
+
+    hr {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 1px;
+        border: 0;
+        border-top: 1px solid currentcolor;
+        opacity: 0.1;
+    }
+
+    ::selection {
+        text-shadow: none;
+        background: #cbeafb;
+    }
+
+    mark {
+        background-color: #fdffb6;
+    }
+
+    small {
+        font-size: 80%;
+    }
+
+    sub,
+    sup {
+        position: relative;
+        font-size: 75%;
+        line-height: 0;
+        vertical-align: baseline;
+    }
+    sup {
+        top: -0.5em;
+    }
+    sub {
+        bottom: -0.25em;
+    }
+
+    ul li + li {
+        margin-top: 0.6em;
+    }
+
+    a {
+        color: #1292EE;
+        text-decoration-skip-ink: auto;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        margin: 0;
+        font-weight: 700;
+        color: #121212;
+        line-height: 1.4em;
+    }
+
+    h1 {
+        font-size: 3.4rem;
+        line-height: 1.1em;
+    }
+
+    h2 {
+        font-size: 2.4rem;
+        line-height: 1.2em;
+    }
+
+    h3 {
+        font-size: 1.8rem;
+    }
+
+    h4 {
+        font-size: 1.7rem;
+    }
+
+    h5 {
+        font-size: 1.6rem;
+    }
+
+    h6 {
+        font-size: 1.6rem;
+    }
+
+    amp-img {
+        height: 100%;
+        width: 100%;
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    amp-img img {
+        object-fit: cover;
+    }
+
+    .page-header {
+        padding: 50px 5vmin 30px;
+        text-align: center;
+        font-size: 2rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .page-header a {
+        color: #121212;
+        font-weight: 700;
+        text-decoration: none;
+        font-size: 1.6rem;
+        letter-spacing: -0.1px;
+    }
+
+    .post {
+        max-width: 680px;
+        margin: 0 auto;
+    }
+
+    .post-header {
+        margin: 0 5vmin 5vmin;
+        text-align: center;
+    }
+
+    .post-meta {
+        margin: 1rem 0 0 0;
+        text-transform: uppercase;
+        color: #738a94;
+        font-weight: 500;
+        font-size: 1.3rem;
+    }
+
+    .post-image {
+        margin: 0 0 5vmin;
+    }
+
+    .post-image img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    .post-content {
+        padding: 0 5vmin;
+    }
+
+    .post-content > * + * {
+        margin-top: 1.5em;
+    }
+
+    .post-content [id]:not(:first-child) {
+        margin: 2em 0 0;
+    }
+
+    .post-content > [id] + * {
+        margin-top: 1rem;
+    }
+
+    .post-content [id] + .kg-card,
+    .post-content blockquote + .kg-card {
+        margin-top: 40px;
+    }
+
+    .post-content > ul,
+    .post-content > ol,
+    .post-content > dl {
+        padding-left: 1.9em;
+    }
+
+    .post-content hr {
+        margin-top: 40px;
+    }
+
+    .post .post-content hr + * {
+        margin-top: 40px;
+    }
+
+    .post-content amp-img {
+        background-color: #f8f8f8;
+    }
+
+    .post-content blockquote {
+        position: relative;
+        font-style: italic;
+    }
+
+    .post-content blockquote::before {
+        content: "";
+        position: absolute;
+        left: -1.5em;
+        top: 0;
+        bottom: 0;
+        width: 0.3rem;
+        background: #000;
+    }
+
+    .post-content :not(.kg-card):not([id]) + .kg-card {
+        margin-top: 40px;
+    }
+
+    .post-content .kg-card + :not(.kg-card) {
+        margin-top: 40px;
+    }
+
+    .kg-card figcaption {
+        padding: 1.5rem 1.5rem 0;
+        text-align: center;
+        font-weight: 500;
+        font-size: 1.3rem;
+        line-height: 1.4em;
+        opacity: 0.6;
+    }
+
+    .kg-card figcaption strong {
+        color: rgba(0,0,0,0.8);
+    }
+
+    .post-content :not(pre) code {
+        vertical-align: middle;
+        padding: 0.15em 0.4em 0.15em;
+        border: #e1eaef 1px solid;
+        font-weight: 400;
+        font-size: 0.9em;
+        line-height: 1em;
+        color: #dc0050;
+        background: #f0f6f9;
+        border-radius: 0.25em;
+    }
+
+    .post-content > pre {
+        overflow: scroll;
+        padding: 16px 20px;
+        color: #fff;
+        background: #1F2428;
+        border-radius: 5px;
+        box-shadow: 0 2px 6px -2px rgba(0,0,0,.1), 0 0 1px rgba(0,0,0,.4);
+    }
+
+    .kg-embed-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .kg-image-card img {
+        margin: auto;
+    }
+
+    .kg-gallery-card + .kg-gallery-card {
+        margin-top: 0.75em;
+    }
+
+    .kg-gallery-container {
+        position: relative;
+    }
+
+    .kg-gallery-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .kg-gallery-image {
+        width: 100%;
+        height: 100%;
+    }
+
+    .kg-gallery-row:not(:first-of-type) {
+        margin: 0.75em 0 0 0;
+    }
+
+    .kg-gallery-image:not(:first-of-type) {
+        margin: 0 0 0 0.75em;
+    }
+
+    .kg-bookmark-card,
+    .kg-bookmark-publisher {
+        position: relative;
+    }
+
+    .kg-bookmark-container,
+    .kg-bookmark-container:hover {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row-reverse;
+        color: currentColor;
+        background: rgba(255,255,255,0.6);
+        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;
+        text-decoration: none;
+        border-radius: 5px;
+        box-shadow: 0 2px 6px -2px rgba(0, 0, 0, 0.1), 0 0 1px rgba(0, 0, 0, 0.4);
+        overflow: hidden;
+    }
+
+    .kg-bookmark-content {
+        flex-basis: 0;
+        flex-grow: 999;
+        padding: 20px;
+        order: 1;
+    }
+
+    .kg-bookmark-title {
+        font-weight: 600;
+        font-size: 1.5rem;
+        line-height: 1.3em;
+    }
+
+    .kg-bookmark-description {
+        display: -webkit-box;
+        max-height: 45px;
+        margin: 0.5em 0 0 0;
+        font-size: 1.4rem;
+        line-height: 1.55em;
+        overflow: hidden;
+        opacity: 0.8;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+
+    .kg-bookmark-metadata {
+        margin-top: 20px;
+    }
+
+    .kg-bookmark-metadata {
+        display: flex;
+        align-items: center;
+        font-weight: 500;
+        font-size: 1.3rem;
+        line-height: 1.3em;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .kg-bookmark-description {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+    }
+
+    .kg-bookmark-metadata amp-img {
+        width: 18px;
+        height: 18px;
+        max-width: 18px;
+        max-height: 18px;
+        margin-right: 10px;
+    }
+
+    .kg-bookmark-thumbnail {
+        display: flex;
+        flex-basis: 20rem;
+        flex-grow: 1;
+        justify-content: flex-end;
+    }
+
+    .kg-bookmark-thumbnail amp-img {
+        max-height: 200px;
+    }
+
+    .kg-bookmark-author {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    .kg-bookmark-publisher::before {
+        content: "•";
+        margin: 0 .5em;
+    }
+
+    .kg-width-full.kg-card-hascaption {
+        display: grid;
+        grid-template-columns: inherit;
+    }
+
+    .post-content table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    .post-content th {
+        padding: 0.5em 0.8em;
+        text-align: left;
+        font-size: .75em;
+        text-transform: uppercase;
+    }
+
+    .post-content td {
+        padding: 0.4em 0.7em;
+    }
+
+    .post-content tbody tr:nth-child(2n + 1) {
+        background-color: rgba(0,0,0,0.1);
+        padding: 1px;
+    }
+
+    .post-content tbody tr:nth-child(2n + 2) td:last-child {
+        box-shadow:
+            inset 1px 0 rgba(0,0,0,0.1),
+            inset -1px 0 rgba(0,0,0,0.1);
+    }
+
+    .post-content tbody tr:nth-child(2n + 2) td {
+        box-shadow: inset 1px 0 rgba(0,0,0,0.1);
+    }
+
+    .post-content tbody tr:last-child {
+        border-bottom: 1px solid rgba(0,0,0,.1);
+    }
+
+    .page-footer {
+        padding: 60px 5vmin;
+        margin: 60px auto 0;
+        text-align: center;
+        background-color: #f8f8f8;
+    }
+
+    .page-footer h3 {
+        margin: 0.5rem 0 0 0;
+    }
+
+    .page-footer p {
+        max-width: 500px;
+        margin: 1rem auto 1.5rem;
+        font-size: 1.7rem;
+        line-height: 1.5em;
+        color: rgba(0,0,0,0.6)
+    }
+
+    .powered {
+        display: inline-flex;
+        align-items: center;
+        margin: 30px 0 0;
+        padding: 6px 9px 6px 6px;
+        border: rgba(0,0,0,0.1) 1px solid;
+        font-size: 12px;
+        line-height: 12px;
+        letter-spacing: -0.2px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+        font-weight: 500;
+        color: #222;
+        text-decoration: none;
+        background: #fff;
+        border-radius: 6px;
+    }
+
+    .powered svg {
+        height: 16px;
+        width: 16px;
+        margin: 0 6px 0 0;
+    }
+
+    @media (max-width: 600px) {
+        body {
+            font-size: 1.6rem;
+        }
+        h1 {
+            font-size: 3rem;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+        }
+    }
+
+    @media (max-width: 400px) {
+        h1 {
+            font-size: 2.6rem;
+            line-height: 1.15em;
+        }
+        h2 {
+            font-size: 2rem;
+            line-height: 1.2em;
+        }
+        h3 {
+            font-size: 1.7rem;
+        }
+    }
+    </style>
+
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+
+    
+
+</head>
+
+<body class="amp-template">
+    <header class="page-header">
+        <a href="../../index.html">
+                More Than One Turn
+        </a>
+    </header>
+
+    <main class="content" role="main">
+        <article class="post">
+
+            <header class="post-header">
+                <h1 class="post-title">Training a Neural Network</h1>
+                <section class="post-meta">
+                    Derek Chen -
+                    <time class="post-date" datetime="2016-10-22">22 Oct 2016</time>
+                </section>
+            </header>
+            <section class="post-content">
+
+                <p><code>(aka. Living a Successful Life)</code></p>
+<p>One way to look at training a neural network is that you are minimizing a cost function to increase accuracy.  This is done through gradient descent, not trying to calculate the hessian.  Because the overall search space is non-convex and complicated.</p>
+<p><code>One way to look at trying to live a successful life is that you are minimizing the resources you spend (e.g. time and money) to increase your happiness. This is done through getting better every day, not trying to have a master plan for life. Because the overall experience of life is constantly changing.</code></p>
+<p>There are some standard procedures people agree on.  Such as more layers and more units is generally better.  Sometimes a network even has 1000s of layers, which might be overkill, but certainly 100 layers is better than 10, and 10 layers is better than 1 - that's the whole point of deep learning right?</p>
+<p><code>There are some standard procedures people agree on.  Such as more schooling and more degrees is generally better.  Sometimes a person might even have PhD, which might be overkill, but certainly a masters is better than an undergrad degree, and an undergrad degree is better than a high school diploma - that's the whole point of education right?</code></p>
+<p>But common sense is never where people like to focus.  Most people like to tweak mini-batch sizes and testing 10 new features to improve your word embeddings (positional encoding, topic modeling, n-gram statistics, matrix factorization, etc.), even though the real gains come in gathering and pre-processing data rather than trying to build a fancier model - i.e. the dirty work.</p>
+<p><code>But common sense is never where people like to focus.  Most people like to go to self-improvement workshops or read 10 ways to hack your productivity, even though the real gains come from putting in the hard work rather than trying to take shortcuts - i.e. the dirty work.</code></p>
+<p>People like to focus on optimization techniques (Adam, Adagrad, Momentum), but honestly plain SGD with mini-batches works perfectly fine most of the time. This is because the majority of the work comes during the training, not whether you chose the right optimizer.</p>
+<p><code>People like to focus on optimization techniques (Pomodoro, GTD, Kanban), but honestly just setting goals and then doing them works perfectly fine most of the time. This is because the majority of the work comes during the execution of the task, not whether you have a fancy todo-list app.</code></p>
+<p>What are some gains that are truly worthwhile?  Well, we've seen that proper initialization is pretty critical.  But the "right way" to initialize is really to just have random weights centered on the mean.  In other words, you know you can't set everything to zero, but that doesn't necessarily mean you know where to start either.</p>
+<p><code>What are some gains that are truly worthwhile?  Well, we've seen that choosing the right career that you're passionate about is pretty critical.  But the "right way" to start your career is really to just try random activities centered around your interests.  In other words, you know you can't just sit on the couch all day, but that doesn't necessarily mean you know where to start either.</code></p>
+<p>One way to start at good initialization is through pre-training.  This alternate task isn't your final goal, but it points you in the right direction.  And on the topic of initialization, we can't forget the benefits of batch norm in starting each layer the best way possible.  You can start with VGG-net if you really want, but that jolt from transfer learning will only take you so far.  Eventually, your model needs to do some learning for itself. Finally, let's not forget about dropout.  It's like building an ensemble of multiple networks and getting the best experiences of every network involved.</p>
+<p><code>One way to make sure you are starting the right career is through internships.  This alternate task isn't your final goal, but it points you in the right direction.  And on the topic of initialization, we can't forget the benefits of a good night's sleep to help starting each day the best way possible.  You can drink all the coffee you want, but that jolt of caffeine will only take you so far.  Eventually, you need to do just grind through some long nights yourself. Finally, let's not forget about learning from other's mistakes and mentors.  It's like building an ensemble of multiple lives and getting the best experiences of every person involved. </code></p>
+<p>Even with all these tips and tricks though, sometimes you just need to restart the whole training process with a new model.</p>
+<p><code>Even with all these tips and tricks though, sometimes you just need to restart the whole growth process with a new career.</code></p>
+<p>Hopefully, you understood your situation well enough to not require such a drastic change as going from a CNN to a LSTM, but maybe you need to make a more subtle change from a 3-layer bi-LSTM with character inputs into a 2-layer GRU with morpheme inputs.</p>
+<p>Let's be honest though, even the more "subtle" change is really difficult, and often requires a completely new set of hyper-params, so that means a completely new grid search process.  This is not to mention that re-training itself takes a long time, even if you happened to magically have all the right params from the start.</p>
+<p><code>Hopefully, you understood your situation well enough to not require such a drastic change as going from a being a doctor to being an engineer, but maybe you need to make a more subtle change from a web developer focused on e-commerce into a systems engineer focused on healthcare.</code></p>
+<p><code>Let's be honest though, even the more "subtle" change is really difficult, and often requires a completely new set of industry connections, so that means a completely new networking period to meet people.  This is not to mention that building credibility in a new field itself takes a long time, even if you happened to magically have all the right skills for the job from the start.</code></p>
+<p>So what happens?  Most people just pick a standard off-the-shelf model and start training.  And if their test accuracy is low, they complain about their slow CPU (eg. if only I were rich enough to afford a GPU) or try to redirect people's attention to their amazing validation accuracy (or even their train accuracy if they're desperate).  Thus most results end up being very average.</p>
+<p>But you already have a NIPs conference to attend and the deadline for submitting a paper is coming soon.  Plus, you just received that new research grant, and the committee is expecting some results soon, so right now isn't really the time to rock the boat.</p>
+<p><code>So what happens?  Most people just pick a safe career and start getting promoted.  And if their success is poor, they complain about their unreasonable boss (eg. if only I were rich enough to quit immediately so I could look for a new job) or try to redirect people's attention to their amazing college years (or even the glory days of high school if they're desperate). Thus most lives end up being very average.</code></p>
+<p><code>But you already have a mortgage to pay and that deadline for figuring out your health insurance is coming soon.  Plus your wife is 8-months pregnant, and the baby is expected to come out any day now, so right now isn't really the time to rock the boat.</code></p>
+<p>Starting from the bottom again is just way too painful and time consuming.  The model I have now isn't horrible - my current perplexity score is certainly nothing to be ashamed of.  There's no point in trying to compete with Jeff Dean, that guy knows everything.</p>
+<p><code>Starting from the bottom again is just way too painful and time consuming.  The career path I have now isn't horrible - my current salary is certainly nothing to be ashamed of.  There's no point in trying to compete with Jeff Dean, that guy knows everything.</code></p>
+<p>So, stop.  This is where you have to ask yourself "Are you really satisfied with where you are?"  Sure, not everyone can get state-of-the-art results, but have you actually collected all the data that you could before giving up?  Is it really too late to start with a new model?   Maybe getting this done right isn't about just trying to just beat current benchmarks by 1.2%.  Maybe you need to stop comparing yourself to everyone else's results on ArXiv and just ask yourself what really matters.</p>
+<p><code>So, stop.  This is where you have to ask yourself "Are you really satisfied with where you are?"  Sure, not everyone can get the perfect job, but have you actually tried learning everything you could before giving up?  Is it really too late to start with a new career?  Maybe getting this done right isn't about just trying to just beat your friend's stock options package by 1.2%.  Maybe you need to stop comparing yourself to everyone else's lives on Facebook and just ask yourself what really matters.</code></p>
+<p>Because you know you can do better.  Because you know you were meant for something more.</p>
+<p><code>Because you know you can do better.  Because you know you were meant for something more.</code></p>
+
+
+            </section>
+
+        </article>
+    </main>
+    <footer class="page-footer">
+        <h3>More Than One Turn</h3>
+            <p>Thoughts about Conversational AI and interactive dialogue systems.</p>
+        <p><a href="../../index.html">Read more posts →</a></p>
+        <a class="powered" href="https://ghost.org" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 156 156"><g fill="none" fill-rule="evenodd"><rect fill="#15212B" width="156" height="156" rx="27"/><g transform="translate(36 36)" fill="#F6F8FA"><path d="M0 71.007A4.004 4.004 0 014 67h26a4 4 0 014 4.007v8.986A4.004 4.004 0 0130 84H4a4 4 0 01-4-4.007v-8.986zM50 71.007A4.004 4.004 0 0154 67h26a4 4 0 014 4.007v8.986A4.004 4.004 0 0180 84H54a4 4 0 01-4-4.007v-8.986z"/><rect y="34" width="84" height="17" rx="4"/><path d="M0 4.007A4.007 4.007 0 014.007 0h41.986A4.003 4.003 0 0150 4.007v8.986A4.007 4.007 0 0145.993 17H4.007A4.003 4.003 0 010 12.993V4.007z"/><rect x="67" width="17" height="17" rx="4"/></g></g></svg> Published with Ghost</a></span>
+    </footer>
+    
+</body>
+</html>

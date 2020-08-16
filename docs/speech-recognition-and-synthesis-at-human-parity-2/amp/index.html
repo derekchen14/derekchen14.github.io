@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html ⚡>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <title>Speech Recognition and Synthesis at Human Parity</title>
+
+    <link rel="canonical" href="../index.html" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    
+    <meta property="og:site_name" content="More Than One Turn" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Speech Recognition and Synthesis at Human Parity" />
+    <meta property="og:description" content="Microsoft Research dominates Speech-to-Text Achieving Human Parity in Conversational Speech Recognition (W. Xiong, J. Droppo, X. Huang, F. Seide, M. Seltzer, A. Stolcke, D. Yu, G. Zweig) [Published: Oct 2016]  Microsoft Research has made a number of advancements in order to achieve this momentous accomplishment. First, they measured the human" />
+    <meta property="og:url" content="http://localhost:2368/speech-recognition-and-synthesis-at-human-parity-2/" />
+    <meta property="article:published_time" content="2016-11-17T17:12:12.000Z" />
+    <meta property="article:modified_time" content="2016-11-17T20:45:53.000Z" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Speech Recognition and Synthesis at Human Parity" />
+    <meta name="twitter:description" content="Microsoft Research dominates Speech-to-Text Achieving Human Parity in Conversational Speech Recognition (W. Xiong, J. Droppo, X. Huang, F. Seide, M. Seltzer, A. Stolcke, D. Yu, G. Zweig) [Published: Oct 2016]  Microsoft Research has made a number of advancements in order to achieve this momentous accomplishment. First, they measured the human" />
+    <meta name="twitter:url" content="http://localhost:2368/speech-recognition-and-synthesis-at-human-parity-2/" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Derek Chen" />
+    <meta name="twitter:site" content="@derekchen14" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "More Than One Turn",
+        "url": "http://localhost:2368/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "http://localhost:2368/favicon.ico",
+            "width": 48,
+            "height": 48
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Derek Chen",
+        "image": {
+            "@type": "ImageObject",
+            "url": "//www.gravatar.com/avatar/9f3ee838eeb42849d4880676cedd85d6?s=250&d=mm&r=x",
+            "width": 250,
+            "height": 250
+        },
+        "url": "http://localhost:2368/author/derek/",
+        "sameAs": []
+    },
+    "headline": "Speech Recognition and Synthesis at Human Parity",
+    "url": "http://localhost:2368/speech-recognition-and-synthesis-at-human-parity-2/",
+    "datePublished": "2016-11-17T17:12:12.000Z",
+    "dateModified": "2016-11-17T20:45:53.000Z",
+    "description": "Microsoft Research dominates Speech-to-Text\nAchieving Human Parity in Conversational Speech Recognition\n[https://arxiv.org/abs/1610.05256] (W. Xiong, J. Droppo, X. Huang, F. Seide, M.\nSeltzer, A. Stolcke, D. Yu, G. Zweig) [Published: Oct 2016]\n\nMicrosoft Research has made a number of advancements in order to achieve this\nmomentous accomplishment. First, they measured the human error rate on NIST’s\n2000 conversational telephone speech recognition task, which consists of two\nparts: the Switchboard",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://localhost:2368/"
+    }
+}
+    </script>
+
+    <meta name="generator" content="Ghost 3.29" />
+    <link rel="alternate" type="application/rss+xml" title="More Than One Turn" href="../../rss/index.html" />
+
+    <style amp-custom>
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
+
+    html {
+        overflow-x: hidden;
+        overflow-y: scroll;
+        font-size: 62.5%;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    }
+
+    body {
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+        color: #3a4145;
+        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;
+        font-size: 1.7rem;
+        line-height: 1.55em;
+        font-weight: 400;
+        font-style: normal;
+        background: #fff;
+        scroll-behavior: smooth;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    p,
+    ul,
+    ol,
+    li,
+    dl,
+    dd,
+    hr,
+    pre,
+    form,
+    table,
+    video,
+    figure,
+    figcaption,
+    blockquote {
+        margin: 0;
+        padding: 0;
+    }
+
+    ul[class],
+    ol[class] {
+        padding: 0;
+        list-style: none;
+    }
+
+    img {
+        display: block;
+        max-width: 100%;
+    }
+
+    input,
+    button,
+    select,
+    textarea {
+        font: inherit;
+        -webkit-appearance: none;
+    }
+
+    fieldset {
+        margin: 0;
+        padding: 0;
+        border: 0;
+    }
+
+    label {
+        display: block;
+        font-size: 0.9em;
+        font-weight: 700;
+    }
+
+    hr {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 1px;
+        border: 0;
+        border-top: 1px solid currentcolor;
+        opacity: 0.1;
+    }
+
+    ::selection {
+        text-shadow: none;
+        background: #cbeafb;
+    }
+
+    mark {
+        background-color: #fdffb6;
+    }
+
+    small {
+        font-size: 80%;
+    }
+
+    sub,
+    sup {
+        position: relative;
+        font-size: 75%;
+        line-height: 0;
+        vertical-align: baseline;
+    }
+    sup {
+        top: -0.5em;
+    }
+    sub {
+        bottom: -0.25em;
+    }
+
+    ul li + li {
+        margin-top: 0.6em;
+    }
+
+    a {
+        color: #1292EE;
+        text-decoration-skip-ink: auto;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        margin: 0;
+        font-weight: 700;
+        color: #121212;
+        line-height: 1.4em;
+    }
+
+    h1 {
+        font-size: 3.4rem;
+        line-height: 1.1em;
+    }
+
+    h2 {
+        font-size: 2.4rem;
+        line-height: 1.2em;
+    }
+
+    h3 {
+        font-size: 1.8rem;
+    }
+
+    h4 {
+        font-size: 1.7rem;
+    }
+
+    h5 {
+        font-size: 1.6rem;
+    }
+
+    h6 {
+        font-size: 1.6rem;
+    }
+
+    amp-img {
+        height: 100%;
+        width: 100%;
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    amp-img img {
+        object-fit: cover;
+    }
+
+    .page-header {
+        padding: 50px 5vmin 30px;
+        text-align: center;
+        font-size: 2rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .page-header a {
+        color: #121212;
+        font-weight: 700;
+        text-decoration: none;
+        font-size: 1.6rem;
+        letter-spacing: -0.1px;
+    }
+
+    .post {
+        max-width: 680px;
+        margin: 0 auto;
+    }
+
+    .post-header {
+        margin: 0 5vmin 5vmin;
+        text-align: center;
+    }
+
+    .post-meta {
+        margin: 1rem 0 0 0;
+        text-transform: uppercase;
+        color: #738a94;
+        font-weight: 500;
+        font-size: 1.3rem;
+    }
+
+    .post-image {
+        margin: 0 0 5vmin;
+    }
+
+    .post-image img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    .post-content {
+        padding: 0 5vmin;
+    }
+
+    .post-content > * + * {
+        margin-top: 1.5em;
+    }
+
+    .post-content [id]:not(:first-child) {
+        margin: 2em 0 0;
+    }
+
+    .post-content > [id] + * {
+        margin-top: 1rem;
+    }
+
+    .post-content [id] + .kg-card,
+    .post-content blockquote + .kg-card {
+        margin-top: 40px;
+    }
+
+    .post-content > ul,
+    .post-content > ol,
+    .post-content > dl {
+        padding-left: 1.9em;
+    }
+
+    .post-content hr {
+        margin-top: 40px;
+    }
+
+    .post .post-content hr + * {
+        margin-top: 40px;
+    }
+
+    .post-content amp-img {
+        background-color: #f8f8f8;
+    }
+
+    .post-content blockquote {
+        position: relative;
+        font-style: italic;
+    }
+
+    .post-content blockquote::before {
+        content: "";
+        position: absolute;
+        left: -1.5em;
+        top: 0;
+        bottom: 0;
+        width: 0.3rem;
+        background: #000;
+    }
+
+    .post-content :not(.kg-card):not([id]) + .kg-card {
+        margin-top: 40px;
+    }
+
+    .post-content .kg-card + :not(.kg-card) {
+        margin-top: 40px;
+    }
+
+    .kg-card figcaption {
+        padding: 1.5rem 1.5rem 0;
+        text-align: center;
+        font-weight: 500;
+        font-size: 1.3rem;
+        line-height: 1.4em;
+        opacity: 0.6;
+    }
+
+    .kg-card figcaption strong {
+        color: rgba(0,0,0,0.8);
+    }
+
+    .post-content :not(pre) code {
+        vertical-align: middle;
+        padding: 0.15em 0.4em 0.15em;
+        border: #e1eaef 1px solid;
+        font-weight: 400;
+        font-size: 0.9em;
+        line-height: 1em;
+        color: #dc0050;
+        background: #f0f6f9;
+        border-radius: 0.25em;
+    }
+
+    .post-content > pre {
+        overflow: scroll;
+        padding: 16px 20px;
+        color: #fff;
+        background: #1F2428;
+        border-radius: 5px;
+        box-shadow: 0 2px 6px -2px rgba(0,0,0,.1), 0 0 1px rgba(0,0,0,.4);
+    }
+
+    .kg-embed-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .kg-image-card img {
+        margin: auto;
+    }
+
+    .kg-gallery-card + .kg-gallery-card {
+        margin-top: 0.75em;
+    }
+
+    .kg-gallery-container {
+        position: relative;
+    }
+
+    .kg-gallery-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .kg-gallery-image {
+        width: 100%;
+        height: 100%;
+    }
+
+    .kg-gallery-row:not(:first-of-type) {
+        margin: 0.75em 0 0 0;
+    }
+
+    .kg-gallery-image:not(:first-of-type) {
+        margin: 0 0 0 0.75em;
+    }
+
+    .kg-bookmark-card,
+    .kg-bookmark-publisher {
+        position: relative;
+    }
+
+    .kg-bookmark-container,
+    .kg-bookmark-container:hover {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row-reverse;
+        color: currentColor;
+        background: rgba(255,255,255,0.6);
+        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;
+        text-decoration: none;
+        border-radius: 5px;
+        box-shadow: 0 2px 6px -2px rgba(0, 0, 0, 0.1), 0 0 1px rgba(0, 0, 0, 0.4);
+        overflow: hidden;
+    }
+
+    .kg-bookmark-content {
+        flex-basis: 0;
+        flex-grow: 999;
+        padding: 20px;
+        order: 1;
+    }
+
+    .kg-bookmark-title {
+        font-weight: 600;
+        font-size: 1.5rem;
+        line-height: 1.3em;
+    }
+
+    .kg-bookmark-description {
+        display: -webkit-box;
+        max-height: 45px;
+        margin: 0.5em 0 0 0;
+        font-size: 1.4rem;
+        line-height: 1.55em;
+        overflow: hidden;
+        opacity: 0.8;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+
+    .kg-bookmark-metadata {
+        margin-top: 20px;
+    }
+
+    .kg-bookmark-metadata {
+        display: flex;
+        align-items: center;
+        font-weight: 500;
+        font-size: 1.3rem;
+        line-height: 1.3em;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .kg-bookmark-description {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+    }
+
+    .kg-bookmark-metadata amp-img {
+        width: 18px;
+        height: 18px;
+        max-width: 18px;
+        max-height: 18px;
+        margin-right: 10px;
+    }
+
+    .kg-bookmark-thumbnail {
+        display: flex;
+        flex-basis: 20rem;
+        flex-grow: 1;
+        justify-content: flex-end;
+    }
+
+    .kg-bookmark-thumbnail amp-img {
+        max-height: 200px;
+    }
+
+    .kg-bookmark-author {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    .kg-bookmark-publisher::before {
+        content: "•";
+        margin: 0 .5em;
+    }
+
+    .kg-width-full.kg-card-hascaption {
+        display: grid;
+        grid-template-columns: inherit;
+    }
+
+    .post-content table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    .post-content th {
+        padding: 0.5em 0.8em;
+        text-align: left;
+        font-size: .75em;
+        text-transform: uppercase;
+    }
+
+    .post-content td {
+        padding: 0.4em 0.7em;
+    }
+
+    .post-content tbody tr:nth-child(2n + 1) {
+        background-color: rgba(0,0,0,0.1);
+        padding: 1px;
+    }
+
+    .post-content tbody tr:nth-child(2n + 2) td:last-child {
+        box-shadow:
+            inset 1px 0 rgba(0,0,0,0.1),
+            inset -1px 0 rgba(0,0,0,0.1);
+    }
+
+    .post-content tbody tr:nth-child(2n + 2) td {
+        box-shadow: inset 1px 0 rgba(0,0,0,0.1);
+    }
+
+    .post-content tbody tr:last-child {
+        border-bottom: 1px solid rgba(0,0,0,.1);
+    }
+
+    .page-footer {
+        padding: 60px 5vmin;
+        margin: 60px auto 0;
+        text-align: center;
+        background-color: #f8f8f8;
+    }
+
+    .page-footer h3 {
+        margin: 0.5rem 0 0 0;
+    }
+
+    .page-footer p {
+        max-width: 500px;
+        margin: 1rem auto 1.5rem;
+        font-size: 1.7rem;
+        line-height: 1.5em;
+        color: rgba(0,0,0,0.6)
+    }
+
+    .powered {
+        display: inline-flex;
+        align-items: center;
+        margin: 30px 0 0;
+        padding: 6px 9px 6px 6px;
+        border: rgba(0,0,0,0.1) 1px solid;
+        font-size: 12px;
+        line-height: 12px;
+        letter-spacing: -0.2px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+        font-weight: 500;
+        color: #222;
+        text-decoration: none;
+        background: #fff;
+        border-radius: 6px;
+    }
+
+    .powered svg {
+        height: 16px;
+        width: 16px;
+        margin: 0 6px 0 0;
+    }
+
+    @media (max-width: 600px) {
+        body {
+            font-size: 1.6rem;
+        }
+        h1 {
+            font-size: 3rem;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+        }
+    }
+
+    @media (max-width: 400px) {
+        h1 {
+            font-size: 2.6rem;
+            line-height: 1.15em;
+        }
+        h2 {
+            font-size: 2rem;
+            line-height: 1.2em;
+        }
+        h3 {
+            font-size: 1.7rem;
+        }
+    }
+    </style>
+
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+
+    <script async custom-element="amp-anim" src="https://cdn.ampproject.org/v0/amp-anim-0.1.js"></script>
+
+</head>
+
+<body class="amp-template">
+    <header class="page-header">
+        <a href="../../index.html">
+                More Than One Turn
+        </a>
+    </header>
+
+    <main class="content" role="main">
+        <article class="post">
+
+            <header class="post-header">
+                <h1 class="post-title">Speech Recognition and Synthesis at Human Parity</h1>
+                <section class="post-meta">
+                    Derek Chen -
+                    <time class="post-date" datetime="2016-11-17">17 Nov 2016</time>
+                </section>
+            </header>
+            <section class="post-content">
+
+                <h4 id="microsoftresearchdominatesspeechtotext">Microsoft Research dominates Speech-to-Text</h4>
+<p><a href="https://arxiv.org/abs/1610.05256"><strong>Achieving Human Parity in Conversational Speech Recognition</strong></a> (<em>W. Xiong, J. Droppo, X. Huang, F. Seide, M. Seltzer, A. Stolcke, D. Yu, G. Zweig</em>) [Published: Oct 2016]</p>
+<p>Microsoft Research has made a number of advancements in order to achieve this momentous accomplishment. First, they measured the human error rate on NIST’s 2000 conversational telephone speech recognition task, which consists of two parts: the Switchboard<br />
+and CallHome subsets, with 5.9% and 11.3% error rates respectively.  Significantly, they found a great deal of variability between the two datasets, which highlights the fact that it would be a misnomer to place a single number to represent "human-level" accuracy - it really depends on the dataset.  With that said, MS claims that for the first time, automatic recognition performance is on par with human performance on this task.</p>
+<p>This was accomplished through a variety of SOTA tricks from deep learning. To start, a combination of triplet of CNNs are fused together for acoustic modeling, namely a (1) VGGNet for senone prediction (2) ResNet with ReLUs and batch norm (3) a LACE network.   What is a senone? Well, a senone is a set of tied triphone states, normally in a HMM, but this time in a CNN.  From <a href="http://cmusphinx.sourceforge.net/wiki/tutorialconcepts">CMU Sphinx</a>: Speech is a continuous audio stream where rather stable states mix with dynamically changed states. In this sequence of states, one can define more or less similar classes of sounds, or phones.<br />
+Words are understood to be built of phones, but this is certainly not true. The acoustic properties of a waveform corresponding to a phone can vary greatly depending on many factors - phone context, speaker, style of speech and so on. The so called coarticulation makes phones sound very different from their “canonical” representation. Next, since transitions between words are more informative than stable regions, developers often talk about diphones - parts of phones between two consecutive phones. Sometimes developers talk about subphonetic units - different substates of a phone. Often three or more regions of a different nature can easily be found.<br />
+The number three is easily explained. The first part of the phone depends on its preceding phone, the middle part is stable, and the next part depends on the subsequent phone. That's why there are often three states in a phone selected for HMM recognition.<br />
+Sometimes phones are considered in context. There are triphones or even quinphones. But note that unlike phones and diphones, they are matched with the same range in waveform as just phones. They just differ by name. That's why we prefer to call this object senone. A senone's dependence on context could be more complex than just left and right context. It can be a rather complex function defined by a decision tree, or in some other way."<br />
+What is a LACE? Well it stands for a layer-wise context expansion<br />
+with attention model, but that doesn't help too much either. LACE is variation on time-delay neural networks where each higher layer studies the broad context, which "expands" the context of lower layers. Put another way, lower layers focus on extracting simple local patterns while higher layers extract complex patterns that cover broader contexts. Where Since not all frames in a window carry the same importance, an attention is applied to tell the network which window to focus on.</p>
+<p>A whole bunch of LSTMs are used for acoustic and language modeling as well.  In order to extract all the data, many steps of processing are performed. We trained both standard, forward-predicting RNNLMs and backward RNN-LMs that predict words in<br />
+reverse temporal order. The log probabilities from both<br />
+models are added.  There is also some interpolation with N-grams.  Then some work is done to account for words that are out-of-domain of the training data. Some other techniques are used for scoring and rescoring the potential candidate terms.  To quote: "Here we also used a two-phase training schedule to train the LSTM LMs. First we train the model on the combination of in-domain and out-domain data for four data passes without any learning rate adjustment. We then start from the resulting model and train on<br />
+in-domain data until convergence."  As is now clear, speech recognition is a deep learning task beyond my understanding, but this is just too great a result to not report :P</p>
+<p>One final note, while I don't think the "human parity" claim is marketing fluff, I do think the rebranding of CNTK to "Cognitive Toolkit" <em>is</em> PR from MS to combat the popularity of Torch (FB) and Tensorflow (GOOG).  Why is this worth mentioning?  Because they devoted an entire section in the paper to say how great their library is.  Anyway, great achievement for the team!</p>
+<h4 id="googledeepminddominatestexttospeech">Google Deepmind dominates Text-to-Speech</h4>
+<p><a href="https://arxiv.org/abs/1609.03499"><strong>Wavenet: a Generative Model for Raw Audio</strong></a><br />
+(<em>A. Oord, K. Simonyan, N. Kalchbrenner, S. Dieleman, O. Vinyals, A. Senior, H. Zen, A. Graves, K. Kavukcuoglu</em>) [Published: Sept 2016]</p>
+<p>Traditionally, raw audio waveforms are created using <a href="https://en.wikipedia.org/wiki/Concatenative_synthesis">Concatenative </a> methods or <a href="http://www.cstr.ed.ac.uk/downloads/publications/2010/king_hmm_tutorial.pdf">Statistical Parametric</a> methods.  For the former, there's just a giant library of sound snippets (likely phonemes) that are glued together to form each words and sentences.  For the later, the combinations and transitions from one sound bite to another are done a bit smarter using Hidden Markov Models and other statistical techniques. As of 2016, this represents the state-of-the-art.  Well, represented state-of-the-art until WaveNet came by and improved on <em>both</em> by over 50%!</p>
+<p>WaveNet is a deep neural network for generating raw audio waveforms. The model is fully probabilistic and autoregressive, with the predictive distribution for each audio sample conditioned on all previous ones.  Human listeners rate the speech as significantly more natural sounding than the best parametric and concatenative systems for both English and Chinese.  This was supposed to be very hard because audio files used for training are now at 16,000 samples per second, which means too much data for most other models to handle.  But what works in PixelRNNs for generating images also works for generating waveforms, once the convolution filters are tweaked a bit for this new purpose.</p>
+<p>At each timestep, it takes in the word it is trying to say, and the outputs samples at all previous timesteps to generate the current output.  But there are no timesteps since its a CNN, not a RNN! Ok true, but basically, the CNN "looks back" at previous timesteps by expanding the receptive field - higher layers have higher dilation leading to larger receptive fields.  A normal dilation will expand in both directions (forward and backward), so to prevent the CNN from looking ahead, the authors apply masks to form causal convolutions.  (Actually a dilation normally expands in four directions up, down, left, right, but the waveform is 2D, so it can only expand left and right.)  Since wave From what I can gather, this basically means applying a mask tensor on the convolution kernel through elementwise multiplication (that blocks signal from the "future") before applying the kernel to the waveform at that layer.</p>
+<p>The output of the model has the same time dimensionality as the input, which makes taking the output from one layer as the input of the next layer really easy (no deconvolutions necessary).  From the image though, it's clear each output comes from multiple inputs.  However, this is <em>not</em> achieved pooling layers in the network (as typical in CNNs).  Instead, in order to shrink down the dimensions as we move up the layers, the dilated convolutions are used to pad zeros between the filters of each layer. To quote: "The intuition behind this configuration is two-fold. First, exponentially increasing the dilation factor results in exponential receptive field growth with depth (Yu &amp; Koltun, 2016). For example each 1, 2, 4, . . . , 512 block has receptive field of size 1024, and can be seen as a more efficient and dis- criminative (non-linear) counterpart of a 1×1024 convolution. Second, stacking these blocks further increases the model capacity and the receptive field size."</p>
+<p></p>
+<p>Also interesting, by tweaking one of the inputs, WaveNet can even generate the same speech using different speakers, such as female or male, when conditioned on a speaker identity. Just for fun, it can also generate "novel and often highly realistic musical fragments".  Finally, it might just be me, but do all the sound clips sound like they have some underlying static in the background?  Might it have to do with the <a href="http://distill.pub/2016/deconv-checkerboard/">checkerboard artifacts</a> in other generative models?</p>
+<p>Perhaps most promising is the use of WaveNet as a discriminative model, since it generally points to the possibility of semi-supervised learning that takes advantage of unlabeled data.  Here, the output is chopped off, and replaced with a mean-pool followed by some more non-causal convs.  (Was there a softmax at the end?)  Applying this to TIMIT, the authors acheieved 18.8 PER on the test set, which is SOTA when trained on raw audio (as opposed to log mel-filterbank energies or mel-frequency cepstral coefficients.)  The <a href="https://deepmind.com/blog/wavenet-generative-model-raw-audio/">official blog post</a> is pretty easy to understand, and includes sound clips from the system.  Definitely worth a look.</p>
+
+
+            </section>
+
+        </article>
+    </main>
+    <footer class="page-footer">
+        <h3>More Than One Turn</h3>
+            <p>Thoughts about Conversational AI and interactive dialogue systems.</p>
+        <p><a href="../../index.html">Read more posts →</a></p>
+        <a class="powered" href="https://ghost.org" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 156 156"><g fill="none" fill-rule="evenodd"><rect fill="#15212B" width="156" height="156" rx="27"/><g transform="translate(36 36)" fill="#F6F8FA"><path d="M0 71.007A4.004 4.004 0 014 67h26a4 4 0 014 4.007v8.986A4.004 4.004 0 0130 84H4a4 4 0 01-4-4.007v-8.986zM50 71.007A4.004 4.004 0 0154 67h26a4 4 0 014 4.007v8.986A4.004 4.004 0 0180 84H54a4 4 0 01-4-4.007v-8.986z"/><rect y="34" width="84" height="17" rx="4"/><path d="M0 4.007A4.007 4.007 0 014.007 0h41.986A4.003 4.003 0 0150 4.007v8.986A4.007 4.007 0 0145.993 17H4.007A4.003 4.003 0 010 12.993V4.007z"/><rect x="67" width="17" height="17" rx="4"/></g></g></svg> Published with Ghost</a></span>
+    </footer>
+    
+</body>
+</html>

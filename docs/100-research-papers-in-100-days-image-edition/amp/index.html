@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html ⚡>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <title>100 Research Papers in 100 Days (Image Edition)</title>
+
+    <meta name="description" content="Research paper summaries giving intuition behind the top paper in the computer vision and image recognition field." />
+    <link rel="canonical" href="../index.html" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    
+    <meta property="og:site_name" content="More Than One Turn" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="100 Research Papers in 100 Days (Image Edition)" />
+    <meta property="og:description" content="Research paper summaries giving intuition behind the top paper in the computer vision and image recognition field." />
+    <meta property="og:url" content="http://localhost:2368/100-research-papers-in-100-days-image-edition/" />
+    <meta property="og:image" content="http://localhost:2368/content/images/2016/10/monalisa.jpg" />
+    <meta property="article:published_time" content="2016-10-15T14:04:00.000Z" />
+    <meta property="article:modified_time" content="2017-03-25T05:21:50.000Z" />
+    <meta property="article:tag" content="CNN" />
+    <meta property="article:tag" content="image recognition" />
+    
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="100 Research Papers in 100 Days (Image Edition)" />
+    <meta name="twitter:description" content="Research paper summaries giving intuition behind the top paper in the computer vision and image recognition field." />
+    <meta name="twitter:url" content="http://localhost:2368/100-research-papers-in-100-days-image-edition/" />
+    <meta name="twitter:image" content="http://localhost:2368/content/images/2016/10/monalisa.jpg" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Derek Chen" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="CNN, image recognition" />
+    <meta name="twitter:site" content="@derekchen14" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "More Than One Turn",
+        "url": "http://localhost:2368/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "http://localhost:2368/favicon.ico",
+            "width": 48,
+            "height": 48
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Derek Chen",
+        "image": {
+            "@type": "ImageObject",
+            "url": "//www.gravatar.com/avatar/9f3ee838eeb42849d4880676cedd85d6?s=250&d=mm&r=x",
+            "width": 250,
+            "height": 250
+        },
+        "url": "http://localhost:2368/author/derek/",
+        "sameAs": []
+    },
+    "headline": "100 Research Papers in 100 Days (Image Edition)",
+    "url": "http://localhost:2368/100-research-papers-in-100-days-image-edition/",
+    "datePublished": "2016-10-15T14:04:00.000Z",
+    "dateModified": "2017-03-25T05:21:50.000Z",
+    "image": {
+        "@type": "ImageObject",
+        "url": "http://localhost:2368/content/images/2016/10/monalisa.jpg"
+    },
+    "keywords": "CNN, image recognition",
+    "description": "Computer Vision (CNNs)\nIdentity Mappings in Deep Residual Networks [http://arxiv.org/abs/1603.05027] \n(He, Zhang, Ren, Sun) [Read: Sept 23rd]\n\n * Idea: Passing more information forward in a network by establishing\n   skip-connections can result in much deeper and more powerful networks. The\n   authors of the original ResNets now expand on this idea by tweaking the\n   connections a bit. * (1) First they experiment with the type of\n      skip-connections (as given by function h). They argue that t",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://localhost:2368/"
+    }
+}
+    </script>
+
+    <meta name="generator" content="Ghost 3.29" />
+    <link rel="alternate" type="application/rss+xml" title="More Than One Turn" href="../../rss/index.html" />
+
+    <style amp-custom>
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
+
+    html {
+        overflow-x: hidden;
+        overflow-y: scroll;
+        font-size: 62.5%;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    }
+
+    body {
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+        color: #3a4145;
+        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;
+        font-size: 1.7rem;
+        line-height: 1.55em;
+        font-weight: 400;
+        font-style: normal;
+        background: #fff;
+        scroll-behavior: smooth;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    p,
+    ul,
+    ol,
+    li,
+    dl,
+    dd,
+    hr,
+    pre,
+    form,
+    table,
+    video,
+    figure,
+    figcaption,
+    blockquote {
+        margin: 0;
+        padding: 0;
+    }
+
+    ul[class],
+    ol[class] {
+        padding: 0;
+        list-style: none;
+    }
+
+    img {
+        display: block;
+        max-width: 100%;
+    }
+
+    input,
+    button,
+    select,
+    textarea {
+        font: inherit;
+        -webkit-appearance: none;
+    }
+
+    fieldset {
+        margin: 0;
+        padding: 0;
+        border: 0;
+    }
+
+    label {
+        display: block;
+        font-size: 0.9em;
+        font-weight: 700;
+    }
+
+    hr {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 1px;
+        border: 0;
+        border-top: 1px solid currentcolor;
+        opacity: 0.1;
+    }
+
+    ::selection {
+        text-shadow: none;
+        background: #cbeafb;
+    }
+
+    mark {
+        background-color: #fdffb6;
+    }
+
+    small {
+        font-size: 80%;
+    }
+
+    sub,
+    sup {
+        position: relative;
+        font-size: 75%;
+        line-height: 0;
+        vertical-align: baseline;
+    }
+    sup {
+        top: -0.5em;
+    }
+    sub {
+        bottom: -0.25em;
+    }
+
+    ul li + li {
+        margin-top: 0.6em;
+    }
+
+    a {
+        color: #1292EE;
+        text-decoration-skip-ink: auto;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        margin: 0;
+        font-weight: 700;
+        color: #121212;
+        line-height: 1.4em;
+    }
+
+    h1 {
+        font-size: 3.4rem;
+        line-height: 1.1em;
+    }
+
+    h2 {
+        font-size: 2.4rem;
+        line-height: 1.2em;
+    }
+
+    h3 {
+        font-size: 1.8rem;
+    }
+
+    h4 {
+        font-size: 1.7rem;
+    }
+
+    h5 {
+        font-size: 1.6rem;
+    }
+
+    h6 {
+        font-size: 1.6rem;
+    }
+
+    amp-img {
+        height: 100%;
+        width: 100%;
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    amp-img img {
+        object-fit: cover;
+    }
+
+    .page-header {
+        padding: 50px 5vmin 30px;
+        text-align: center;
+        font-size: 2rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .page-header a {
+        color: #121212;
+        font-weight: 700;
+        text-decoration: none;
+        font-size: 1.6rem;
+        letter-spacing: -0.1px;
+    }
+
+    .post {
+        max-width: 680px;
+        margin: 0 auto;
+    }
+
+    .post-header {
+        margin: 0 5vmin 5vmin;
+        text-align: center;
+    }
+
+    .post-meta {
+        margin: 1rem 0 0 0;
+        text-transform: uppercase;
+        color: #738a94;
+        font-weight: 500;
+        font-size: 1.3rem;
+    }
+
+    .post-image {
+        margin: 0 0 5vmin;
+    }
+
+    .post-image img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    .post-content {
+        padding: 0 5vmin;
+    }
+
+    .post-content > * + * {
+        margin-top: 1.5em;
+    }
+
+    .post-content [id]:not(:first-child) {
+        margin: 2em 0 0;
+    }
+
+    .post-content > [id] + * {
+        margin-top: 1rem;
+    }
+
+    .post-content [id] + .kg-card,
+    .post-content blockquote + .kg-card {
+        margin-top: 40px;
+    }
+
+    .post-content > ul,
+    .post-content > ol,
+    .post-content > dl {
+        padding-left: 1.9em;
+    }
+
+    .post-content hr {
+        margin-top: 40px;
+    }
+
+    .post .post-content hr + * {
+        margin-top: 40px;
+    }
+
+    .post-content amp-img {
+        background-color: #f8f8f8;
+    }
+
+    .post-content blockquote {
+        position: relative;
+        font-style: italic;
+    }
+
+    .post-content blockquote::before {
+        content: "";
+        position: absolute;
+        left: -1.5em;
+        top: 0;
+        bottom: 0;
+        width: 0.3rem;
+        background: #000;
+    }
+
+    .post-content :not(.kg-card):not([id]) + .kg-card {
+        margin-top: 40px;
+    }
+
+    .post-content .kg-card + :not(.kg-card) {
+        margin-top: 40px;
+    }
+
+    .kg-card figcaption {
+        padding: 1.5rem 1.5rem 0;
+        text-align: center;
+        font-weight: 500;
+        font-size: 1.3rem;
+        line-height: 1.4em;
+        opacity: 0.6;
+    }
+
+    .kg-card figcaption strong {
+        color: rgba(0,0,0,0.8);
+    }
+
+    .post-content :not(pre) code {
+        vertical-align: middle;
+        padding: 0.15em 0.4em 0.15em;
+        border: #e1eaef 1px solid;
+        font-weight: 400;
+        font-size: 0.9em;
+        line-height: 1em;
+        color: #dc0050;
+        background: #f0f6f9;
+        border-radius: 0.25em;
+    }
+
+    .post-content > pre {
+        overflow: scroll;
+        padding: 16px 20px;
+        color: #fff;
+        background: #1F2428;
+        border-radius: 5px;
+        box-shadow: 0 2px 6px -2px rgba(0,0,0,.1), 0 0 1px rgba(0,0,0,.4);
+    }
+
+    .kg-embed-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .kg-image-card img {
+        margin: auto;
+    }
+
+    .kg-gallery-card + .kg-gallery-card {
+        margin-top: 0.75em;
+    }
+
+    .kg-gallery-container {
+        position: relative;
+    }
+
+    .kg-gallery-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .kg-gallery-image {
+        width: 100%;
+        height: 100%;
+    }
+
+    .kg-gallery-row:not(:first-of-type) {
+        margin: 0.75em 0 0 0;
+    }
+
+    .kg-gallery-image:not(:first-of-type) {
+        margin: 0 0 0 0.75em;
+    }
+
+    .kg-bookmark-card,
+    .kg-bookmark-publisher {
+        position: relative;
+    }
+
+    .kg-bookmark-container,
+    .kg-bookmark-container:hover {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row-reverse;
+        color: currentColor;
+        background: rgba(255,255,255,0.6);
+        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;
+        text-decoration: none;
+        border-radius: 5px;
+        box-shadow: 0 2px 6px -2px rgba(0, 0, 0, 0.1), 0 0 1px rgba(0, 0, 0, 0.4);
+        overflow: hidden;
+    }
+
+    .kg-bookmark-content {
+        flex-basis: 0;
+        flex-grow: 999;
+        padding: 20px;
+        order: 1;
+    }
+
+    .kg-bookmark-title {
+        font-weight: 600;
+        font-size: 1.5rem;
+        line-height: 1.3em;
+    }
+
+    .kg-bookmark-description {
+        display: -webkit-box;
+        max-height: 45px;
+        margin: 0.5em 0 0 0;
+        font-size: 1.4rem;
+        line-height: 1.55em;
+        overflow: hidden;
+        opacity: 0.8;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+
+    .kg-bookmark-metadata {
+        margin-top: 20px;
+    }
+
+    .kg-bookmark-metadata {
+        display: flex;
+        align-items: center;
+        font-weight: 500;
+        font-size: 1.3rem;
+        line-height: 1.3em;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .kg-bookmark-description {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+    }
+
+    .kg-bookmark-metadata amp-img {
+        width: 18px;
+        height: 18px;
+        max-width: 18px;
+        max-height: 18px;
+        margin-right: 10px;
+    }
+
+    .kg-bookmark-thumbnail {
+        display: flex;
+        flex-basis: 20rem;
+        flex-grow: 1;
+        justify-content: flex-end;
+    }
+
+    .kg-bookmark-thumbnail amp-img {
+        max-height: 200px;
+    }
+
+    .kg-bookmark-author {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    .kg-bookmark-publisher::before {
+        content: "•";
+        margin: 0 .5em;
+    }
+
+    .kg-width-full.kg-card-hascaption {
+        display: grid;
+        grid-template-columns: inherit;
+    }
+
+    .post-content table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    .post-content th {
+        padding: 0.5em 0.8em;
+        text-align: left;
+        font-size: .75em;
+        text-transform: uppercase;
+    }
+
+    .post-content td {
+        padding: 0.4em 0.7em;
+    }
+
+    .post-content tbody tr:nth-child(2n + 1) {
+        background-color: rgba(0,0,0,0.1);
+        padding: 1px;
+    }
+
+    .post-content tbody tr:nth-child(2n + 2) td:last-child {
+        box-shadow:
+            inset 1px 0 rgba(0,0,0,0.1),
+            inset -1px 0 rgba(0,0,0,0.1);
+    }
+
+    .post-content tbody tr:nth-child(2n + 2) td {
+        box-shadow: inset 1px 0 rgba(0,0,0,0.1);
+    }
+
+    .post-content tbody tr:last-child {
+        border-bottom: 1px solid rgba(0,0,0,.1);
+    }
+
+    .page-footer {
+        padding: 60px 5vmin;
+        margin: 60px auto 0;
+        text-align: center;
+        background-color: #f8f8f8;
+    }
+
+    .page-footer h3 {
+        margin: 0.5rem 0 0 0;
+    }
+
+    .page-footer p {
+        max-width: 500px;
+        margin: 1rem auto 1.5rem;
+        font-size: 1.7rem;
+        line-height: 1.5em;
+        color: rgba(0,0,0,0.6)
+    }
+
+    .powered {
+        display: inline-flex;
+        align-items: center;
+        margin: 30px 0 0;
+        padding: 6px 9px 6px 6px;
+        border: rgba(0,0,0,0.1) 1px solid;
+        font-size: 12px;
+        line-height: 12px;
+        letter-spacing: -0.2px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+        font-weight: 500;
+        color: #222;
+        text-decoration: none;
+        background: #fff;
+        border-radius: 6px;
+    }
+
+    .powered svg {
+        height: 16px;
+        width: 16px;
+        margin: 0 6px 0 0;
+    }
+
+    @media (max-width: 600px) {
+        body {
+            font-size: 1.6rem;
+        }
+        h1 {
+            font-size: 3rem;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+        }
+    }
+
+    @media (max-width: 400px) {
+        h1 {
+            font-size: 2.6rem;
+            line-height: 1.15em;
+        }
+        h2 {
+            font-size: 2rem;
+            line-height: 1.2em;
+        }
+        h3 {
+            font-size: 1.7rem;
+        }
+    }
+    </style>
+
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+
+    
+
+</head>
+
+<body class="amp-template">
+    <header class="page-header">
+        <a href="../../index.html">
+                More Than One Turn
+        </a>
+    </header>
+
+    <main class="content" role="main">
+        <article class="post">
+
+            <header class="post-header">
+                <h1 class="post-title">100 Research Papers in 100 Days (Image Edition)</h1>
+                <section class="post-meta">
+                    Derek Chen -
+                    <time class="post-date" datetime="2016-10-15">15 Oct 2016</time>
+                </section>
+            </header>
+            <figure class="post-image">
+                <amp-img src="http://localhost:2368/content/images/2016/10/monalisa.jpg" width="600" height="340" layout="responsive"></amp-img>
+            </figure>
+            <section class="post-content">
+
+                <h3 id="computervisioncnns">Computer Vision (CNNs)</h3>
+<p><a href="http://arxiv.org/abs/1603.05027"><strong>Identity Mappings in Deep Residual Networks</strong></a> <em>(He, Zhang, Ren, Sun)</em> [Read: Sept 23rd]</p>
+<ul>
+<li><strong>Idea</strong>: Passing more information forward in a network by establishing skip-connections can result in much deeper and more powerful networks. The authors of the original ResNets now expand on this idea by tweaking the connections a bit.
+<ul>
+<li>(1) First they experiment with the type of skip-connections (as given by function <em>h</em>). They argue that the best type of skip connection is simply the identity function, largely because any other type of function (scalar multiplication, dropout, gate, conv, etc.) will result in vanishing or exploding gradients. A simpler way to see this is that any manipulations on the shortcuts can hamper information propagation and lead to optimization problems.</li>
+<li>(2) In a typical ResNet, the results of the Convs are added to the results of an identity output, and then a post-activiation ReLU is applied before passing the outputs to the next block.  In the proposed "pre-activation" process, there is no longer a ReLU after the addition.  Instead, the identity results are allowed to flow through completely unimpeded, and a pre-processing of [Batch Norm]-&gt;[ReLU] is applied to the Conv portion before multiplying the by the weights.</li>
+<li>The authors experimented with only have ReLU, rather than BN and ReLU in the pre-activation step, as well as a number of other combinations before arriving at the final model, which yielded the best empirical results.</li>
+</ul>
+</li>
+<li><strong>Results</strong>: New pre-activation units achieve gains over previous state-of-the-art original ResNets by roughly 10% from ~5.5. to ~4.8 on ImageNet. All of these gains allow for networks of over 1000 layers!</li>
+<li><strong>Lessons</strong>: The authors believe this works well because first, the optimization is further eased since an identity mapping over a ReLU allows the signal to be passed freely backwards and forwards. Secondly, this works well because using BN as pre-activation improves regularization of the models.</li>
+</ul>
+<p><a href="https://arxiv.org/pdf/1608.06993v1.pdf"><strong>Densely Connected Convolutional Networks</strong></a> <em>(Huang, Liu, Weinberger)</em> [Read Sept 15th]</p>
+<ul>
+<li><strong>Idea</strong>: When dealing with CNNs, we've seen that passing more information over directly through ResNets or Highway Networks allows the final softmax classifier to perform better even when the networks have many layers. The authors take this one step further such that each layer obtains additional inputs from all preceding layers and passes on its own feature maps to all subsequent layers. Crucially, in contrast to ResNets, the model does not combine features through summation before they are passed into a layer, and instead the model provides all the features as separate inputs.</li>
+<li>One counter-intuitive point is that in some cases, DenseNets actually require fewer parameters than traditional networks because each subsequent layer requires fewer feature maps to perform well, and fewer feature maps overall means fewer weights to optimize. This is made possible because all layers in a DenseNet have direct access to feature maps from all preceding layers, which means that many of the feature maps (namely those from the beginning) are being reused by layers towards the end.  In turn, this reuse lowers the burden on future layers to re-learn redundant feature maps. More concretely, in traditional ConvNets, the number of maps per layer is a medium size number (~64) and the number of connections grows linearly.  In a DenseNet, the number of connections grows much faster, but the maps per layer is a small size number (~12).  Thus, even though the number of connections grows quadratically, DenseNet layers start with a smaller base, so depending on the final depth, the total number of parameters might actually end up smaller as well.</li>
+<li><strong>Results</strong>: The DenseNet beats the state-of-the-art on CIFAR-10, CIFAR-100 and SVHN by a decent margin, with improvements around 30% over previous methods.  When the depth of the DenseNet is lowered such that the total number of params is roughly equal to the total number of params in a ResNet, the DenseNet performance is consistently lower by a factor of around 11%.</li>
+<li><strong>Lessons</strong>: One potential side-effect of the more efficient use of parameters may be a tendency of DenseNets to be more robust against overfitting, which led to a lessened need for regularization. Dropout was only used for datasets without data augmentation, which are substantially smaller and thus more prone to overfitting. Separately, inspired by (He et al., 2016), composite layers that contain (Batch Norm)-(ReLU)-(ConvPool) seem to be great mechanisms for joining together network components.</li>
+</ul>
+<p><a href="https://arxiv.org/abs/1603.09382"><strong>Deep Networks with Stochastic Depth</strong></a> <em>(Huang, Sun, Liu, Sedra, Weinberger)</em> [Read Sept 26th]</p>
+<ul>
+<li><strong>Idea</strong>: The expressive power of deep ConvNets with 100s of layers leads to significant improvements in performance.  However, this does not come without a cost, since deep networks often exhibit problems of diminishing feature reuse in feed forward calculations, vanishing gradients during backprop, and slower training time.  To address these problems, the authors propose a stochastic depth procedure where the network size is randomly cut shorter during training time (and is the full length during test time). Concretely, each mini-batch has a chance of dropping a subset of layers and bypassing those layers with the identity function. Each layer is dropped based on the outcome of an independent Bernoulli random variable, whose distribution is determined by a linear decay rate such that later layers (closer to output) have a higher likelihood of being dropped than earlier layers (closer to input).</li>
+<li><strong>Results</strong>: Recall VGG-net and GoogLeNet have 19 and 22 layers respectively, from 2014.  ResNets pushed this to 152 layers last year, and now in 2016, 1000+ layers (yes, thousand) can be trained effectively.  This yields test errors below 5% on CIFAR, which is state-of-the-art during time of publication.</li>
+<li>Training time is no longer a function of total size, but rather total expected network size.  Based on the proposed survival probability scheme, this amounts to ~25% time decrease over networks of the same constant size.</li>
+<li><strong>Lessons</strong>: The random dropping of layers with stochastic depth functions a lot like the random dropping of units with dropout.  Whereas the former performs operations on depth, the latter performs operations on width.  Other notable similarities is that both seem to offer a form of regularization, as well as a makeshift ensemble of different network sizes.</li>
+</ul>
+<p><a href="https://arxiv.org/abs/1604.03640"><strong>Bridging the Gaps Between Residual Learning, Recurrent Neural Networks and Visual Cortex</strong></a> <em>(Liao, Poggio)</em> [Read Oct 3rd]</p>
+<ul>
+<li><strong>Idea</strong>: ResNets have recently shown great promise in image recognition, but often require 1000+ neural units to achieve the SOTA accuracy.  While impressive, the human brain does this with just dozens of neurons.  One advantage the brain uses is lateral connections in addition to depth connections, so the authors propose combining the ResNet (depth) with RNN-like structure (lateral) which would more closely mimic how the visual cortex operates.</li>
+<li>In particular, they reformulate the ResNet architecture to have shared weights across "time-steps", where one time-step is a pass through one time-step of a ResNet block (BN-ReLU-Conv), representing the lateral connections.  Next, they layer on multiple "RNN-ResNet" blocks in a hierarchical fashion to simulate the depth. This is essentially the form of a stacked-RNN. Finally, there is a pre-net and post-net for input preprocessing and post-processing, all trained jointly.</li>
+<li><strong>Results</strong>: On the CIFAR-10 dataset, the new structure does <em>not</em> perform as well as original ResNets (~6% loss vs ~2% loss) by roughly a factor of 3x.  This corresponds to the roughly 3x fewer params to train (100k vs 300k) because weights are shared. Those extra weights are clearly making a difference though, and can't just be tossed away.</li>
+<li><strong>Remarks</strong>: While the biological inspiration is certainly interesting, the empirical results are lackluster.  I'm sure a future architecture will find a way to combine all the hot ideas (CNNs, Skip-connections, GRUs, Batch Norm and let's throw in Dropout too), but we are not there yet.</li>
+</ul>
+<h3 id="newdatasets">New Datasets</h3>
+<p><a href="https://arxiv.org/abs/1604.03968"><strong>Visual Storytelling</strong></a><br />
+<em>(Huang, Ferraro, Mostafazadeh, Misra, Agrawal, Devlin, Girshick, et al.)</em> [Read Oct 4th]</p>
+<ul>
+<li><strong>Ideas</strong>: Image recognition has arguably surpassed human accuracy, and yet there still lacks a sense that machines are better than humans at storytelling.  In particular, while machines can now be trained to give literal descriptions of an image (sun is setting), it still struggles to give colorful narratives filled with emotion or intent (sky is illuminated with brilliance as the gentle sun drops beneath the horizon). In order to tackle this, the authors developed a public dataset of sequences of images that offer more context about how situations evolve and give machines a chance to reason about changes over time.</li>
+<li>The dataset was created using thousands of Mechanical Turk workers, with multiple stages of processing and quality control.  Concretely, rather than having the workers simply label the images using the instruction "describe all the important parts", the new instructions ask the turkers to tell a story. The authors then establish a baseline by building a network that generates stories.</li>
+<li><strong>Results</strong>: Of course, grading a story is quite difficult, so after producing stories, a panel of human judges evaluated each story depending on how much they agreed with the statement “If these were my photos, I would like using a story like this to share my experience with my friends”.  Then the authors tried a couple of different automatic evaluation techniques to find which metric most closely correlated with the human judges evaluations. To this end, the authors found that METEOR smoothed-BLEU is the most ideal automatic evaluation metric, an idea from C.Y. Lin and F.J. Och in 2004, from their talk Automatic Evaluation of Machine Translation<br />
+Quality Using Longest Common Subsequence and Skip-bigram Statistics.</li>
+<li><strong>Lessons</strong>: New dataset (SIND), great win for the community!</li>
+</ul>
+<p><a href="https://arxiv.org/abs/1604.07316"><strong>End to End Learning for Self-Driving Cars</strong></a> (<em>Bojarski, Testa, Dworakowski, Firner, Flepp, Goyal, Jackel, et al.</em>) [Read Oct 10th]</p>
+<ul>
+<li><strong>Idea</strong>: Memory Networks and CNNs trained end-to-end have shown great promise in a number of applications, so the authors from Nvidia thought about trying this to the self-driving car problem.  While straightforward, the idea is also quite ambitious because there are many more steps to driving a car than a task like image captioning, which is already quite difficult.  In particular, performing such a task would require recognizing lane markers (left to right steering), recognizing obstacles (breaking), ramping onto a highway (acceleration), recognizing signs (deceleration), different weather conditions, and much more!</li>
+<li>If done correctly though, the model would be quite a breakthrough because it could interact directly with the world, rather than interpreting its surroundings through a composition of human-selected signaling mechanisms.</li>
+<li><strong>Results</strong>: "A small amount of training data from less than a hundred hours of driving was sufficient to train the car to operate in diverse conditions, on highways, local and residential roads in sunny, cloudy, and rainy conditions." Absolutely amazing, here's the video: <a href="https://drive.google.com/file/d/0B9raQzOpizn1TkRIa241ZnBEcjQ/view">https://drive.google.com/file/d/0B9raQzOpizn1TkRIa241ZnBEcjQ/view</a>.</li>
+<li>There are still parts that can be improved, but clearly self-driving cars are going to be a real thing within the next year.  For context, this paper was from April 2016.</li>
+</ul>
+<p><a href="https://arxiv.org/abs/1611.03530"><strong>Understanding deep learning requires rethinking generalization</strong></a> (<em>Zhang, Bengio, Hardt, Recht, Vinyals</em>) [Read Mar 24th]<br />
+-<strong>Idea</strong>: Neural networks have amazing power such that even given random labels or an image with random noise, the network can predict those classes with full accuracy on training data.  Of course, the same model falls apart completely on the test data because all it has done is "create a hashmap" that memorized all the training data.  It's not the models fault that it didn't pick up any salient features in the image - there are no meaningful features to pick up!  Thus, if the network is so successful at memorizing features, then how is it able to generalize under normal circumstances?  It seems like a network (such as Inception or AlexNet) is able thus able to learn useful features (such as lines or angles) when available, but will fall back to rote memorization when those signals aren't available.  The final takeaway is that due to this divergence, classical statistical learning theory and regularization strategy can not explain the outstanding generalization ability of deep networks.<br />
+-<strong>Remarks</strong>: This paper won ICLR best paper award, but, in my humble opinion, doesn't seem all that ground-breaking.  In particular, even though I am convinced that traditional statistical methods do not apply here, the authors don't offer an alternative.  Moreover, the result just doesn't seem that surprising.  It would not be surprising to hear that kids can memorize random vocabulary for an exam. And those same kids are also able learn vocabulary faster with the presence of useful features (for example, "bilateral" means two sided based on construction of prefix and suffix).  The former task is harder and would take longer to do. Similarly, we see a CNN takes longer to converge when training on random noise.  So basically, we're saying that a network can learn in multiple ways.  Maybe what's amazing is that we can't explain how the network does that?</p>
+<p>FractalNet (Larsson et al., 2016)<br />
+GoogLeNet with the “Inception module” (Szegedy et al., 2015)<br />
+Highway Networks (Srivastava et al., 2015)<br />
+Ladder Networks (Rasmus et al., 2015)<br />
+Actual CV tasks (Gardner et al., 2015) (Gatys et al., 2015)</p>
+
+
+            </section>
+
+        </article>
+    </main>
+    <footer class="page-footer">
+        <h3>More Than One Turn</h3>
+            <p>Thoughts about Conversational AI and interactive dialogue systems.</p>
+        <p><a href="../../index.html">Read more posts →</a></p>
+        <a class="powered" href="https://ghost.org" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 156 156"><g fill="none" fill-rule="evenodd"><rect fill="#15212B" width="156" height="156" rx="27"/><g transform="translate(36 36)" fill="#F6F8FA"><path d="M0 71.007A4.004 4.004 0 014 67h26a4 4 0 014 4.007v8.986A4.004 4.004 0 0130 84H4a4 4 0 01-4-4.007v-8.986zM50 71.007A4.004 4.004 0 0154 67h26a4 4 0 014 4.007v8.986A4.004 4.004 0 0180 84H54a4 4 0 01-4-4.007v-8.986z"/><rect y="34" width="84" height="17" rx="4"/><path d="M0 4.007A4.007 4.007 0 014.007 0h41.986A4.003 4.003 0 0150 4.007v8.986A4.007 4.007 0 0145.993 17H4.007A4.003 4.003 0 010 12.993V4.007z"/><rect x="67" width="17" height="17" rx="4"/></g></g></svg> Published with Ghost</a></span>
+    </footer>
+    
+</body>
+</html>

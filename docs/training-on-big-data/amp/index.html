@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html ⚡>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <title>Training on Big Data with GPUs in AWS for Deep Learning</title>
+
+    <meta name="description" content="How to guide for Deep Learning using Amazon Web Services.  A single machine with a high-powered GPU often beats  distributed computing with MapReduce when the" />
+    <link rel="canonical" href="../index.html" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    
+    <meta property="og:site_name" content="More Than One Turn" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Training on Big Data with GPUs in AWS for Deep Learning" />
+    <meta property="og:description" content="How to guide for Deep Learning using Amazon Web Services.  A single machine with a high-powered GPU often beats  distributed computing with MapReduce when the" />
+    <meta property="og:url" content="http://localhost:2368/training-on-big-data/" />
+    <meta property="article:published_time" content="2016-01-11T04:16:29.000Z" />
+    <meta property="article:modified_time" content="2016-01-14T01:47:42.000Z" />
+    <meta property="article:tag" content="gpu" />
+    <meta property="article:tag" content="aws" />
+    
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Training on Big Data with GPUs in AWS for Deep Learning" />
+    <meta name="twitter:description" content="How to guide for Deep Learning using Amazon Web Services.  A single machine with a high-powered GPU often beats  distributed computing with MapReduce when the" />
+    <meta name="twitter:url" content="http://localhost:2368/training-on-big-data/" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Derek Chen" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="gpu, aws" />
+    <meta name="twitter:site" content="@derekchen14" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "More Than One Turn",
+        "url": "http://localhost:2368/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "http://localhost:2368/favicon.ico",
+            "width": 48,
+            "height": 48
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Derek Chen",
+        "image": {
+            "@type": "ImageObject",
+            "url": "//www.gravatar.com/avatar/9f3ee838eeb42849d4880676cedd85d6?s=250&d=mm&r=x",
+            "width": 250,
+            "height": 250
+        },
+        "url": "http://localhost:2368/author/derek/",
+        "sameAs": []
+    },
+    "headline": "Training on Big Data with GPUs in AWS for Deep Learning",
+    "url": "http://localhost:2368/training-on-big-data/",
+    "datePublished": "2016-01-11T04:16:29.000Z",
+    "dateModified": "2016-01-14T01:47:42.000Z",
+    "keywords": "gpu, aws",
+    "description": "Recent advances in Deep Learning have come about for a couple of key reasons,\nnot the least of which is the enormous growth of available data. But if\noverwhelming amounts of data are required to reach peak performance, how does\none actually go about managing the unmanageable? In other words, how does one\nget past the hype of Big Data in machine learning and into the practical\nimplementation of leveraging Big Data for meaningful results?\n\nWhat Are My Options?\n\nIt turns out that quite often distri",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://localhost:2368/"
+    }
+}
+    </script>
+
+    <meta name="generator" content="Ghost 3.29" />
+    <link rel="alternate" type="application/rss+xml" title="More Than One Turn" href="../../rss/index.html" />
+
+    <style amp-custom>
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
+
+    html {
+        overflow-x: hidden;
+        overflow-y: scroll;
+        font-size: 62.5%;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    }
+
+    body {
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+        color: #3a4145;
+        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;
+        font-size: 1.7rem;
+        line-height: 1.55em;
+        font-weight: 400;
+        font-style: normal;
+        background: #fff;
+        scroll-behavior: smooth;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    p,
+    ul,
+    ol,
+    li,
+    dl,
+    dd,
+    hr,
+    pre,
+    form,
+    table,
+    video,
+    figure,
+    figcaption,
+    blockquote {
+        margin: 0;
+        padding: 0;
+    }
+
+    ul[class],
+    ol[class] {
+        padding: 0;
+        list-style: none;
+    }
+
+    img {
+        display: block;
+        max-width: 100%;
+    }
+
+    input,
+    button,
+    select,
+    textarea {
+        font: inherit;
+        -webkit-appearance: none;
+    }
+
+    fieldset {
+        margin: 0;
+        padding: 0;
+        border: 0;
+    }
+
+    label {
+        display: block;
+        font-size: 0.9em;
+        font-weight: 700;
+    }
+
+    hr {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 1px;
+        border: 0;
+        border-top: 1px solid currentcolor;
+        opacity: 0.1;
+    }
+
+    ::selection {
+        text-shadow: none;
+        background: #cbeafb;
+    }
+
+    mark {
+        background-color: #fdffb6;
+    }
+
+    small {
+        font-size: 80%;
+    }
+
+    sub,
+    sup {
+        position: relative;
+        font-size: 75%;
+        line-height: 0;
+        vertical-align: baseline;
+    }
+    sup {
+        top: -0.5em;
+    }
+    sub {
+        bottom: -0.25em;
+    }
+
+    ul li + li {
+        margin-top: 0.6em;
+    }
+
+    a {
+        color: #1292EE;
+        text-decoration-skip-ink: auto;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        margin: 0;
+        font-weight: 700;
+        color: #121212;
+        line-height: 1.4em;
+    }
+
+    h1 {
+        font-size: 3.4rem;
+        line-height: 1.1em;
+    }
+
+    h2 {
+        font-size: 2.4rem;
+        line-height: 1.2em;
+    }
+
+    h3 {
+        font-size: 1.8rem;
+    }
+
+    h4 {
+        font-size: 1.7rem;
+    }
+
+    h5 {
+        font-size: 1.6rem;
+    }
+
+    h6 {
+        font-size: 1.6rem;
+    }
+
+    amp-img {
+        height: 100%;
+        width: 100%;
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    amp-img img {
+        object-fit: cover;
+    }
+
+    .page-header {
+        padding: 50px 5vmin 30px;
+        text-align: center;
+        font-size: 2rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .page-header a {
+        color: #121212;
+        font-weight: 700;
+        text-decoration: none;
+        font-size: 1.6rem;
+        letter-spacing: -0.1px;
+    }
+
+    .post {
+        max-width: 680px;
+        margin: 0 auto;
+    }
+
+    .post-header {
+        margin: 0 5vmin 5vmin;
+        text-align: center;
+    }
+
+    .post-meta {
+        margin: 1rem 0 0 0;
+        text-transform: uppercase;
+        color: #738a94;
+        font-weight: 500;
+        font-size: 1.3rem;
+    }
+
+    .post-image {
+        margin: 0 0 5vmin;
+    }
+
+    .post-image img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    .post-content {
+        padding: 0 5vmin;
+    }
+
+    .post-content > * + * {
+        margin-top: 1.5em;
+    }
+
+    .post-content [id]:not(:first-child) {
+        margin: 2em 0 0;
+    }
+
+    .post-content > [id] + * {
+        margin-top: 1rem;
+    }
+
+    .post-content [id] + .kg-card,
+    .post-content blockquote + .kg-card {
+        margin-top: 40px;
+    }
+
+    .post-content > ul,
+    .post-content > ol,
+    .post-content > dl {
+        padding-left: 1.9em;
+    }
+
+    .post-content hr {
+        margin-top: 40px;
+    }
+
+    .post .post-content hr + * {
+        margin-top: 40px;
+    }
+
+    .post-content amp-img {
+        background-color: #f8f8f8;
+    }
+
+    .post-content blockquote {
+        position: relative;
+        font-style: italic;
+    }
+
+    .post-content blockquote::before {
+        content: "";
+        position: absolute;
+        left: -1.5em;
+        top: 0;
+        bottom: 0;
+        width: 0.3rem;
+        background: #000;
+    }
+
+    .post-content :not(.kg-card):not([id]) + .kg-card {
+        margin-top: 40px;
+    }
+
+    .post-content .kg-card + :not(.kg-card) {
+        margin-top: 40px;
+    }
+
+    .kg-card figcaption {
+        padding: 1.5rem 1.5rem 0;
+        text-align: center;
+        font-weight: 500;
+        font-size: 1.3rem;
+        line-height: 1.4em;
+        opacity: 0.6;
+    }
+
+    .kg-card figcaption strong {
+        color: rgba(0,0,0,0.8);
+    }
+
+    .post-content :not(pre) code {
+        vertical-align: middle;
+        padding: 0.15em 0.4em 0.15em;
+        border: #e1eaef 1px solid;
+        font-weight: 400;
+        font-size: 0.9em;
+        line-height: 1em;
+        color: #dc0050;
+        background: #f0f6f9;
+        border-radius: 0.25em;
+    }
+
+    .post-content > pre {
+        overflow: scroll;
+        padding: 16px 20px;
+        color: #fff;
+        background: #1F2428;
+        border-radius: 5px;
+        box-shadow: 0 2px 6px -2px rgba(0,0,0,.1), 0 0 1px rgba(0,0,0,.4);
+    }
+
+    .kg-embed-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .kg-image-card img {
+        margin: auto;
+    }
+
+    .kg-gallery-card + .kg-gallery-card {
+        margin-top: 0.75em;
+    }
+
+    .kg-gallery-container {
+        position: relative;
+    }
+
+    .kg-gallery-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .kg-gallery-image {
+        width: 100%;
+        height: 100%;
+    }
+
+    .kg-gallery-row:not(:first-of-type) {
+        margin: 0.75em 0 0 0;
+    }
+
+    .kg-gallery-image:not(:first-of-type) {
+        margin: 0 0 0 0.75em;
+    }
+
+    .kg-bookmark-card,
+    .kg-bookmark-publisher {
+        position: relative;
+    }
+
+    .kg-bookmark-container,
+    .kg-bookmark-container:hover {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row-reverse;
+        color: currentColor;
+        background: rgba(255,255,255,0.6);
+        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;
+        text-decoration: none;
+        border-radius: 5px;
+        box-shadow: 0 2px 6px -2px rgba(0, 0, 0, 0.1), 0 0 1px rgba(0, 0, 0, 0.4);
+        overflow: hidden;
+    }
+
+    .kg-bookmark-content {
+        flex-basis: 0;
+        flex-grow: 999;
+        padding: 20px;
+        order: 1;
+    }
+
+    .kg-bookmark-title {
+        font-weight: 600;
+        font-size: 1.5rem;
+        line-height: 1.3em;
+    }
+
+    .kg-bookmark-description {
+        display: -webkit-box;
+        max-height: 45px;
+        margin: 0.5em 0 0 0;
+        font-size: 1.4rem;
+        line-height: 1.55em;
+        overflow: hidden;
+        opacity: 0.8;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+
+    .kg-bookmark-metadata {
+        margin-top: 20px;
+    }
+
+    .kg-bookmark-metadata {
+        display: flex;
+        align-items: center;
+        font-weight: 500;
+        font-size: 1.3rem;
+        line-height: 1.3em;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .kg-bookmark-description {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+    }
+
+    .kg-bookmark-metadata amp-img {
+        width: 18px;
+        height: 18px;
+        max-width: 18px;
+        max-height: 18px;
+        margin-right: 10px;
+    }
+
+    .kg-bookmark-thumbnail {
+        display: flex;
+        flex-basis: 20rem;
+        flex-grow: 1;
+        justify-content: flex-end;
+    }
+
+    .kg-bookmark-thumbnail amp-img {
+        max-height: 200px;
+    }
+
+    .kg-bookmark-author {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    .kg-bookmark-publisher::before {
+        content: "•";
+        margin: 0 .5em;
+    }
+
+    .kg-width-full.kg-card-hascaption {
+        display: grid;
+        grid-template-columns: inherit;
+    }
+
+    .post-content table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    .post-content th {
+        padding: 0.5em 0.8em;
+        text-align: left;
+        font-size: .75em;
+        text-transform: uppercase;
+    }
+
+    .post-content td {
+        padding: 0.4em 0.7em;
+    }
+
+    .post-content tbody tr:nth-child(2n + 1) {
+        background-color: rgba(0,0,0,0.1);
+        padding: 1px;
+    }
+
+    .post-content tbody tr:nth-child(2n + 2) td:last-child {
+        box-shadow:
+            inset 1px 0 rgba(0,0,0,0.1),
+            inset -1px 0 rgba(0,0,0,0.1);
+    }
+
+    .post-content tbody tr:nth-child(2n + 2) td {
+        box-shadow: inset 1px 0 rgba(0,0,0,0.1);
+    }
+
+    .post-content tbody tr:last-child {
+        border-bottom: 1px solid rgba(0,0,0,.1);
+    }
+
+    .page-footer {
+        padding: 60px 5vmin;
+        margin: 60px auto 0;
+        text-align: center;
+        background-color: #f8f8f8;
+    }
+
+    .page-footer h3 {
+        margin: 0.5rem 0 0 0;
+    }
+
+    .page-footer p {
+        max-width: 500px;
+        margin: 1rem auto 1.5rem;
+        font-size: 1.7rem;
+        line-height: 1.5em;
+        color: rgba(0,0,0,0.6)
+    }
+
+    .powered {
+        display: inline-flex;
+        align-items: center;
+        margin: 30px 0 0;
+        padding: 6px 9px 6px 6px;
+        border: rgba(0,0,0,0.1) 1px solid;
+        font-size: 12px;
+        line-height: 12px;
+        letter-spacing: -0.2px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+        font-weight: 500;
+        color: #222;
+        text-decoration: none;
+        background: #fff;
+        border-radius: 6px;
+    }
+
+    .powered svg {
+        height: 16px;
+        width: 16px;
+        margin: 0 6px 0 0;
+    }
+
+    @media (max-width: 600px) {
+        body {
+            font-size: 1.6rem;
+        }
+        h1 {
+            font-size: 3rem;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+        }
+    }
+
+    @media (max-width: 400px) {
+        h1 {
+            font-size: 2.6rem;
+            line-height: 1.15em;
+        }
+        h2 {
+            font-size: 2rem;
+            line-height: 1.2em;
+        }
+        h3 {
+            font-size: 1.7rem;
+        }
+    }
+    </style>
+
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+
+    
+
+</head>
+
+<body class="amp-template">
+    <header class="page-header">
+        <a href="../../index.html">
+                More Than One Turn
+        </a>
+    </header>
+
+    <main class="content" role="main">
+        <article class="post">
+
+            <header class="post-header">
+                <h1 class="post-title">Deep Learning using GPUs in the Cloud</h1>
+                <section class="post-meta">
+                    Derek Chen -
+                    <time class="post-date" datetime="2016-01-11">11 Jan 2016</time>
+                </section>
+            </header>
+            <section class="post-content">
+
+                <p>Recent advances in Deep Learning have come about for a couple of key reasons, not the least of which is the enormous growth of available data.  But if overwhelming amounts of data are required to reach peak performance, how does one actually go about managing the unmanageable?  In other words, how does one get past the hype of Big Data in machine learning and into the practical implementation of leveraging Big Data for meaningful results?</p>
+<p><strong>What Are My Options?</strong></p>
+<p>It turns out that quite often distributed cloud computing with Apache Hadoop, Spark, or Storm is neither the most efficient nor the most effective method of training machine learning algorithms when dealing with massive datasets.  <a href="http://localhost:2368/training-on-big-data/fastml.com/the-emperors-new-clothes-distributed-machine-learning/">Other articles</a> will dig into the details, but the gist is the overhead necessary to manage a complicated MapReduce architecture usually outweighs the benefits gained by being able to scale indefinitely with commodity hardware.  Simply put, if you're still debating whether you qualify as a Big Data company, then you don't have enough data yet, and using a single high-powered machine is your best bet.</p>
+<p>After coming to the conclusion that all you need is a couple of multi-core GPUs, there are two routes: buy or rent.  The former option means <a href="https://www.reddit.com/r/MachineLearning/comments/3wk6wl/tips_on_buyingbuilding_a_computer_with_a_gpu_for/">building a custom computer</a> with powerful specs, and is largely a decision of how much you are willing to spend on a graphics card.  If you truly want a personalized machine, then this is the way to go.  However, for most practical purposes, renting a GPU through AWS is preferable because not only will it cost less in the short term, but you can also scale up in power and in the number of servers if the need arises.  Therefore, the remainder of this article will deal with how to setup and configure a GPU instance on Amazon Web Services.</p>
+<p><strong>Setting Up GPUs on AWS</strong></p>
+<p>If you have worked with EC2 before on AWS, then running deep learning models on GPUs will be a breeze because the process is almost identical to running programs on CPUs.  And if you have not done that before, don't worry, because Amazon has made the new user experience relatively painless as well.  Once you've created an account, the key steps are:</p>
+<ul>
+<li>A. Launch an EC2 Instance </li>
+<li>B. Walk through the steps outlined in the top row:
+<ol>
+<li><em>Select an AMI</em> - Choose a community AMI with what you want pre-installed.  For the time being (Jan 2016), I am hosting a preconfigured set-up that comes with most of the libraries you hopefully need for Deep Learning. In particular, <code>Keras for Deep Learning (ami-5ea7d23e)</code> comes with Theano, TensorFlow, Keras and CUDA7 pre-installed.  If you truly want to go through the pain of setting everything up yourself, choose <code>64-bit Ubuntu 14.04 LTS (ami-3d50120d)</code> from the Quick Start list and follow the directions <a href="http://markus.com/install-theano-on-aws/">found here</a>. </li>
+<li><em>Choose an instance type</em> - Select "GPU Instances" from the "All Instance Types" dropdown, and pick <code>g2.2xlarge</code> from the list.  That's it!  You have just gone from CPU-computing to GPU-computing! </li>
+<li><em>Configure instance</em> - Choose spot instances if desired, will save a couple of dollars for every full day you plan on keeping your instance running. </li>
+<li><em>Add storage</em> - add more EBS (Elastic Block Store) storage if so desired.  If your data set is larger than 32 GB, then you might need to explore this option, otherwise feel free to leave as is.</li>
+<li><em>Tag instance</em> - add some tags to help identify this instance.  Unless you already have many instance running, in most cases, you can leave this section blank.</li>
+<li><em>Configure security group</em> - <mark>Important!</mark> This section outlines who will be able to access your instance.  By default, allowing SSH with a TCP protocol coming from your own IP will allow you to connect into the terminal of your instance and perform secure copies.  If you're working from multiple locations, then add some more IPs.  If you're using other tools, then add more ports. For example, using a Rails server usually uses port 3000 and iPython Notebooks default to using port 8888. </li>
+<li><em>Review</em> - Check all your details and then click [Launch]</li>
+</ol>
+</li>
+<li>C. Save your PEM
+<ol>
+<li>The next dialog box will prompt you to create your security key</li>
+<li>Once that is done, download your PEM in a secure and accessible location since you will need it each time to access your instance</li>
+<li>Modify the access to the PEM to make it private with chmod 0400.</li>
+</ol>
+</li>
+<li>D. Access your machine
+<ol>
+<li>Use  <code>ssh -i &lt;pem_file_name&gt;.pem &lt;username&gt;@&lt;your instance full dns address&gt;</code> to get in, with username usually being Ubuntu, ec2-user, or root.  The pem_ file_name is the name of the file you created in Step C2</li>
+<li>A completed example might look like <code>ssh -i EC2_GPU_22x.pem ubuntu@ec2-52-29-214-135.us-west-1.compute.amazonaws.com</code></li>
+<li>Use <code>scp -r -i &lt;pem_file_name&gt;.pem setup/ &lt;username&gt;@&lt;full dns address&gt;:~</code> to copy a folder into your instance.  In this case "setup" is the name of your folder. This command is performed from your local machine.  A similar command can be performed on your remote to <a href="http://stackoverflow.com/questions/11304895/how-to-scp-a-folder-from-remote-to-local">download files</a> into your local computer.</li>
+</ol>
+</li>
+</ul>
+<p><strong>Common Pitfalls</strong></p>
+<p>If you're following this tutorial or others you've found online, you might still encounter some issues.  This is where I hope to add to the discussion to prevent hours of headache and searching through StackOverflow.  Some common issues include:</p>
+<ol>
+<li>You forgot to add a credit card to AWS or your credit card is expired.  Also, if your bank has recently issued you a new card because they were breached again, you will also need to update your credentials.</li>
+<li>You didn't remember the password for your remote so you weren't able to use <code>sudo</code>. Now I know you didn't even try to enter the command, because on a remote machine, you don't need the password :)</li>
+<li>You skipped Step C3 which limits the access to your PEM file. This will result in an error complaining about "Unprotected Private Key File: Permissions 0777 for '.ssh/my_ private_key.pem' are too open.  It is required that your private key files are NOT accessible by others. This private key will be ignored." To fix the error, execute the following command, substituting the path for your private key file: <code>$ chmod 0400 .ssh/my_private_key.pem</code>.</li>
+<li>You used the wrong host key, resulting in "Error: Host key not found, Permission denied (publickey), or Authentication failed, permission denied".  To fix this, replace the  portion with <code>Ubuntu</code>.  If that doesn't work, try <code>ec2-user</code>.  If that doesn't work, try <code>root</code>.  If that doesn't work, start googling.</li>
+<li>You moved out of your home and into a coffeeshop, but then you forgot to add the IP of the coffeeshop to your list of allowed IPs in "Configure Security Groups" in Step B6. To fix this, find "Network &amp; Security" on the left panel.  Then select Security Groups &gt; check the box &gt; Actions &gt; Edit Inbound Rules &gt; add your IP &gt; Save</li>
+<li>You didn't upgrade your packages and now the system is complaining.  Even when you choose an existing public AMI from the community, their setup might be out of date.  It is up to you to run system updates with <code>sudo apt-get -y dist-upgrade</code> and library updates with <code>sudo pip install --upgrade &lt;package name&gt;</code></li>
+<li>Anything else you see on this list: <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html">http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html</a></li>
+</ol>
+<p><strong>Saving your Image</strong></p>
+<p>If you added more packages or did some more set-up, you might want to save your own AMI for future use.  This will cost you a couple dollars a year, but it's a great idea if you plan to use the same configuration for multiple projects or if you're using the company budget to fund the project.   To do this, you simple go to Images on the left-hand panel and then select AMIs &gt; check the box &gt; Actions &gt; Save Image.  If you are doing other configuration work, keep in mind that you likely have an EBS-backed image and not an Instance Store-back image. <br />
+And with that you're done! You now have a custom machine built for specifically for your machine learning purposes that you can use at any time.  Leave any questions or comments in the section below!</p>
+
+
+            </section>
+
+        </article>
+    </main>
+    <footer class="page-footer">
+        <h3>More Than One Turn</h3>
+            <p>Thoughts about Conversational AI and interactive dialogue systems.</p>
+        <p><a href="../../index.html">Read more posts →</a></p>
+        <a class="powered" href="https://ghost.org" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 156 156"><g fill="none" fill-rule="evenodd"><rect fill="#15212B" width="156" height="156" rx="27"/><g transform="translate(36 36)" fill="#F6F8FA"><path d="M0 71.007A4.004 4.004 0 014 67h26a4 4 0 014 4.007v8.986A4.004 4.004 0 0130 84H4a4 4 0 01-4-4.007v-8.986zM50 71.007A4.004 4.004 0 0154 67h26a4 4 0 014 4.007v8.986A4.004 4.004 0 0180 84H54a4 4 0 01-4-4.007v-8.986z"/><rect y="34" width="84" height="17" rx="4"/><path d="M0 4.007A4.007 4.007 0 014.007 0h41.986A4.003 4.003 0 0150 4.007v8.986A4.007 4.007 0 0145.993 17H4.007A4.003 4.003 0 010 12.993V4.007z"/><rect x="67" width="17" height="17" rx="4"/></g></g></svg> Published with Ghost</a></span>
+    </footer>
+    
+</body>
+</html>

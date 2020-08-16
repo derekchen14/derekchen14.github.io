@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>Deep Learning for Recommendation Systems</title>
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" type="text/css" href="../assets/built/screen.css%3Fv=245ecc38c2.css" />
+
+    <link rel="canonical" href="index.html" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    <link rel="amphtml" href="amp/index.html" />
+    
+    <meta property="og:site_name" content="More Than One Turn" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Deep Learning for Recommendation Systems" />
+    <meta property="og:description" content="Wide &amp;amp; Deep Learning for Recommender Systems  (Cheng, Koc, Harmsen, Shaked, Chandra, Aradhye, Anderson, et. al.)  While deep learning is great for many things, it&#x27;s progress in recommendations systems has been limited, partially because recommendation systems inherently have a cold-start problem and sparse data, whereas deep learning works best in" />
+    <meta property="og:url" content="http://localhost:2368/deep-learning-for-recommendation-systems/" />
+    <meta property="article:published_time" content="2016-11-19T00:00:03.000Z" />
+    <meta property="article:modified_time" content="2016-11-19T00:00:03.000Z" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Deep Learning for Recommendation Systems" />
+    <meta name="twitter:description" content="Wide &amp;amp; Deep Learning for Recommender Systems  (Cheng, Koc, Harmsen, Shaked, Chandra, Aradhye, Anderson, et. al.)  While deep learning is great for many things, it&#x27;s progress in recommendations systems has been limited, partially because recommendation systems inherently have a cold-start problem and sparse data, whereas deep learning works best in" />
+    <meta name="twitter:url" content="http://localhost:2368/deep-learning-for-recommendation-systems/" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Derek Chen" />
+    <meta name="twitter:site" content="@derekchen14" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "More Than One Turn",
+        "url": "http://localhost:2368/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "http://localhost:2368/favicon.ico",
+            "width": 48,
+            "height": 48
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Derek Chen",
+        "image": {
+            "@type": "ImageObject",
+            "url": "//www.gravatar.com/avatar/9f3ee838eeb42849d4880676cedd85d6?s=250&d=mm&r=x",
+            "width": 250,
+            "height": 250
+        },
+        "url": "http://localhost:2368/author/derek/",
+        "sameAs": []
+    },
+    "headline": "Deep Learning for Recommendation Systems",
+    "url": "http://localhost:2368/deep-learning-for-recommendation-systems/",
+    "datePublished": "2016-11-19T00:00:03.000Z",
+    "dateModified": "2016-11-19T00:00:03.000Z",
+    "description": "Wide &amp; Deep Learning for Recommender Systems [https://arxiv.org/abs/1606.07792]\n(Cheng, Koc, Harmsen, Shaked, Chandra, Aradhye, Anderson, et. al.)\n\nWhile deep learning is great for many things, it&#x27;s progress in recommendations\nsystems has been limited, partially because recommendation systems inherently\nhave a cold-start problem and sparse data, whereas deep learning works best in\nthe regime of data abundance. When applied to sparse data, DL models tend to\noverfit since it has so much flexibilit",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://localhost:2368/"
+    }
+}
+    </script>
+
+    <meta name="generator" content="Ghost 3.29" />
+    <link rel="alternate" type="application/rss+xml" title="More Than One Turn" href="../rss/index.html" />
+    <style>
+.page-title,
+.page-description {
+   color:#3D0F90!important;
+   text-shadow: #F7FAEB 0px 0px 0.3em;
+}
+a { color: #3399ff; }  
+.nav li a:after { display: none; }
+.nav li:before { display: none; }
+li { margin: 0.2em 0; }
+ol, ul {
+	margin: 0;
+    position: relative;
+}
+ol > li, ul > li { bottom: 0; }
+p { margin: 0 0 0.7em 0; }
+.main-header { height: 90vh; }
+
+article.post { width: 100%; }
+section.post-full-content {
+    padding: 0;
+    line-height: 1em;
+    font-size: 1.4em;
+}
+h1.site-title, h2.site-description { 
+    text-shadow: 2px 2px 3px #232522;
+} 
+    
+</style>
+
+</head>
+<body class="post-template">
+
+    <div class="site-wrapper">
+
+        
+
+<header class="site-header">
+    <div class="outer site-nav-main">
+    <div class="inner">
+        <nav class="site-nav">
+    <div class="site-nav-left-wrapper">
+        <div class="site-nav-left">
+                <a class="site-nav-logo" href="../index.html">More Than One Turn</a>
+            <div class="site-nav-content">
+                    <ul class="nav">
+    <li class="nav-home"><a href="../index.html">Home</a></li>
+    <li class="nav-about"><a href="http://feature.engineering/about">About</a></li>
+    <li class="nav-contact"><a href="http://feature.engineering/contact">Contact</a></li>
+</ul>
+
+                    <span class="nav-post-title dash">Deep Learning for Recommendation Systems</span>
+            </div>
+        </div>
+    </div>
+    <div class="site-nav-right">
+            <div class="social-links">
+                    <a class="social-link social-link-tw" href="https://twitter.com/derekchen14" title="Twitter" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+</a>
+            </div>
+                <a class="rss-button" href="https://feedly.com/i/subscription/feed/http://localhost:2368/rss/" title="RSS" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="6.18" cy="17.82" r="2.18"/><path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/></svg>
+</a>
+
+    </div>
+</nav>
+    </div>
+</div></header>
+
+
+<main id="site-main" class="site-main outer">
+    <div class="inner">
+
+        <article class="post-full post no-image no-image">
+
+            <header class="post-full-header">
+
+
+                <h1 class="post-full-title">Deep Learning for Recommendation Systems</h1>
+
+
+                <div class="post-full-byline">
+
+                    <section class="post-full-byline-content">
+
+                        <ul class="author-list">
+                            <li class="author-list-item">
+
+                                <div class="author-card">
+                                    <img class="author-profile-image" src="http://www.gravatar.com/avatar/9f3ee838eeb42849d4880676cedd85d6?s=250&amp;d=mm&amp;r=x" alt="Derek Chen" />
+                                    <div class="author-info">
+                                        <h2>Derek Chen</h2>
+                                        <p>Read <a href="../author/derek/index.html">more posts</a> by this author.</p>
+                                    </div>
+                                </div>
+
+                                <a href="../author/derek/index.html" class="author-avatar">
+                                    <img class="author-profile-image" src="http://www.gravatar.com/avatar/9f3ee838eeb42849d4880676cedd85d6?s=250&amp;d=mm&amp;r=x" alt="Derek Chen" />
+                                </a>
+
+                            </li>
+                        </ul>
+
+                        <section class="post-full-byline-meta">
+                            <h4 class="author-name"><a href="../author/derek/index.html">Derek Chen</a></h4>
+                            <div class="byline-meta-content">
+                                <time class="byline-meta-date" datetime="2016-11-19">19 Nov 2016</time>
+                                <span class="byline-reading-time"><span class="bull">&bull;</span> 2 min read</span>
+                            </div>
+                        </section>
+
+                    </section>
+
+
+                </div>
+            </header>
+
+
+            <section class="post-full-content">
+                <div class="post-content">
+                    <!--kg-card-begin: markdown--><p><a href="https://arxiv.org/abs/1606.07792"><strong>Wide &amp; Deep Learning for Recommender Systems</strong></a><br>
+(<em>Cheng, Koc, Harmsen, Shaked, Chandra, Aradhye, Anderson, et. al.</em>)</p>
+<p>While deep learning is great for many things, it's progress in recommendations systems has been limited, partially because recommendation systems inherently have a cold-start problem and sparse data, whereas deep learning works best in the regime of data abundance. When applied to sparse data, DL models tend to overfit since it has so much flexibility in the parameters.  Thus, the authors present a model that jointly trains on deep neural nets (for memorization) and wide linear models (for generalization).</p>
+<p>Since there are over a million apps in the database, it is intractable to exhaustively score every app for every query within the serving latency requirements. Therefore, the first step upon receiving a query is limiting the options to a short list of items.  This is done through a combination of statistical-based machine-learned models and human-defined rules. Then the network can do the job of ranking the smaller list of returned app options.  The wide part of the network is just a shallow logistic regression layer.  The deep part is just a feed-forward network.  In the experiments, the authors used Followthe-regularized-leader (FTRL) algorithm with L1 regularization as the optimizer for the wide part of the model,<br>
+and AdaGrad optimizer for the deep part.</p>
+<p>The exciting part of this model isn't the methods, but the fact that it runs in production. Multi-threading and other scalability techniques needed to be added in order to make sure the model worked within the time constraints (often ~10 milliseconds) for a consumer facing service.  The results show that the model actually drives increased app acquisitions over previous recommendation systems, which means that rather than just beating some benchmark, deep learning actually influence user behavior.</p>
+<p>As a side node, since the linear models are used to prevent overfitting, I view this as a form of regularization.  I'm sure there are smarter ways to regularize the output.  The context for these recommendations is the Google Play store where users can download apps to their phone. As a result, the model in the paper seems to look at user features (e.g., country, language, demographics), contextual features (e.g., device, hour of the<br>
+day, day of the week), and impression features (e.g., app age,<br>
+historical statistics of an app).  But there are dozens more options here. For example,</p>
+<ol>
+<li>What page did the user come from</li>
+<li>Did they click on an add to arrive</li>
+<li>How long did the user stay on the app page</li>
+<li>What other Google Play apps has the user downloaded before?</li>
+<li>What is their location?</li>
+<li>This is Google right? So what pages did they visit on Chrome?What videos did they watch on YouTube? What topics do they discuss in Gmail? What places have they visited in Maps?</li>
+<li>We can even explicitly ask the user about their preferences!  What are songs you like to listen to?  What do you like doing for fun?  What kind of food to you like to eat?  Tell me about yourself.</li>
+</ol>
+<p>Then, when there is too much data, apply some Variational Dropout or Zoneout to the problem to push the solution to the right space.  The folks at Google aren't doing this, possibly due to privacy concerns, but at the same time, I'm sure at least 1% of the users would be willing to opt in - and at Google's size that means over a million users to test.  Using all the data is so obvious it means Google probably is using it to improve the system, but just hasn't told us yet until the results are noteworthy.</p>
+<!--kg-card-end: markdown-->
+                </div>
+            </section>
+
+
+
+        </article>
+
+    </div>
+</main>
+
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+
+                <article class="post-card post no-image no-image">
+
+
+    <div class="post-card-content">
+
+        <a class="post-card-content-link" href="../100-research-papers-in-100-days-lm-edition/index.html">
+
+            <header class="post-card-header">
+                <h2 class="post-card-title">100 Research Papers in 100 Days (LM Edition)</h2>
+            </header>
+
+            <section class="post-card-excerpt">
+                    <p>This is Part III of 100 in 100 series:  Language Modeling: ~30 papers NLP Edition: ~40 papers Images Edition: ~30 papers Language Modeling (LM, NMT, Seq2Seq) Gains made where a model generates responses or predicts responses.  Decoder can produce sentences or characters or belief</p>
+            </section>
+
+        </a>
+
+        <footer class="post-card-meta">
+            <ul class="author-list">
+                <li class="author-list-item">
+            
+                    <div class="author-name-tooltip">
+                        Derek Chen
+                    </div>
+            
+                    <a href="../author/derek/index.html" class="static-avatar">
+                        <img class="author-profile-image" src="http://www.gravatar.com/avatar/9f3ee838eeb42849d4880676cedd85d6?s=250&amp;d=mm&amp;r=x" alt="Derek Chen" />
+                    </a>
+                </li>
+            </ul>
+            <div class="post-card-byline-content">
+                <span><a href="../author/derek/index.html">Derek Chen</a></span>
+                <span class="post-card-byline-date"><time datetime="2017-03-29">29 Mar 2017</time> <span class="bull">&bull;</span> 24 min read</span>
+            </div>
+        </footer>
+
+    </div>
+
+</article>
+
+                <article class="post-card post no-image no-image">
+
+
+    <div class="post-card-content">
+
+        <a class="post-card-content-link" href="../speech-recognition-and-synthesis-at-human-parity-2/index.html">
+
+            <header class="post-card-header">
+                <h2 class="post-card-title">Speech Recognition and Synthesis at Human Parity</h2>
+            </header>
+
+            <section class="post-card-excerpt">
+                    <p>Microsoft Research dominates Speech-to-Text Achieving Human Parity in Conversational Speech Recognition (W. Xiong, J. Droppo, X. Huang, F. Seide, M. Seltzer, A. Stolcke, D. Yu, G. Zweig) [Published: Oct 2016]  Microsoft Research has made a number of advancements in order to achieve this momentous</p>
+            </section>
+
+        </a>
+
+        <footer class="post-card-meta">
+            <ul class="author-list">
+                <li class="author-list-item">
+            
+                    <div class="author-name-tooltip">
+                        Derek Chen
+                    </div>
+            
+                    <a href="../author/derek/index.html" class="static-avatar">
+                        <img class="author-profile-image" src="http://www.gravatar.com/avatar/9f3ee838eeb42849d4880676cedd85d6?s=250&amp;d=mm&amp;r=x" alt="Derek Chen" />
+                    </a>
+                </li>
+            </ul>
+            <div class="post-card-byline-content">
+                <span><a href="../author/derek/index.html">Derek Chen</a></span>
+                <span class="post-card-byline-date"><time datetime="2016-11-17">17 Nov 2016</time> <span class="bull">&bull;</span> 6 min read</span>
+            </div>
+        </footer>
+
+    </div>
+
+</article>
+        </div>
+    </div>
+</aside>
+
+
+
+
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="../index.html">More Than One Turn</a> &copy; 2020</section>
+                <nav class="site-footer-nav">
+                    <a href="../index.html">Latest Posts</a>
+                    
+                    <a href="https://twitter.com/derekchen14" target="_blank" rel="noopener">Twitter</a>
+                    <a href="https://ghost.org" target="_blank" rel="noopener">Ghost</a>
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+
+
+    <script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous">
+    </script>
+    <script src="../assets/built/casper.js%3Fv=245ecc38c2"></script>
+
+    <script>
+        // Parse the URL parameter
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+        // Give the parameter a variable name
+        var action = getParameterByName('action');
+
+        $(document).ready(function () {
+            if (action == 'subscribe') {
+                $('body').addClass("subscribe-success");
+            }
+
+            $('.subscribe-success-message .subscribe-close').click(function () {
+                $('.subscribe-success-message').addClass('close');
+            });
+
+            // Reset form on opening subscrion overlay
+            $('.subscribe-button').click(function() {
+                $('.subscribe-overlay form').removeClass();
+                $('.subscribe-email').val('');
+            });
+        });
+    </script>
+
+    <script>
+    $(document).ready(function () {
+        // FitVids - start
+        var $postContent = $(".post-full-content");
+        $postContent.fitVids();
+        // FitVids - end
+
+        // Replace nav with title on scroll - start
+        Casper.stickyNavTitle({
+            navSelector: '.site-nav-main',
+            titleSelector: '.post-full-title',
+            activeClass: 'nav-post-title-active'
+        });
+        // Replace nav with title on scroll - end
+
+        // Hover on avatar
+        var hoverTimeout;
+        $('.author-list-item').hover(function () {
+            var $this = $(this);
+
+            clearTimeout(hoverTimeout);
+
+            $('.author-card').removeClass('hovered');
+            $(this).children('.author-card').addClass('hovered');
+
+        }, function () {
+            var $this = $(this);
+
+            hoverTimeout = setTimeout(function () {
+                $this.children('.author-card').removeClass('hovered');
+            }, 800);
+        });
+    });
+</script>
+
+
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+</body>
+</html>

@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>Training a Neural Network</title>
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" type="text/css" href="../assets/built/screen.css%3Fv=245ecc38c2.css" />
+
+    <link rel="canonical" href="index.html" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    <link rel="amphtml" href="amp/index.html" />
+    
+    <meta property="og:site_name" content="More Than One Turn" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Training a Neural Network" />
+    <meta property="og:description" content="(aka. Living a Successful Life)  One way to look at training a neural network is that you are minimizing a cost function to increase accuracy.  This is done through gradient descent, not trying to calculate the hessian.  Because the overall search space is non-convex and complicated.  One way to look" />
+    <meta property="og:url" content="http://localhost:2368/training-a-neural-network/" />
+    <meta property="article:published_time" content="2016-10-22T17:37:58.000Z" />
+    <meta property="article:modified_time" content="2016-10-28T23:59:08.000Z" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Training a Neural Network" />
+    <meta name="twitter:description" content="(aka. Living a Successful Life)  One way to look at training a neural network is that you are minimizing a cost function to increase accuracy.  This is done through gradient descent, not trying to calculate the hessian.  Because the overall search space is non-convex and complicated.  One way to look" />
+    <meta name="twitter:url" content="http://localhost:2368/training-a-neural-network/" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Derek Chen" />
+    <meta name="twitter:site" content="@derekchen14" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "More Than One Turn",
+        "url": "http://localhost:2368/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "http://localhost:2368/favicon.ico",
+            "width": 48,
+            "height": 48
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Derek Chen",
+        "image": {
+            "@type": "ImageObject",
+            "url": "//www.gravatar.com/avatar/9f3ee838eeb42849d4880676cedd85d6?s=250&d=mm&r=x",
+            "width": 250,
+            "height": 250
+        },
+        "url": "http://localhost:2368/author/derek/",
+        "sameAs": []
+    },
+    "headline": "Training a Neural Network",
+    "url": "http://localhost:2368/training-a-neural-network/",
+    "datePublished": "2016-10-22T17:37:58.000Z",
+    "dateModified": "2016-10-28T23:59:08.000Z",
+    "description": "(aka. Living a Successful Life)\n\nOne way to look at training a neural network is that you are minimizing a cost\nfunction to increase accuracy. This is done through gradient descent, not trying\nto calculate the hessian. Because the overall search space is non-convex and\ncomplicated.\n\nOne way to look at trying to live a successful life is that you are minimizing\nthe resources you spend (e.g. time and money) to increase your happiness. This\nis done through getting better every day, not trying to ha",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://localhost:2368/"
+    }
+}
+    </script>
+
+    <meta name="generator" content="Ghost 3.29" />
+    <link rel="alternate" type="application/rss+xml" title="More Than One Turn" href="../rss/index.html" />
+    <style>
+.page-title,
+.page-description {
+   color:#3D0F90!important;
+   text-shadow: #F7FAEB 0px 0px 0.3em;
+}
+a { color: #3399ff; }  
+.nav li a:after { display: none; }
+.nav li:before { display: none; }
+li { margin: 0.2em 0; }
+ol, ul {
+	margin: 0;
+    position: relative;
+}
+ol > li, ul > li { bottom: 0; }
+p { margin: 0 0 0.7em 0; }
+.main-header { height: 90vh; }
+
+article.post { width: 100%; }
+section.post-full-content {
+    padding: 0;
+    line-height: 1em;
+    font-size: 1.4em;
+}
+h1.site-title, h2.site-description { 
+    text-shadow: 2px 2px 3px #232522;
+} 
+    
+</style>
+
+</head>
+<body class="post-template">
+
+    <div class="site-wrapper">
+
+        
+
+<header class="site-header">
+    <div class="outer site-nav-main">
+    <div class="inner">
+        <nav class="site-nav">
+    <div class="site-nav-left-wrapper">
+        <div class="site-nav-left">
+                <a class="site-nav-logo" href="../index.html">More Than One Turn</a>
+            <div class="site-nav-content">
+                    <ul class="nav">
+    <li class="nav-home"><a href="../index.html">Home</a></li>
+    <li class="nav-about"><a href="http://feature.engineering/about">About</a></li>
+    <li class="nav-contact"><a href="http://feature.engineering/contact">Contact</a></li>
+</ul>
+
+                    <span class="nav-post-title dash">Training a Neural Network</span>
+            </div>
+        </div>
+    </div>
+    <div class="site-nav-right">
+            <div class="social-links">
+                    <a class="social-link social-link-tw" href="https://twitter.com/derekchen14" title="Twitter" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+</a>
+            </div>
+                <a class="rss-button" href="https://feedly.com/i/subscription/feed/http://localhost:2368/rss/" title="RSS" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="6.18" cy="17.82" r="2.18"/><path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/></svg>
+</a>
+
+    </div>
+</nav>
+    </div>
+</div></header>
+
+
+<main id="site-main" class="site-main outer">
+    <div class="inner">
+
+        <article class="post-full post no-image no-image">
+
+            <header class="post-full-header">
+
+
+                <h1 class="post-full-title">Training a Neural Network</h1>
+
+
+                <div class="post-full-byline">
+
+                    <section class="post-full-byline-content">
+
+                        <ul class="author-list">
+                            <li class="author-list-item">
+
+                                <div class="author-card">
+                                    <img class="author-profile-image" src="http://www.gravatar.com/avatar/9f3ee838eeb42849d4880676cedd85d6?s=250&amp;d=mm&amp;r=x" alt="Derek Chen" />
+                                    <div class="author-info">
+                                        <h2>Derek Chen</h2>
+                                        <p>Read <a href="../author/derek/index.html">more posts</a> by this author.</p>
+                                    </div>
+                                </div>
+
+                                <a href="../author/derek/index.html" class="author-avatar">
+                                    <img class="author-profile-image" src="http://www.gravatar.com/avatar/9f3ee838eeb42849d4880676cedd85d6?s=250&amp;d=mm&amp;r=x" alt="Derek Chen" />
+                                </a>
+
+                            </li>
+                        </ul>
+
+                        <section class="post-full-byline-meta">
+                            <h4 class="author-name"><a href="../author/derek/index.html">Derek Chen</a></h4>
+                            <div class="byline-meta-content">
+                                <time class="byline-meta-date" datetime="2016-10-22">22 Oct 2016</time>
+                                <span class="byline-reading-time"><span class="bull">&bull;</span> 6 min read</span>
+                            </div>
+                        </section>
+
+                    </section>
+
+
+                </div>
+            </header>
+
+
+            <section class="post-full-content">
+                <div class="post-content">
+                    <!--kg-card-begin: markdown--><p><code>(aka. Living a Successful Life)</code></p>
+<p>One way to look at training a neural network is that you are minimizing a cost function to increase accuracy.  This is done through gradient descent, not trying to calculate the hessian.  Because the overall search space is non-convex and complicated.</p>
+<p><code>One way to look at trying to live a successful life is that you are minimizing the resources you spend (e.g. time and money) to increase your happiness. This is done through getting better every day, not trying to have a master plan for life. Because the overall experience of life is constantly changing.</code></p>
+<p>There are some standard procedures people agree on.  Such as more layers and more units is generally better.  Sometimes a network even has 1000s of layers, which might be overkill, but certainly 100 layers is better than 10, and 10 layers is better than 1 - that's the whole point of deep learning right?</p>
+<p><code>There are some standard procedures people agree on.  Such as more schooling and more degrees is generally better.  Sometimes a person might even have PhD, which might be overkill, but certainly a masters is better than an undergrad degree, and an undergrad degree is better than a high school diploma - that's the whole point of education right?</code></p>
+<p>But common sense is never where people like to focus.  Most people like to tweak mini-batch sizes and testing 10 new features to improve your word embeddings (positional encoding, topic modeling, n-gram statistics, matrix factorization, etc.), even though the real gains come in gathering and pre-processing data rather than trying to build a fancier model - i.e. the dirty work.</p>
+<p><code>But common sense is never where people like to focus.  Most people like to go to self-improvement workshops or read 10 ways to hack your productivity, even though the real gains come from putting in the hard work rather than trying to take shortcuts - i.e. the dirty work.</code></p>
+<p>People like to focus on optimization techniques (Adam, Adagrad, Momentum), but honestly plain SGD with mini-batches works perfectly fine most of the time. This is because the majority of the work comes during the training, not whether you chose the right optimizer.</p>
+<p><code>People like to focus on optimization techniques (Pomodoro, GTD, Kanban), but honestly just setting goals and then doing them works perfectly fine most of the time. This is because the majority of the work comes during the execution of the task, not whether you have a fancy todo-list app.</code></p>
+<p>What are some gains that are truly worthwhile?  Well, we've seen that proper initialization is pretty critical.  But the &quot;right way&quot; to initialize is really to just have random weights centered on the mean.  In other words, you know you can't set everything to zero, but that doesn't necessarily mean you know where to start either.</p>
+<p><code>What are some gains that are truly worthwhile?  Well, we've seen that choosing the right career that you're passionate about is pretty critical.  But the &quot;right way&quot; to start your career is really to just try random activities centered around your interests.  In other words, you know you can't just sit on the couch all day, but that doesn't necessarily mean you know where to start either.</code></p>
+<p>One way to start at good initialization is through pre-training.  This alternate task isn't your final goal, but it points you in the right direction.  And on the topic of initialization, we can't forget the benefits of batch norm in starting each layer the best way possible.  You can start with VGG-net if you really want, but that jolt from transfer learning will only take you so far.  Eventually, your model needs to do some learning for itself. Finally, let's not forget about dropout.  It's like building an ensemble of multiple networks and getting the best experiences of every network involved.</p>
+<p><code>One way to make sure you are starting the right career is through internships.  This alternate task isn't your final goal, but it points you in the right direction.  And on the topic of initialization, we can't forget the benefits of a good night's sleep to help starting each day the best way possible.  You can drink all the coffee you want, but that jolt of caffeine will only take you so far.  Eventually, you need to do just grind through some long nights yourself. Finally, let's not forget about learning from other's mistakes and mentors.  It's like building an ensemble of multiple lives and getting the best experiences of every person involved. </code></p>
+<p>Even with all these tips and tricks though, sometimes you just need to restart the whole training process with a new model.</p>
+<p><code>Even with all these tips and tricks though, sometimes you just need to restart the whole growth process with a new career.</code></p>
+<p>Hopefully, you understood your situation well enough to not require such a drastic change as going from a CNN to a LSTM, but maybe you need to make a more subtle change from a 3-layer bi-LSTM with character inputs into a 2-layer GRU with morpheme inputs.</p>
+<p>Let's be honest though, even the more &quot;subtle&quot; change is really difficult, and often requires a completely new set of hyper-params, so that means a completely new grid search process.  This is not to mention that re-training itself takes a long time, even if you happened to magically have all the right params from the start.</p>
+<p><code>Hopefully, you understood your situation well enough to not require such a drastic change as going from a being a doctor to being an engineer, but maybe you need to make a more subtle change from a web developer focused on e-commerce into a systems engineer focused on healthcare.</code></p>
+<p><code>Let's be honest though, even the more &quot;subtle&quot; change is really difficult, and often requires a completely new set of industry connections, so that means a completely new networking period to meet people.  This is not to mention that building credibility in a new field itself takes a long time, even if you happened to magically have all the right skills for the job from the start.</code></p>
+<p>So what happens?  Most people just pick a standard off-the-shelf model and start training.  And if their test accuracy is low, they complain about their slow CPU (eg. if only I were rich enough to afford a GPU) or try to redirect people's attention to their amazing validation accuracy (or even their train accuracy if they're desperate).  Thus most results end up being very average.</p>
+<p>But you already have a NIPs conference to attend and the deadline for submitting a paper is coming soon.  Plus, you just received that new research grant, and the committee is expecting some results soon, so right now isn't really the time to rock the boat.</p>
+<p><code>So what happens?  Most people just pick a safe career and start getting promoted.  And if their success is poor, they complain about their unreasonable boss (eg. if only I were rich enough to quit immediately so I could look for a new job) or try to redirect people's attention to their amazing college years (or even the glory days of high school if they're desperate). Thus most lives end up being very average.</code></p>
+<p><code>But you already have a mortgage to pay and that deadline for figuring out your health insurance is coming soon.  Plus your wife is 8-months pregnant, and the baby is expected to come out any day now, so right now isn't really the time to rock the boat.</code></p>
+<p>Starting from the bottom again is just way too painful and time consuming.  The model I have now isn't horrible - my current perplexity score is certainly nothing to be ashamed of.  There's no point in trying to compete with Jeff Dean, that guy knows everything.</p>
+<p><code>Starting from the bottom again is just way too painful and time consuming.  The career path I have now isn't horrible - my current salary is certainly nothing to be ashamed of.  There's no point in trying to compete with Jeff Dean, that guy knows everything.</code></p>
+<p>So, stop.  This is where you have to ask yourself &quot;Are you really satisfied with where you are?&quot;  Sure, not everyone can get state-of-the-art results, but have you actually collected all the data that you could before giving up?  Is it really too late to start with a new model?   Maybe getting this done right isn't about just trying to just beat current benchmarks by 1.2%.  Maybe you need to stop comparing yourself to everyone else's results on ArXiv and just ask yourself what really matters.</p>
+<p><code>So, stop.  This is where you have to ask yourself &quot;Are you really satisfied with where you are?&quot;  Sure, not everyone can get the perfect job, but have you actually tried learning everything you could before giving up?  Is it really too late to start with a new career?  Maybe getting this done right isn't about just trying to just beat your friend's stock options package by 1.2%.  Maybe you need to stop comparing yourself to everyone else's lives on Facebook and just ask yourself what really matters.</code></p>
+<p>Because you know you can do better.  Because you know you were meant for something more.</p>
+<p><code>Because you know you can do better.  Because you know you were meant for something more.</code></p>
+<!--kg-card-end: markdown-->
+                </div>
+            </section>
+
+
+
+        </article>
+
+    </div>
+</main>
+
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+
+                <article class="post-card post no-image no-image">
+
+
+    <div class="post-card-content">
+
+        <a class="post-card-content-link" href="../speech-recognition-and-synthesis-at-human-parity-2/index.html">
+
+            <header class="post-card-header">
+                <h2 class="post-card-title">Speech Recognition and Synthesis at Human Parity</h2>
+            </header>
+
+            <section class="post-card-excerpt">
+                    <p>Microsoft Research dominates Speech-to-Text Achieving Human Parity in Conversational Speech Recognition (W. Xiong, J. Droppo, X. Huang, F. Seide, M. Seltzer, A. Stolcke, D. Yu, G. Zweig) [Published: Oct 2016]  Microsoft Research has made a number of advancements in order to achieve this momentous</p>
+            </section>
+
+        </a>
+
+        <footer class="post-card-meta">
+            <ul class="author-list">
+                <li class="author-list-item">
+            
+                    <div class="author-name-tooltip">
+                        Derek Chen
+                    </div>
+            
+                    <a href="../author/derek/index.html" class="static-avatar">
+                        <img class="author-profile-image" src="http://www.gravatar.com/avatar/9f3ee838eeb42849d4880676cedd85d6?s=250&amp;d=mm&amp;r=x" alt="Derek Chen" />
+                    </a>
+                </li>
+            </ul>
+            <div class="post-card-byline-content">
+                <span><a href="../author/derek/index.html">Derek Chen</a></span>
+                <span class="post-card-byline-date"><time datetime="2016-11-17">17 Nov 2016</time> <span class="bull">&bull;</span> 6 min read</span>
+            </div>
+        </footer>
+
+    </div>
+
+</article>
+
+                <article class="post-card post no-image no-image">
+
+
+    <div class="post-card-content">
+
+        <a class="post-card-content-link" href="../creating-great-products/index.html">
+
+            <header class="post-card-header">
+                <h2 class="post-card-title">Creating Great Products</h2>
+            </header>
+
+            <section class="post-card-excerpt">
+                    <p>Building a product can be quite simple, but the best ones include insights from human behavior, algorithmic efficiency, and usability.  To start, an engineer might build a sophisticated app that uses some cutting edge technology. It is a non-trivial feat which required:  Speaking the</p>
+            </section>
+
+        </a>
+
+        <footer class="post-card-meta">
+            <ul class="author-list">
+                <li class="author-list-item">
+            
+                    <div class="author-name-tooltip">
+                        Derek Chen
+                    </div>
+            
+                    <a href="../author/derek/index.html" class="static-avatar">
+                        <img class="author-profile-image" src="http://www.gravatar.com/avatar/9f3ee838eeb42849d4880676cedd85d6?s=250&amp;d=mm&amp;r=x" alt="Derek Chen" />
+                    </a>
+                </li>
+            </ul>
+            <div class="post-card-byline-content">
+                <span><a href="../author/derek/index.html">Derek Chen</a></span>
+                <span class="post-card-byline-date"><time datetime="2016-10-17">17 Oct 2016</time> <span class="bull">&bull;</span> 1 min read</span>
+            </div>
+        </footer>
+
+    </div>
+
+</article>
+        </div>
+    </div>
+</aside>
+
+
+
+
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="../index.html">More Than One Turn</a> &copy; 2020</section>
+                <nav class="site-footer-nav">
+                    <a href="../index.html">Latest Posts</a>
+                    
+                    <a href="https://twitter.com/derekchen14" target="_blank" rel="noopener">Twitter</a>
+                    <a href="https://ghost.org" target="_blank" rel="noopener">Ghost</a>
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+
+
+    <script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous">
+    </script>
+    <script src="../assets/built/casper.js%3Fv=245ecc38c2"></script>
+
+    <script>
+        // Parse the URL parameter
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+        // Give the parameter a variable name
+        var action = getParameterByName('action');
+
+        $(document).ready(function () {
+            if (action == 'subscribe') {
+                $('body').addClass("subscribe-success");
+            }
+
+            $('.subscribe-success-message .subscribe-close').click(function () {
+                $('.subscribe-success-message').addClass('close');
+            });
+
+            // Reset form on opening subscrion overlay
+            $('.subscribe-button').click(function() {
+                $('.subscribe-overlay form').removeClass();
+                $('.subscribe-email').val('');
+            });
+        });
+    </script>
+
+    <script>
+    $(document).ready(function () {
+        // FitVids - start
+        var $postContent = $(".post-full-content");
+        $postContent.fitVids();
+        // FitVids - end
+
+        // Replace nav with title on scroll - start
+        Casper.stickyNavTitle({
+            navSelector: '.site-nav-main',
+            titleSelector: '.post-full-title',
+            activeClass: 'nav-post-title-active'
+        });
+        // Replace nav with title on scroll - end
+
+        // Hover on avatar
+        var hoverTimeout;
+        $('.author-list-item').hover(function () {
+            var $this = $(this);
+
+            clearTimeout(hoverTimeout);
+
+            $('.author-card').removeClass('hovered');
+            $(this).children('.author-card').addClass('hovered');
+
+        }, function () {
+            var $this = $(this);
+
+            hoverTimeout = setTimeout(function () {
+                $this.children('.author-card').removeClass('hovered');
+            }, 800);
+        });
+    });
+</script>
+
+
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+</body>
+</html>
