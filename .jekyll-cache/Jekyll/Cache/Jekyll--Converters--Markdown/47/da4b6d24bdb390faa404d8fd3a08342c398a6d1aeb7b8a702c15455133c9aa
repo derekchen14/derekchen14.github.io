@@ -1,0 +1,48 @@
+I"�<p>Problem: Training function is imprecise (i.e. BLEU score)</p>
+
+<ul>
+  <li>Training is imperfect because current evaluation metrics (i.e. BLEU Score) measure neither conversation fluency nor task-completion.
+    <ul>
+      <li>Labels are often inadequate since there are often many valid methods of answering the same query, where the gold label serves as only one such method.</li>
+      <li>Training set is incomplete since you they cover only a subset of possible acceptable responses</li>
+      <li>LMs train the network to be grammatically coherent, but not necessarily relevant</li>
+    </ul>
+  </li>
+  <li>Instead, a good method should be able to more closely mimic user satisfaction
+    <ol>
+      <li>evaluate based on semantic similarity</li>
+      <li>take context into account
+<!--kg-card-end: markdown--><!--kg-card-begin: markdown--></li>
+    </ol>
+  </li>
+</ul>
+
+<p>What does it mean to have high user satisfaction?</p>
+
+<ul>
+  <li>Sentence-level fluency - sentence in isolation is valid and grammatically correct</li>
+  <li>Turn-level appropriateness - sentence is natural and makes sense given the user input</li>
+  <li>Dialogue-level fluency - sentence is strategically correct in getting the agent towards goal completion</li>
+  <li>Overall Variation - sufficient diversity in agent responses</li>
+</ul>
+
+<p>How do we measure the satisfaction?</p>
+
+<ul>
+  <li>Ask the user for feedback after each dialogue –&gt; Very inefficient/annoying</li>
+  <li>Hand-craft a “user satisfaction” estimator (e.g. success/length trade-off) –&gt; We usually need to know the user goal to succeed</li>
+  <li>Train a “user satisfaction” estimator using user feedback –&gt; We ask for user feedback only when we are uncertain about it
+<!--kg-card-end: markdown--><!--kg-card-begin: markdown--></li>
+</ul>
+
+<p>Quantitative Metrics</p>
+
+<ul>
+  <li>Perplexity</li>
+  <li>BLEU Score</li>
+  <li>METEOR</li>
+  <li>ROUGE</li>
+  <li>ADEM
+<!--kg-card-end: markdown--></li>
+</ul>
+:ET

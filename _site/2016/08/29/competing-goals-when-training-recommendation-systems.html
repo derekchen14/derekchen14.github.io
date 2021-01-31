@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<!--
+    Type on Strap jekyll theme v2.3.1
+    Copyright 2016-2020 Sylhare
+    Theme free for personal and commercial use under the MIT license
+    https://github.com/sylhare/Type-on-Strap/blob/master/LICENSE
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer src="/Type-on-Strap/assets/js/main.min.js"></script>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/Type-on-Strap/assets/css/main.css">
+
+    <!--Favicon-->
+    <link rel="shortcut icon" href="/Type-on-Strap/assets/favicon.ico" type="image/x-icon">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="More Than One Turn" href="https://sylhare.github.io/Type-on-Strap/feed.xml"/>
+    
+    
+
+    <!-- KaTeX 0.12.0 -->
+    
+    <script defer src="/Type-on-Strap/assets/js/vendor/katex.min.js"></script>
+    <script defer src="/Type-on-Strap/assets/js/vendor/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+    
+
+    <!-- Mermaid 8.8.2 -->
+    
+    <!-- <script src=”https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.8.2/mermaid.min.js" onload="mermaid.initialize({startOnLoad:true});"></script> -->
+    <script defer src="/Type-on-Strap/assets/js/vendor/mermaid.min.js" onload="mermaid.initialize({startOnLoad:true});"></script>
+    
+
+    <!-- Simple-Jekyll-Search 1.17.12 -->
+    <script src="/Type-on-Strap/assets/js/vendor/simple-jekyll-search.min.js" type="text/javascript"></script>
+
+    <!-- Google Analytics / Cookie Consent -->
+    <script>
+      const cookieName = 'cookie-notice-dismissed-https://sylhare.github.io';
+      const isCookieConsent = 'false';
+      const analyticsName = '';
+    </script>
+
+    
+    
+
+    <!-- seo tags -->
+    <meta property="og:image" content="https://sylhare.github.io/Type-on-Strap/assets/img/pexels/triangular.jpeg">
+    
+    <meta property="og:type" content="website" />
+    
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Competing Goals when Training Recommendation Systems | More Than One Turn</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Competing Goals when Training Recommendation Systems" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Although not intractable, the problem of training recommendation systems includes many difficult components that must be resolved in order to have practical use in the real world. Based on my current understanding, there are three separate problem domains:" />
+<meta property="og:description" content="Although not intractable, the problem of training recommendation systems includes many difficult components that must be resolved in order to have practical use in the real world. Based on my current understanding, there are three separate problem domains:" />
+<link rel="canonical" href="https://sylhare.github.io/Type-on-Strap/2016/08/29/competing-goals-when-training-recommendation-systems.html" />
+<meta property="og:url" content="https://sylhare.github.io/Type-on-Strap/2016/08/29/competing-goals-when-training-recommendation-systems.html" />
+<meta property="og:site_name" content="More Than One Turn" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2016-08-29T03:08:03-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Competing Goals when Training Recommendation Systems" />
+<script type="application/ld+json">
+{"description":"Although not intractable, the problem of training recommendation systems includes many difficult components that must be resolved in order to have practical use in the real world. Based on my current understanding, there are three separate problem domains:","headline":"Competing Goals when Training Recommendation Systems","dateModified":"2016-08-29T03:08:03-04:00","datePublished":"2016-08-29T03:08:03-04:00","url":"https://sylhare.github.io/Type-on-Strap/2016/08/29/competing-goals-when-training-recommendation-systems.html","mainEntityOfPage":{"@type":"WebPage","@id":"https://sylhare.github.io/Type-on-Strap/2016/08/29/competing-goals-when-training-recommendation-systems.html"},"@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- RSS -->
+    <link type="application/atom+xml" rel="alternate" href="https://sylhare.github.io/Type-on-Strap/feed.xml" title="More Than One Turn" />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="Competing Goals when Training Recommendation Systems">
+    <meta name="twitter:description" content="Although not intractable, the problem of training recommendation systems includes many difficult components that must be resolved in order to have practical ...">
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:image" content="https://sylhare.github.io/Type-on-Strap/assets/img/pexels/triangular.jpeg">
+    <meta name="twitter:image:alt" content="Competing Goals when Training Recommendation Systems">
+</head>
+
+  <body>
+    <header class="site-header">
+
+    <!-- Logo and title -->
+	<div class="branding">
+        
+		<a href="/Type-on-Strap/">
+			<img alt="logo img" class="avatar" src="/Type-on-Strap/assets/img/triangle.png" />
+		</a>
+        
+        <a class="site-title" aria-label="More Than One Turn" href="/Type-on-Strap/">
+        More Than One Turn
+		</a>
+	</div>
+
+    <!-- Toggle menu -->
+    <nav class="clear">
+    <a aria-label="pull" id="pull" class="toggle" href="#">
+    <i class="fa fa-bars fa-lg"></i>
+    </a>
+
+    <!-- Menu -->
+    <ul class="hide">
+        
+
+        
+            
+            
+        
+            
+            <li class="separator"> | </li>
+            <li>
+                <a class="clear" aria-label="About" title="About" href="/Type-on-Strap/about/">
+                     About 
+                </a>
+            </li>
+            
+            
+        
+            
+            <li class="separator"> | </li>
+            <li>
+                <a class="clear" aria-label="Gallery" title="Gallery" href="/Type-on-Strap/gallery/">
+                     Gallery 
+                </a>
+            </li>
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            <li class="separator"> | </li>
+            <li>
+                <a class="clear" aria-label="Portfolio" title="Portfolio" href="/Type-on-Strap/portfolio/">
+                     Portfolio 
+                </a>
+            </li>
+            
+            
+        
+            
+            
+        
+            
+            <li class="separator"> | </li>
+            <li>
+                <a class="clear" aria-label="Search" title="Search" href="/Type-on-Strap/search/">
+                     <i class="fa fa-search" aria-hidden="true"></i>
+                    
+                </a>
+            </li>
+            
+            
+        
+            
+            <li class="separator"> | </li>
+            <li>
+                <a class="clear" aria-label="Tags" title="Tags" href="/Type-on-Strap/tags/">
+                     <i class="fa fa-tags" aria-hidden="true"></i>
+                    
+                </a>
+            </li>
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+    </ul>
+
+	</nav>
+</header>
+
+    <div class="content">
+      <article >
+  <header id="main" style="">
+    <div class="title-padder">
+      
+      <h1 id="Competing+Goals+when+Training+Recommendation+Systems" class="title">Competing Goals when Training Recommendation Systems</h1>
+      
+
+
+<div class="post-info">
+    <p class="meta">
+      August 29, 2016
+    </p></div>
+
+      
+    </div>
+  </header>
+
+  <section class="post-content">
+  
+      <p>Although not intractable, the problem of training recommendation systems includes many difficult components that must be resolved in order to have practical use in the real world.  Based on my current understanding, there are three separate problem domains:</p>
+
+<ol>
+  <li><strong>Memorization</strong> of explicitly stated user preferences</li>
+  <li><strong>Generalization</strong> to unseen examples not found in the dataset</li>
+  <li><strong>Exploration</strong> of new option spaces that the user might like</li>
+</ol>
+
+<p>The ultimate goal of coming up with the best recommendation is especially difficult because these sub-goals are often at odds with each other such that  generating the “right answer” can change based on something as capricious as the user’s mood.  In particular, let’s take an example of recommending desserts to a user.  For the first situation, the best recommendation for the user might be to offer a Option A (i.e. strawberry cheesecake) because they are in a straightforward typical mood.  In another situation, the best recommendation for the user might be to offer Option B (i.e. blueberry cheesecake) because the restaurant doesn’t offer strawberry cheesecake, so a different, but similar dessert should be recommended.  Finally, in a third situation, the best recommendation for the user might be Option C (i.e. Tiramisu) because the user is feeling particularly adventurous that day and wants to try something new.  This is all to say, there is no one right answer which makes training decidedly more difficult.</p>
+
+<p>If we build a neural network large enough and wide enough, this largely resolves the problem of memorization.  However, training times starts to take too long and the systems starts to overfit.  Regularization can get us back to a state of good generalization, but the problem of exploration still remains.  Sometimes, when the network “messes up”, the outcome might actually end up being good because the user appreciates well-timed moments for trying novel options.</p>
+
+<p>One possible way to model this is potentially use neural turing machines to handle the Memorization issue by taking advantage of explicit storage capabilities.  Then similar to an LSTM, there are forget gates that “randomly” drop in the optimal output in favor of a slightly different option.  This would work such that for a random percentage of outputs, the NTM outputs a different recommendation than the conservative best guess.</p>
+
+<p>Next, using variable rewards feedback signals from reinforcement learning, the algorithm can once again be trained through gradients to update the “likelihood to forget” mechanism.  Once again, the training must be done through variable rewards, rather than explicit “right/wrong” classification because in the real world, even suboptimal recommendations (i.e. Rocky Road ice cream) still yields marginal utility for the user.   Thus, the algorithm should not try model an exact right answer, but rather it should focus on maximizing the reward, or overall utility, to the end user.</p>
+
+<h3 id="forgetting-the-future">Forgetting the Future</h3>
+
+<p>Collaborative Filtering and Deep Learning both already have methods for dealing with Generalization, so I would view balancing these needs with Exploration as probably the trickiest part.  If there are readers who believe this is a “solved problem”, I would love to hear in the comments since I could definitely be missing something.</p>
+
+<p>With that as the background, the most important question in my mind is what are the details of the “forget mechanism” as outlined above?  First, note that randomly choosing to forget the optimal output and then using policy gradients to slowly update the model is probably not the most ideal strategy because we aren’t being very smart about how we initialize the random value.</p>
+
+<p>As we’ve seen with Batch Norm, Glorot Initialization, Adagrad,  and other optimization methods, where we start and how we make updates can cause meaningful improvements in our outcomes.  To that end, perhaps rather than just forgetting at random, we can be a little smarter about it by using genetic algorithms that randomly choose what to let through, but are more sophisticated in figuring out what combination of options are allowed to “breed” into the next generation. Since the output head follows a slightly different policy than the input head, the chosen model must be flexible enough to train those two aspects separately, which explains why I chose a Neural Turing Machine rather than a relatively simpler Attention Mechanism for remembering long-term dependencies.</p>
+
+<p>At the same time, using a Genetic algorithm might actually be an atrocious idea because we lose the end-to-end gradient descent benefits that are so useful in training.  However, this is where the reinforcement learning comes in.  Just as we are able to reinforcement learning to translate hard attention models into fully trainable soft attention models, we might use a similar technique for “smoothing out” the process of training genetic algorithms.</p>
+
+<h3 id="final-thoughts">Final Thoughts</h3>
+
+<p>There are still some huge holes with this process, but hopefully it covers many of the practical aspects of training deep learning recommendation systems, namely how to deal with the competing goals when finding the best recommendation at a given point in time for a given user at scale.  Some other ideas also come to mind to improve the output.  Specifically, putting together an ensemble of such systems, and/or combining with manual human oversight will probably produce better results.  However, these tweaks do not detract from the general hypothesis so the debate of their merits can be saved for a later discussion.</p>
+
+    
+  </section>
+
+  <!-- Social media shares -->
+  
+
+<div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fsylhare.github.io%2FType-on-Strap%2F2016%2F08%2F29%2Fcompeting-goals-when-training-recommendation-systems.html" target="_blank" title=" Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?text=Competing+Goals+when+Training+Recommendation+Systems%20https%3A%2F%2Fsylhare.github.io%2FType-on-Strap%2F2016%2F08%2F29%2Fcompeting-goals-when-training-recommendation-systems.html" target="_blank" title="">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="http://www.reddit.com/submit?url=https://sylhare.github.io/Type-on-Strap/2016/08/29/competing-goals-when-training-recommendation-systems.html&title=Competing+Goals+when+Training+Recommendation+Systems%20%7C%20More+Than+One+Turn" target="_blank" title=" Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=Competing+Goals+when+Training+Recommendation+Systems%20%7C%20More+Than+One+Turn&body=:%20https://sylhare.github.io/Type-on-Strap/2016/08/29/competing-goals-when-training-recommendation-systems.html" target="_blank" title="">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+
+   <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list"></div>
+</footer>
+
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+    
+    <div id="previous-post">
+        <a alt="Why Generative Models?" href="/Type-on-Strap/2016/09/08/why-generative-models.html">
+            <p>Previous post</p>
+            Why Generative Models?
+        </a>
+    </div>
+    
+
+    
+    <div id="next-post">
+        <a alt="Clothing Ontologies for Fashion Recommendations" href="/Type-on-Strap/2016/08/21/review-of-beyond-clothing-ontologies.html">
+            <p>Next post</p>
+            Clothing Ontologies for Fashion Recommendations
+        </a>
+    </div>
+    
+</div>
+
+
+
+<!-- To change color of links in the page -->
+<style>
+  
+
+  header#main {
+    background-repeat:no-repeat;
+  
+  }
+</style>
+
+    </div>
+    <footer class="site-footer">
+    <p class="text">
+        Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/sylhare/Type-on-Strap">Type on Strap</a>
+</p>
+            <div class="footer-icons">
+                <ul>
+                <!-- Social icons from Font Awesome, if enabled -->
+                
+<li>
+    <a feed.xml href="/Type-on-Strap/feed.xml"
+       title="Follow RSS feed">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+    <a href="https://github.com/sylhare" title="Follow on GitHub">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+        </span>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                </ul>
+            </div>
+</footer>
+
+
+
+  </body>
+</html>

@@ -1,0 +1,44 @@
+I"_<p>What exactly is the task we are trying to solve in task-oriented dialogue modeling?   Is there a different goal for academic research vs industry application?  First, note that I am already segmenting into chit-chat vs. goal-oriented dialogue. Despite this, even with the realm of goal-oriented chat, there seems to be different categories.  </p>
+
+<p>Specifically, there seems to be at least 3 different categorizations:</p>
+
+<!--kg-card-begin: markdown-->
+<ol>
+  <li><em>Information Retrieval</em> (IR)
+    <ul>
+      <li>Goal: better search by allowing for natural language queries, acts as internal Google engine</li>
+      <li>Value-add: helps users find information when they don’t know where to look, or too many places to look</li>
+      <li>Use cases: Look up the company policy on X, lookup X within the customer account</li>
+      <li>Examples: Does the restaurant have any vegan options? What is the status of my purchase?</li>
+      <li>Downsides: Often requires access to KB which can be difficult to query</li>
+      <li>Best Method: Embed all questions into some vector space (perhaps sentence embeddings, perhaps autoencoder). Then, given a new user query, find the closest question already in the database (perhaps cosine similarity, perhaps a small FF Network). Then return the answer associated with the known question.</li>
+    </ul>
+  </li>
+  <li><em>Command and Control</em> (CC)
+    <ul>
+      <li>Goal: report the status of event, execute pre-determined action</li>
+      <li>Value-add: faster than typing or tapping through mobile app</li>
+      <li>Use cases: this is what Siri and Alexa are capable of doing now</li>
+      <li>Examples: Weather in Milwaukee. Driving directions to Los Angeles. Music events near me on Oct 20th.</li>
+      <li>Downsides: dialogue is very unnatural, certainly not multi-turn conversation</li>
+      <li>Best Method: Parse input using rules and then return highest ranking action. Frankly, it’s hard to imagine neural-baesd methods working better in this task.</li>
+    </ul>
+  </li>
+  <li><em>Recommendation System</em> (Rec)
+    <ul>
+      <li>Goal: offer a solution based on user constraints</li>
+      <li>Value-add: offer insight into a new domain customer is unfamiliar with</li>
+      <li>Use cases: shopping for clothes, shoes, handbags, restaurant recommendation</li>
+      <li>Examples: Help me find a expensive hotel for last week of July. I would like some Indian food for 4 people on the South side of town.</li>
+      <li>Downsides: Really difficult to enumerate all possible options a user might want.</li>
+      <li>Best Method: a framework with RNN-based belief tracker, RL-based policy manager and slot-filled templates for text generation.
+<!--kg-card-end: markdown--></li>
+    </ul>
+  </li>
+</ol>
+
+<p>What’s really interesting is that we actually study Task 3 in academia but we treat it as if it were Task 2.  The datasets assume the user knows what he/she wants when in reality it should be more of a conversation to uncover a need, rather than  series of utterances to extract a known desire.  Otherwise, the most straightforward interface would be a single screen where users can tap on the options they want (area=south, price=cheap, food=Korean), all in a couple of seconds with no loss in fidelity.  Additionally, most real-world users care about Task 1, but we lack datasets for it.  Then again, datasets could always be better.</p>
+
+<p>What can be done to build systems that survive in the real world?  It seems clear that we need to tackle recommendation and move away from limiting ourselves to thinking that virtual assistants are only capable of command execution.</p>
+
+:ET

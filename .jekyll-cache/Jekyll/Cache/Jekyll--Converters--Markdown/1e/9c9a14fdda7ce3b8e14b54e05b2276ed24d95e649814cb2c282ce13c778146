@@ -1,0 +1,63 @@
+I"�<p>(aka. How the technical part of the building a intelligent agent might work)</p>
+
+<p>Drawing upon the insights from traditional dialog state tracking and newer models, a proposed framework includes the following key ideas:</p>
+
+<ul>
+  <li>Break down the problem into modules (similar to DMN): this is so that components can be analyzed individually, and optimized immediately when new algorithms come out.  Also, this is just good programming practice.</li>
+  <li>System should be end-to-end differentiable: take advantage of the magic of SGD</li>
+  <li>Focuses on user intents: research from Stanford NLP has shown that rule-based agents can perform on par with neural-based agents by focusing on modeling user beliefs which significantly limits the amount of calculation required by the model.</li>
+  <li>Closed domain: each bot handles some small section of related tasks to make the problem tractable.  Don’t try to make one bot that does everything at once.</li>
+</ul>
+
+<p>The model takes in user input:</p>
+
+<ol>
+  <li>Perform NLU to infer user beliefs:
+    <ul>
+      <li>tokenization and vocab embedding lookup</li>
+      <li>lexer to find relevant entities</li>
+      <li>parser to identify user intent</li>
+      <li>reformulate as user query</li>
+      <li><em>Best Candidate</em>: Bi-LSTM encoder with attention</li>
+    </ul>
+  </li>
+  <li>Model query as probabilistic factor in a Bayes Net:
+    <ul>
+      <li>user belief modeled as (hidden) state, so solution must go beyond reflexive machine learning algorithms</li>
+      <li>not a binary factor since the prediction of user intent was a probability distribution</li>
+      <li>to the extent that user intent is an indicator variable (ie. did or did not click a button declaring explicit preference), then add laplace smoothing</li>
+      <li>not a Markov Network or CRF since turns within a dialogue have order, and thus direction (i.e. we can’t look into the future to perform smoothing)</li>
+      <li>process and store query as continuous vector embedding to allow for gradients</li>
+      <li><em>Best Candidate</em>: Dynamic Memory Network or EntNet</li>
+    </ul>
+  </li>
+  <li>Performance Module:
+    <ul>
+      <li>Receive reward if proper API is called.  Reward signal in the form of task completion accuracy.</li>
+      <li><em>Best Candidate</em>: AC3 or TRPO</li>
+    </ul>
+  </li>
+  <li>Understanding Module:
+    <ul>
+      <li>Different from most models, we explicitly try to model whether or not we have a high confidence of the user intent.</li>
+      <li>If low confidence, ask for follow up (i.e. “What did you mean by that?”) just like in real life, rather than setting user intent state as “unknown”</li>
+      <li>Receive reward if properly predict user intent.  Reward signal in the form of positive signals.
+ (i.e. “Thanks!”)</li>
+      <li>Allows model to never return generic (non-useful) answer.</li>
+    </ul>
+  </li>
+  <li>GAN for generating agent response:
+    <ul>
+      <li>Discriminator measures coherency of agent output</li>
+      <li>Humanlike-ness and interesting-ness are secondary</li>
+      <li>Generator probably a GRU Decoder with beam search</li>
+    </ul>
+  </li>
+</ol>
+
+<p>As a first pass, if a rule-based method or IR can find answers, use that rather than passing to neural-based agent which may take time.  Additionally, fallbacks need to be implemented in case nothing useful is found. Attach speech recognition and TTS modules if desired.</p>
+
+<p>Critically, limiting usage to small domains allows agent to tractably approximate full state space of user intents.  Scalability comes from connecting multiple such agents together rather than having one agent that can do it all.  Consequently, the process for building (and training and KBP) for many agents must be incredibly simple.  Furthermore, this implies that each agent should be able to work independently of all other agents.</p>
+
+<p>In conjunction, similar to how ensembles always win data science competitions, all the smaller agents form a super-agent with superior capabilities.</p>
+:ET

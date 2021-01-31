@@ -1,2 +1,3 @@
 *.json
-ghost/
+_archives/
+.DS_Store

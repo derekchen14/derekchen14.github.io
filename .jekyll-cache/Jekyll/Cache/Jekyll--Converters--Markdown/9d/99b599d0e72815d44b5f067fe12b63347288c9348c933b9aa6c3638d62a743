@@ -1,0 +1,60 @@
+I"%'<p>Recent advances in Deep Learning have come about for a couple of key reasons, not the least of which is the enormous growth of available data.  But if overwhelming amounts of data are required to reach peak performance, how does one actually go about managing the unmanageable?  In other words, how does one get past the hype of Big Data in machine learning and into the practical implementation of leveraging Big Data for meaningful results?</p>
+
+<p><strong>What Are My Options?</strong></p>
+
+<p>It turns out that quite often distributed cloud computing with Apache Hadoop, Spark, or Storm is neither the most efficient nor the most effective method of training machine learning algorithms when dealing with massive datasets.  <a href="fastml.com/the-emperors-new-clothes-distributed-machine-learning/">Other articles</a> will dig into the details, but the gist is the overhead necessary to manage a complicated MapReduce architecture usually outweighs the benefits gained by being able to scale indefinitely with commodity hardware.  Simply put, if you’re still debating whether you qualify as a Big Data company, then you don’t have enough data yet, and using a single high-powered machine is your best bet.</p>
+
+<p>After coming to the conclusion that all you need is a couple of multi-core GPUs, there are two routes: buy or rent.  The former option means <a href="https://www.reddit.com/r/MachineLearning/comments/3wk6wl/tips_on_buyingbuilding_a_computer_with_a_gpu_for/">building a custom computer</a> with powerful specs, and is largely a decision of how much you are willing to spend on a graphics card.  If you truly want a personalized machine, then this is the way to go.  However, for most practical purposes, renting a GPU through AWS is preferable because not only will it cost less in the short term, but you can also scale up in power and in the number of servers if the need arises.  Therefore, the remainder of this article will deal with how to setup and configure a GPU instance on Amazon Web Services.</p>
+
+<p><strong>Setting Up GPUs on AWS</strong></p>
+
+<p>If you have worked with EC2 before on AWS, then running deep learning models on GPUs will be a breeze because the process is almost identical to running programs on CPUs.  And if you have not done that before, don’t worry, because Amazon has made the new user experience relatively painless as well.  Once you’ve created an account, the key steps are:</p>
+
+<ul>
+  <li>A. Launch an EC2 Instance <img src="/content/images/2016/01/EC2_Management_Console.png" alt="Management Console" /></li>
+  <li>B. Walk through the steps outlined in the top row:
+    <ol>
+      <li><em>Select an AMI</em> - Choose a community AMI with what you want pre-installed.  For the time being (Jan 2016), I am hosting a preconfigured set-up that comes with most of the libraries you hopefully need for Deep Learning. In particular, <code class="language-plaintext highlighter-rouge">Keras for Deep Learning (ami-5ea7d23e)</code> comes with Theano, TensorFlow, Keras and CUDA7 pre-installed.  If you truly want to go through the pain of setting everything up yourself, choose <code class="language-plaintext highlighter-rouge">64-bit Ubuntu 14.04 LTS (ami-3d50120d)</code> from the Quick Start list and follow the directions <a href="http://markus.com/install-theano-on-aws/">found here</a>. <img src="/content/images/2016/01/EC2_Step1.png" alt="AWS AMI Setup" /></li>
+      <li><em>Choose an instance type</em> - Select “GPU Instances” from the “All Instance Types” dropdown, and pick <code class="language-plaintext highlighter-rouge">g2.2xlarge</code> from the list.  That’s it!  You have just gone from CPU-computing to GPU-computing! <img src="/content/images/2016/01/EC2_Step2.png" alt="AWS_Instance" /></li>
+      <li><em>Configure instance</em> - Choose spot instances if desired, will save a couple of dollars for every full day you plan on keeping your instance running. <img src="/content/images/2016/01/EC2_Step3.png" alt="AWS Spot" /></li>
+      <li><em>Add storage</em> - add more EBS (Elastic Block Store) storage if so desired.  If your data set is larger than 32 GB, then you might need to explore this option, otherwise feel free to leave as is.</li>
+      <li><em>Tag instance</em> - add some tags to help identify this instance.  Unless you already have many instance running, in most cases, you can leave this section blank.</li>
+      <li><em>Configure security group</em> - ==Important!== This section outlines who will be able to access your instance.  By default, allowing SSH with a TCP protocol coming from your own IP will allow you to connect into the terminal of your instance and perform secure copies.  If you’re working from multiple locations, then add some more IPs.  If you’re using other tools, then add more ports. For example, using a Rails server usually uses port 3000 and iPython Notebooks default to using port 8888. <img src="/content/images/2016/01/EC2_Step6.png" alt="Security Group" /></li>
+      <li><em>Review</em> - Check all your details and then click [Launch]</li>
+    </ol>
+  </li>
+  <li>C. Save your PEM
+    <ol>
+      <li>The next dialog box will prompt you to create your security key</li>
+      <li>Once that is done, download your PEM in a secure and accessible location since you will need it each time to access your instance</li>
+      <li>Modify the access to the PEM to make it private with chmod 0400.</li>
+    </ol>
+  </li>
+  <li>D. Access your machine
+    <ol>
+      <li>Use  <code class="language-plaintext highlighter-rouge">ssh -i &lt;pem_file_name&gt;.pem &lt;username&gt;@&lt;your instance full dns address&gt;</code> to get in, with username usually being Ubuntu, ec2-user, or root.  The pem_ file_name is the name of the file you created in Step C2</li>
+      <li>A completed example might look like <code class="language-plaintext highlighter-rouge">ssh -i EC2_GPU_22x.pem ubuntu@ec2-52-29-214-135.us-west-1.compute.amazonaws.com</code></li>
+      <li>Use <code class="language-plaintext highlighter-rouge">scp -r -i &lt;pem_file_name&gt;.pem setup/ &lt;username&gt;@&lt;full dns address&gt;:~</code> to copy a folder into your instance.  In this case “setup” is the name of your folder. This command is performed from your local machine.  A similar command can be performed on your remote to <a href="http://stackoverflow.com/questions/11304895/how-to-scp-a-folder-from-remote-to-local">download files</a> into your local computer.</li>
+    </ol>
+  </li>
+</ul>
+
+<p><strong>Common Pitfalls</strong></p>
+
+<p>If you’re following this tutorial or others you’ve found online, you might still encounter some issues.  This is where I hope to add to the discussion to prevent hours of headache and searching through StackOverflow.  Some common issues include:</p>
+
+<ol>
+  <li>You forgot to add a credit card to AWS or your credit card is expired.  Also, if your bank has recently issued you a new card because they were breached again, you will also need to update your credentials.</li>
+  <li>You didn’t remember the password for your remote so you weren’t able to use <code class="language-plaintext highlighter-rouge">sudo</code>. Now I know you didn’t even try to enter the command, because on a remote machine, you don’t need the password :)</li>
+  <li>You skipped Step C3 which limits the access to your PEM file. This will result in an error complaining about “Unprotected Private Key File: Permissions 0777 for ‘.ssh/my_ private_key.pem’ are too open.  It is required that your private key files are NOT accessible by others. This private key will be ignored.” To fix the error, execute the following command, substituting the path for your private key file: <code class="language-plaintext highlighter-rouge">$ chmod 0400 .ssh/my_private_key.pem</code>.</li>
+  <li>You used the wrong host key, resulting in “Error: Host key not found, Permission denied (publickey), or Authentication failed, permission denied”.  To fix this, replace the <username> portion with `Ubuntu`.  If that doesn't work, try `ec2-user`.  If that doesn't work, try `root`.  If that doesn't work, start googling.</username></li>
+  <li>You moved out of your home and into a coffeeshop, but then you forgot to add the IP of the coffeeshop to your list of allowed IPs in “Configure Security Groups” in Step B6. To fix this, find “Network &amp; Security” on the left panel.  Then select Security Groups &gt; check the box &gt; Actions &gt; Edit Inbound Rules &gt; add your IP &gt; Save</li>
+  <li>You didn’t upgrade your packages and now the system is complaining.  Even when you choose an existing public AMI from the community, their setup might be out of date.  It is up to you to run system updates with <code class="language-plaintext highlighter-rouge">sudo apt-get -y dist-upgrade</code> and library updates with <code class="language-plaintext highlighter-rouge">sudo pip install --upgrade &lt;package name&gt;</code></li>
+  <li>Anything else you see on this list: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html</li>
+</ol>
+
+<p><strong>Saving your Image</strong></p>
+
+<p>If you added more packages or did some more set-up, you might want to save your own AMI for future use.  This will cost you a couple dollars a year, but it’s a great idea if you plan to use the same configuration for multiple projects or if you’re using the company budget to fund the project.   To do this, you simple go to Images on the left-hand panel and then select AMIs &gt; check the box &gt; Actions &gt; Save Image.  If you are doing other configuration work, keep in mind that you likely have an EBS-backed image and not an Instance Store-back image. <img src="/content/images/2016/01/EC2_Image.png" alt="AWS Image" />
+And with that you’re done! You now have a custom machine built for specifically for your machine learning purposes that you can use at any time.  Leave any questions or comments in the section below!</p>
+:ET

@@ -1,0 +1,2 @@
+I"	<p>Performing active learning on data annotation is to decide when the model should query the expert annotator for more samples.  Note the parallel with dialogue, which is to decide when the agent should ask a clarification question to the customer for more details on their intent.  Such a policy can be obtained through static data with basic supervised learning or in a more interactive manner through imitation learning using algorithms such as DAgger (<a href="https://arxiv.org/abs/1011.0686">Ross 2011</a>).</p>
+:ET

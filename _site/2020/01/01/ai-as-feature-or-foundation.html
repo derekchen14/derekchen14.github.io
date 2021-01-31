@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<!--
+    Type on Strap jekyll theme v2.3.1
+    Copyright 2016-2020 Sylhare
+    Theme free for personal and commercial use under the MIT license
+    https://github.com/sylhare/Type-on-Strap/blob/master/LICENSE
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer src="/Type-on-Strap/assets/js/main.min.js"></script>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/Type-on-Strap/assets/css/main.css">
+
+    <!--Favicon-->
+    <link rel="shortcut icon" href="/Type-on-Strap/assets/favicon.ico" type="image/x-icon">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="More Than One Turn" href="https://sylhare.github.io/Type-on-Strap/feed.xml"/>
+    
+    
+
+    <!-- KaTeX 0.12.0 -->
+    
+    <script defer src="/Type-on-Strap/assets/js/vendor/katex.min.js"></script>
+    <script defer src="/Type-on-Strap/assets/js/vendor/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+    
+
+    <!-- Mermaid 8.8.2 -->
+    
+    <!-- <script src=”https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.8.2/mermaid.min.js" onload="mermaid.initialize({startOnLoad:true});"></script> -->
+    <script defer src="/Type-on-Strap/assets/js/vendor/mermaid.min.js" onload="mermaid.initialize({startOnLoad:true});"></script>
+    
+
+    <!-- Simple-Jekyll-Search 1.17.12 -->
+    <script src="/Type-on-Strap/assets/js/vendor/simple-jekyll-search.min.js" type="text/javascript"></script>
+
+    <!-- Google Analytics / Cookie Consent -->
+    <script>
+      const cookieName = 'cookie-notice-dismissed-https://sylhare.github.io';
+      const isCookieConsent = 'false';
+      const analyticsName = '';
+    </script>
+
+    
+    
+
+    <!-- seo tags -->
+    <meta property="og:image" content="https://sylhare.github.io/Type-on-Strap/assets/img/pexels/triangular.jpeg">
+    
+    <meta property="og:type" content="website" />
+    
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>AI as Feature or Foundation | More Than One Turn</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="AI as Feature or Foundation" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="For awhile from 2015 to 2020 it seemed as if every start-up touted itself to be powered by AI.  The buzz around artificial intelligence has faded a bit, probably because it’s clear that AGI is not just around the corner and also because the media is always looking for the next shiny thing to discuss.  But for those of us in the trenches thinking about AI research every day, there remains a critical question to ask - is this latest round of AI, namely around deep learning with SGD, merely a feature to sprinkle onto existing tools and services, or is this truly a new foundation on which to build new technologies?" />
+<meta property="og:description" content="For awhile from 2015 to 2020 it seemed as if every start-up touted itself to be powered by AI.  The buzz around artificial intelligence has faded a bit, probably because it’s clear that AGI is not just around the corner and also because the media is always looking for the next shiny thing to discuss.  But for those of us in the trenches thinking about AI research every day, there remains a critical question to ask - is this latest round of AI, namely around deep learning with SGD, merely a feature to sprinkle onto existing tools and services, or is this truly a new foundation on which to build new technologies?" />
+<link rel="canonical" href="https://sylhare.github.io/Type-on-Strap/2020/01/01/ai-as-feature-or-foundation.html" />
+<meta property="og:url" content="https://sylhare.github.io/Type-on-Strap/2020/01/01/ai-as-feature-or-foundation.html" />
+<meta property="og:site_name" content="More Than One Turn" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-01-01T23:53:56-05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="AI as Feature or Foundation" />
+<script type="application/ld+json">
+{"description":"For awhile from 2015 to 2020 it seemed as if every start-up touted itself to be powered by AI.  The buzz around artificial intelligence has faded a bit, probably because it’s clear that AGI is not just around the corner and also because the media is always looking for the next shiny thing to discuss.  But for those of us in the trenches thinking about AI research every day, there remains a critical question to ask - is this latest round of AI, namely around deep learning with SGD, merely a feature to sprinkle onto existing tools and services, or is this truly a new foundation on which to build new technologies?","headline":"AI as Feature or Foundation","dateModified":"2020-01-01T23:53:56-05:00","datePublished":"2020-01-01T23:53:56-05:00","url":"https://sylhare.github.io/Type-on-Strap/2020/01/01/ai-as-feature-or-foundation.html","mainEntityOfPage":{"@type":"WebPage","@id":"https://sylhare.github.io/Type-on-Strap/2020/01/01/ai-as-feature-or-foundation.html"},"@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- RSS -->
+    <link type="application/atom+xml" rel="alternate" href="https://sylhare.github.io/Type-on-Strap/feed.xml" title="More Than One Turn" />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="AI as Feature or Foundation">
+    <meta name="twitter:description" content="For awhile from 2015 to 2020 it seemed as if every start-up touted itself to be powered by AI.  The buzz around artificial intelligence has faded a bit, prob...">
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:image" content="https://sylhare.github.io/Type-on-Strap/assets/img/pexels/triangular.jpeg">
+    <meta name="twitter:image:alt" content="AI as Feature or Foundation">
+</head>
+
+  <body>
+    <header class="site-header">
+
+    <!-- Logo and title -->
+	<div class="branding">
+        
+		<a href="/Type-on-Strap/">
+			<img alt="logo img" class="avatar" src="/Type-on-Strap/assets/img/triangle.png" />
+		</a>
+        
+        <a class="site-title" aria-label="More Than One Turn" href="/Type-on-Strap/">
+        More Than One Turn
+		</a>
+	</div>
+
+    <!-- Toggle menu -->
+    <nav class="clear">
+    <a aria-label="pull" id="pull" class="toggle" href="#">
+    <i class="fa fa-bars fa-lg"></i>
+    </a>
+
+    <!-- Menu -->
+    <ul class="hide">
+        
+
+        
+            
+            
+        
+            
+            <li class="separator"> | </li>
+            <li>
+                <a class="clear" aria-label="About" title="About" href="/Type-on-Strap/about/">
+                     About 
+                </a>
+            </li>
+            
+            
+        
+            
+            <li class="separator"> | </li>
+            <li>
+                <a class="clear" aria-label="Gallery" title="Gallery" href="/Type-on-Strap/gallery/">
+                     Gallery 
+                </a>
+            </li>
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            <li class="separator"> | </li>
+            <li>
+                <a class="clear" aria-label="Portfolio" title="Portfolio" href="/Type-on-Strap/portfolio/">
+                     Portfolio 
+                </a>
+            </li>
+            
+            
+        
+            
+            
+        
+            
+            <li class="separator"> | </li>
+            <li>
+                <a class="clear" aria-label="Search" title="Search" href="/Type-on-Strap/search/">
+                     <i class="fa fa-search" aria-hidden="true"></i>
+                    
+                </a>
+            </li>
+            
+            
+        
+            
+            <li class="separator"> | </li>
+            <li>
+                <a class="clear" aria-label="Tags" title="Tags" href="/Type-on-Strap/tags/">
+                     <i class="fa fa-tags" aria-hidden="true"></i>
+                    
+                </a>
+            </li>
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+    </ul>
+
+	</nav>
+</header>
+
+    <div class="content">
+      <article >
+  <header id="main" style="">
+    <div class="title-padder">
+      
+      <h1 id="AI+as+Feature+or+Foundation" class="title">AI as Feature or Foundation</h1>
+      
+
+
+<div class="post-info">
+    <p class="meta">
+      January 1, 2020
+    </p></div>
+
+      
+    </div>
+  </header>
+
+  <section class="post-content">
+  
+      <p>For awhile from 2015 to 2020 it seemed as if every start-up touted itself to be powered by AI.  The buzz around artificial intelligence has faded a bit, probably because it’s clear that AGI is not just around the corner and also because the media is always looking for the next shiny thing to discuss.  But for those of us in the trenches thinking about AI research every day, there remains a critical question to ask - is this latest round of AI, namely around deep learning with SGD, merely a feature to sprinkle onto existing tools and services, or is this truly a new foundation on which to build new technologies?</p>
+
+<h3 id="ai-as-a-feature">AI as a Feature</h3>
+<!--kg-card-begin: markdown-->
+
+<p>When seen as a feature, AI is used to automate certain areas of a business to be more efficient and cost effective. Some example in various industries:</p>
+
+<ul>
+  <li>Bowery, Iron Ox - grow cabbage by efficiently identify bad batches of crops</li>
+  <li>Drishti - uses ML to train factory workers with cameras</li>
+  <li>Cresta, Directly - augment customer service by efficiently suggesting phrases to say</li>
+  <li>Textio - write resumes or job descriptions by efficiently identifying biases</li>
+  <li>Everlaw - speed up legal review by efficiently tagging relevant documents</li>
+  <li>People AI - improve sales processes by autopopulating CRM</li>
+  <li>Dialpad, Pindrop - listen in on conference calls, sales calls or customer service calls to offer insights or identify fraud</li>
+</ul>
+
+<p>In all cases above, the automated component can be tackled sufficiently well by writing complex rules and/or straightforward ML algorithms. Moving those algorithms into the realm of Deep Learning is often not necessary, and perhaps doesn’t even happen at all.</p>
+
+<!--kg-card-end: markdown-->
+<h3 id="ai-as-a-foundation">AI as a Foundation</h3>
+
+<p>If AI serves as the foundation of the company, then the company should not be viable without the use of advanced AI techniques.   Which AI techniques are considered sufficiently advanced is debatable.  Thus, we ground the discussion by saying that advanced AI specifically refers to the development of <a href="https://medium.com/@karpathy/software-2-0-a64152b37c35">Software 2.0</a> where programs are not written with code and rules, but rather with data.  In this sense, we are less concerned about identifying a specific cutting edge architecture or algorithm, which can quickly change from one year to the next, and instead focus on identifying the requisite factors for building companies built on data.</p>
+
+<p>We believe there are three major signs that AI can indeed be the new electricity.  To start, in such a world, all AI companies will be centered around the 3A’s: accumulation, annotation and application of data.  Traditional software companies might collect massive amounts of log data or tracking statistics, but AI-based companies collect this data with the explicit-goal of using this data to train models.  Thus, the data should be captured and stored in a consistent manner that makes it readily accessible to end users for building models.  Critically, the mindset should <em>not</em> be to collect as much data as possible and to <em>later on</em> figure out how to extract insights from such data.  This brings us to the second differentiator, AI companies should have dedicated teams from annotating and labeling data, which should be treated as critical department, such as marketing or human resources.  This department would have dedicated resources and headcount since the team provides unique value.  Lastly, a AI-first company has dedicated teams for building models, just as a mobile-first company has dedicated teams for building mobile apps separate from folks doing web development.</p>
+
+<p>The second sign that Machine Learning is a new paradigm of software development will the advent of new model development practices.  In traditional software, we observe teams which handle writing code, QA and deployment.  If AI is a foundation, then we should see companies that spend time curating data the same way we see people writing programs.  There will be conscious effort around determining what data to label next (active learning) as well as mindful practices around debugging the quality of data (<a href="https://hazyresearch.github.io/snorkel/blog/socratic_learning.html">socratic learning</a>).  Deployment and infrastructure teams are concerned with making sure the production website stays up and does not cause any critical errors.  Similarly, AI companies should have teams dedicated to monitoring the activity of AI predictions to prevent ethical breakdowns and other catastrophes.  </p>
+
+<p>Lastly, and perhaps most importantly, we will know that AI is the foundation of a new revolution in technology if we see users start to interact with machines in a qualitatively different manner.  Companies built on this technology should be able to provide services that are significantly better than previous iterations, rather than just marginal improvements over the status quo.  We should see new human-computer interaction mechanisms similar to how we now expect to be able to swipe, pinch and zoom on devices.  We will also see the development of new cultural norms, where it is now normal to see folks staring at a phone screen when on the street, in a car, on the subway or walking down the hall.  </p>
+
+<h3 id="conclusion">Conclusion</h3>
+
+<p>If we’re honest, then we have to admit that we have punted on the main question since the analysis above mostly highlights what we <em>would</em> see if AI is the new foundation.  We have not really identified the factors that would enable AI to be new electricity.  Some promising examples that this might happen include the ability to identify objects, translate languages and generate images with super-human skill.  Additionally, the explosion of BERT and friends for various NLP tasks is an interesting starting point for exploration.  Ultimately, the future will be determined by those with a vision for turning these research advances into new ways of interacting with the world.</p>
+
+
+    
+  </section>
+
+  <!-- Social media shares -->
+  
+
+<div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fsylhare.github.io%2FType-on-Strap%2F2020%2F01%2F01%2Fai-as-feature-or-foundation.html" target="_blank" title=" Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?text=AI+as+Feature+or+Foundation%20https%3A%2F%2Fsylhare.github.io%2FType-on-Strap%2F2020%2F01%2F01%2Fai-as-feature-or-foundation.html" target="_blank" title="">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="http://www.reddit.com/submit?url=https://sylhare.github.io/Type-on-Strap/2020/01/01/ai-as-feature-or-foundation.html&title=AI+as+Feature+or+Foundation%20%7C%20More+Than+One+Turn" target="_blank" title=" Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=AI+as+Feature+or+Foundation%20%7C%20More+Than+One+Turn&body=:%20https://sylhare.github.io/Type-on-Strap/2020/01/01/ai-as-feature-or-foundation.html" target="_blank" title="">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+
+   <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list"></div>
+</footer>
+
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+    
+    <div id="previous-post">
+        <a alt="Calculating Uncertainty over Beliefs" href="/Type-on-Strap/2020/01/05/calculating-uncertainty-over-beliefs.html">
+            <p>Previous post</p>
+            Calculating Uncertainty over Beliefs
+        </a>
+    </div>
+    
+
+    
+    <div id="next-post">
+        <a alt="Sample post" href="/Type-on-Strap/2019/06/30/sample-post.html">
+            <p>Next post</p>
+            Sample post
+        </a>
+    </div>
+    
+</div>
+
+
+
+<!-- To change color of links in the page -->
+<style>
+  
+
+  header#main {
+    background-repeat:no-repeat;
+  
+  }
+</style>
+
+    </div>
+    <footer class="site-footer">
+    <p class="text">
+        Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/sylhare/Type-on-Strap">Type on Strap</a>
+</p>
+            <div class="footer-icons">
+                <ul>
+                <!-- Social icons from Font Awesome, if enabled -->
+                
+<li>
+    <a feed.xml href="/Type-on-Strap/feed.xml"
+       title="Follow RSS feed">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+    <a href="https://github.com/sylhare" title="Follow on GitHub">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+        </span>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                </ul>
+            </div>
+</footer>
+
+
+
+  </body>
+</html>

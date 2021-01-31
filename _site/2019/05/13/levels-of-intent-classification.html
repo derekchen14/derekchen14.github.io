@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<!--
+    Type on Strap jekyll theme v2.3.1
+    Copyright 2016-2020 Sylhare
+    Theme free for personal and commercial use under the MIT license
+    https://github.com/sylhare/Type-on-Strap/blob/master/LICENSE
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer src="/Type-on-Strap/assets/js/main.min.js"></script>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/Type-on-Strap/assets/css/main.css">
+
+    <!--Favicon-->
+    <link rel="shortcut icon" href="/Type-on-Strap/assets/favicon.ico" type="image/x-icon">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="More Than One Turn" href="https://sylhare.github.io/Type-on-Strap/feed.xml"/>
+    
+    
+
+    <!-- KaTeX 0.12.0 -->
+    
+    <script defer src="/Type-on-Strap/assets/js/vendor/katex.min.js"></script>
+    <script defer src="/Type-on-Strap/assets/js/vendor/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+    
+
+    <!-- Mermaid 8.8.2 -->
+    
+    <!-- <script src=”https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.8.2/mermaid.min.js" onload="mermaid.initialize({startOnLoad:true});"></script> -->
+    <script defer src="/Type-on-Strap/assets/js/vendor/mermaid.min.js" onload="mermaid.initialize({startOnLoad:true});"></script>
+    
+
+    <!-- Simple-Jekyll-Search 1.17.12 -->
+    <script src="/Type-on-Strap/assets/js/vendor/simple-jekyll-search.min.js" type="text/javascript"></script>
+
+    <!-- Google Analytics / Cookie Consent -->
+    <script>
+      const cookieName = 'cookie-notice-dismissed-https://sylhare.github.io';
+      const isCookieConsent = 'false';
+      const analyticsName = '';
+    </script>
+
+    
+    
+
+    <!-- seo tags -->
+    <meta property="og:image" content="https://sylhare.github.io/Type-on-Strap/assets/img/pexels/triangular.jpeg">
+    
+    <meta property="og:type" content="website" />
+    
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Label Formats for Intent Classification | More Than One Turn</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Label Formats for Intent Classification" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="When trying to understand user belief, a NLU model attempts to track the intent over the length of the conversation.  However, what format should this intent be represented?  Is it continuous or discrete?  It it directly passed into the Policy Manager or should it be augmented first?  Hundreds of hours and effort will be spent finding labels for training such a model, so it seems reasonable we should agree on what format this label should take.  But considering the issue in any depth will show trade-offs in different label formats, so the answer is not immediately obvious." />
+<meta property="og:description" content="When trying to understand user belief, a NLU model attempts to track the intent over the length of the conversation.  However, what format should this intent be represented?  Is it continuous or discrete?  It it directly passed into the Policy Manager or should it be augmented first?  Hundreds of hours and effort will be spent finding labels for training such a model, so it seems reasonable we should agree on what format this label should take.  But considering the issue in any depth will show trade-offs in different label formats, so the answer is not immediately obvious." />
+<link rel="canonical" href="https://sylhare.github.io/Type-on-Strap/2019/05/13/levels-of-intent-classification.html" />
+<meta property="og:url" content="https://sylhare.github.io/Type-on-Strap/2019/05/13/levels-of-intent-classification.html" />
+<meta property="og:site_name" content="More Than One Turn" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-05-13T17:53:21-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Label Formats for Intent Classification" />
+<script type="application/ld+json">
+{"description":"When trying to understand user belief, a NLU model attempts to track the intent over the length of the conversation.  However, what format should this intent be represented?  Is it continuous or discrete?  It it directly passed into the Policy Manager or should it be augmented first?  Hundreds of hours and effort will be spent finding labels for training such a model, so it seems reasonable we should agree on what format this label should take.  But considering the issue in any depth will show trade-offs in different label formats, so the answer is not immediately obvious.","headline":"Label Formats for Intent Classification","dateModified":"2019-05-13T17:53:21-04:00","datePublished":"2019-05-13T17:53:21-04:00","url":"https://sylhare.github.io/Type-on-Strap/2019/05/13/levels-of-intent-classification.html","mainEntityOfPage":{"@type":"WebPage","@id":"https://sylhare.github.io/Type-on-Strap/2019/05/13/levels-of-intent-classification.html"},"@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- RSS -->
+    <link type="application/atom+xml" rel="alternate" href="https://sylhare.github.io/Type-on-Strap/feed.xml" title="More Than One Turn" />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="Label Formats for Intent Classification">
+    <meta name="twitter:description" content="When trying to understand user belief, a NLU model attempts to track the intent over the length of the conversation.  However, what format should this intent...">
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:image" content="https://sylhare.github.io/Type-on-Strap/assets/img/pexels/triangular.jpeg">
+    <meta name="twitter:image:alt" content="Label Formats for Intent Classification">
+</head>
+
+  <body>
+    <header class="site-header">
+
+    <!-- Logo and title -->
+	<div class="branding">
+        
+		<a href="/Type-on-Strap/">
+			<img alt="logo img" class="avatar" src="/Type-on-Strap/assets/img/triangle.png" />
+		</a>
+        
+        <a class="site-title" aria-label="More Than One Turn" href="/Type-on-Strap/">
+        More Than One Turn
+		</a>
+	</div>
+
+    <!-- Toggle menu -->
+    <nav class="clear">
+    <a aria-label="pull" id="pull" class="toggle" href="#">
+    <i class="fa fa-bars fa-lg"></i>
+    </a>
+
+    <!-- Menu -->
+    <ul class="hide">
+        
+
+        
+            
+            
+        
+            
+            <li class="separator"> | </li>
+            <li>
+                <a class="clear" aria-label="About" title="About" href="/Type-on-Strap/about/">
+                     About 
+                </a>
+            </li>
+            
+            
+        
+            
+            <li class="separator"> | </li>
+            <li>
+                <a class="clear" aria-label="Gallery" title="Gallery" href="/Type-on-Strap/gallery/">
+                     Gallery 
+                </a>
+            </li>
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            <li class="separator"> | </li>
+            <li>
+                <a class="clear" aria-label="Portfolio" title="Portfolio" href="/Type-on-Strap/portfolio/">
+                     Portfolio 
+                </a>
+            </li>
+            
+            
+        
+            
+            
+        
+            
+            <li class="separator"> | </li>
+            <li>
+                <a class="clear" aria-label="Search" title="Search" href="/Type-on-Strap/search/">
+                     <i class="fa fa-search" aria-hidden="true"></i>
+                    
+                </a>
+            </li>
+            
+            
+        
+            
+            <li class="separator"> | </li>
+            <li>
+                <a class="clear" aria-label="Tags" title="Tags" href="/Type-on-Strap/tags/">
+                     <i class="fa fa-tags" aria-hidden="true"></i>
+                    
+                </a>
+            </li>
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+    </ul>
+
+	</nav>
+</header>
+
+    <div class="content">
+      <article >
+  <header id="main" style="">
+    <div class="title-padder">
+      
+      <h1 id="Label+Formats+for+Intent+Classification" class="title">Label Formats for Intent Classification</h1>
+      
+
+
+<div class="post-info">
+    <p class="meta">
+      May 13, 2019
+    </p></div>
+
+      
+    </div>
+  </header>
+
+  <section class="post-content">
+  
+      <p>When trying to understand user belief, a NLU model attempts to track the intent over the length of the conversation.  However, what format should this intent be represented?  Is it continuous or discrete?  It it directly passed into the Policy Manager or should it be augmented first?  Hundreds of hours and effort will be spent finding labels for training such a model, so it seems reasonable we should agree on what format this label should take.  But considering the issue in any depth will show trade-offs in different label formats, so the answer is not immediately obvious.</p>
+
+<p>To be more concrete, let’s first observe the spectrum of options, ranging from more structured to less structured:</p>
+
+<p><em>&lt;Most direct and interpretable, but less generalizable.  Has more structure. &gt;</em></p>
+
+<!--kg-card-begin: markdown-->
+<ol>
+  <li>Output is from a rule-based model. Classifier is rules-based or works by statistical inference, so it is largely deterministic. It is directly based on structure infused by the expert.</li>
+  <li>Output is a semantic or syntactic parse, which is very still highly structured. There is a pre-defined set of logical predicates to choose from, so building such a system is heavily dependent on an expert. Gives highly interpretable results.</li>
+  <li>Output is a intent made up of dialogue act, slot, relation, value, such as <code class="language-plaintext highlighter-rouge">inform(price &lt; $100)</code> or <code class="language-plaintext highlighter-rouge">accept(restaurant=the golden wok)</code> or <code class="language-plaintext highlighter-rouge">open(text=good morning)</code>. This has a flat structure, rather than a complex hierarchical parse tree, so it is less structured than before. This has a pre-defined expert labeled ontology, and much easier to label.</li>
+  <li>Output is a generic natural language tag. It is human interpretable, but largely unrestricted. This gets very messy quickly because the lexicon is only determined after the fact, if at all. So there can be many tags that are very similar to each other.</li>
+  <li>Output of classifier is some latent continuous vector that is then passed to a separate memory module, decoder, or other network. Great for back-propagation and end-to-end learning, really poor for human interpretability. Most powerful representation of user intent. Would need to build tools to understand its hidden structure, which arises from data rather than expert labels.
+<!--kg-card-end: markdown--></li>
+</ol>
+
+<p><em>&lt;Least direct and interpretable.  Has no predefined structure.&gt;</em></p>
+
+<p>Implied in the spectrum is a shift from rule-based methods to more neural-based methods.  While it may seem inevitable that everything moves into a deep learning direction, there is certainly the case to be made that we aren’t there yet and also that human-interpretability matters more in certain situations than just high accuracy. As with many decisions involving trade-offs, I don’t think there’s a right answer overall, but there might be a right answer for your problem – so take the time to choose wisely.</p>
+
+
+    
+  </section>
+
+  <!-- Social media shares -->
+  
+
+<div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fsylhare.github.io%2FType-on-Strap%2F2019%2F05%2F13%2Flevels-of-intent-classification.html" target="_blank" title=" Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?text=Label+Formats+for+Intent+Classification%20https%3A%2F%2Fsylhare.github.io%2FType-on-Strap%2F2019%2F05%2F13%2Flevels-of-intent-classification.html" target="_blank" title="">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="http://www.reddit.com/submit?url=https://sylhare.github.io/Type-on-Strap/2019/05/13/levels-of-intent-classification.html&title=Label+Formats+for+Intent+Classification%20%7C%20More+Than+One+Turn" target="_blank" title=" Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=Label+Formats+for+Intent+Classification%20%7C%20More+Than+One+Turn&body=:%20https://sylhare.github.io/Type-on-Strap/2019/05/13/levels-of-intent-classification.html" target="_blank" title="">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+
+   <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list"></div>
+</footer>
+
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+    
+    <div id="previous-post">
+        <a alt="Color Post" href="/Type-on-Strap/2019/05/18/color-post.html">
+            <p>Previous post</p>
+            Color Post
+        </a>
+    </div>
+    
+
+    
+    <div id="next-post">
+        <a alt="Tiling Tensors in PyTorch" href="/Type-on-Strap/2019/03/11/tiling-tensors-in-pytorch.html">
+            <p>Next post</p>
+            Tiling Tensors in PyTorch
+        </a>
+    </div>
+    
+</div>
+
+
+
+<!-- To change color of links in the page -->
+<style>
+  
+
+  header#main {
+    background-repeat:no-repeat;
+  
+  }
+</style>
+
+    </div>
+    <footer class="site-footer">
+    <p class="text">
+        Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/sylhare/Type-on-Strap">Type on Strap</a>
+</p>
+            <div class="footer-icons">
+                <ul>
+                <!-- Social icons from Font Awesome, if enabled -->
+                
+<li>
+    <a feed.xml href="/Type-on-Strap/feed.xml"
+       title="Follow RSS feed">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+    <a href="https://github.com/sylhare" title="Follow on GitHub">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+        </span>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                </ul>
+            </div>
+</footer>
+
+
+
+  </body>
+</html>

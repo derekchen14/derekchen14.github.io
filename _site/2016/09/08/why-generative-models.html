@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<!--
+    Type on Strap jekyll theme v2.3.1
+    Copyright 2016-2020 Sylhare
+    Theme free for personal and commercial use under the MIT license
+    https://github.com/sylhare/Type-on-Strap/blob/master/LICENSE
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer src="/Type-on-Strap/assets/js/main.min.js"></script>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/Type-on-Strap/assets/css/main.css">
+
+    <!--Favicon-->
+    <link rel="shortcut icon" href="/Type-on-Strap/assets/favicon.ico" type="image/x-icon">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="More Than One Turn" href="https://sylhare.github.io/Type-on-Strap/feed.xml"/>
+    
+    
+
+    <!-- KaTeX 0.12.0 -->
+    
+    <script defer src="/Type-on-Strap/assets/js/vendor/katex.min.js"></script>
+    <script defer src="/Type-on-Strap/assets/js/vendor/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+    
+
+    <!-- Mermaid 8.8.2 -->
+    
+    <!-- <script src=”https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.8.2/mermaid.min.js" onload="mermaid.initialize({startOnLoad:true});"></script> -->
+    <script defer src="/Type-on-Strap/assets/js/vendor/mermaid.min.js" onload="mermaid.initialize({startOnLoad:true});"></script>
+    
+
+    <!-- Simple-Jekyll-Search 1.17.12 -->
+    <script src="/Type-on-Strap/assets/js/vendor/simple-jekyll-search.min.js" type="text/javascript"></script>
+
+    <!-- Google Analytics / Cookie Consent -->
+    <script>
+      const cookieName = 'cookie-notice-dismissed-https://sylhare.github.io';
+      const isCookieConsent = 'false';
+      const analyticsName = '';
+    </script>
+
+    
+    
+
+    <!-- seo tags -->
+    <meta property="og:image" content="https://sylhare.github.io/Type-on-Strap/assets/img/pexels/triangular.jpeg">
+    
+    <meta property="og:type" content="website" />
+    
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Why Generative Models? | More Than One Turn</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Why Generative Models?" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Recently, there has been a lot of talk around generative models as the next big thing in deep learning. There are articles about general adversarial networks, variational autoencoders, PixelRNNs, and perhaps some reinforcement learning augmentation. But why all this sudden interest? Why not pursue memory networks or other ideas? I am by no means an expert, but my suspicion is that generative models offer superior context and speed." />
+<meta property="og:description" content="Recently, there has been a lot of talk around generative models as the next big thing in deep learning. There are articles about general adversarial networks, variational autoencoders, PixelRNNs, and perhaps some reinforcement learning augmentation. But why all this sudden interest? Why not pursue memory networks or other ideas? I am by no means an expert, but my suspicion is that generative models offer superior context and speed." />
+<link rel="canonical" href="https://sylhare.github.io/Type-on-Strap/2016/09/08/why-generative-models.html" />
+<meta property="og:url" content="https://sylhare.github.io/Type-on-Strap/2016/09/08/why-generative-models.html" />
+<meta property="og:site_name" content="More Than One Turn" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2016-09-08T17:52:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Why Generative Models?" />
+<script type="application/ld+json">
+{"description":"Recently, there has been a lot of talk around generative models as the next big thing in deep learning. There are articles about general adversarial networks, variational autoencoders, PixelRNNs, and perhaps some reinforcement learning augmentation. But why all this sudden interest? Why not pursue memory networks or other ideas? I am by no means an expert, but my suspicion is that generative models offer superior context and speed.","headline":"Why Generative Models?","dateModified":"2016-09-08T17:52:00-04:00","datePublished":"2016-09-08T17:52:00-04:00","url":"https://sylhare.github.io/Type-on-Strap/2016/09/08/why-generative-models.html","mainEntityOfPage":{"@type":"WebPage","@id":"https://sylhare.github.io/Type-on-Strap/2016/09/08/why-generative-models.html"},"@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- RSS -->
+    <link type="application/atom+xml" rel="alternate" href="https://sylhare.github.io/Type-on-Strap/feed.xml" title="More Than One Turn" />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="Why Generative Models?">
+    <meta name="twitter:description" content="Recently, there has been a lot of talk around generative models as the next big thing in deep learning.  There are articles about general adversarial network...">
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:image" content="https://sylhare.github.io/Type-on-Strap/assets/img/pexels/triangular.jpeg">
+    <meta name="twitter:image:alt" content="Why Generative Models?">
+</head>
+
+  <body>
+    <header class="site-header">
+
+    <!-- Logo and title -->
+	<div class="branding">
+        
+		<a href="/Type-on-Strap/">
+			<img alt="logo img" class="avatar" src="/Type-on-Strap/assets/img/triangle.png" />
+		</a>
+        
+        <a class="site-title" aria-label="More Than One Turn" href="/Type-on-Strap/">
+        More Than One Turn
+		</a>
+	</div>
+
+    <!-- Toggle menu -->
+    <nav class="clear">
+    <a aria-label="pull" id="pull" class="toggle" href="#">
+    <i class="fa fa-bars fa-lg"></i>
+    </a>
+
+    <!-- Menu -->
+    <ul class="hide">
+        
+
+        
+            
+            
+        
+            
+            <li class="separator"> | </li>
+            <li>
+                <a class="clear" aria-label="About" title="About" href="/Type-on-Strap/about/">
+                     About 
+                </a>
+            </li>
+            
+            
+        
+            
+            <li class="separator"> | </li>
+            <li>
+                <a class="clear" aria-label="Gallery" title="Gallery" href="/Type-on-Strap/gallery/">
+                     Gallery 
+                </a>
+            </li>
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            <li class="separator"> | </li>
+            <li>
+                <a class="clear" aria-label="Portfolio" title="Portfolio" href="/Type-on-Strap/portfolio/">
+                     Portfolio 
+                </a>
+            </li>
+            
+            
+        
+            
+            
+        
+            
+            <li class="separator"> | </li>
+            <li>
+                <a class="clear" aria-label="Search" title="Search" href="/Type-on-Strap/search/">
+                     <i class="fa fa-search" aria-hidden="true"></i>
+                    
+                </a>
+            </li>
+            
+            
+        
+            
+            <li class="separator"> | </li>
+            <li>
+                <a class="clear" aria-label="Tags" title="Tags" href="/Type-on-Strap/tags/">
+                     <i class="fa fa-tags" aria-hidden="true"></i>
+                    
+                </a>
+            </li>
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+    </ul>
+
+	</nav>
+</header>
+
+    <div class="content">
+      <article >
+  <header id="main" style="">
+    <div class="title-padder">
+      
+      <h1 id="Why+Generative+Models%3F" class="title">Why Generative Models?</h1>
+      
+
+
+<div class="post-info">
+    <p class="meta">
+      September 8, 2016
+    </p></div>
+
+      
+    </div>
+  </header>
+
+  <section class="post-content">
+  
+      <p>Recently, there has been a lot of talk around generative models as the next big thing in deep learning.  There are articles about general adversarial networks, variational autoencoders, PixelRNNs, and perhaps some reinforcement learning augmentation.  But why all this sudden interest?  Why not pursue memory networks or other ideas?  I am by no means an expert, but my suspicion is that generative models offer superior context and speed.</p>
+
+<p>To start, there is a very practical aspect to strong generative models because they turn unlabeled data into a useful tool that helps the supervised training portion to run faster. This happens because a model that is pre-trained using generative models have better initialization weights - starting closer to local minima means less road to travel.</p>
+
+<p>More important than faster convergence though is the ability of generative models to (theoretically) lead to better convergence.
+In other words, rather than just getting to the answer faster, we actually reach better answers overall, or similar answers with significantly less data than previously possible.</p>
+
+<p>This happens because if a machine has a decent understanding of how the world works, then this context allows the machine to make inferences about the world to give a reasonable responses even in situations if has not previously encountered.  This concept has taken on various names in the past: One-shot learning, Semi-supervised learning, Transfer learning.  For example, from the machine’s point of view:</p>
+
+<ul>
+  <li>When answering a question, I can produce more variety in my responses that are different in syntax yet still similar in meaning.</li>
+  <li>When offering a recommendation, I can offer choices that are novel yet reasonable because I have established concepts that are useful for reasoning and decision making</li>
+  <li>When classifying news, I can label snippets that have no words in common with the snippets found in my corpus</li>
+  <li>When listening for an input, I can understand different phrases that I have not heard in training</li>
+  <li>When recognizing objects in an image or video, I can make better predictions because I have a deep understanding of objects in the world and their factors of variation.  Concretely, since I know the essence of a car, I am not confused and can easily recognize a car even when if the car is viewed from different camera angles or painted a different color.</li>
+  <li>When generating new images, I can imagine the parts of the image that were originally occluded from view or otherwise damaged
+When tracking events, I can detect anomalies since I have a good understanding of what is normal vs. surprising.</li>
+</ul>
+
+<p>Thus, while generating jazz songs or Van Gogh style paintings is certainly entertaining, the true benefit of generative models is allowing practitioners to move more efficiently and effectively than ever before.  At least that is my opinion from an outsider’s perspective - would love to hear an expert’s thoughts on the subject!</p>
+
+    
+  </section>
+
+  <!-- Social media shares -->
+  
+
+<div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fsylhare.github.io%2FType-on-Strap%2F2016%2F09%2F08%2Fwhy-generative-models.html" target="_blank" title=" Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?text=Why+Generative+Models%3F%20https%3A%2F%2Fsylhare.github.io%2FType-on-Strap%2F2016%2F09%2F08%2Fwhy-generative-models.html" target="_blank" title="">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="http://www.reddit.com/submit?url=https://sylhare.github.io/Type-on-Strap/2016/09/08/why-generative-models.html&title=Why+Generative+Models%3F%20%7C%20More+Than+One+Turn" target="_blank" title=" Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=Why+Generative+Models%3F%20%7C%20More+Than+One+Turn&body=:%20https://sylhare.github.io/Type-on-Strap/2016/09/08/why-generative-models.html" target="_blank" title="">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+
+   <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list"></div>
+</footer>
+
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+    
+    <div id="previous-post">
+        <a alt="Deep NLP from Deep Learning Summer School" href="/Type-on-Strap/2016/09/16/deep-nlp.html">
+            <p>Previous post</p>
+            Deep NLP from Deep Learning Summer School
+        </a>
+    </div>
+    
+
+    
+    <div id="next-post">
+        <a alt="Competing Goals when Training Recommendation Systems" href="/Type-on-Strap/2016/08/29/competing-goals-when-training-recommendation-systems.html">
+            <p>Next post</p>
+            Competing Goals when Training Recommendation Systems
+        </a>
+    </div>
+    
+</div>
+
+
+
+<!-- To change color of links in the page -->
+<style>
+  
+
+  header#main {
+    background-repeat:no-repeat;
+  
+  }
+</style>
+
+    </div>
+    <footer class="site-footer">
+    <p class="text">
+        Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/sylhare/Type-on-Strap">Type on Strap</a>
+</p>
+            <div class="footer-icons">
+                <ul>
+                <!-- Social icons from Font Awesome, if enabled -->
+                
+<li>
+    <a feed.xml href="/Type-on-Strap/feed.xml"
+       title="Follow RSS feed">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+    <a href="https://github.com/sylhare" title="Follow on GitHub">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+        </span>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                </ul>
+            </div>
+</footer>
+
+
+
+  </body>
+</html>

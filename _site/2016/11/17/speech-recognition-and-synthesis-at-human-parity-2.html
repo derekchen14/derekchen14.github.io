@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<!--
+    Type on Strap jekyll theme v2.3.1
+    Copyright 2016-2020 Sylhare
+    Theme free for personal and commercial use under the MIT license
+    https://github.com/sylhare/Type-on-Strap/blob/master/LICENSE
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer src="/Type-on-Strap/assets/js/main.min.js"></script>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/Type-on-Strap/assets/css/main.css">
+
+    <!--Favicon-->
+    <link rel="shortcut icon" href="/Type-on-Strap/assets/favicon.ico" type="image/x-icon">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="More Than One Turn" href="https://sylhare.github.io/Type-on-Strap/feed.xml"/>
+    
+    
+
+    <!-- KaTeX 0.12.0 -->
+    
+    <script defer src="/Type-on-Strap/assets/js/vendor/katex.min.js"></script>
+    <script defer src="/Type-on-Strap/assets/js/vendor/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+    
+
+    <!-- Mermaid 8.8.2 -->
+    
+    <!-- <script src=”https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.8.2/mermaid.min.js" onload="mermaid.initialize({startOnLoad:true});"></script> -->
+    <script defer src="/Type-on-Strap/assets/js/vendor/mermaid.min.js" onload="mermaid.initialize({startOnLoad:true});"></script>
+    
+
+    <!-- Simple-Jekyll-Search 1.17.12 -->
+    <script src="/Type-on-Strap/assets/js/vendor/simple-jekyll-search.min.js" type="text/javascript"></script>
+
+    <!-- Google Analytics / Cookie Consent -->
+    <script>
+      const cookieName = 'cookie-notice-dismissed-https://sylhare.github.io';
+      const isCookieConsent = 'false';
+      const analyticsName = '';
+    </script>
+
+    
+    
+
+    <!-- seo tags -->
+    <meta property="og:image" content="https://sylhare.github.io/Type-on-Strap/assets/img/pexels/triangular.jpeg">
+    
+    <meta property="og:type" content="website" />
+    
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Speech Recognition and Synthesis at Human Parity | More Than One Turn</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Speech Recognition and Synthesis at Human Parity" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="####Microsoft Research dominates Speech-to-Text Achieving Human Parity in Conversational Speech Recognition (W. Xiong, J. Droppo, X. Huang, F. Seide, M. Seltzer, A. Stolcke, D. Yu, G. Zweig) [Published: Oct 2016]" />
+<meta property="og:description" content="####Microsoft Research dominates Speech-to-Text Achieving Human Parity in Conversational Speech Recognition (W. Xiong, J. Droppo, X. Huang, F. Seide, M. Seltzer, A. Stolcke, D. Yu, G. Zweig) [Published: Oct 2016]" />
+<link rel="canonical" href="https://sylhare.github.io/Type-on-Strap/2016/11/17/speech-recognition-and-synthesis-at-human-parity-2.html" />
+<meta property="og:url" content="https://sylhare.github.io/Type-on-Strap/2016/11/17/speech-recognition-and-synthesis-at-human-parity-2.html" />
+<meta property="og:site_name" content="More Than One Turn" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2016-11-17T17:12:12-05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Speech Recognition and Synthesis at Human Parity" />
+<script type="application/ld+json">
+{"description":"####Microsoft Research dominates Speech-to-Text Achieving Human Parity in Conversational Speech Recognition (W. Xiong, J. Droppo, X. Huang, F. Seide, M. Seltzer, A. Stolcke, D. Yu, G. Zweig) [Published: Oct 2016]","headline":"Speech Recognition and Synthesis at Human Parity","dateModified":"2016-11-17T17:12:12-05:00","datePublished":"2016-11-17T17:12:12-05:00","url":"https://sylhare.github.io/Type-on-Strap/2016/11/17/speech-recognition-and-synthesis-at-human-parity-2.html","mainEntityOfPage":{"@type":"WebPage","@id":"https://sylhare.github.io/Type-on-Strap/2016/11/17/speech-recognition-and-synthesis-at-human-parity-2.html"},"@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- RSS -->
+    <link type="application/atom+xml" rel="alternate" href="https://sylhare.github.io/Type-on-Strap/feed.xml" title="More Than One Turn" />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="Speech Recognition and Synthesis at Human Parity">
+    <meta name="twitter:description" content="####Microsoft Research dominates Speech-to-TextAchieving Human Parity in Conversational Speech Recognition (W. Xiong, J. Droppo, X. Huang, F. Seide, M. Seltz...">
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:image" content="https://sylhare.github.io/Type-on-Strap/assets/img/pexels/triangular.jpeg">
+    <meta name="twitter:image:alt" content="Speech Recognition and Synthesis at Human Parity">
+</head>
+
+  <body>
+    <header class="site-header">
+
+    <!-- Logo and title -->
+	<div class="branding">
+        
+		<a href="/Type-on-Strap/">
+			<img alt="logo img" class="avatar" src="/Type-on-Strap/assets/img/triangle.png" />
+		</a>
+        
+        <a class="site-title" aria-label="More Than One Turn" href="/Type-on-Strap/">
+        More Than One Turn
+		</a>
+	</div>
+
+    <!-- Toggle menu -->
+    <nav class="clear">
+    <a aria-label="pull" id="pull" class="toggle" href="#">
+    <i class="fa fa-bars fa-lg"></i>
+    </a>
+
+    <!-- Menu -->
+    <ul class="hide">
+        
+
+        
+            
+            
+        
+            
+            <li class="separator"> | </li>
+            <li>
+                <a class="clear" aria-label="About" title="About" href="/Type-on-Strap/about/">
+                     About 
+                </a>
+            </li>
+            
+            
+        
+            
+            <li class="separator"> | </li>
+            <li>
+                <a class="clear" aria-label="Gallery" title="Gallery" href="/Type-on-Strap/gallery/">
+                     Gallery 
+                </a>
+            </li>
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            <li class="separator"> | </li>
+            <li>
+                <a class="clear" aria-label="Portfolio" title="Portfolio" href="/Type-on-Strap/portfolio/">
+                     Portfolio 
+                </a>
+            </li>
+            
+            
+        
+            
+            
+        
+            
+            <li class="separator"> | </li>
+            <li>
+                <a class="clear" aria-label="Search" title="Search" href="/Type-on-Strap/search/">
+                     <i class="fa fa-search" aria-hidden="true"></i>
+                    
+                </a>
+            </li>
+            
+            
+        
+            
+            <li class="separator"> | </li>
+            <li>
+                <a class="clear" aria-label="Tags" title="Tags" href="/Type-on-Strap/tags/">
+                     <i class="fa fa-tags" aria-hidden="true"></i>
+                    
+                </a>
+            </li>
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+    </ul>
+
+	</nav>
+</header>
+
+    <div class="content">
+      <article >
+  <header id="main" style="">
+    <div class="title-padder">
+      
+      <h1 id="Speech+Recognition+and+Synthesis+at+Human+Parity" class="title">Speech Recognition and Synthesis at Human Parity</h1>
+      
+
+
+<div class="post-info">
+    <p class="meta">
+      November 17, 2016
+    </p></div>
+
+      
+    </div>
+  </header>
+
+  <section class="post-content">
+  
+      <p>####Microsoft Research dominates Speech-to-Text
+<a href="https://arxiv.org/abs/1610.05256"><strong>Achieving Human Parity in Conversational Speech Recognition</strong></a> (<em>W. Xiong, J. Droppo, X. Huang, F. Seide, M. Seltzer, A. Stolcke, D. Yu, G. Zweig</em>) [Published: Oct 2016]</p>
+
+<p>Microsoft Research has made a number of advancements in order to achieve this momentous accomplishment. First, they measured the human error rate on NIST’s 2000 conversational telephone speech recognition task, which consists of two parts: the Switchboard
+and CallHome subsets, with 5.9% and 11.3% error rates respectively.  Significantly, they found a great deal of variability between the two datasets, which highlights the fact that it would be a misnomer to place a single number to represent “human-level” accuracy - it really depends on the dataset.  With that said, MS claims that for the first time, automatic recognition performance is on par with human performance on this task.</p>
+
+<p>This was accomplished through a variety of SOTA tricks from deep learning. To start, a combination of triplet of CNNs are fused together for acoustic modeling, namely a (1) VGGNet for senone prediction (2) ResNet with ReLUs and batch norm (3) a LACE network.   What is a senone? Well, a senone is a set of tied triphone states, normally in a HMM, but this time in a CNN.  From <a href="http://cmusphinx.sourceforge.net/wiki/tutorialconcepts">CMU Sphinx</a>: Speech is a continuous audio stream where rather stable states mix with dynamically changed states. In this sequence of states, one can define more or less similar classes of sounds, or phones.
+Words are understood to be built of phones, but this is certainly not true. The acoustic properties of a waveform corresponding to a phone can vary greatly depending on many factors - phone context, speaker, style of speech and so on. The so called coarticulation makes phones sound very different from their “canonical” representation. Next, since transitions between words are more informative than stable regions, developers often talk about diphones - parts of phones between two consecutive phones. Sometimes developers talk about subphonetic units - different substates of a phone. Often three or more regions of a different nature can easily be found.
+The number three is easily explained. The first part of the phone depends on its preceding phone, the middle part is stable, and the next part depends on the subsequent phone. That’s why there are often three states in a phone selected for HMM recognition.
+Sometimes phones are considered in context. There are triphones or even quinphones. But note that unlike phones and diphones, they are matched with the same range in waveform as just phones. They just differ by name. That’s why we prefer to call this object senone. A senone’s dependence on context could be more complex than just left and right context. It can be a rather complex function defined by a decision tree, or in some other way.”
+What is a LACE? Well it stands for a layer-wise context expansion
+with attention model, but that doesn’t help too much either. LACE is variation on time-delay neural networks where each higher layer studies the broad context, which “expands” the context of lower layers. Put another way, lower layers focus on extracting simple local patterns while higher layers extract complex patterns that cover broader contexts. Where Since not all frames in a window carry the same importance, an attention is applied to tell the network which window to focus on.</p>
+
+<p>A whole bunch of LSTMs are used for acoustic and language modeling as well.  In order to extract all the data, many steps of processing are performed. We trained both standard, forward-predicting RNNLMs and backward RNN-LMs that predict words in
+reverse temporal order. The log probabilities from both
+models are added.  There is also some interpolation with N-grams.  Then some work is done to account for words that are out-of-domain of the training data. Some other techniques are used for scoring and rescoring the potential candidate terms.  To quote: “Here we also used a two-phase training schedule to train the LSTM LMs. First we train the model on the combination of in-domain and out-domain data for four data passes without any learning rate adjustment. We then start from the resulting model and train on
+in-domain data until convergence.”  As is now clear, speech recognition is a deep learning task beyond my understanding, but this is just too great a result to not report :P</p>
+
+<p>One final note, while I don’t think the “human parity” claim is marketing fluff, I do think the rebranding of CNTK to “Cognitive Toolkit” <em>is</em> PR from MS to combat the popularity of Torch (FB) and Tensorflow (GOOG).  Why is this worth mentioning?  Because they devoted an entire section in the paper to say how great their library is.  Anyway, great achievement for the team!</p>
+
+<p>####Google Deepmind dominates Text-to-Speech 
+<a href="https://arxiv.org/abs/1609.03499"><strong>Wavenet: a Generative Model for Raw Audio</strong></a> 
+(<em>A. Oord, K. Simonyan, N. Kalchbrenner, S. Dieleman, O. Vinyals, A. Senior, H. Zen, A. Graves, K. Kavukcuoglu</em>) [Published: Sept 2016]</p>
+
+<p>Traditionally, raw audio waveforms are created using <a href="https://en.wikipedia.org/wiki/Concatenative_synthesis">Concatenative </a> methods or <a href="http://www.cstr.ed.ac.uk/downloads/publications/2010/king_hmm_tutorial.pdf">Statistical Parametric</a> methods.  For the former, there’s just a giant library of sound snippets (likely phonemes) that are glued together to form each words and sentences.  For the later, the combinations and transitions from one sound bite to another are done a bit smarter using Hidden Markov Models and other statistical techniques. As of 2016, this represents the state-of-the-art.  Well, represented state-of-the-art until WaveNet came by and improved on <em>both</em> by over 50%!</p>
+
+<p>WaveNet is a deep neural network for generating raw audio waveforms. The model is fully probabilistic and autoregressive, with the predictive distribution for each audio sample conditioned on all previous ones.  Human listeners rate the speech as significantly more natural sounding than the best parametric and concatenative systems for both English and Chinese.  This was supposed to be very hard because audio files used for training are now at 16,000 samples per second, which means too much data for most other models to handle.  But what works in PixelRNNs for generating images also works for generating waveforms, once the convolution filters are tweaked a bit for this new purpose.</p>
+
+<p>At each timestep, it takes in the word it is trying to say, and the outputs samples at all previous timesteps to generate the current output.  But there are no timesteps since its a CNN, not a RNN! Ok true, but basically, the CNN “looks back” at previous timesteps by expanding the receptive field - higher layers have higher dilation leading to larger receptive fields.  A normal dilation will expand in both directions (forward and backward), so to prevent the CNN from looking ahead, the authors apply masks to form causal convolutions.  (Actually a dilation normally expands in four directions up, down, left, right, but the waveform is 2D, so it can only expand left and right.)  Since wave From what I can gather, this basically means applying a mask tensor on the convolution kernel through elementwise multiplication (that blocks signal from the “future”) before applying the kernel to the waveform at that layer.</p>
+
+<p>The output of the model has the same time dimensionality as the input, which makes taking the output from one layer as the input of the next layer really easy (no deconvolutions necessary).  From the image though, it’s clear each output comes from multiple inputs.  However, this is <em>not</em> achieved pooling layers in the network (as typical in CNNs).  Instead, in order to shrink down the dimensions as we move up the layers, the dilated convolutions are used to pad zeros between the filters of each layer. To quote: “The intuition behind this configuration is two-fold. First, exponentially increasing the dilation factor results in exponential receptive field growth with depth (Yu &amp; Koltun, 2016). For example each 1, 2, 4, . . . , 512 block has receptive field of size 1024, and can be seen as a more efficient and dis- criminative (non-linear) counterpart of a 1×1024 convolution. Second, stacking these blocks further increases the model capacity and the receptive field size.”</p>
+
+<p><img src="/content/images/2016/11/wavenet.gif" alt="WaveNet" /></p>
+
+<p>Also interesting, by tweaking one of the inputs, WaveNet can even generate the same speech using different speakers, such as female or male, when conditioned on a speaker identity. Just for fun, it can also generate “novel and often highly realistic musical fragments”.  Finally, it might just be me, but do all the sound clips sound like they have some underlying static in the background?  Might it have to do with the <a href="http://distill.pub/2016/deconv-checkerboard/">checkerboard artifacts</a> in other generative models?</p>
+
+<p>Perhaps most promising is the use of WaveNet as a discriminative model, since it generally points to the possibility of semi-supervised learning that takes advantage of unlabeled data.  Here, the output is chopped off, and replaced with a mean-pool followed by some more non-causal convs.  (Was there a softmax at the end?)  Applying this to TIMIT, the authors acheieved 18.8 PER on the test set, which is SOTA when trained on raw audio (as opposed to log mel-filterbank energies or mel-frequency cepstral coefficients.)  The <a href="https://deepmind.com/blog/wavenet-generative-model-raw-audio/">official blog post</a> is pretty easy to understand, and includes sound clips from the system.  Definitely worth a look.</p>
+
+    
+  </section>
+
+  <!-- Social media shares -->
+  
+
+<div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fsylhare.github.io%2FType-on-Strap%2F2016%2F11%2F17%2Fspeech-recognition-and-synthesis-at-human-parity-2.html" target="_blank" title=" Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?text=Speech+Recognition+and+Synthesis+at+Human+Parity%20https%3A%2F%2Fsylhare.github.io%2FType-on-Strap%2F2016%2F11%2F17%2Fspeech-recognition-and-synthesis-at-human-parity-2.html" target="_blank" title="">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="http://www.reddit.com/submit?url=https://sylhare.github.io/Type-on-Strap/2016/11/17/speech-recognition-and-synthesis-at-human-parity-2.html&title=Speech+Recognition+and+Synthesis+at+Human+Parity%20%7C%20More+Than+One+Turn" target="_blank" title=" Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=Speech+Recognition+and+Synthesis+at+Human+Parity%20%7C%20More+Than+One+Turn&body=:%20https://sylhare.github.io/Type-on-Strap/2016/11/17/speech-recognition-and-synthesis-at-human-parity-2.html" target="_blank" title="">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+
+   <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list"></div>
+</footer>
+
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+    
+    <div id="previous-post">
+        <a alt="Deep Learning for Recommendation Systems" href="/Type-on-Strap/2016/11/19/deep-learning-for-recommendation-systems.html">
+            <p>Previous post</p>
+            Deep Learning for Recommendation Systems
+        </a>
+    </div>
+    
+
+    
+    <div id="next-post">
+        <a alt="Training a Neural Network" href="/Type-on-Strap/2016/10/22/training-a-neural-network.html">
+            <p>Next post</p>
+            Training a Neural Network
+        </a>
+    </div>
+    
+</div>
+
+
+
+<!-- To change color of links in the page -->
+<style>
+  
+
+  header#main {
+    background-repeat:no-repeat;
+  
+  }
+</style>
+
+    </div>
+    <footer class="site-footer">
+    <p class="text">
+        Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/sylhare/Type-on-Strap">Type on Strap</a>
+</p>
+            <div class="footer-icons">
+                <ul>
+                <!-- Social icons from Font Awesome, if enabled -->
+                
+<li>
+    <a feed.xml href="/Type-on-Strap/feed.xml"
+       title="Follow RSS feed">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+    <a href="https://github.com/sylhare" title="Follow on GitHub">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+        </span>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                </ul>
+            </div>
+</footer>
+
+
+
+  </body>
+</html>

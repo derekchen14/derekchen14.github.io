@@ -1,0 +1,116 @@
+I"<p>Dialogue systems and chatbots are going through the same cycle of adoption seen in previous technology growth curves.  As a quick primer, we note that mobile experienced the same four phases as it has expanded from technical oddity to ubiquitous usage.  In particular, in the first phase, you had a limited number of forerunners who used large brick phones.  This certainly didn’t live up the promise of mobile, but it was also certainly distinct from its predecessor of the corded phone. In the second phase, there was a shift to enterprise with Palm Pre, Blackberry and other PDAs.  In the third phase, we had the original iPhone which lacked an App Store and other key functionality, but at this point you knew mobile was going to take over the world.  Finally, in the fourth phase, there was also Android, long-lasting phones with giant screens, and all the bells and whistles we expect today.</p>
+
+<p>Moving our focus on dialogue systems, it seems the same pattern is playing out again:</p>
+
+<!--kg-card-begin: markdown-->
+<ol>
+  <li></li>
+</ol>
+
+<p>Phase One: recognize basic intents to execute actions</p>
+
+<ul>
+  <li>Alexa, Siri, Cortana (2015 - 2019)</li>
+  <li>This is mainly characterized by taking a single utterance as input an resulting in the desired response</li>
+  <li>On the enterprise side: schedule a meeting or call, manage a todo list, transcribe meeting notes</li>
+  <li>On the consumer side: turn on the lights, set an alarm, what is the weather
+    <ol>
+      <li></li>
+    </ol>
+  </li>
+</ul>
+
+<p>Phase Two: responds to requests, asks for clarification, access to KB</p>
+
+<ul>
+  <li>Interface to apps and services (2019 - 2023)</li>
+  <li>The agent is now able to handle multi-turn conversation and hold onto context over many exchanges. The size of the ontology also becomes largely unbounded, with the structure focused only on the dialogue acts.</li>
+  <li>On the enterprise side: suggested phrases for customer service or call centers, automated scripts for sales teams, resolving helpdesk tickets for IT</li>
+  <li>On the consumer side: purchasing tickets for an event or movie, ordering food for common menu items, make a flight booking or restaurant reservation
+    <ol>
+      <li></li>
+    </ol>
+  </li>
+</ul>
+
+<p>Phase Three: makes recommendations and pushes notifications, proactive nature</p>
+
+<ul>
+  <li>Virtual Assistant (2023 - 2027)</li>
+  <li>The agent remembers your context from past conversations and has a basic understanding of who you are and your preferences. It is thus able to make simple recommendations without being too annoying.</li>
+  <li>On the enterprise side: onboarding for new employees, read and compose short emails, we noticed everyone in your department signed up for X, would you like to as well?</li>
+  <li>On the consumer side: recommend what news to read or shows to watch, give suggestion on what place to eat taking into account previously stated dietary preferences
+    <ol>
+      <li></li>
+    </ol>
+  </li>
+</ul>
+
+<p>Phase Four: converses based on personalized context</p>
+
+<ul>
+  <li>Executive Assistant (2027 - ?), timeline on this could be way off</li>
+  <li>The agent is able to handle more high level tasks and has low level commonsense baked into everything it does. It is able to infer from context what is the most likely intent for high performance in zero-shot learning settings.</li>
+  <li>On the enterprise side: research a subject online to generate a summary, intuitive interaction for booking a flight, almost like talking to a co-worker</li>
+  <li>On the consumer side: user no longer needs to adapt when giving instructions and can converse in natural language. This is reading into the future, so I will leave this vague …
+<!--kg-card-end: markdown--></li>
+</ul>
+
+<p>Sometimes, the best way to understand is with an example.  So, on a more concrete level, the way this might play out:</p>
+
+<!--kg-card-begin: markdown-->
+
+<p><em>Phase 1:</em></p>
+
+<ul>
+  <li>&lt;Turn on TV&gt;</li>
+  <li>I’d like to watch the game.</li>
+  <li>Got it, the Game Portal is on channel 312. Would you like to go there?</li>
+  <li>No</li>
+  <li>OK, what would you like me to do?</li>
+  <li>Watch basketball game.</li>
+  <li>OK, switching to channel 253. &lt;Shows a replay of NCAA FInal Four game.&gt;</li>
+  <li>Argh, not that one!</li>
+  <li>I’m sorry, I didn’t get that.</li>
+  <li>&lt;Manually flips through TV guide&gt;</li>
+  <li>Please go to channel 261</li>
+  <li>OK, switching to channel 261.</li>
+</ul>
+
+<p><em>Phase 2:</em></p>
+
+<ul>
+  <li>&lt;Turn on TV&gt;</li>
+  <li>I’d like to watch the game.</li>
+  <li>Which game?</li>
+  <li>Basketball</li>
+  <li>Did you mean the NBA playoffs?</li>
+  <li>Yes</li>
+  <li>There are two series currently playing: Bucks vs Raptors and Warriors vs Blazers, which one do you prefer?</li>
+  <li>Umm, the Warriors and Blazers</li>
+  <li>Ok, switching to channel 261</li>
+</ul>
+
+<p><em>Phase 3:</em></p>
+
+<ul>
+  <li>&lt;Turn on TV&gt;</li>
+  <li>I’d like to watch the game.</li>
+  <li>You mean the Warriors game?</li>
+  <li>Yes, that’s perfect!</li>
+  <li>Ok, switching to channel 261</li>
+</ul>
+
+<p><em>Phase 4:</em></p>
+
+<ul>
+  <li>&lt;Turn on TV&gt;</li>
+  <li>Would you like to watch the Warriors game?</li>
+  <li>Oh, that’d be great!</li>
+  <li>Ok, switching to channel 261
+<!--kg-card-end: markdown--></li>
+</ul>
+
+<p>Open to thoughts and comments below!</p>
+
+:ET

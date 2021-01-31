@@ -1,0 +1,42 @@
+I"�<p>Many folks in the tech industry are <a href="http://www.kdnuggets.com/2015/01/deep-learning-flaws-universal-machine-learning.html">skeptical</a> about the hype of machine learning, since the world has been promised to them before, but the reality hasn’t really panned out.  In fact this has happened so many times, there is a term for this in the machine learning community called an <a href="https://en.wikipedia.org/wiki/AI_winter" title="AI Winter">AI Winter</a>. A number of fundamental factors are different though in 2015 that warrant taking a closer look this time around.</p>
+
+<p>###Why Machine Learning is the Real Deal###</p>
+<ul>
+  <li><strong>Larger data sets</strong> - The explosion of big data is probably the number one driver of the new effectiveness of machine learning. It turns out that using the exact same techniques, more data can yield significantly better predictions.  This new data comes from many sources:
+    <ul>
+      <li><em>Data collection</em> - this is the obvious one, we now have more devices like smartwatches, smartphones, and computers generating more data.  More analytics packages and more people spending their time in a digital world</li>
+      <li><em>Data labeling</em> - gathering more data through unsupervised learning methods first, such as auto-encoders</li>
+      <li><em>Feature engineering</em> - creating new training data through skewing, translations, rotations, and other transformations</li>
+    </ul>
+  </li>
+  <li><strong>Improved Hardware</strong> - Following Moore’s Law, the processing power of chips and other hardware components continue to steadily improve over time, which simply leads to faster training.
+    <ul>
+      <li><em>GPU vs CPU vs FGPA</em> - the emergence of <a href="http://www.nvidia.com/object/machine-learning.html">GPUs</a> for training machine learning algorithms has given a huge boost in speed in calculating matrix operations.  While a GPU can’t do many types of operations, it can focus on doing one operation really, really well.  Same is true with using <a href="https://gigaom.com/2014/08/14/researchers-hope-deep-learning-algorithms-can-run-on-fpgas-and-supercomputers/">FPGAs</a> for training neural networks.</li>
+      <li><em>Better Processors</em> - The chips themselves are just faster and more powerful over time.  Although, there is some news that rate of improvement is not as fast anymore, things are still <a href="http://venturebeat.com/2015/11/19/intel-says-moores-law-isnt-dead-yet/">getting better</a>.</li>
+    </ul>
+  </li>
+  <li><strong>Better Algorithms</strong> - Lastly, there have also been advances in how to train these machines to learn.  While this third component is what academic researchers and the media often like to focus on, it is worth stating again that the first two are both equally important advances.  Examples include:
+    <ul>
+      <li><em>Neural networks</em> - whereas most functions of the past used some combination of statistics (<a href="https://en.wikipedia.org/wiki/Probabilistic_classification">Naive Bayes</a>), data transformations (kernels in <a href="https://en.wikipedia.org/wiki/Support_vector_machine">SVMs</a>), or increasingly sophisticated ensembling techniques (<a href="https://en.wikipedia.org/wiki/Ensemble_learning">Random Forests</a>), neural networks model the problem from a totally different perspective.  By mimicking how the human brain functions, <a href="https://en.wikipedia.org/wiki/Artificial_neural_network">neural networks</a> are able to achieve a surprising level of complexity without losing the flexibility to adapt to unique domains.</li>
+      <li><em>Network architecture</em> - as researchers continued to explore neural networks, they began adding significantly more layers to the model, giving rise to <a href="https://en.wikipedia.org/wiki/Deep_learning">deep learning</a>. Not only were there more layers though, sometimes these layers performed different functions, such as activation, max-pooling, or convolutions.  Finally, sometimes the network also grew larger in the front due to pre-training layers using unsupervised methods, or in the end due to extra recurrent layers from RNNs.</li>
+      <li><em>Sum is greater than the parts</em> - lots of other little wins that incrementally are not worth much, but combined have drastically improved the accuracy of machine learning.  Without going into too much detail, some noteworthy advances include improved initialization methods (<a href="yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf">Lecun</a>, <a href="http://jmlr.org/proceedings/papers/v9/glorot10a/glorot10a.pdf">Glorot</a>, <a href="http://arxiv.org/abs/1502.01852.">He</a>) to start off training and improved learning rates (<a href="http://www.cs.toronto.edu/~tijmen/csc321/slides/lecture_slides_lec6.pdf">RMSProp</a>, <a href="http://www.ark.cs.cmu.edu/cdyer/adagrad.pdf">AdaGrad</a>, <a href="http://arxiv.org/pdf/1412.6980.pdf">Adam</a>) to speed up the process.  And let’s not forget improved activation functions (<a href="http://ufldl.stanford.edu/wiki/index.php/Neural_Networks">Sigmoid</a>, <a href="http://stats.stackexchange.com/questions/101560/tanh-activation-function-vs-sigmoid-activation-function">tanH</a>, <a href="https://imiloainf.wordpress.com/2013/11/06/rectifier-nonlinearities/">ReLU</a>) to avoid neuron saturation and regularization techniques (<a href="http://statweb.stanford.edu/~tibs/sta305files/Rudyregularization.pdf">lasso</a>, <a href="https://en.wikipedia.org/wiki/Tikhonov_regularization">ridge</a>, <a href="https://www.cs.toronto.edu/~hinton/absps/JMLRdropout.pdf">dropout</a>) to avoid overfitting on training data.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>###Examples of Improved Machine Learning###
+Frankly, words can’t do justice in explaining the amazing advances that have been made in the last year – so just watch.</p>
+
+<ul>
+  <li><em>Image Recognition</em> - 5 years ago, computers could not tell the difference between an image of cat and an image of dog.  Now, they can interpret objects better than most people: &lt;iframe width="560" height="315" src="https://www.youtube.com/embed/40riCqvRoMs" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;</li>
+  <li><em>NLP and Translation</em> - Not too long ago, computers could barely understand the words you were speaking even if spoken slowly from a limited vocabulary.  Now, they can translate entire sentences on the fly: &lt;iframe width="420" height="315" src="https://www.youtube.com/embed/Nu-nlQqFCKg" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;</li>
+  <li><em>Memory Networks</em> - Not too long ago, computers could not really interpret any meaning or context from data.  Now, they can chain together sentences to <a href="http://www.techinsider.io/facebook-lord-of-the-rings-teach-memory-network-2015-11">reason through logic</a>.</li>
+</ul>
+
+<p>It’s no surprise then that <a href="https://code.facebook.com/posts/1478523512478471/teaching-machines-to-see-and-understand-advances-in-ai-research/">all</a> <a href="http://googleresearch.blogspot.com/2015/06/inceptionism-going-deeper-into-neural.html">the</a> <a href="http://blogs.microsoft.com/next/2015/11/11/happy-sad-angry-this-microsoft-tool-recognizes-emotions-in-pictures/">big</a> <a href="http://blogs.wsj.com/digits/2015/08/26/amazon-com-offers-machine-learning-platform-hires-scientists/">names</a> are joining in on the fun.</p>
+
+<p><strong>Conclusion</strong></p>
+
+<p>To be clear, we aren’t in this wonderful new world yet. The majority of machine learning news you hear these days is simply about incremental improvements in data science that allow a researcher to better predict outcome Y based on features X<sub>1</sub>, X<sub>2</sub>, and X<sub>3</sub>. But we are quickly moving into a reality where machines will simply understand our desires and cater to those personal interests with little to no prompting.  And because <a href="https://www.ted.com/talks/ray_kurzweil_on_how_technology_will_transform_us?language=en">technology improves exponentially</a>, the age of machine learning and artificial intelligence is arriving much sooner than you may have been led to believe.</p>
+
+:ET

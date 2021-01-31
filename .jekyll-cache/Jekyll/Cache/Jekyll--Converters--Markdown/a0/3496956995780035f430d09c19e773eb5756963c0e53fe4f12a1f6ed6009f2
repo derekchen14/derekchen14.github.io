@@ -1,0 +1,45 @@
+I"�<p>It’s straightforward to see that L1 and L2 regularization both prefer small numbers, but it is harder to see the intuition in how they get there.</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>Specifically, the L1 norm and the L2 norm differ in how they achieve their objective of small weights, so understanding this can be useful for deciding which to use..  On the one hand, L1 wants errors to be all or nothing, which leads to sparse weights since all the errors are concentrated in one place.  As a simple example, let’s say there are six weights, then L1 =</td>
+      <td>0</td>
+      <td>+</td>
+      <td>0</td>
+      <td>+</td>
+      <td>0</td>
+      <td>+</td>
+      <td>-3</td>
+      <td>+</td>
+      <td>0</td>
+      <td>+</td>
+      <td>1.8</td>
+      <td>= 4.8, or alternatively, L1 =</td>
+      <td>0.7</td>
+      <td>+</td>
+      <td>1.1</td>
+      <td>+</td>
+      <td>-0.6</td>
+      <td>+</td>
+      <td>0.9</td>
+      <td>+</td>
+      <td>0.7</td>
+      <td>+</td>
+      <td>-0.8</td>
+      <td>= 4.8.  For L1 Norm, they both look about the same, and generally will lean towards the former.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>% Testing LaTeX</p>
+
+<p>\sqrt{x^3}
+$\sum_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6}$</p>
+
+<p>On the other hand, L2 wants <em>all</em> errors to be tiny and heavily penalizes anyone who doesn’t obey.  Looking back the at the our example, L2 = sqrt(0<sup>2</sup>+0<sup>2</sup>+0<sup>2</sup>+3<sup>2</sup>+0<sup>2</sup>+1.8<sup>2</sup>) = 3.5, or alternatively, L1 = sqrt(0.7<sup>2</sup>+1.1<sup>2</sup>+(-0.6)<sup>2</sup>+0.9<sup>2</sup>+0.7+(-0.8)<sup>2</sup>) = 2.  In this case, the L2 norm would clearly prefer the dispersed smaller values in the latter distribution.</p>
+
+<p>In summary, L1 = sparse weights, L2 = small distributed weights.</p>
+
+<p>Reference: https://www.quora.com/What-is-the-difference-between-L1-and-L2-regularization, https://www.quora.com/When-would-you-chose-L1-norm-over-L2-norm</p>
+:ET

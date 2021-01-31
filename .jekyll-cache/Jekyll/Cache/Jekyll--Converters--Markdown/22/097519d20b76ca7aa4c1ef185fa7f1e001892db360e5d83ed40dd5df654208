@@ -1,0 +1,90 @@
+I"�<p>Some notes to remember when building intelligent task oriented dialogue agents:</p>
+
+<!--kg-card-begin: markdown-->
+<ol>
+  <li>Modularity is important. While E2E response generation is good, intepretability is better.
+    <ul>
+      <li>There is a draw to simply use a Seq2Seq approach with an encoder for reading user input and decoder for generating output. However, the output becomes more of a language model, and fails to perform reasoning.</li>
+      <li>Moreover, the hidden state is not human readable. Instead, this should be broken down into Intent Tracking, Policy Management and Text Generation, which allows for better interpretability.</li>
+      <li>Additionally, modularity is easier to maintain and easier to delegate duties when operating in a realistic industry setting.</li>
+    </ul>
+  </li>
+  <li>Important not to forget about optimizing auxiliary components
+    <ul>
+      <li>Intent tracker should include context embedder in addition to utterance embedder</li>
+      <li>Intent tracker includes memory cells, likely formulated as a Recurrent Entity Network or Neural Process Network</li>
+      <li>Policy manager includes soft knowledge base query mechanism</li>
+      <li>Evaluation and data processing should be optimized</li>
+    </ul>
+  </li>
+  <li>Intent tracking is a set of binary predictors
+    <ul>
+      <li>Multi-intent utterances occur often, even multiple slots of the same dialogue act are fairly common, such as “I would like to eat Chinese or Korean food.”</li>
+      <li>The model actually works better since each task is now much simpler (watch for if the user wants Chinese food, rather than watch for what the user wants)</li>
+      <li>This has been shown to work well in practice (from start-up)</li>
+    </ul>
+  </li>
+  <li>Intent output should be act(slot-relation-value):
+    <ul>
+      <li>for example: inform(food = korean), request(address = the_missing_sock), inform(rating &gt; 3), accept(offer = the_missing_sock), inform(date &gt; today), answer(confirm = yes)</li>
+      <li>between two values (such as price range) can be written as inform(price &gt; 3) and inform(price &lt; 6)</li>
+      <li>this is all possible because the binary predictors allow for arbitrary combinations</li>
+      <li>semantic parsing is overly complex (hard for machines to perform and hard for people to interpret), also does not necessarily give better information to the policy manager</li>
+    </ul>
+  </li>
+  <li>Dialogue Acts are five pairs of items which constitutes a MECE set
+    <ul>
+      <li>request/inform</li>
+      <li>open/close</li>
+      <li>accept/reject</li>
+      <li>question/answer</li>
+      <li>acknow/confuse</li>
+      <li>MECE = mutually exclusive, collectively exhaustive</li>
+    </ul>
+  </li>
+  <li>Full Dialogue State (to be fed into RL agent) includes
+    <ul>
+      <li>Five items:</li>
+    </ul>
+    <ul>
+      <li>previous agent actions</li>
+      <li>current user intent</li>
+      <li>full frame of possible slots-value pairs</li>
+      <li>turn count</li>
+      <li>KB results
+      - Context vector is stored for Intent Tracker, but not for Policy Manager
+      - Markov property that previous information, such as the order of past “informs” is not needed</li>
+    </ul>
+  </li>
+  <li>In order to measure uncertainty, distributed soft approximation of dialogue state is necessary
+    <ul>
+      <li>memory stored as neural embedding</li>
+      <li>a pure softmax has been shown to be overly confident, more research is needed on how to better measure “uncertainty”</li>
+    </ul>
+  </li>
+  <li>In order to increase accuracy, model should ask for clarification:
+    <ul>
+      <li><strong>conventional</strong> clarification request (question paraphrase) - what did you want?</li>
+      <li><strong>partial</strong> clarification requests (ask for relevant knowledge) - what was the area you mentioned?</li>
+      <li><strong>confirmation</strong> through mention of alternatives (knowledge verification) - did you say the north part of town?</li>
+      <li><strong>reformulation</strong> of information (question verification) - so basically you want asian food, right?</li>
+    </ul>
+  </li>
+  <li>Good dialogue models have the following attributes
+    <ul>
+      <li>works across multiples turns, which distinguishes it from QA bots</li>
+      <li>works with a knowledge base, which distinguishes it from chatbots</li>
+      <li>knows whether to clarify and what type of clarification to employ using expected entropy maximization objective (ie. it does not ask irrelevant questions and annoy the user)</li>
+    </ul>
+  </li>
+  <li>Covers majority of real world scenarios through use of user simulator capable of generating novel examples
+    <ul>
+      <li>user simulator allows for fast training, since real users are expensive in time and money</li>
+      <li>user simulator should be dynamic, meaning it should be trainable itself</li>
+      <li>user simulator should output realistic user utterance through use of a GAN which discriminates against model generated text</li>
+      <li>user simulator should be smart about switching between offering real text vs generated text as training progresses
+<!--kg-card-end: markdown--></li>
+    </ul>
+  </li>
+</ol>
+:ET

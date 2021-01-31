@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://sylhare.github.io/Type-on-Strap/feed.xml" rel="self" type="application/atom+xml" /><link href="https://sylhare.github.io/Type-on-Strap/" rel="alternate" type="text/html" /><updated>2021-01-31T18:32:43-05:00</updated><id>https://sylhare.github.io/Type-on-Strap/feed.xml</id><title type="html">More Than One Turn</title><subtitle>A website with blog posts and pages</subtitle><entry><title type="html">Measuring Uncertainty</title><link href="https://sylhare.github.io/Type-on-Strap/2020/07/29/measuring-uncertainty.html" rel="alternate" type="text/html" title="Measuring Uncertainty" /><published>2020-07-29T20:06:00-04:00</published><updated>2020-07-29T20:06:00-04:00</updated><id>https://sylhare.github.io/Type-on-Strap/2020/07/29/measuring-uncertainty</id><content type="html" xml:base="https://sylhare.github.io/Type-on-Strap/2020/07/29/measuring-uncertainty.html">&lt;p&gt;Compared to typical goal-oriented dialogue systems, interactive dialogue agents not only aim to solve the task at hand, but also engage with the user by asking questions.  Questions can be used to push the conversation forward or to spark some new ideas, but for now we will focus on the use of questions to clarify understanding.  &lt;a href=&quot;https://www.researchgate.net/profile/Matthew_Purver/publication/236273309_The_Theory_and_Use_of_Clarification_Requests_in_Dialogue/links/00b7d5313817a20f30000000/The-Theory-and-Use-of-Clarification-Requests-in-Dialogue.pdf&quot;&gt;Clarification requests&lt;/a&gt;, as they are referred to in the academic literature, come in many forms, but the key issues to solve are when to ask such questions and in what format.  Asking questions too often, or at inappropriate times, causes the conversation to feel disjointed or annoying.  Asking the wrong type of question causes the dialogue agent to seem incoherent or useless.&lt;/p&gt;
+
+&lt;p&gt;Recognizing &lt;a href=&quot;/deciding-when-to-ask-questions-for-dialogue/&quot;&gt;when to ask questions&lt;/a&gt; and what questions to ask can be tackled by having a NLU module which has a interpretable and &lt;a href=&quot;https://papers.nips.cc/paper/5658-calibrated-structured-prediction.pdf&quot;&gt;well-calibrated&lt;/a&gt; measure of uncertainty, often expressed as a confidence score.  If the score is low, then the model is uncertain and should ask a clarification question (even if model is unable to generate questions, it should at least abstain from offering any solutions).  If the score is higher, then the model is more certain and can ask a different set of questions.  Once the score is past a certain threshold, we can deem the model to be confident enough to formulate a reasonable recommendation.&lt;/p&gt;
+
+&lt;p&gt;As we study the landscape of options for measuring uncertainty, there seem to be four broad methods of generating confidence scores.  Let’s examine each one in detail.&lt;/p&gt;
+
+&lt;h3 id=&quot;1-posterior-probabilities&quot;&gt;(1) Posterior Probabilities&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;The most straightforward manner of measuring the model’s uncertainty is to &lt;a href=&quot;https://arxiv.org/abs/1805.04604&quot;&gt;ask the model itself&lt;/a&gt;.  Namely, a typical classification or ranking problem will have a softmax at the end which represents the p(y&lt;/td&gt;
+      &lt;td&gt;x).&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;!--kg-card-begin: markdown--&gt;
+
+&lt;p&gt;1A) &lt;a href=&quot;https://arxiv.org/pdf/2006.09462&quot;&gt;Max Item&lt;/a&gt;&lt;br /&gt;
+If the max output of &lt;a href=&quot;https://arxiv.org/abs/1610.02136&quot;&gt;softmax is below some threshold&lt;/a&gt;, then mark the model as uncertain. However, numerous papers have noted that the pure softmax is &lt;a href=&quot;https://arxiv.org/abs/1701.06548&quot;&gt;largely uncalibrated&lt;/a&gt; and tends to make the model overconfident due to the exponeniating factor. Thus, the uncalibrated logits tend to work better. There are various tricks, &lt;a href=&quot;https://arxiv.org/abs/1706.04599&quot;&gt;like working with temperature&lt;/a&gt; to improve the calibration, but ultimately, you will still be looking at the likelihood of the model itself.&lt;/p&gt;
+
+&lt;p&gt;1B) Top-K Rank&lt;br /&gt;
+Rather than depending on just the top item, we can possibly glean some information from the other predictions. For example, we can look at the gap between the confidence score of top two items. If the gap is below some threshold, this indicates low confidence, so we mark the model as uncertain. We can also think of the ratio between the top items instead. If we generalize this further, we can look at the gap between the second and third ranked item or the first and third item. In total, &lt;a href=&quot;https://arxiv.org/abs/1805.04604&quot;&gt;we can expand this to arbitrary K&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;1C) Full distribution&lt;br /&gt;
+If we look at the gap between certain items, the signal here is probably diminishing at a certain point. However, looking at the &lt;a href=&quot;https://arxiv.org/abs/2005.07174&quot;&gt;overall entropy&lt;/a&gt; of the entire distribution can tell us something. Along those lines, we might also want to check the total variance of the softmax/logits.&lt;/p&gt;
+
+&lt;!--kg-card-end: markdown--&gt;
+&lt;h3 id=&quot;2-ensembles&quot;&gt;(2) Ensembles&lt;/h3&gt;
+
+&lt;p&gt;On the topic of variance, ensembles are a method for inducing variance upon our model.  Essentially, we perturb the model such that it produces different outputs, and if there is high variance in the outputs, then our model is considered less certain.  The intuition is that a more confident model will still make the same prediction even if the input has been slightly shifted since the latent label has not changed.&lt;/p&gt;
+
+&lt;!--kg-card-begin: markdown--&gt;
+
+&lt;p&gt;2A) Post-Training&lt;br /&gt;
+The most common form of ensemble is one created by &lt;a href=&quot;http://www.jmlr.org/proceedings/papers/v48/gal16.pdf&quot;&gt;Gal and Ghahramani&lt;/a&gt;. In this paper, they propose MC-dropout where random masks are placed on model to simulate dropout at &lt;a href=&quot;https://arxiv.org/pdf/2006.09462&quot;&gt;&lt;em&gt;test&lt;/em&gt; time&lt;/a&gt;. This brilliant insight allows us to gain a measure of uncertainty without any extra heavy lifting to come up with a new model. Alternatively, any sort of perturbation, such as gaussian noise or brown noise can be added to the model to see its reaction.&lt;/p&gt;
+
+&lt;p&gt;2B) Pre-Training&lt;br /&gt;
+Of course, &lt;a href=&quot;http://papers.nips.cc/paper/7219-simple-and-scalable-predictive-uncertainty-estimation-using-deep-ensembles.pdf&quot;&gt;straightforward ensembles&lt;/a&gt; can also give a sense of the variance of the outputs. This turns out to work better, but at the cost of having to train &lt;em&gt;M&lt;/em&gt; models for a better measure of uncertainty. If we are doing all the extra work of training extra models, we don’t even have to really restrict ourselves to the same architecture. We could theoretically try M=5 different models and go off the assumption that confident prediction should hold true across all the architectures.&lt;/p&gt;
+
+&lt;!--kg-card-end: markdown--&gt;
+&lt;h3 id=&quot;3-outlier-detection&quot;&gt;(3) Outlier Detection&lt;/h3&gt;
+
+&lt;p&gt;Another method of predicting uncertainty is to look at other sources of uncertainty.  The previous methods roughly falls under the bucket of epistemic uncertainty since they examine how the model performs.  Alternatively, we can also study the data for aleatoric uncertainty.  This falls under the assumption that the data varies due to natural variation in the system, but should not vary beyond some reasonable bounds.  (If this interpretation is totally wrong, feel free to comment below.)&lt;/p&gt;
+
+&lt;!--kg-card-begin: markdown--&gt;
+
+&lt;p&gt;3A) Input Outliers&lt;br /&gt;
+Although this is a false dichotomy, we can somewhat split up the data based on inputs and outputs. By inputs, we mean looking at the distribution of the data before it is passed into the model. For example, we might look at the n-gram distribution of a sentence and compare that to the n-grams of the average sentence in the training corpus. Additionally, we could &lt;a href=&quot;https://arxiv.org/abs/1805.04604&quot;&gt;pass an utterance into a Language Model&lt;/a&gt; to get a sense of its perplexity. In both cases, utterances that are “not typical” could be considered more likely to be uncertain, and dealt with accordingly.&lt;/p&gt;
+
+&lt;p&gt;Perhaps looking at a datapoint before it is processed is too biased. So as a practical matter, we might say that instead, the pre-computed statistic simply gives us a &lt;a href=&quot;https://arxiv.org/abs/2002.07965&quot;&gt;Bayesian prior&lt;/a&gt;, after which we can use any of the other methods described to get us a better sense of the posterior likelihood of uncertainty. Assuming we are working with sentences, we can examine the prior uncertainty of either the tokens or the sentence as a whole.&lt;/p&gt;
+
+&lt;p&gt;3B) Output Outliers&lt;br /&gt;
+Moving on to processed data, we can imagine passing the datapoint through our main model to make predictions. If the predicted class itself is rare, this can be a warning signal to &lt;a href=&quot;https://arxiv.org/abs/2006.09462&quot;&gt;possibly abstain&lt;/a&gt;. Of course rare classes do occassionally appear, or otherwise they shouldn’t even be considered, so this method shouldn’t be taken too far. We could also imagine embedding the data using any embedding algorithm and then clustering the results. Any &lt;a href=&quot;https://arxiv.org/abs/1803.04765&quot;&gt;embeddings that are not near any known centroids&lt;/a&gt; can then be flagged for review. In this sense, any tool that gives a sense of outlier detection can be used as a measure of uncertainty.&lt;/p&gt;
+
+&lt;!--kg-card-end: markdown--&gt;
+&lt;h3 id=&quot;4-second-order-methods&quot;&gt;(4) Second-order Methods&lt;/h3&gt;
+
+&lt;p&gt;Finally, we can consider second-order methods where a separate model makes a prediction of the uncertainty.   Training a model to do the heavy lifting for us is actually quite ingenious, but perhaps the papers don’t think of it this way, so they ironically don’t aggrandize this direction as much as some of the papers which proposed the other methods.&lt;/p&gt;
+
+&lt;!--kg-card-begin: markdown--&gt;
+
+&lt;p&gt;4A) Reinforcement Learning&lt;br /&gt;
+Suppose we want to train a dialogue agent or semantic parser to ask a clarification question when it is uncertain of the situation. Using an RL system, we can instead &lt;a href=&quot;https://arxiv.org/abs/1911.03598&quot;&gt;have a policy manager decide&lt;/a&gt; when to take such an action, and simply train it with a reward signal. The &lt;a href=&quot;https://www.aaai.org/ojs/index.php/AAAI/article/download/4101/3979&quot;&gt;REINFORCE algorithm can be used&lt;/a&gt;, but certainly the whole back of tricks with RL can be used now as long as we can design some intermediate rewards for the model to follow.&lt;/p&gt;
+
+&lt;p&gt;This ends up working quite well for certain problems, but my instinct says that it doesn’t work on real-world use cases for all the same reasons why reinforcement learning often fails outside of the simulated scenarios. We could have a model that tries to recognize the domain shift from the simulated enviroment to the real world, but then we start back at square one with some inception style behavior.&lt;/p&gt;
+
+&lt;p&gt;4B) Direct Prediction&lt;br /&gt;
+If the training data included a not-applicable or &lt;a href=&quot;https://arxiv.org/abs/2004.01926&quot;&gt;none-of-the-above&lt;/a&gt; option, then we can possibly get a model to choose that when none of the given options fit nicely. The hard part here is that we would need to know the ground truth of when to choose this option, which pretty much never happens unless we perform data augmentation. This gives the original model a chance to decide for itself that it is uncertain, but often does not work that well, especially on out-of-domain predictions.&lt;/p&gt;
+
+&lt;p&gt;An interesting line of work might be to handcraft options that are known to be unclear and to also have training examples that can clearly be answered. Efforts such as &lt;a href=&quot;https://arxiv.org/abs/2004.10645&quot;&gt;AmbigQA&lt;/a&gt; and &lt;a href=&quot;https://arxiv.org/abs/1907.06554&quot;&gt;Qulac&lt;/a&gt; are in the right direction, but fail to cover the nuance needed to really understand that a topic is unclear. Oftentimes, what might be obvious to one person requires clarification from another person, so the entire dataset is a bit subjective and thus hard to generate at scale. Given the current techniques around crowdsourcing, this is a limitation without any clear solution at the moment.&lt;/p&gt;
+
+&lt;p&gt;4C) Predictions on Statistics&lt;br /&gt;
+Saving the best for last, one of the most promising methods for generating a confidence score is to develop an &lt;a href=&quot;https://arxiv.org/abs/1610.02136&quot;&gt;uncertainty predictor&lt;/a&gt; based on dev set. Concretely, we can pre-train some model using the training data (D-train) to see how well it performs. Then because we know the ground truth (either because it was part of the original dataset or because we augmented it), we can say that whenever the original model made a mistake, &lt;a href=&quot;https://arxiv.org/abs/2004.01926&quot;&gt;the model should have been more uncertain on that training example&lt;/a&gt;. To prevent overfitting, we freeze the D-train model and pass in D-dev data into the model for training the predictor. Thus, we train a confidence estimator that can hopefully generalize to example from the D-test distribution.&lt;/p&gt;
+
+&lt;!--kg-card-end: markdown--&gt;
+
+&lt;p&gt;&lt;u&gt;Takeaways&lt;/u&gt;&lt;/p&gt;
+
+&lt;p&gt;As we analyze all these methods of measuring uncertainty, one final thought is to consider how humans know to ask clarification questions.   How do or I know that something is unclear?  Is it just a feeling? My general thought is that we have a sense of outlier detection when asking questions, but this is only triggered when something is far outside the what we expect.  What we expect is measured likely by some external function, which implies some support for the methods under Category Four.  &lt;/p&gt;
+
+&lt;p&gt;However, the key is that humans have this expectation, a &lt;a href=&quot;https://arxiv.org/abs/1902.08355&quot;&gt;theory of mind&lt;/a&gt; of the other individual and a general view of the world at large.   Building a comprehensive opinion of the world at large is intractable in the near future, but I remain optimistic that perhaps we can get a model to “fake it” well enough that general users either won’t notice or won’t care.&lt;/p&gt;</content><author><name></name></author><summary type="html">Compared to typical goal-oriented dialogue systems, interactive dialogue agents not only aim to solve the task at hand, but also engage with the user by asking questions.  Questions can be used to push the conversation forward or to spark some new ideas, but for now we will focus on the use of questions to clarify understanding.  Clarification requests, as they are referred to in the academic literature, come in many forms, but the key issues to solve are when to ask such questions and in what format.  Asking questions too often, or at inappropriate times, causes the conversation to feel disjointed or annoying.  Asking the wrong type of question causes the dialogue agent to seem incoherent or useless.</summary></entry><entry><title type="html">Deciding when to Ask Questions for Dialogue</title><link href="https://sylhare.github.io/Type-on-Strap/2020/06/28/deciding-when-to-ask-questions-for-dialogue.html" rel="alternate" type="text/html" title="Deciding when to Ask Questions for Dialogue" /><published>2020-06-28T18:15:06-04:00</published><updated>2020-06-28T18:15:06-04:00</updated><id>https://sylhare.github.io/Type-on-Strap/2020/06/28/deciding-when-to-ask-questions-for-dialogue</id><content type="html" xml:base="https://sylhare.github.io/Type-on-Strap/2020/06/28/deciding-when-to-ask-questions-for-dialogue.html">&lt;p&gt;Performing active learning on data annotation is to decide when the model should query the expert annotator for more samples.  Note the parallel with dialogue, which is to decide when the agent should ask a clarification question to the customer for more details on their intent.  Such a policy can be obtained through static data with basic supervised learning or in a more interactive manner through imitation learning using algorithms such as DAgger (&lt;a href=&quot;https://arxiv.org/abs/1011.0686&quot;&gt;Ross 2011&lt;/a&gt;).&lt;/p&gt;
+
+&lt;p&gt;We have seen in numerous papers that simply using the direct system output (ie. softmax) to measure the uncertainty of the model is highly uncalibrated (&lt;a href=&quot;https://arxiv.org/abs/1706.04599&quot;&gt;Guo et al. 2017&lt;/a&gt;, &lt;a href=&quot;https://arxiv.org/abs/1805.11783&quot;&gt;Jiang et al. 2018&lt;/a&gt;).  There have been various ways to deal with this issue.  For example, you can tune the confidence score with a temperature variable (&lt;a href=&quot;https://arxiv.org/abs/1706.04599&quot;&gt;Guo et al. 2017&lt;/a&gt;), set a threshold to make a decision or use dropout as a bayesian approximation (&lt;a href=&quot;https://arxiv.org/abs/1506.02142&quot;&gt;Gal and Ghahramani 2016&lt;/a&gt;).  However, none of these work that well (&lt;a href=&quot;https://arxiv.org/abs/2004.01926&quot;&gt;Feng et al. 2020&lt;/a&gt;) in comparison to having a forecaster whose sole job is to decide whether or not to query the expert (&lt;a href=&quot;https://papers.nips.cc/paper/5658-calibrated-structured-prediction&quot;&gt;Kuleshov and Liang, 2015&lt;/a&gt;).  This is intuitive because the forecaster has extra parameters to work with that allow it to learn something useful.&lt;/p&gt;
+
+&lt;p&gt;However, building a good forecaster is non-trivial.  Concretely, it is unclear when a forecaster should decide to ask a question.  Since the forecaster is a model, it must be trained.  But if it needs to be trained, then you must have labels.  And if you have labels, this implies you know when a model is uncertain, and the whole point of having a forecaster is that you cannot identify this situation through the logits alone.&lt;/p&gt;
+
+&lt;p&gt;Brantley et al. (&lt;a href=&quot;https://arxiv.org/abs/2005.12801&quot;&gt;2020&lt;/a&gt;) use Apple Tasting and a difference classifier paired with a heuristic model to get around these issue.  Going in reverse, the &lt;em&gt;heuristic model&lt;/em&gt; is a rule-based or generally simpler system than the main model that can offer predictions of the user intent, but may often be wrong.  Then the &lt;em&gt;difference classifier&lt;/em&gt; has the job to decide if the heuristic model behaves differently from the main model.  In this sense, the heuristic model acts similar to a generator in the GAN setting (&lt;a href=&quot;https://arxiv.org/abs/1406.2661&quot;&gt;Goodfellow et al. 2017&lt;/a&gt;), and the difference classifier acts similar to a discriminator.  Lastly, &lt;em&gt;Apple Tasting&lt;/em&gt; (&lt;a href=&quot;http://phillong.info/publications/apple.pdf&quot;&gt;Helmbold et al., 2000&lt;/a&gt;) is a framework for helping train the forecaster.  The idea is that it can be hard to build a classifier to decide which apples are tasty since you have to eat an apple to determine its value, which means you will inevitably try some bad apples.  This is identical to the problem when building a forecaster in real-life since the only way to know it made a bad prediction (asked a question to the customer when it should not have) is to allow it to make mistakes. Thus, various algorithms (such as STAP) are employed which essentially run this experiment multiple times as part of an inner loop with the data that the models have already seen so far.   Then, if the difference classifier does not perform well during this process, it should not be trusted as much and therefore it is acceptable to query the user.  As training progresses, the difference classifier will improve, and thus queries to the user will also decrease.&lt;/p&gt;
+
+&lt;p&gt;To me, the first insight is to use all available information – which is to say, use both the uncertainty scores from the main model &lt;em&gt;and&lt;/em&gt; a forecaster policy.  Specifically, if the main model is very certain, then avoid asking the customer any questions.  If the model is at all uncertain, even though only query the customer if the difference classifier thinks the gap between the heuristic and the main model is large.  The Apple Tasting method helps to train this, but most importantly, the forecaster is now &lt;em&gt;trained on the distribution it will see in real life&lt;/em&gt;!  In other words, be decoupling the confidence score and the query decision, the forecaster only operates on examples where the system has deemed the situation to be uncertain.&lt;/p&gt;
+
+&lt;p&gt;The difference classifier (ie. forecaster) combined with a traditional RL policy is then similar to the policy used in conversational machine reading (&lt;a href=&quot;https://arxiv.org/abs/1809.01494&quot;&gt;Saeidi et al. 2018&lt;/a&gt;) that decides whether to Inquired (ask a follow-up question) or Respond (with a Yes/No answer).  As a final step, all of these variables can be passed to a natural langauge generator which can decide on the final response.&lt;/p&gt;</content><author><name></name></author><summary type="html">Performing active learning on data annotation is to decide when the model should query the expert annotator for more samples.  Note the parallel with dialogue, which is to decide when the agent should ask a clarification question to the customer for more details on their intent.  Such a policy can be obtained through static data with basic supervised learning or in a more interactive manner through imitation learning using algorithms such as DAgger (Ross 2011).</summary></entry><entry><title type="html">Calculating Uncertainty over Beliefs</title><link href="https://sylhare.github.io/Type-on-Strap/2020/01/05/calculating-uncertainty-over-beliefs.html" rel="alternate" type="text/html" title="Calculating Uncertainty over Beliefs" /><published>2020-01-05T23:17:47-05:00</published><updated>2020-01-05T23:17:47-05:00</updated><id>https://sylhare.github.io/Type-on-Strap/2020/01/05/calculating-uncertainty-over-beliefs</id><content type="html" xml:base="https://sylhare.github.io/Type-on-Strap/2020/01/05/calculating-uncertainty-over-beliefs.html">&lt;p&gt;A key sub-issue in designing conversational agents is being able to reliably calculate uncertainty over the model’s beliefs.  In doing so, the model would be able to recognize when it does not understand something, and appropriately ask for clarification.  Thus, we can imagine the output of an uncertainty model feeding into a dialogue policy manager which then decides to either retrieve an answer from the knowledge base when it feels fairly certain it knows what the customer wants, or to ask a follow-up question when it is unsure.  From a information-theory point of view, this can be seen as a model which asks questions to minimize entropy until it reaches a certain threshold, at which point it will return an answer. Beyond improving model behavior, measuring uncertainty also gives a view into how the model is thinking for improved debugging and enhanced interpretability.&lt;/p&gt;
+
+&lt;p&gt;A sensible way to approach such as problem is to lean on Bayesian methods which naturally offer a distribution over its posterior beliefs.  As such, it might make sense to tackle this subject using Gaussian Processes.  A Gaussian Process is a probability distribution over a number of possible functions that fit a set of points.  In simplified terms, any point from your input X can be mapped to a corresponding label Y which is its own Gaussian variable.  For points that come from your dataset &lt;em&gt;x&lt;/em&gt;, the variance of the &lt;em&gt;y&lt;/em&gt; is relatively low since you know actual values that &lt;em&gt;y&lt;/em&gt; can take on.  For values x̂ that are far away from your dataset, you must extrapolate in order to calculate ŷ, which should lead to Gaussian variables with high variance.  For values x* that are in between the values found in your dataset, you would expect the uncertainty of y* to be somewhere in the middle since you are merely interpolating.  Overall, each one of these points requires their own Gaussian, and thus you end up with a model composed of a multi-variate Gaussian with infinite dimensions.&lt;/p&gt;
+
+&lt;p&gt;Of course, you can’t perform inference on an infinite number of Gaussians, so we use the kernel trick to approximate the co-variance matrix.  In slightly more detail, recall that a multivariate Gaussian can be fully described by a &lt;em&gt;m&lt;/em&gt;-dimensional vector of means and a &lt;em&gt;m&lt;/em&gt; x &lt;em&gt;m&lt;/em&gt;  co-variance matrix.   If &lt;em&gt;m&lt;/em&gt; goes towards infinity, then this matrix can be described by a kernel K(x_i, x_j).  (For more details, a simple search will return many results, my favorites: &lt;a href=&quot;https://distill.pub/2019/visual-exploration-gaussian-processes/&quot;&gt;Distill publication&lt;/a&gt;, &lt;a href=&quot;https://youtu.be/92-98SYOdlY&quot;&gt;ICL lecture video&lt;/a&gt; or &lt;a href=&quot;http://cs229.stanford.edu/section/cs229-gaussian_processes.pdf&quot;&gt;Stanford lecture notes&lt;/a&gt;).  Next, to perform inference, you can use standard equations to extract the information you know from your dataset, typically using Cholesky decomposition, which is then used to make predictions about the unknown data.  Unfortunately, performing this calculation requires inverting a matrix the size of your dataset, which operates at a speed of O(n^3).  This can work for small problems, but quickly becomes intractable for larger datasets containing hundreds of thousands of examples.  In addition to being slow, GP also has hyper-parameters to tune (namely σ and &lt;em&gt;l&lt;/em&gt;) that require some domain knowledge.  There is also the problem of choosing the right kernel in the first place to serve as the prior.  Finally, Gaussian Processes require a bit of manipulation to get them to work for classification and RL problems.&lt;/p&gt;
+
+&lt;p&gt;In any case, the research community has shifted towards modeling the world through deep learning, which require new ideas for calculating uncertainty because neural networks are trained with gradient descent.  Luckily, the commonplace tool of dropout can be easily adapted to fit our needs in this situation.  More concretely, suppose we have a existing model that has already been trained to convergence.  Then, during test time, we simply perturb the model using dropout for the various inputs to generate random samples of the model. In this sense, we get an ensemble of models that can be averaged to give a higher confidence prediction.  More importantly, in addition to a mean, the predictions from this set of models has variance that can be empirically calculated (&lt;a href=&quot;http://mlg.eng.cam.ac.uk/yarin/blog_3d801aa532c1ce.html&quot;&gt;Details here&lt;/a&gt;).  I think the key insight here is that we are not perturbing the inputs to generate noise, but rather sampling a distribution of models.  Intuitively, this is equivalent to the distribution of functions in GP being used to fit the data.  Mathematically, this can be seen as equivalent by reviewing the derivations found in the paper by Gal and Ghahramani: &lt;a href=&quot;https://arxiv.org/abs/1506.02142&quot;&gt;https://arxiv.org/abs/1506.02142&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Even with this method though, we still face at least a number of considerable complications before being able have dialogue models that are able to reason about uncertainty.  To start, recall that our predicted belief represents a distribution over user intents, and thus we must assume a finite ontology of intents already exists that can properly approximate the meaning of utterances.   This is a non-trivial assumption, but also outside the scope of this blog post.   However, even assuming that the previous conditions are met, the dropout method still might not be sufficient because we must run a full inference pass each time just to get one sample.  Next, to get an accurate estimate of the variance for one class, there might need thousands of samples.  Then, to get an accurate estimate for all &lt;em&gt;n&lt;/em&gt; classes would need &lt;em&gt;n&lt;/em&gt;-thousand samples, where for real life problems &lt;em&gt;n&lt;/em&gt; itself might be around a thousand.  If we view our semantic space as continuous, then this sampling method isn’t even tractable.  Perhaps we could measure our uncertainty instead as the tightness of the bounds of the samples, and anything beyond a certain range would be considered “low certainty”.&lt;/p&gt;
+
+&lt;p&gt;With that said, note that what we really want is a tool for measuring the uncertainty over user intents in the semantic space.  More specifically, we don’t just need a system where its predictions are calibrated to match the likelihood; what we really want is a system where its predictions have a semantic meaning.  In other words, we have been viewing uncertainty as a single number assigned to each class, but perhaps we should be viewing certainty as a point within an embedding space.  So for example, in the restaurant domain, when the model assigns high probability to Japanese food, it also raises the probability of Chinese and Korean food because these items are more closely grouped together in the “Asian food” cluster.  At the same time if the entity that triggered the prediction was “fish”, then maybe Japanese (sashimi) and Mexican (fish tacos) should concurrently increase, while the prediction shifts away from the Korean node in the embedding space.  Consequently, notice this immediately invalidates any &lt;a href=&quot;https://arxiv.org/abs/1505.05424&quot;&gt;Bayesian Neural Network&lt;/a&gt; or &lt;a href=&quot;https://arxiv.org/abs/1608.05081&quot;&gt;Bayes by Backprop&lt;/a&gt; approaches that capture uncertainty over the weights of the network rather than uncertainty over the understanding.  &lt;/p&gt;
+
+&lt;p&gt;In this sense, rather than attaching an uncertainty score to each intent in the ontology, what we needed is an embedding space of intents that still offers a measure of uncertainty.  Then, we also need a way to calculate it.&lt;/p&gt;</content><author><name></name></author><summary type="html">A key sub-issue in designing conversational agents is being able to reliably calculate uncertainty over the model’s beliefs.  In doing so, the model would be able to recognize when it does not understand something, and appropriately ask for clarification.  Thus, we can imagine the output of an uncertainty model feeding into a dialogue policy manager which then decides to either retrieve an answer from the knowledge base when it feels fairly certain it knows what the customer wants, or to ask a follow-up question when it is unsure.  From a information-theory point of view, this can be seen as a model which asks questions to minimize entropy until it reaches a certain threshold, at which point it will return an answer. Beyond improving model behavior, measuring uncertainty also gives a view into how the model is thinking for improved debugging and enhanced interpretability.</summary></entry><entry><title type="html">AI as Feature or Foundation</title><link href="https://sylhare.github.io/Type-on-Strap/2020/01/01/ai-as-feature-or-foundation.html" rel="alternate" type="text/html" title="AI as Feature or Foundation" /><published>2020-01-01T23:53:56-05:00</published><updated>2020-01-01T23:53:56-05:00</updated><id>https://sylhare.github.io/Type-on-Strap/2020/01/01/ai-as-feature-or-foundation</id><content type="html" xml:base="https://sylhare.github.io/Type-on-Strap/2020/01/01/ai-as-feature-or-foundation.html">&lt;p&gt;For awhile from 2015 to 2020 it seemed as if every start-up touted itself to be powered by AI.  The buzz around artificial intelligence has faded a bit, probably because it’s clear that AGI is not just around the corner and also because the media is always looking for the next shiny thing to discuss.  But for those of us in the trenches thinking about AI research every day, there remains a critical question to ask - is this latest round of AI, namely around deep learning with SGD, merely a feature to sprinkle onto existing tools and services, or is this truly a new foundation on which to build new technologies?&lt;/p&gt;
+
+&lt;h3 id=&quot;ai-as-a-feature&quot;&gt;AI as a Feature&lt;/h3&gt;
+&lt;!--kg-card-begin: markdown--&gt;
+
+&lt;p&gt;When seen as a feature, AI is used to automate certain areas of a business to be more efficient and cost effective. Some example in various industries:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Bowery, Iron Ox - grow cabbage by efficiently identify bad batches of crops&lt;/li&gt;
+  &lt;li&gt;Drishti - uses ML to train factory workers with cameras&lt;/li&gt;
+  &lt;li&gt;Cresta, Directly - augment customer service by efficiently suggesting phrases to say&lt;/li&gt;
+  &lt;li&gt;Textio - write resumes or job descriptions by efficiently identifying biases&lt;/li&gt;
+  &lt;li&gt;Everlaw - speed up legal review by efficiently tagging relevant documents&lt;/li&gt;
+  &lt;li&gt;People AI - improve sales processes by autopopulating CRM&lt;/li&gt;
+  &lt;li&gt;Dialpad, Pindrop - listen in on conference calls, sales calls or customer service calls to offer insights or identify fraud&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;In all cases above, the automated component can be tackled sufficiently well by writing complex rules and/or straightforward ML algorithms. Moving those algorithms into the realm of Deep Learning is often not necessary, and perhaps doesn’t even happen at all.&lt;/p&gt;
+
+&lt;!--kg-card-end: markdown--&gt;
+&lt;h3 id=&quot;ai-as-a-foundation&quot;&gt;AI as a Foundation&lt;/h3&gt;
+
+&lt;p&gt;If AI serves as the foundation of the company, then the company should not be viable without the use of advanced AI techniques.   Which AI techniques are considered sufficiently advanced is debatable.  Thus, we ground the discussion by saying that advanced AI specifically refers to the development of &lt;a href=&quot;https://medium.com/@karpathy/software-2-0-a64152b37c35&quot;&gt;Software 2.0&lt;/a&gt; where programs are not written with code and rules, but rather with data.  In this sense, we are less concerned about identifying a specific cutting edge architecture or algorithm, which can quickly change from one year to the next, and instead focus on identifying the requisite factors for building companies built on data.&lt;/p&gt;
+
+&lt;p&gt;We believe there are three major signs that AI can indeed be the new electricity.  To start, in such a world, all AI companies will be centered around the 3A’s: accumulation, annotation and application of data.  Traditional software companies might collect massive amounts of log data or tracking statistics, but AI-based companies collect this data with the explicit-goal of using this data to train models.  Thus, the data should be captured and stored in a consistent manner that makes it readily accessible to end users for building models.  Critically, the mindset should &lt;em&gt;not&lt;/em&gt; be to collect as much data as possible and to &lt;em&gt;later on&lt;/em&gt; figure out how to extract insights from such data.  This brings us to the second differentiator, AI companies should have dedicated teams from annotating and labeling data, which should be treated as critical department, such as marketing or human resources.  This department would have dedicated resources and headcount since the team provides unique value.  Lastly, a AI-first company has dedicated teams for building models, just as a mobile-first company has dedicated teams for building mobile apps separate from folks doing web development.&lt;/p&gt;
+
+&lt;p&gt;The second sign that Machine Learning is a new paradigm of software development will the advent of new model development practices.  In traditional software, we observe teams which handle writing code, QA and deployment.  If AI is a foundation, then we should see companies that spend time curating data the same way we see people writing programs.  There will be conscious effort around determining what data to label next (active learning) as well as mindful practices around debugging the quality of data (&lt;a href=&quot;https://hazyresearch.github.io/snorkel/blog/socratic_learning.html&quot;&gt;socratic learning&lt;/a&gt;).  Deployment and infrastructure teams are concerned with making sure the production website stays up and does not cause any critical errors.  Similarly, AI companies should have teams dedicated to monitoring the activity of AI predictions to prevent ethical breakdowns and other catastrophes.  &lt;/p&gt;
+
+&lt;p&gt;Lastly, and perhaps most importantly, we will know that AI is the foundation of a new revolution in technology if we see users start to interact with machines in a qualitatively different manner.  Companies built on this technology should be able to provide services that are significantly better than previous iterations, rather than just marginal improvements over the status quo.  We should see new human-computer interaction mechanisms similar to how we now expect to be able to swipe, pinch and zoom on devices.  We will also see the development of new cultural norms, where it is now normal to see folks staring at a phone screen when on the street, in a car, on the subway or walking down the hall.  &lt;/p&gt;
+
+&lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt;
+
+&lt;p&gt;If we’re honest, then we have to admit that we have punted on the main question since the analysis above mostly highlights what we &lt;em&gt;would&lt;/em&gt; see if AI is the new foundation.  We have not really identified the factors that would enable AI to be new electricity.  Some promising examples that this might happen include the ability to identify objects, translate languages and generate images with super-human skill.  Additionally, the explosion of BERT and friends for various NLP tasks is an interesting starting point for exploration.  Ultimately, the future will be determined by those with a vision for turning these research advances into new ways of interacting with the world.&lt;/p&gt;</content><author><name></name></author><summary type="html">For awhile from 2015 to 2020 it seemed as if every start-up touted itself to be powered by AI.  The buzz around artificial intelligence has faded a bit, probably because it’s clear that AGI is not just around the corner and also because the media is always looking for the next shiny thing to discuss.  But for those of us in the trenches thinking about AI research every day, there remains a critical question to ask - is this latest round of AI, namely around deep learning with SGD, merely a feature to sprinkle onto existing tools and services, or is this truly a new foundation on which to build new technologies?</summary></entry><entry><title type="html">Sample post</title><link href="https://sylhare.github.io/Type-on-Strap/2019/06/30/sample-post.html" rel="alternate" type="text/html" title="Sample post" /><published>2019-06-30T00:00:00-04:00</published><updated>2019-06-30T00:00:00-04:00</updated><id>https://sylhare.github.io/Type-on-Strap/2019/06/30/sample-post</id><content type="html" xml:base="https://sylhare.github.io/Type-on-Strap/2019/06/30/sample-post.html">&lt;p&gt;Consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor. 
+Praesent et diam eget libero egestas mattis sit amet vitae augue. Nam tincidunt congue enim, ut porta lorem lacinia consectetur. 
+&lt;!--more--&gt;
+Donec ut libero sed arcu vehicula ultricies a non tortor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut gravida lorem.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Consectetur adipiscing elit&lt;/li&gt;
+  &lt;li&gt;Donec a diam lectus&lt;/li&gt;
+  &lt;li&gt;Sed sit amet ipsum mauris&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Ut turpis felis, pulvinar a semper sed, adipiscing id dolor. Pellentesque auctor nisi id magna consequat sagittis. Curabitur dapibus enim sit amet elit pharetra tincidunt feugiat nisl imperdiet. Ut convallis libero in urna ultrices accumsan. Donec sed odio eros. Donec viverra mi quis quam pulvinar at malesuada arcu rhoncus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In rutrum accumsan ultricies. Mauris vitae nisi at sem facilisis semper ac in est.&lt;/p&gt;
+
+&lt;p&gt;Nunc diam velit, adipiscing ut tristique vitae, sagittis vel odio. Maecenas convallis ullamcorper ultricies. Curabitur ornare, ligula &lt;em&gt;semper consectetur sagittis&lt;/em&gt;, nisi diam iaculis velit, id fringilla sem nunc vel mi. Nam dictum, odio nec pretium volutpat, arcu ante placerat erat, non tristique elit urna et turpis. Quisque mi metus, ornare sit amet fermentum et, tincidunt et orci. Fusce eget orci a orci congue vestibulum.&lt;/p&gt;
+
+&lt;div class=&quot;row&quot;&gt;
+    
+    &lt;div style=&quot;flex: 100.0%&quot;&gt;
+        &lt;img class=&quot;single&quot; src=&quot;/Type-on-Strap/assets/img/pexels/travel.jpeg&quot; alt=&quot;travel.jpeg&quot; /&gt;
+    &lt;/div&gt;
+    
+&lt;/div&gt;
+
+&lt;p&gt;Ut dolor diam, elementum et vestibulum eu, porttitor vel elit. Curabitur venenatis pulvinar tellus gravida ornare. Sed et erat faucibus nunc euismod ultricies ut id justo. Nullam cursus suscipit nisi, et ultrices justo sodales nec. Fusce venenatis facilisis lectus ac semper. Aliquam at massa ipsum. Quisque bibendum purus convallis nulla ultrices ultricies. Nullam aliquam, mi eu aliquam tincidunt, purus velit laoreet tortor, viverra pretium nisi quam vitae mi. Fusce vel volutpat elit. Nam sagittis nisi dui.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Suspendisse lectus leo, consectetur in tempor sit amet, placerat quis neque&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Etiam luctus porttitor lorem, sed suscipit est rutrum non. Curabitur lobortis nisl a enim congue semper. Aenean commodo ultrices imperdiet. Vestibulum ut justo vel sapien venenatis tincidunt.&lt;/p&gt;
+
+\[\Theta \ne \Gamma\]
+
+&lt;p&gt;Phasellus eget dolor sit amet ipsum dapibus condimentum vitae quis lectus. Aliquam ut massa in turpis dapibus convallis. Praesent elit lacus, vestibulum at malesuada et, ornare et est. Ut augue nunc, sodales ut euismod non, adipiscing vitae orci&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;. Mauris ut placerat justo. Mauris in ultricies enim. Quisque nec est eleifend nulla ultrices egestas quis ut quam. Donec sollicitudin lectus a mauris pulvinar id aliquam urna cursus. Cras quis ligula sem, vel elementum mi. Phasellus non ullamcorper urna.&lt;/p&gt;
+
+&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot; role=&quot;doc-endnote&quot;&gt;
+
+      &lt;p&gt;&lt;span class=&quot;cit-authors&quot;&gt;John Smith&lt;/span&gt;, &lt;span class=&quot;cit-title&quot;&gt;A Title About Citations&lt;/span&gt; &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;</content><author><name></name></author><category term="A Tag" /><category term="Test" /><category term="Lorem" /><category term="Ipsum" /><summary type="html">Consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor. Praesent et diam eget libero egestas mattis sit amet vitae augue. Nam tincidunt congue enim, ut porta lorem lacinia consectetur.</summary></entry><entry><title type="html">Phases of Dialogue Adoption</title><link href="https://sylhare.github.io/Type-on-Strap/2019/06/04/phases-of-dialogue-adoption.html" rel="alternate" type="text/html" title="Phases of Dialogue Adoption" /><published>2019-06-04T14:55:16-04:00</published><updated>2019-06-04T14:55:16-04:00</updated><id>https://sylhare.github.io/Type-on-Strap/2019/06/04/phases-of-dialogue-adoption</id><content type="html" xml:base="https://sylhare.github.io/Type-on-Strap/2019/06/04/phases-of-dialogue-adoption.html">&lt;p&gt;Dialogue systems and chatbots are going through the same cycle of adoption seen in previous technology growth curves.  As a quick primer, we note that mobile experienced the same four phases as it has expanded from technical oddity to ubiquitous usage.  In particular, in the first phase, you had a limited number of forerunners who used large brick phones.  This certainly didn’t live up the promise of mobile, but it was also certainly distinct from its predecessor of the corded phone. In the second phase, there was a shift to enterprise with Palm Pre, Blackberry and other PDAs.  In the third phase, we had the original iPhone which lacked an App Store and other key functionality, but at this point you knew mobile was going to take over the world.  Finally, in the fourth phase, there was also Android, long-lasting phones with giant screens, and all the bells and whistles we expect today.&lt;/p&gt;
+
+&lt;p&gt;Moving our focus on dialogue systems, it seems the same pattern is playing out again:&lt;/p&gt;
+
+&lt;!--kg-card-begin: markdown--&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Phase One: recognize basic intents to execute actions&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Alexa, Siri, Cortana (2015 - 2019)&lt;/li&gt;
+  &lt;li&gt;This is mainly characterized by taking a single utterance as input an resulting in the desired response&lt;/li&gt;
+  &lt;li&gt;On the enterprise side: schedule a meeting or call, manage a todo list, transcribe meeting notes&lt;/li&gt;
+  &lt;li&gt;On the consumer side: turn on the lights, set an alarm, what is the weather
+    &lt;ol&gt;
+      &lt;li&gt;&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Phase Two: responds to requests, asks for clarification, access to KB&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Interface to apps and services (2019 - 2023)&lt;/li&gt;
+  &lt;li&gt;The agent is now able to handle multi-turn conversation and hold onto context over many exchanges. The size of the ontology also becomes largely unbounded, with the structure focused only on the dialogue acts.&lt;/li&gt;
+  &lt;li&gt;On the enterprise side: suggested phrases for customer service or call centers, automated scripts for sales teams, resolving helpdesk tickets for IT&lt;/li&gt;
+  &lt;li&gt;On the consumer side: purchasing tickets for an event or movie, ordering food for common menu items, make a flight booking or restaurant reservation
+    &lt;ol&gt;
+      &lt;li&gt;&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Phase Three: makes recommendations and pushes notifications, proactive nature&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Virtual Assistant (2023 - 2027)&lt;/li&gt;
+  &lt;li&gt;The agent remembers your context from past conversations and has a basic understanding of who you are and your preferences. It is thus able to make simple recommendations without being too annoying.&lt;/li&gt;
+  &lt;li&gt;On the enterprise side: onboarding for new employees, read and compose short emails, we noticed everyone in your department signed up for X, would you like to as well?&lt;/li&gt;
+  &lt;li&gt;On the consumer side: recommend what news to read or shows to watch, give suggestion on what place to eat taking into account previously stated dietary preferences
+    &lt;ol&gt;
+      &lt;li&gt;&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Phase Four: converses based on personalized context&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Executive Assistant (2027 - ?), timeline on this could be way off&lt;/li&gt;
+  &lt;li&gt;The agent is able to handle more high level tasks and has low level commonsense baked into everything it does. It is able to infer from context what is the most likely intent for high performance in zero-shot learning settings.&lt;/li&gt;
+  &lt;li&gt;On the enterprise side: research a subject online to generate a summary, intuitive interaction for booking a flight, almost like talking to a co-worker&lt;/li&gt;
+  &lt;li&gt;On the consumer side: user no longer needs to adapt when giving instructions and can converse in natural language. This is reading into the future, so I will leave this vague …
+&lt;!--kg-card-end: markdown--&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Sometimes, the best way to understand is with an example.  So, on a more concrete level, the way this might play out:&lt;/p&gt;
+
+&lt;!--kg-card-begin: markdown--&gt;
+
+&lt;p&gt;&lt;em&gt;Phase 1:&lt;/em&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&amp;lt;Turn on TV&amp;gt;&lt;/li&gt;
+  &lt;li&gt;I’d like to watch the game.&lt;/li&gt;
+  &lt;li&gt;Got it, the Game Portal is on channel 312. Would you like to go there?&lt;/li&gt;
+  &lt;li&gt;No&lt;/li&gt;
+  &lt;li&gt;OK, what would you like me to do?&lt;/li&gt;
+  &lt;li&gt;Watch basketball game.&lt;/li&gt;
+  &lt;li&gt;OK, switching to channel 253. &amp;lt;Shows a replay of NCAA FInal Four game.&amp;gt;&lt;/li&gt;
+  &lt;li&gt;Argh, not that one!&lt;/li&gt;
+  &lt;li&gt;I’m sorry, I didn’t get that.&lt;/li&gt;
+  &lt;li&gt;&amp;lt;Manually flips through TV guide&amp;gt;&lt;/li&gt;
+  &lt;li&gt;Please go to channel 261&lt;/li&gt;
+  &lt;li&gt;OK, switching to channel 261.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;Phase 2:&lt;/em&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&amp;lt;Turn on TV&amp;gt;&lt;/li&gt;
+  &lt;li&gt;I’d like to watch the game.&lt;/li&gt;
+  &lt;li&gt;Which game?&lt;/li&gt;
+  &lt;li&gt;Basketball&lt;/li&gt;
+  &lt;li&gt;Did you mean the NBA playoffs?&lt;/li&gt;
+  &lt;li&gt;Yes&lt;/li&gt;
+  &lt;li&gt;There are two series currently playing: Bucks vs Raptors and Warriors vs Blazers, which one do you prefer?&lt;/li&gt;
+  &lt;li&gt;Umm, the Warriors and Blazers&lt;/li&gt;
+  &lt;li&gt;Ok, switching to channel 261&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;Phase 3:&lt;/em&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&amp;lt;Turn on TV&amp;gt;&lt;/li&gt;
+  &lt;li&gt;I’d like to watch the game.&lt;/li&gt;
+  &lt;li&gt;You mean the Warriors game?&lt;/li&gt;
+  &lt;li&gt;Yes, that’s perfect!&lt;/li&gt;
+  &lt;li&gt;Ok, switching to channel 261&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;Phase 4:&lt;/em&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&amp;lt;Turn on TV&amp;gt;&lt;/li&gt;
+  &lt;li&gt;Would you like to watch the Warriors game?&lt;/li&gt;
+  &lt;li&gt;Oh, that’d be great!&lt;/li&gt;
+  &lt;li&gt;Ok, switching to channel 261
+&lt;!--kg-card-end: markdown--&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Open to thoughts and comments below!&lt;/p&gt;</content><author><name></name></author><summary type="html">Dialogue systems and chatbots are going through the same cycle of adoption seen in previous technology growth curves.  As a quick primer, we note that mobile experienced the same four phases as it has expanded from technical oddity to ubiquitous usage.  In particular, in the first phase, you had a limited number of forerunners who used large brick phones.  This certainly didn’t live up the promise of mobile, but it was also certainly distinct from its predecessor of the corded phone. In the second phase, there was a shift to enterprise with Palm Pre, Blackberry and other PDAs.  In the third phase, we had the original iPhone which lacked an App Store and other key functionality, but at this point you knew mobile was going to take over the world.  Finally, in the fourth phase, there was also Android, long-lasting phones with giant screens, and all the bells and whistles we expect today.</summary></entry><entry><title type="html">Color Post</title><link href="https://sylhare.github.io/Type-on-Strap/2019/05/18/color-post.html" rel="alternate" type="text/html" title="Color Post" /><published>2019-05-18T00:00:00-04:00</published><updated>2019-05-18T00:00:00-04:00</updated><id>https://sylhare.github.io/Type-on-Strap/2019/05/18/color-post</id><content type="html" xml:base="https://sylhare.github.io/Type-on-Strap/2019/05/18/color-post.html">&lt;h1 id=&quot;what-a-colorful-post&quot;&gt;What a colorful post!&lt;/h1&gt;
+
+&lt;p&gt;This is an idea that came from &lt;a href=&quot;https://github.com/xukimseven/HardCandy-Jekyll&quot;&gt;xukimseven/HardCandy-Jekyll&lt;/a&gt; 
+looking at this cheerful and colorful them, I wanted to enable something similar for mine.&lt;/p&gt;
+
+&lt;p&gt;You can go fork and star hers too! 😉&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h2 id=&quot;how-does-it-work&quot;&gt;How does it work?&lt;/h2&gt;
+
+&lt;p&gt;Basically you need to add just one thing, the color:&lt;/p&gt;
+
+&lt;div class=&quot;language-yml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;layout&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;post&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Color Post&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;brown&lt;/span&gt;
+&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;It can either be a html color like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;brown&lt;/code&gt; (which look like red to me). Or with the rgb:&lt;/p&gt;
+
+&lt;div class=&quot;language-yml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;layout&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;post&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Color Post&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;rgb(165,42,42)&lt;/span&gt;
+&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The background used is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lineart.png&lt;/code&gt; from &lt;a href=&quot;https://github.com/xukimseven&quot;&gt;xukimseven&lt;/a&gt; you can edit it in the config file. 
+If you want another one, put it in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/assets/img&lt;/code&gt; as well.&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;⚠️ It’s a bit hacking the css in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;post.html&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;</content><author><name>Sylhare</name></author><category term="Test" /><category term="Color" /><category term="Markdown" /><summary type="html">What a colorful post! This is an idea that came from xukimseven/HardCandy-Jekyll looking at this cheerful and colorful them, I wanted to enable something similar for mine. You can go fork and star hers too! 😉</summary></entry><entry><title type="html">Label Formats for Intent Classification</title><link href="https://sylhare.github.io/Type-on-Strap/2019/05/13/levels-of-intent-classification.html" rel="alternate" type="text/html" title="Label Formats for Intent Classification" /><published>2019-05-13T17:53:21-04:00</published><updated>2019-05-13T17:53:21-04:00</updated><id>https://sylhare.github.io/Type-on-Strap/2019/05/13/levels-of-intent-classification</id><content type="html" xml:base="https://sylhare.github.io/Type-on-Strap/2019/05/13/levels-of-intent-classification.html">&lt;p&gt;When trying to understand user belief, a NLU model attempts to track the intent over the length of the conversation.  However, what format should this intent be represented?  Is it continuous or discrete?  It it directly passed into the Policy Manager or should it be augmented first?  Hundreds of hours and effort will be spent finding labels for training such a model, so it seems reasonable we should agree on what format this label should take.  But considering the issue in any depth will show trade-offs in different label formats, so the answer is not immediately obvious.&lt;/p&gt;
+
+&lt;p&gt;To be more concrete, let’s first observe the spectrum of options, ranging from more structured to less structured:&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;&amp;lt;Most direct and interpretable, but less generalizable.  Has more structure. &amp;gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;!--kg-card-begin: markdown--&gt;
+&lt;ol&gt;
+  &lt;li&gt;Output is from a rule-based model. Classifier is rules-based or works by statistical inference, so it is largely deterministic. It is directly based on structure infused by the expert.&lt;/li&gt;
+  &lt;li&gt;Output is a semantic or syntactic parse, which is very still highly structured. There is a pre-defined set of logical predicates to choose from, so building such a system is heavily dependent on an expert. Gives highly interpretable results.&lt;/li&gt;
+  &lt;li&gt;Output is a intent made up of dialogue act, slot, relation, value, such as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;inform(price &amp;lt; $100)&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;accept(restaurant=the golden wok)&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;open(text=good morning)&lt;/code&gt;. This has a flat structure, rather than a complex hierarchical parse tree, so it is less structured than before. This has a pre-defined expert labeled ontology, and much easier to label.&lt;/li&gt;
+  &lt;li&gt;Output is a generic natural language tag. It is human interpretable, but largely unrestricted. This gets very messy quickly because the lexicon is only determined after the fact, if at all. So there can be many tags that are very similar to each other.&lt;/li&gt;
+  &lt;li&gt;Output of classifier is some latent continuous vector that is then passed to a separate memory module, decoder, or other network. Great for back-propagation and end-to-end learning, really poor for human interpretability. Most powerful representation of user intent. Would need to build tools to understand its hidden structure, which arises from data rather than expert labels.
+&lt;!--kg-card-end: markdown--&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;em&gt;&amp;lt;Least direct and interpretable.  Has no predefined structure.&amp;gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Implied in the spectrum is a shift from rule-based methods to more neural-based methods.  While it may seem inevitable that everything moves into a deep learning direction, there is certainly the case to be made that we aren’t there yet and also that human-interpretability matters more in certain situations than just high accuracy. As with many decisions involving trade-offs, I don’t think there’s a right answer overall, but there might be a right answer for your problem – so take the time to choose wisely.&lt;/p&gt;</content><author><name></name></author><summary type="html">When trying to understand user belief, a NLU model attempts to track the intent over the length of the conversation.  However, what format should this intent be represented?  Is it continuous or discrete?  It it directly passed into the Policy Manager or should it be augmented first?  Hundreds of hours and effort will be spent finding labels for training such a model, so it seems reasonable we should agree on what format this label should take.  But considering the issue in any depth will show trade-offs in different label formats, so the answer is not immediately obvious.</summary></entry><entry><title type="html">Tiling Tensors in PyTorch</title><link href="https://sylhare.github.io/Type-on-Strap/2019/03/11/tiling-tensors-in-pytorch.html" rel="alternate" type="text/html" title="Tiling Tensors in PyTorch" /><published>2019-03-11T19:06:59-04:00</published><updated>2019-03-11T19:06:59-04:00</updated><id>https://sylhare.github.io/Type-on-Strap/2019/03/11/tiling-tensors-in-pytorch</id><content type="html" xml:base="https://sylhare.github.io/Type-on-Strap/2019/03/11/tiling-tensors-in-pytorch.html">&lt;p&gt;Suppose you had sample = tensor([[3,5,4]   [0,2,1]])&lt;/p&gt;
+
+&lt;p&gt;Then these will all return the &lt;em&gt;exact&lt;/em&gt; same output:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;sample.repeat(2,1)&lt;/li&gt;
+  &lt;li&gt;sample.view(1,-1).expand(2,-1).contiguous().view(4,3)&lt;/li&gt;
+  &lt;li&gt;sample.index_select(0, tensor([0,1,0,1])&lt;/li&gt;
+  &lt;li&gt;torch. cat( [sample, sample], 0 )
+&lt;!--kg-card-begin: markdown--&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Explanations&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Repeat - this is the correct tool for the job&lt;/li&gt;
+  &lt;li&gt;Expand - meant for expanding a tensor when one of the dimensions is a singleton
+    &lt;ul&gt;
+      &lt;li&gt;in other words, if the sample is (4,1) and we want to repeat (4,3)&lt;/li&gt;
+      &lt;li&gt;we should use sample.expand(4,3) and not sample.repeat(1,3)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Index Select - meant for re-ordering the items in a tensor
+    &lt;ul&gt;
+      &lt;li&gt;so we might have a tensor that was shuffled, and we want to shuffle it back into place&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Concat - meant for joining together two different tensors
+    &lt;ul&gt;
+      &lt;li&gt;also, do not confuse with torch.stack, which would add an extra dimension&lt;/li&gt;
+      &lt;li&gt;concat a list of four 2x3 matrices and you will get 8x3 back&lt;/li&gt;
+      &lt;li&gt;stack a list of four 2x3 matrices and you will get 4x2x3 back
+&lt;!--kg-card-end: markdown--&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><summary type="html">Suppose you had sample = tensor([[3,5,4]   [0,2,1]])</summary></entry><entry><title type="html">Top 10 Secrets to Building Effective Dialogue Agents</title><link href="https://sylhare.github.io/Type-on-Strap/2019/01/11/lessons-on-building-effective-dialogue-agents.html" rel="alternate" type="text/html" title="Top 10 Secrets to Building Effective Dialogue Agents" /><published>2019-01-11T19:11:28-05:00</published><updated>2019-01-11T19:11:28-05:00</updated><id>https://sylhare.github.io/Type-on-Strap/2019/01/11/lessons-on-building-effective-dialogue-agents</id><content type="html" xml:base="https://sylhare.github.io/Type-on-Strap/2019/01/11/lessons-on-building-effective-dialogue-agents.html">&lt;p&gt;Some notes to remember when building intelligent task oriented dialogue agents:&lt;/p&gt;
+
+&lt;!--kg-card-begin: markdown--&gt;
+&lt;ol&gt;
+  &lt;li&gt;Modularity is important. While E2E response generation is good, intepretability is better.
+    &lt;ul&gt;
+      &lt;li&gt;There is a draw to simply use a Seq2Seq approach with an encoder for reading user input and decoder for generating output. However, the output becomes more of a language model, and fails to perform reasoning.&lt;/li&gt;
+      &lt;li&gt;Moreover, the hidden state is not human readable. Instead, this should be broken down into Intent Tracking, Policy Management and Text Generation, which allows for better interpretability.&lt;/li&gt;
+      &lt;li&gt;Additionally, modularity is easier to maintain and easier to delegate duties when operating in a realistic industry setting.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Important not to forget about optimizing auxiliary components
+    &lt;ul&gt;
+      &lt;li&gt;Intent tracker should include context embedder in addition to utterance embedder&lt;/li&gt;
+      &lt;li&gt;Intent tracker includes memory cells, likely formulated as a Recurrent Entity Network or Neural Process Network&lt;/li&gt;
+      &lt;li&gt;Policy manager includes soft knowledge base query mechanism&lt;/li&gt;
+      &lt;li&gt;Evaluation and data processing should be optimized&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Intent tracking is a set of binary predictors
+    &lt;ul&gt;
+      &lt;li&gt;Multi-intent utterances occur often, even multiple slots of the same dialogue act are fairly common, such as “I would like to eat Chinese or Korean food.”&lt;/li&gt;
+      &lt;li&gt;The model actually works better since each task is now much simpler (watch for if the user wants Chinese food, rather than watch for what the user wants)&lt;/li&gt;
+      &lt;li&gt;This has been shown to work well in practice (from start-up)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Intent output should be act(slot-relation-value):
+    &lt;ul&gt;
+      &lt;li&gt;for example: inform(food = korean), request(address = the_missing_sock), inform(rating &amp;gt; 3), accept(offer = the_missing_sock), inform(date &amp;gt; today), answer(confirm = yes)&lt;/li&gt;
+      &lt;li&gt;between two values (such as price range) can be written as inform(price &amp;gt; 3) and inform(price &amp;lt; 6)&lt;/li&gt;
+      &lt;li&gt;this is all possible because the binary predictors allow for arbitrary combinations&lt;/li&gt;
+      &lt;li&gt;semantic parsing is overly complex (hard for machines to perform and hard for people to interpret), also does not necessarily give better information to the policy manager&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Dialogue Acts are five pairs of items which constitutes a MECE set
+    &lt;ul&gt;
+      &lt;li&gt;request/inform&lt;/li&gt;
+      &lt;li&gt;open/close&lt;/li&gt;
+      &lt;li&gt;accept/reject&lt;/li&gt;
+      &lt;li&gt;question/answer&lt;/li&gt;
+      &lt;li&gt;acknow/confuse&lt;/li&gt;
+      &lt;li&gt;MECE = mutually exclusive, collectively exhaustive&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Full Dialogue State (to be fed into RL agent) includes
+    &lt;ul&gt;
+      &lt;li&gt;Five items:&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;ul&gt;
+      &lt;li&gt;previous agent actions&lt;/li&gt;
+      &lt;li&gt;current user intent&lt;/li&gt;
+      &lt;li&gt;full frame of possible slots-value pairs&lt;/li&gt;
+      &lt;li&gt;turn count&lt;/li&gt;
+      &lt;li&gt;KB results
+      - Context vector is stored for Intent Tracker, but not for Policy Manager
+      - Markov property that previous information, such as the order of past “informs” is not needed&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;In order to measure uncertainty, distributed soft approximation of dialogue state is necessary
+    &lt;ul&gt;
+      &lt;li&gt;memory stored as neural embedding&lt;/li&gt;
+      &lt;li&gt;a pure softmax has been shown to be overly confident, more research is needed on how to better measure “uncertainty”&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;In order to increase accuracy, model should ask for clarification:
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;conventional&lt;/strong&gt; clarification request (question paraphrase) - what did you want?&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;partial&lt;/strong&gt; clarification requests (ask for relevant knowledge) - what was the area you mentioned?&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;confirmation&lt;/strong&gt; through mention of alternatives (knowledge verification) - did you say the north part of town?&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;reformulation&lt;/strong&gt; of information (question verification) - so basically you want asian food, right?&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Good dialogue models have the following attributes
+    &lt;ul&gt;
+      &lt;li&gt;works across multiples turns, which distinguishes it from QA bots&lt;/li&gt;
+      &lt;li&gt;works with a knowledge base, which distinguishes it from chatbots&lt;/li&gt;
+      &lt;li&gt;knows whether to clarify and what type of clarification to employ using expected entropy maximization objective (ie. it does not ask irrelevant questions and annoy the user)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Covers majority of real world scenarios through use of user simulator capable of generating novel examples
+    &lt;ul&gt;
+      &lt;li&gt;user simulator allows for fast training, since real users are expensive in time and money&lt;/li&gt;
+      &lt;li&gt;user simulator should be dynamic, meaning it should be trainable itself&lt;/li&gt;
+      &lt;li&gt;user simulator should output realistic user utterance through use of a GAN which discriminates against model generated text&lt;/li&gt;
+      &lt;li&gt;user simulator should be smart about switching between offering real text vs generated text as training progresses
+&lt;!--kg-card-end: markdown--&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;</content><author><name></name></author><summary type="html">Some notes to remember when building intelligent task oriented dialogue agents:</summary></entry></feed>

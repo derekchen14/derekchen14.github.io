@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<!--
+    Type on Strap jekyll theme v2.3.1
+    Copyright 2016-2020 Sylhare
+    Theme free for personal and commercial use under the MIT license
+    https://github.com/sylhare/Type-on-Strap/blob/master/LICENSE
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer src="/Type-on-Strap/assets/js/main.min.js"></script>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/Type-on-Strap/assets/css/main.css">
+
+    <!--Favicon-->
+    <link rel="shortcut icon" href="/Type-on-Strap/assets/favicon.ico" type="image/x-icon">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="More Than One Turn" href="https://sylhare.github.io/Type-on-Strap/feed.xml"/>
+    
+    
+
+    <!-- KaTeX 0.12.0 -->
+    
+    <script defer src="/Type-on-Strap/assets/js/vendor/katex.min.js"></script>
+    <script defer src="/Type-on-Strap/assets/js/vendor/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+    
+
+    <!-- Mermaid 8.8.2 -->
+    
+    <!-- <script src=”https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.8.2/mermaid.min.js" onload="mermaid.initialize({startOnLoad:true});"></script> -->
+    <script defer src="/Type-on-Strap/assets/js/vendor/mermaid.min.js" onload="mermaid.initialize({startOnLoad:true});"></script>
+    
+
+    <!-- Simple-Jekyll-Search 1.17.12 -->
+    <script src="/Type-on-Strap/assets/js/vendor/simple-jekyll-search.min.js" type="text/javascript"></script>
+
+    <!-- Google Analytics / Cookie Consent -->
+    <script>
+      const cookieName = 'cookie-notice-dismissed-https://sylhare.github.io';
+      const isCookieConsent = 'false';
+      const analyticsName = '';
+    </script>
+
+    
+    
+
+    <!-- seo tags -->
+    <meta property="og:image" content="https://sylhare.github.io/Type-on-Strap/assets/img/pexels/triangular.jpeg">
+    
+    <meta property="og:type" content="website" />
+    
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Deep Learning for Recommendation Systems | More Than One Turn</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Deep Learning for Recommendation Systems" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Wide &amp; Deep Learning for Recommender Systems (Cheng, Koc, Harmsen, Shaked, Chandra, Aradhye, Anderson, et. al.)" />
+<meta property="og:description" content="Wide &amp; Deep Learning for Recommender Systems (Cheng, Koc, Harmsen, Shaked, Chandra, Aradhye, Anderson, et. al.)" />
+<link rel="canonical" href="https://sylhare.github.io/Type-on-Strap/2016/11/19/deep-learning-for-recommendation-systems.html" />
+<meta property="og:url" content="https://sylhare.github.io/Type-on-Strap/2016/11/19/deep-learning-for-recommendation-systems.html" />
+<meta property="og:site_name" content="More Than One Turn" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2016-11-19T00:00:03-05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Deep Learning for Recommendation Systems" />
+<script type="application/ld+json">
+{"description":"Wide &amp; Deep Learning for Recommender Systems (Cheng, Koc, Harmsen, Shaked, Chandra, Aradhye, Anderson, et. al.)","headline":"Deep Learning for Recommendation Systems","dateModified":"2016-11-19T00:00:03-05:00","datePublished":"2016-11-19T00:00:03-05:00","url":"https://sylhare.github.io/Type-on-Strap/2016/11/19/deep-learning-for-recommendation-systems.html","mainEntityOfPage":{"@type":"WebPage","@id":"https://sylhare.github.io/Type-on-Strap/2016/11/19/deep-learning-for-recommendation-systems.html"},"@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- RSS -->
+    <link type="application/atom+xml" rel="alternate" href="https://sylhare.github.io/Type-on-Strap/feed.xml" title="More Than One Turn" />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="Deep Learning for Recommendation Systems">
+    <meta name="twitter:description" content="Wide &amp; Deep Learning for Recommender Systems(Cheng, Koc, Harmsen, Shaked, Chandra, Aradhye, Anderson, et. al.)While deep learning is great for many thing...">
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:image" content="https://sylhare.github.io/Type-on-Strap/assets/img/pexels/triangular.jpeg">
+    <meta name="twitter:image:alt" content="Deep Learning for Recommendation Systems">
+</head>
+
+  <body>
+    <header class="site-header">
+
+    <!-- Logo and title -->
+	<div class="branding">
+        
+		<a href="/Type-on-Strap/">
+			<img alt="logo img" class="avatar" src="/Type-on-Strap/assets/img/triangle.png" />
+		</a>
+        
+        <a class="site-title" aria-label="More Than One Turn" href="/Type-on-Strap/">
+        More Than One Turn
+		</a>
+	</div>
+
+    <!-- Toggle menu -->
+    <nav class="clear">
+    <a aria-label="pull" id="pull" class="toggle" href="#">
+    <i class="fa fa-bars fa-lg"></i>
+    </a>
+
+    <!-- Menu -->
+    <ul class="hide">
+        
+
+        
+            
+            
+        
+            
+            <li class="separator"> | </li>
+            <li>
+                <a class="clear" aria-label="About" title="About" href="/Type-on-Strap/about/">
+                     About 
+                </a>
+            </li>
+            
+            
+        
+            
+            <li class="separator"> | </li>
+            <li>
+                <a class="clear" aria-label="Gallery" title="Gallery" href="/Type-on-Strap/gallery/">
+                     Gallery 
+                </a>
+            </li>
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            <li class="separator"> | </li>
+            <li>
+                <a class="clear" aria-label="Portfolio" title="Portfolio" href="/Type-on-Strap/portfolio/">
+                     Portfolio 
+                </a>
+            </li>
+            
+            
+        
+            
+            
+        
+            
+            <li class="separator"> | </li>
+            <li>
+                <a class="clear" aria-label="Search" title="Search" href="/Type-on-Strap/search/">
+                     <i class="fa fa-search" aria-hidden="true"></i>
+                    
+                </a>
+            </li>
+            
+            
+        
+            
+            <li class="separator"> | </li>
+            <li>
+                <a class="clear" aria-label="Tags" title="Tags" href="/Type-on-Strap/tags/">
+                     <i class="fa fa-tags" aria-hidden="true"></i>
+                    
+                </a>
+            </li>
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+    </ul>
+
+	</nav>
+</header>
+
+    <div class="content">
+      <article >
+  <header id="main" style="">
+    <div class="title-padder">
+      
+      <h1 id="Deep+Learning+for+Recommendation+Systems" class="title">Deep Learning for Recommendation Systems</h1>
+      
+
+
+<div class="post-info">
+    <p class="meta">
+      November 19, 2016
+    </p></div>
+
+      
+    </div>
+  </header>
+
+  <section class="post-content">
+  
+      <p><a href="https://arxiv.org/abs/1606.07792"><strong>Wide &amp; Deep Learning for Recommender Systems</strong></a>
+(<em>Cheng, Koc, Harmsen, Shaked, Chandra, Aradhye, Anderson, et. al.</em>)</p>
+
+<p>While deep learning is great for many things, it’s progress in recommendations systems has been limited, partially because recommendation systems inherently have a cold-start problem and sparse data, whereas deep learning works best in the regime of data abundance. When applied to sparse data, DL models tend to overfit since it has so much flexibility in the parameters.  Thus, the authors present a model that jointly trains on deep neural nets (for memorization) and wide linear models (for generalization).</p>
+
+<p>Since there are over a million apps in the database, it is intractable to exhaustively score every app for every query within the serving latency requirements. Therefore, the first step upon receiving a query is limiting the options to a short list of items.  This is done through a combination of statistical-based machine-learned models and human-defined rules. Then the network can do the job of ranking the smaller list of returned app options.  The wide part of the network is just a shallow logistic regression layer.  The deep part is just a feed-forward network.  In the experiments, the authors used Followthe-regularized-leader (FTRL) algorithm with L1 regularization as the optimizer for the wide part of the model,
+and AdaGrad optimizer for the deep part.</p>
+
+<p>The exciting part of this model isn’t the methods, but the fact that it runs in production. Multi-threading and other scalability techniques needed to be added in order to make sure the model worked within the time constraints (often ~10 milliseconds) for a consumer facing service.  The results show that the model actually drives increased app acquisitions over previous recommendation systems, which means that rather than just beating some benchmark, deep learning actually influence user behavior.</p>
+
+<p>As a side node, since the linear models are used to prevent overfitting, I view this as a form of regularization.  I’m sure there are smarter ways to regularize the output.  The context for these recommendations is the Google Play store where users can download apps to their phone. As a result, the model in the paper seems to look at user features (e.g., country, language, demographics), contextual features (e.g., device, hour of the
+day, day of the week), and impression features (e.g., app age,
+historical statistics of an app).  But there are dozens more options here. For example,</p>
+
+<ol>
+  <li>What page did the user come from</li>
+  <li>Did they click on an add to arrive</li>
+  <li>How long did the user stay on the app page</li>
+  <li>What other Google Play apps has the user downloaded before?</li>
+  <li>What is their location?</li>
+  <li>This is Google right? So what pages did they visit on Chrome?What videos did they watch on YouTube? What topics do they discuss in Gmail? What places have they visited in Maps?</li>
+  <li>We can even explicitly ask the user about their preferences!  What are songs you like to listen to?  What do you like doing for fun?  What kind of food to you like to eat?  Tell me about yourself.</li>
+</ol>
+
+<p>Then, when there is too much data, apply some Variational Dropout or Zoneout to the problem to push the solution to the right space.  The folks at Google aren’t doing this, possibly due to privacy concerns, but at the same time, I’m sure at least 1% of the users would be willing to opt in - and at Google’s size that means over a million users to test.  Using all the data is so obvious it means Google probably is using it to improve the system, but just hasn’t told us yet until the results are noteworthy.</p>
+
+    
+  </section>
+
+  <!-- Social media shares -->
+  
+
+<div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fsylhare.github.io%2FType-on-Strap%2F2016%2F11%2F19%2Fdeep-learning-for-recommendation-systems.html" target="_blank" title=" Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?text=Deep+Learning+for+Recommendation+Systems%20https%3A%2F%2Fsylhare.github.io%2FType-on-Strap%2F2016%2F11%2F19%2Fdeep-learning-for-recommendation-systems.html" target="_blank" title="">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="http://www.reddit.com/submit?url=https://sylhare.github.io/Type-on-Strap/2016/11/19/deep-learning-for-recommendation-systems.html&title=Deep+Learning+for+Recommendation+Systems%20%7C%20More+Than+One+Turn" target="_blank" title=" Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=Deep+Learning+for+Recommendation+Systems%20%7C%20More+Than+One+Turn&body=:%20https://sylhare.github.io/Type-on-Strap/2016/11/19/deep-learning-for-recommendation-systems.html" target="_blank" title="">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+
+   <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list"></div>
+</footer>
+
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+    
+    <div id="previous-post">
+        <a alt="100 Research Papers in 100 Days (LM Edition)" href="/Type-on-Strap/2017/03/29/100-research-papers-in-100-days-lm-edition.html">
+            <p>Previous post</p>
+            100 Research Papers in 100 Days (LM Edition)
+        </a>
+    </div>
+    
+
+    
+    <div id="next-post">
+        <a alt="Speech Recognition and Synthesis at Human Parity" href="/Type-on-Strap/2016/11/17/speech-recognition-and-synthesis-at-human-parity-2.html">
+            <p>Next post</p>
+            Speech Recognition and Synthesis at Human Parity
+        </a>
+    </div>
+    
+</div>
+
+
+
+<!-- To change color of links in the page -->
+<style>
+  
+
+  header#main {
+    background-repeat:no-repeat;
+  
+  }
+</style>
+
+    </div>
+    <footer class="site-footer">
+    <p class="text">
+        Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/sylhare/Type-on-Strap">Type on Strap</a>
+</p>
+            <div class="footer-icons">
+                <ul>
+                <!-- Social icons from Font Awesome, if enabled -->
+                
+<li>
+    <a feed.xml href="/Type-on-Strap/feed.xml"
+       title="Follow RSS feed">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+    <a href="https://github.com/sylhare" title="Follow on GitHub">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+        </span>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                </ul>
+            </div>
+</footer>
+
+
+
+  </body>
+</html>
