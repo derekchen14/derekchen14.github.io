@@ -1,3 +1,4 @@
 *.json
 _archives/
 .DS_Store
+.jekyll-cache/
