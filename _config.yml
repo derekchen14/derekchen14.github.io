@@ -1,6 +1,6 @@
 # SITE CONFIGURATION
-baseurl: "/docs"
-url: "https://morethanoneturn.com"
+baseurl: ""
+url: "https://derekchen14.github.io"
 
 # THEME-SPECIFIC CONFIGURATION
 title: More Than One Turn                                    # site's title
