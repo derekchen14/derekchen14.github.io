@@ -1,4 +1,4 @@
 *.json
-_archives/
 .DS_Store
 .jekyll-cache/
+how_to_use/
