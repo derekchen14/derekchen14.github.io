@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Deciding when to Ask Questions for Dialogue
+title: Deciding when to Ask Questions
 date: '2020-06-28 18:15:06'
 ---
 

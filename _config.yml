@@ -12,8 +12,8 @@ favicon: assets/favicon.ico                             # Icon displayed in the 
 # you can use html in the header  <code>_config.yml</code>
 header_text: More Than One Turn                         # Change Blog header text
 header_feature_image: assets/img/pexels/triangular.jpeg
-footer_text: >
-  Made in San Francisco with <3
+footer_text: Aut viam inveniam aut faciam.
+# >   Made with <3 in San Francisco
 
 # Blog
 excerpt: true                                           # Or "truncate" (first 250 characters), "false" to disable
@@ -25,7 +25,7 @@ color_image: /assets/img/lineart.png                    # A bit transparent for 
 # For layout customization, go to the "_sass > base" folder, and check "_variables.scss"
 katex: true                                             # Enable if using math markup
 mermaid: true                                           # Enable mermaid-js for sequence and diagrams
-google_analytics:                                       # Tracking ID, e.g. "UA-000000-01"
+google_analytics: G-KGN8PKZ5K7                          # Tracking ID, e.g. "UA-000000-01"
 cookie_consent: false                                   # To respect the usage of cookies
 disqus_shortname:                                       # Your discus shortname for comments
 

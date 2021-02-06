@@ -1,14 +1,11 @@
 ---
 layout: page
-title: About
+title: About Me
 permalink: /about/
 feature-img: "assets/img/pexels/travel.jpeg"
 tags: [About, Archive]
 ---
 
-Type on Strap is based on Type Theme, a free and open-source theme for [Jekyll](http://jekyllrb.com/), licensed under the MIT License.
+Derek is a Research Engineer working on designing intelligent dialogue systems with stronger natural langauge understanding.  His research is focused on data efficiency methods including active learning, data augmentation and meta-learning.  He is also interested in techniques surrounding uncertainty measurement so that a dialogue agent can better manage ambiguity and out-of-scope situtations.
 
-Head over to the [theme's documentation](https://github.io/sylhare/Type-on-Strap) for much more information about Type on Strap or to install this theme on your own Jekyll site.
-
-This file is an example of a page in Jekyll, that automatically shows up in the header navigation, you can delete or modify this file freely.
- 
+He attended numerous Computer Science courses at Stanford University, and eventually graduated with a masters in CS from the University of Washington.  This blog is about the journey in building a qualitatively superior virtual assistant and the start-up surrounding this product.  Specifically, the assistant will focus on listening rather than responding, understanding rather than reacting.  In other words, the assistant will move beyond executing commands and towards conversations that last more than one turn.
