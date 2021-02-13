@@ -24,10 +24,14 @@
   }
 
   //For white images
+  h1 {
+    font-family: "Lora", "Lato", "Noto Sans", Helvetica, sans-serif;
+    @extend .header-txt-shadow;
+  }
+
   p,
   a,
   li,
-  h1,
   h2,
   h3,
   h4,

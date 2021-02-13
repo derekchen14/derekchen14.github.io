@@ -1,0 +1,51 @@
+/*!
+ * Font: SIL OFL 1.1, CSS: MIT License
+ */
+
+$lora-font-path: "../../assets/fonts/Lora" !default;
+/* latin v17 */
+@font-face {
+    font-family: 'Lora';
+    src: url('#{$lora-font-path}/lora-300.eot'); /* IE9 Compat Modes */
+    src: url('#{$lora-font-path}/lora-300.woff2') format('woff2'),
+         url('#{$lora-font-path}/lora-300.woff') format('woff'),/* Modern Browsers */
+         url('#{$lora-font-path}/lora-300.ttf') format('truetype'),/* Safari, Android, iOS */
+         url('#{$lora-font-path}/lora-300.svg') format('svg');/* Legacy iOS */
+    font-weight: lighter;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Lora';
+    src: url('#{$lora-font-path}/lora-300italic.ttf') format('truetype');/* Safari, Android, iOS */
+    font-weight: lighter;
+    font-style: italic;
+}
+
+/* latin v17 */
+@font-face {
+    font-family: 'Lora';
+    src: url('#{$lora-font-path}/lora-500.ttf') format('truetype');/* Safari, Android, iOS */
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Lora';
+    src: url('#{$lora-font-path}/lora-500italic.ttf') format('truetype');/* Safari, Android, iOS */
+    font-weight: normal;
+    font-style: italic;
+}
+
+
+/* latin v17 */
+@font-face {
+    font-family: 'Lora';
+    src: url('#{$lora-font-path}/lora-700.ttf') format('truetype');/* Safari, Android, iOS */
+    font-weight: bold;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Lora';
+    src: url('#{$lora-font-path}/lora-700italic.ttf') format('truetype');/* Safari, Android, iOS */
+    font-weight: bold;
+    font-style: italic;
+}
