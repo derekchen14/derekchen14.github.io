@@ -52,7 +52,7 @@
 /* --- Post listing --- */
 .posts {
   .post-teaser {
-    @extend %padding-teaser;
+    @extend %padding-post;
     width: 100%;
     margin-bottom: 0;
     display: inline-block;

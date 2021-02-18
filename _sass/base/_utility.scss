@@ -16,22 +16,6 @@
 }
 
 %padding-post {
-  padding: $padding-x-small $padding-x-large;
-  @media (max-width: $xl-break) {
-    padding: $padding-x-small ($padding-large * 2);
-  }
-  @media (max-width: $l-break) {
-    padding: $padding-x-small $padding-large;
-  }
-  @media (max-width: $m-break) {
-    padding: $padding-x-small $padding-medium;
-  }
-  @media (max-width: $sm-break) {
-    padding: $padding-x-small $padding-small;
-  }
-}
-
-%padding-teaser {
   padding: $padding-x-small ($padding-x-large + $padding-small);
   @media (max-width: $xl-break) {
     padding: $padding-x-small $padding-x-large;

@@ -2350,25 +2350,15 @@ table.dataframe { border: 0 solid rgba(0, 0, 0, 0.1); border-collapse: collapse;
 
 @media (max-width: 576px) { .pagination, #post-nav { padding: 4% 3%; } }
 
-.feature-image footer, .feature-image .post-content, .comments, article, .site-footer { padding: 3% 23%; }
+.posts .post-teaser, .feature-image footer, .feature-image .post-content, .comments, article, .site-footer { padding: 3% 27%; }
 
-@media (max-width: 2000px) { .feature-image footer, .feature-image .post-content, .comments, article, .site-footer { padding: 3% 18%; } }
+@media (max-width: 2000px) { .posts .post-teaser, .feature-image footer, .feature-image .post-content, .comments, article, .site-footer { padding: 3% 23%; } }
 
-@media (max-width: 1400px) { .feature-image footer, .feature-image .post-content, .comments, article, .site-footer { padding: 3% 9%; } }
+@media (max-width: 1400px) { .posts .post-teaser, .feature-image footer, .feature-image .post-content, .comments, article, .site-footer { padding: 3% 18%; } }
 
-@media (max-width: 1000px) { .feature-image footer, .feature-image .post-content, .comments, article, .site-footer { padding: 3% 6%; } }
+@media (max-width: 1000px) { .posts .post-teaser, .feature-image footer, .feature-image .post-content, .comments, article, .site-footer { padding: 3% 9%; } }
 
-@media (max-width: 576px) { .feature-image footer, .feature-image .post-content, .comments, article, .site-footer { padding: 3% 4%; } }
-
-.posts .post-teaser { padding: 3% 27%; }
-
-@media (max-width: 2000px) { .posts .post-teaser { padding: 3% 23%; } }
-
-@media (max-width: 1400px) { .posts .post-teaser { padding: 3% 18%; } }
-
-@media (max-width: 1000px) { .posts .post-teaser { padding: 3% 9%; } }
-
-@media (max-width: 576px) { .posts .post-teaser { padding: 3% 6%; } }
+@media (max-width: 576px) { .posts .post-teaser, .feature-image footer, .feature-image .post-content, .comments, article, .site-footer { padding: 3% 6%; } }
 
 .call-out { padding: 6% 9%; }
 
@@ -2392,7 +2382,7 @@ table.dataframe { border: 0 solid rgba(0, 0, 0, 0.1); border-collapse: collapse;
 
 .right { float: right; }
 
-.site-footer { z-index: -1; display: inline-block; text-align: center; width: 100%; color: #636363; font-size: 0.9em; }
+.site-footer { z-index: -1; display: inline-block; text-align: center; width: 100%; color: #636363; font-size: 0.9em; padding-top: 0; }
 
 .site-footer .footer-icons ul { list-style: none; margin: 0; }
 
