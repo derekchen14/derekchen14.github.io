@@ -12,7 +12,7 @@ As we study the landscape of options for measuring uncertainty, there seem to be
 
 ### (1) Posterior Probabilities
 
-The most straightforward manner of measuring the model's uncertainty is to [ask the model itself](https://arxiv.org/abs/1805.04604). &nbsp;Namely, a typical classification or ranking problem will have a softmax at the end which represents the p(y|x).
+The most straightforward manner of measuring the model's uncertainty is to [ask the model itself](https://arxiv.org/abs/1805.04604). Namely, a typical classification or ranking problem will have a softmax at the end which represents the $$p(y \mid x)$$ .
 
 <!--kg-card-begin: markdown-->
 

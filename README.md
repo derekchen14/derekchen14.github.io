@@ -18,6 +18,12 @@ Each post will have the following key fields:
 
   * The actual content goes here *
 
+TO use a Latex, add two dollar signs like so:
+
+  $$ f(x,y) = \alpha x^2 + (1 - \alpha) \frac{y}{3} $$
+
+API here: https://artofproblemsolving.com/wiki/index.php/LaTeX:Symbols
+
 ### Local Development
 To serve locally, run `bundle exec jekyll serve`, then head to http://localhost:4000 to view
 
