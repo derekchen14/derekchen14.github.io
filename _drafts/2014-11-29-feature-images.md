@@ -57,3 +57,6 @@ However you can just use the Markdown way of doing it to get the image normal si
 {% endhighlight %}
 
 {% include aligner.html images="pexels/computer.jpeg" %}
+
+[^1]: 
+    {% include citation.html key="ref1" %}
