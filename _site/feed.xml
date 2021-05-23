@@ -1,4 +1,38 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://derekchen14.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://derekchen14.github.io/" rel="alternate" type="text/html" /><updated>2021-03-03T08:13:55-05:00</updated><id>https://derekchen14.github.io/feed.xml</id><title type="html">More Than One Turn</title><subtitle>Blog about dialogue modeling and data efficiency</subtitle><entry><title type="html">2020 Year End Review (Part 2)</title><link href="https://derekchen14.github.io/2020/12/30/year-end-review-2020.html" rel="alternate" type="text/html" title="2020 Year End Review (Part 2)" /><published>2020-12-30T00:00:00-05:00</published><updated>2020-12-30T00:00:00-05:00</updated><id>https://derekchen14.github.io/2020/12/30/year-end-review-2020</id><content type="html" xml:base="https://derekchen14.github.io/2020/12/30/year-end-review-2020.html">&lt;p&gt;Continuing on the thoughts described in &lt;a href=&quot;https://morethanoneturn.com/2020/12/28/emnlp-2020-highlights.html&quot;&gt;Part 1&lt;/a&gt;, we now describe two trends around dialogue and NLP research. In the previous post, we discussed how data strategy is playing an increasingly important role in the development of modern machine learning models.  How that plays out in more detail will be discussed in the future, but today we will look further into the development of dialogue in the past few months as well as other observations.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://derekchen14.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://derekchen14.github.io/" rel="alternate" type="text/html" /><updated>2021-05-23T12:22:35-04:00</updated><id>https://derekchen14.github.io/feed.xml</id><title type="html">More Than One Turn</title><subtitle>Blog about dialogue modeling and data efficiency</subtitle><entry><title type="html">Embracing the AI-First Paradigm</title><link href="https://derekchen14.github.io/2021/05/23/embracing-ai-first.html" rel="alternate" type="text/html" title="Embracing the AI-First Paradigm" /><published>2021-05-23T00:00:00-04:00</published><updated>2021-05-23T00:00:00-04:00</updated><id>https://derekchen14.github.io/2021/05/23/embracing-ai-first</id><content type="html" xml:base="https://derekchen14.github.io/2021/05/23/embracing-ai-first.html">&lt;p&gt;When the web first appeared, many folks adopted the new technology by porting over existing physical assets (ie. magazines and newspapers) to appear on a website with almost no changes.  When smartphones began to take hold, those same people ported over their existing websites onto a smaller screen, again with no discernable changes.  Rather than embracing the new medium, people simply applied the content of the old onto the new.  In hindsight, it seems obvious that the builders and makers should have been developing for the new medium, but perhaps paradigm shifts aren’t so obvious when they are happening.  What lessons does that teach us about the shift into building AI-first companies?&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;To figure out what we can learn from this, we start by really understanding what went wrong.  Then, we can identify opportunities to amend a possibly misguided mindset.  Next, we apply this framework onto exisiting projects which exhibit spurious objectives.  Finally, we conclude by highlighting the takeaway lessons for building an AI-first company.&lt;/p&gt;
+
+&lt;h2 id=&quot;1-what-went-wrong&quot;&gt;1. What Went Wrong?&lt;/h2&gt;
+
+&lt;p&gt;Early webmasters recognized that the Internet was going to be a big thing, but often failed to take advantage of the new medium.  Rather than creating new experiences, they created online versions of offline artifacts.  With today’s view, we know that rather than static pages of content, a website can be interactive with links and buttons.  We can make spreadsheets, dashboards, and scrolling menus.  Rather than focusing on what the web couldn’t do, we should have been focusing on what it &lt;em&gt;could&lt;/em&gt; do.&lt;/p&gt;
+
+&lt;p&gt;Mobile developers faced the same hurdles.  Rather than opting for pinch and zoom, most took content on the web and simplified it for smaller screens.  There was a lack of imagination in using the GPS tracking, the real-time updates and built-in camera to build mobile first experiences.  Looking back, we see that the most successful companies of that era (AirBnB, Uber, Pinterest, Instagra, etc.) are precisely those that learned to take advantage of these new features.  It seems then that embracing the new is the clear solution.&lt;/p&gt;
+
+&lt;h2 id=&quot;2-lessons-from-the-past&quot;&gt;2. Lessons from the Past&lt;/h2&gt;
+
+&lt;p&gt;What makes it so hard to see things “inevitable” changes coming?  How could a developer be so right in betting on the web, yet be so mistaken in what they built?  A reasonable solution shouldn’t just recommend building with the advantages of the new medium, but should also acknowledge why the transition might be turbulent.  For many new technologies, there are people who jump onto the bandwagon simply because it is new and rising.  These people wrote blogs and put up largely static websites because it was the cool, new thing to do.  Does that explain the majority of the population though?  What about the brick and mortar stores moving their retail interfaces online?  What about the educators, evangelists and entertainment moguls building their empires?&lt;/p&gt;
+
+&lt;p&gt;Most people building an online presence regarded the web as simply a new medium rather than a paradigm shift because they weren’t interested in paradigm shifts.  They were interested in selling whatever it was they already provided and so the web or mobile web was just another way to do what they had already been doing.  Even after it became clear that the new tech needed new ways of thinking, many people simply learned the best practices and left it at that.  These folks are not concerned with ushering in new wave of technology.  And who can blame them, they’ve got their day jobs to worry about!&lt;/p&gt;
+
+&lt;p&gt;The early majority and late majority need to be convinced of the new wave and also taught the appropriate methods of using the new technology.  Google had to build SEO, PPC, and web analytics platforms for people to learn how to build in their garden.  Apple and Android had to offer SDKs and other online training for mobile developers to build in their walled garden.  Both had to showcase examples of good websites and good mobile apps, respectively.&lt;/p&gt;
+
+&lt;p&gt;Additionally, we’ve also noted that the innovators will use new technology for the sake of new tech.  These folks are not so much ahead of the curve as they are just interested in playing with the latest shiny object.  This is why looking at their behaviors will lead to many false prophets (AR/VR, early tablets, autonomous driving, etc.)  The shift must occur then with the early adopters, who must have demanded that the builders create something that takes advantage of the technology or risk becoming another over-hyped flop.&lt;/p&gt;
+
+&lt;h2 id=&quot;3-applications-to-the-present&quot;&gt;3. Applications to the Present&lt;/h2&gt;
+
+&lt;p&gt;Chatbots today are still in the early stages where there are certainly some commercial successes (Alexa, Siri, Google Now), but certainly not the world-changing revolution that was promised around 2016.  The innovators have participated, but it will take a change in how we build these dialogue systems to attract the early adopter crowd.  Luckily, the errors in applying Conversationl AI seem to follow same patterns of omission, so the issue should be straightforward to diagnose.&lt;/p&gt;
+
+&lt;p&gt;The first versions of task-oriented chatbots will likely operate with existing user interaction paradigms until we learn how to take advantage of the unique aspects of chatbot technology.  Consequently, what we see today are agent-assisted systems that help users navigate websites.   We see dialogue systems that take a mobile experience and modify it for chat by changing each mobile API call into a voice-based API call.  Everything is coded up as a bunch of if/then statements because that’s how we build our applications today.&lt;/p&gt;
+
+&lt;p&gt;It doesn’t have to be this way of course.&lt;/p&gt;
+
+&lt;p&gt;Intelligent virtual assistants should be a wholly &lt;em&gt;new&lt;/em&gt; method for interacting with technology and information.  We should be able to speak with mostly natural language and get back a reasonable response rather than spitting out directions one line at a time.  We should be able to ask for what we actually want (ie. book a hotel, shop for a pair of dress shoes) rather than using the virtual agent as a voice-activated navigation tool for a mobile app that offers travel reservations or sells shoes.  We should be able to recover from misunderstandings by clarifying what we want in a way that pushes the conversation forward, rather than screaming at a bot that can’t seem to comprehend that it just made a mistake.  In short, we should be engaging in conversations over commands.&lt;/p&gt;
+
+&lt;h2 id=&quot;4-ai-first-companies&quot;&gt;4. AI-First Companies&lt;/h2&gt;
+
+&lt;p&gt;An AI-first company (and really we’re referring to converstional AI companies) should build dialogue agents that understand the new medium that they represent.  It should be reliable enough to handle the variations found in real-life conversation, which means the agent should be trained in a way that can adapt to changing circumstances.  Training a flexible agent means being more innovative about where the training data comes from, how the training data is collected and what kind of data is annotated.  How the data aspect should be managed though is a subject for another day …&lt;/p&gt;</content><author><name></name></author><category term="ai" /><category term="startups" /><category term="trends" /><summary type="html">When the web first appeared, many folks adopted the new technology by porting over existing physical assets (ie. magazines and newspapers) to appear on a website with almost no changes. When smartphones began to take hold, those same people ported over their existing websites onto a smaller screen, again with no discernable changes. Rather than embracing the new medium, people simply applied the content of the old onto the new. In hindsight, it seems obvious that the builders and makers should have been developing for the new medium, but perhaps paradigm shifts aren’t so obvious when they are happening. What lessons does that teach us about the shift into building AI-first companies?</summary></entry><entry><title type="html">2020 Year End Review (Part 2)</title><link href="https://derekchen14.github.io/2020/12/30/year-end-review-2020.html" rel="alternate" type="text/html" title="2020 Year End Review (Part 2)" /><published>2020-12-30T00:00:00-05:00</published><updated>2020-12-30T00:00:00-05:00</updated><id>https://derekchen14.github.io/2020/12/30/year-end-review-2020</id><content type="html" xml:base="https://derekchen14.github.io/2020/12/30/year-end-review-2020.html">&lt;p&gt;Continuing on the thoughts described in &lt;a href=&quot;https://morethanoneturn.com/2020/12/28/emnlp-2020-highlights.html&quot;&gt;Part 1&lt;/a&gt;, we now describe two trends around dialogue and NLP research. In the previous post, we discussed how data strategy is playing an increasingly important role in the development of modern machine learning models.  How that plays out in more detail will be discussed in the future, but today we will look further into the development of dialogue in the past few months as well as other observations.&lt;/p&gt;
 
 &lt;!--more--&gt;
 
@@ -416,92 +450,4 @@ Saving the best for last, one of the most promising methods for generating a con
 &lt;!--kg-card-end: markdown--&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><author><name></name></author><summary type="html">Suppose you had sample = tensor([[3,5,4]   [0,2,1]])</summary></entry><entry><title type="html">Top 10 Secrets to Building Effective Dialogue Agents</title><link href="https://derekchen14.github.io/2019/01/11/lessons-on-building-effective-dialogue-agents.html" rel="alternate" type="text/html" title="Top 10 Secrets to Building Effective Dialogue Agents" /><published>2019-01-11T19:11:28-05:00</published><updated>2019-01-11T19:11:28-05:00</updated><id>https://derekchen14.github.io/2019/01/11/lessons-on-building-effective-dialogue-agents</id><content type="html" xml:base="https://derekchen14.github.io/2019/01/11/lessons-on-building-effective-dialogue-agents.html">&lt;p&gt;Some notes to remember when building intelligent task oriented dialogue agents:&lt;/p&gt;
-
-&lt;!--kg-card-begin: markdown--&gt;
-&lt;ol&gt;
-  &lt;li&gt;Modularity is important. While E2E response generation is good, intepretability is better.
-    &lt;ul&gt;
-      &lt;li&gt;There is a draw to simply use a Seq2Seq approach with an encoder for reading user input and decoder for generating output. However, the output becomes more of a language model, and fails to perform reasoning.&lt;/li&gt;
-      &lt;li&gt;Moreover, the hidden state is not human readable. Instead, this should be broken down into Intent Tracking, Policy Management and Text Generation, which allows for better interpretability.&lt;/li&gt;
-      &lt;li&gt;Additionally, modularity is easier to maintain and easier to delegate duties when operating in a realistic industry setting.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Important not to forget about optimizing auxiliary components
-    &lt;ul&gt;
-      &lt;li&gt;Intent tracker should include context embedder in addition to utterance embedder&lt;/li&gt;
-      &lt;li&gt;Intent tracker includes memory cells, likely formulated as a Recurrent Entity Network or Neural Process Network&lt;/li&gt;
-      &lt;li&gt;Policy manager includes soft knowledge base query mechanism&lt;/li&gt;
-      &lt;li&gt;Evaluation and data processing should be optimized&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Intent tracking is a set of binary predictors
-    &lt;ul&gt;
-      &lt;li&gt;Multi-intent utterances occur often, even multiple slots of the same dialogue act are fairly common, such as “I would like to eat Chinese or Korean food.”&lt;/li&gt;
-      &lt;li&gt;The model actually works better since each task is now much simpler (watch for if the user wants Chinese food, rather than watch for what the user wants)&lt;/li&gt;
-      &lt;li&gt;This has been shown to work well in practice (from start-up)&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Intent output should be act(slot-relation-value):
-    &lt;ul&gt;
-      &lt;li&gt;for example: inform(food = korean), request(address = the_missing_sock), inform(rating &amp;gt; 3), accept(offer = the_missing_sock), inform(date &amp;gt; today), answer(confirm = yes)&lt;/li&gt;
-      &lt;li&gt;between two values (such as price range) can be written as inform(price &amp;gt; 3) and inform(price &amp;lt; 6)&lt;/li&gt;
-      &lt;li&gt;this is all possible because the binary predictors allow for arbitrary combinations&lt;/li&gt;
-      &lt;li&gt;semantic parsing is overly complex (hard for machines to perform and hard for people to interpret), also does not necessarily give better information to the policy manager&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Dialogue Acts are five pairs of items which constitutes a MECE set
-    &lt;ul&gt;
-      &lt;li&gt;request/inform&lt;/li&gt;
-      &lt;li&gt;open/close&lt;/li&gt;
-      &lt;li&gt;accept/reject&lt;/li&gt;
-      &lt;li&gt;question/answer&lt;/li&gt;
-      &lt;li&gt;acknow/confuse&lt;/li&gt;
-      &lt;li&gt;MECE = mutually exclusive, collectively exhaustive&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Full Dialogue State (to be fed into RL agent) includes
-    &lt;ul&gt;
-      &lt;li&gt;Five items:&lt;/li&gt;
-    &lt;/ul&gt;
-    &lt;ul&gt;
-      &lt;li&gt;previous agent actions&lt;/li&gt;
-      &lt;li&gt;current user intent&lt;/li&gt;
-      &lt;li&gt;full frame of possible slots-value pairs&lt;/li&gt;
-      &lt;li&gt;turn count&lt;/li&gt;
-      &lt;li&gt;KB results
-      - Context vector is stored for Intent Tracker, but not for Policy Manager
-      - Markov property that previous information, such as the order of past “informs” is not needed&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;In order to measure uncertainty, distributed soft approximation of dialogue state is necessary
-    &lt;ul&gt;
-      &lt;li&gt;memory stored as neural embedding&lt;/li&gt;
-      &lt;li&gt;a pure softmax has been shown to be overly confident, more research is needed on how to better measure “uncertainty”&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;In order to increase accuracy, model should ask for clarification:
-    &lt;ul&gt;
-      &lt;li&gt;&lt;strong&gt;conventional&lt;/strong&gt; clarification request (question paraphrase) - what did you want?&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;partial&lt;/strong&gt; clarification requests (ask for relevant knowledge) - what was the area you mentioned?&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;confirmation&lt;/strong&gt; through mention of alternatives (knowledge verification) - did you say the north part of town?&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;reformulation&lt;/strong&gt; of information (question verification) - so basically you want asian food, right?&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Good dialogue models have the following attributes
-    &lt;ul&gt;
-      &lt;li&gt;works across multiples turns, which distinguishes it from QA bots&lt;/li&gt;
-      &lt;li&gt;works with a knowledge base, which distinguishes it from chatbots&lt;/li&gt;
-      &lt;li&gt;knows whether to clarify and what type of clarification to employ using expected entropy maximization objective (ie. it does not ask irrelevant questions and annoy the user)&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Covers majority of real world scenarios through use of user simulator capable of generating novel examples
-    &lt;ul&gt;
-      &lt;li&gt;user simulator allows for fast training, since real users are expensive in time and money&lt;/li&gt;
-      &lt;li&gt;user simulator should be dynamic, meaning it should be trainable itself&lt;/li&gt;
-      &lt;li&gt;user simulator should output realistic user utterance through use of a GAN which discriminates against model generated text&lt;/li&gt;
-      &lt;li&gt;user simulator should be smart about switching between offering real text vs generated text as training progresses
-&lt;!--kg-card-end: markdown--&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;</content><author><name></name></author><summary type="html">Some notes to remember when building intelligent task oriented dialogue agents:</summary></entry></feed>
+&lt;/ul&gt;</content><author><name></name></author><summary type="html">Suppose you had sample = tensor([[3,5,4]   [0,2,1]])</summary></entry></feed>
