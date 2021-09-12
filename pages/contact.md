@@ -5,4 +5,4 @@ permalink: /contact/
 tags: [About, Archive]
 ---
 
-To connect, please send an email to: derek chen 14 at gmail.
+To connect, please send an email to: derek chen 14 at gmail.  Also see all the social links below.

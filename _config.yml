@@ -11,7 +11,7 @@ favicon: assets/favicon.ico                             # Icon displayed in the 
 # Header and footer text
 # you can use html in the header  <code>_config.yml</code>
 header_text: More Than One Turn                         # Change Blog header text
-header_feature_image: assets/img/pexels/triangular.jpeg
+header_feature_image: assets/img/feature-img/triangular.jpeg
 footer_text: Aut viam inveniam aut faciam.
 # >   Made with <3 in San Francisco
 

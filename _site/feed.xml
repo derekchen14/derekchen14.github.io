@@ -1,4 +1,122 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://derekchen14.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://derekchen14.github.io/" rel="alternate" type="text/html" /><updated>2021-07-26T14:14:40-04:00</updated><id>https://derekchen14.github.io/feed.xml</id><title type="html">More Than One Turn</title><subtitle>Blog about dialogue modeling and data efficiency</subtitle><entry><title type="html">Proper Assessment of Data Value</title><link href="https://derekchen14.github.io/2021/07/24/proper-assessment-data.html" rel="alternate" type="text/html" title="Proper Assessment of Data Value" /><published>2021-07-24T00:00:00-04:00</published><updated>2021-07-24T00:00:00-04:00</updated><id>https://derekchen14.github.io/2021/07/24/proper-assessment-data</id><content type="html" xml:base="https://derekchen14.github.io/2021/07/24/proper-assessment-data.html">&lt;p&gt;Data is the new oil.  It underpins an undeniable aspect of growth in the popularity and dominance of deep learning.  But is all data created equal? What makes some data points worth more than others?  How could we go about calculating what each data point is worth?  If data is so important, we should certainly want to have a proper way to assess its value.  To do so, we should begin by recognizing that
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://derekchen14.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://derekchen14.github.io/" rel="alternate" type="text/html" /><updated>2021-09-12T10:47:39-04:00</updated><id>https://derekchen14.github.io/feed.xml</id><title type="html">More Than One Turn</title><subtitle>Blog about dialogue modeling and data efficiency</subtitle><entry><title type="html">Data Collection Best Practices</title><link href="https://derekchen14.github.io/2021/09/11/data-collection-best-practices.html" rel="alternate" type="text/html" title="Data Collection Best Practices" /><published>2021-09-11T00:00:00-04:00</published><updated>2021-09-11T00:00:00-04:00</updated><id>https://derekchen14.github.io/2021/09/11/data-collection-best-practices</id><content type="html" xml:base="https://derekchen14.github.io/2021/09/11/data-collection-best-practices.html">&lt;p&gt;The first step to truly becoming an &lt;a href=&quot;https://morethanoneturn.com/2021/05/23/embracing-ai-first.html&quot;&gt;AI-first&lt;/a&gt; company is to adopt a &lt;a href=&quot;http://datacentricai.org/&quot;&gt;data-centric&lt;/a&gt; view, which naturally implies taking data collection seriously as a core competency of the business.  Even before involving any sophistcated algorithms to improve data quality, there are already many best practices to consider when performing manual data collection.  At a high level, this can be broken down into improvements&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;on the people, the tools and the process itself.  In total, they constitute a basic checklist of items to consider when performing data labeling for NLP tasks.&lt;/p&gt;
+
+&lt;h2 id=&quot;annotator-training&quot;&gt;Annotator Training&lt;/h2&gt;
+
+&lt;h3 id=&quot;recruiting&quot;&gt;Recruiting&lt;/h3&gt;
+&lt;p&gt;Gathering quality data begins with reliable annotators who understand the problem you’re working on.  Your first line of defense are the tools built directly into MTurk including filters and quals.  Filters should be set to 90-95% acceptance rate and specific English-speaking locations.  A pro-tip is to consider places beyond the United States, such as to include Canada, Britain and Singapore.  Of course, if your NLP task requires multi-language or code-switched labels, then you should branch out even further.  Qualifications are mini-exams that you can require annotators pass before starting your HIT.  The benefit of using these quals to both (a) prevent spammers and (b) ensure that the worker understands the task cannot be overstated.&lt;/p&gt;
+
+&lt;p&gt;Of course, you should also pay the crowd-workers a reasonable rate for their work.  It should be commonsense, but there is also a clear correlation between offering higher pay and attracting higher quality workers.  If you happen to be doing repeated work, it might make sense to keep a running list of known experts on your task such that you can invite them back rather than recruiting new folks every time.&lt;/p&gt;
+
+&lt;h3 id=&quot;onboarding&quot;&gt;Onboarding&lt;/h3&gt;
+&lt;p&gt;As new workers start your data collection task, they will need a well-written training manual to explain the task and how to go about labeling the text for any given situation.  Natural language utterances are extremely nuanced and thus require clear guidelines for picking out these detailed differences.  Dialogue in particular is heavily context dependent.  As you work more with crowdworkers, you will find almost all of them acting in good faith to provide the best annotations possible.  When something is mislabeled, it is much more likely the cause is due to lackluster guidelines or truly tricky conversations rather than workers behaving with ill-intent.  Thus, putting in the time to really write clear instructions is well worth the effort.&lt;/p&gt;
+
+&lt;p&gt;Tips for writing great guidelines:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;give an explanation of your task in clear, simple writing – without the jargon&lt;/li&gt;
+  &lt;li&gt;remember that your reader is not an expert in linguistics or NLP&lt;/li&gt;
+  &lt;li&gt;explain what is happening from the start, not from what you think they should already know&lt;/li&gt;
+  &lt;li&gt;highlight the most important details in &lt;em&gt;italics&lt;/em&gt;, &lt;strong&gt;bold&lt;/strong&gt; or &lt;span style=&quot;color:green;&quot;&gt;color&lt;/span&gt;&lt;/li&gt;
+  &lt;li&gt;offer examples of good annotations and examples of common mistakes when annotating&lt;/li&gt;
+  &lt;li&gt;repeat yourself on the most critical parts if necessary&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If you want to go above and beyond, consider creating tutorial videos and/or offering feedback through email.  When collecting data for ABCD,&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; we found that offering live feedback through a Slack/Discord channel yielded tremendous gains.  Other research has corroborated the findings that expert feedback can be quite helpful.&lt;sup id=&quot;fnref:2&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;  Intutively, it also makes sense that superficial interventions, such as asking the workers to provide a justification for their labels does not help much.  An interesting trick is to have the highest rated crowdworkers provide feedback to other crowdworkers which can help to naturally scale the process.&lt;/p&gt;
+
+&lt;h3 id=&quot;retention&quot;&gt;Retention&lt;/h3&gt;
+&lt;p&gt;For long-running tasks, you can also add in certain aspects to make sure the workers keep on their toes.  In particular, it is common practice to include occassional gold labels that you know are correct.  Then, any workers who mess up too many of these may have their qualifications revoked. Additionally, ideas such as time limits or other thresholds can help to prevent folks getting lazy.  More specifically, suppose you are collecting a dialogue chat, then a token minimum can be automatically checked to make sure the utterances they have generated match some minimum length.  Finally, you should perform occasional spot checks to ensure quality has not dropped.&lt;/p&gt;
+
+&lt;p&gt;Just like running any company though, employee satisfaction becomes paramount.  It makes much more sense to think about how to retain your best workers than to waste extra time worrying about a few bad apples.  One of the unmentioned benefits of feedback and iteration is that it keeps the workers engaged.  Along those lines any sort of reward system, such as bonuses for particularly good labels, warrant a bit of discussion.  Bonuses can be offered per HIT that is done well, or as a one-off system for people who perform well in aggregate.  If there are folks managing and supporting other crowdsource workers then this would certainly warrant some sort of bonus. Be creative in your rewards! Utimately, anything that can help the workers do their job better will end up helping you.&lt;/p&gt;
+
+&lt;h2 id=&quot;annotation-experience&quot;&gt;Annotation Experience&lt;/h2&gt;
+
+&lt;h3 id=&quot;general-principles&quot;&gt;General principles&lt;/h3&gt;
+&lt;p&gt;Making the data collection process as realistic as possible will drastically improve the data being collected because workers no longer need to conciously think about all the rules and regulations in the guidelines.  Instead, they can just focus on acting normally and letting their natural tendencies take over, which is what we want to train a model to do anyway.  This insight compelled us to develop Expert Live Chat,&lt;sup id=&quot;fnref:1:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; which differs from typical Wizard-of-Oz data collection by three aspects:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Conversations are conducted continuously in real-time.
+    - no set number of turns
+    - no templated responses
+    - interlocutors can speak for multiple turns in a row&lt;/li&gt;
+  &lt;li&gt;Users involved are not interchangeable.
+    - there is an explicit agent and customer relationship, which mimics real-life
+    - since people have distinct roles, the typical customs of how to behave naturally arise&lt;/li&gt;
+  &lt;li&gt;Players are informed that all participants are human.
+    – there is no wizard behind the scenes
+    - encourages people to act like they would with humans rather than with machines
+While these aspects make data collection more difficult (methods for resolving this discussed in the paper), they dramatically increase the verisimilitude of the generated conversations.  More generally, even when dealing with non-dialogue related data tasks, any way to make the task itself feel natural should improve results.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;human-computer-interaction&quot;&gt;Human-computer interaction&lt;/h3&gt;
+&lt;p&gt;There exists a large body of work in &lt;a href=&quot;https://en.wikipedia.org/wiki/Human%E2%80%93computer_interaction&quot;&gt;HCI&lt;/a&gt; and &lt;a href=&quot;https://www.interaction-design.org/literature/article/what-is-design-thinking-and-why-is-it-so-popular&quot;&gt;Design Thinking&lt;/a&gt; around how to make better software, much of which can be carried over to the &lt;a href=&quot;https://aclanthology.org/W12-3613/&quot;&gt;design of annotation tools&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The basic idea behind designing great user experiences is to make the task as simple and intuitive as possible.  This encompasses making the labeling task itself straightforward (more on this in the next section), but also includes keeping the tool simple and easy to use as well.  If there are ways to minimize, or even eliminate, clicking around on a mouse, then you should do so.  For example, rather than having to click [Next Item] or [Submit], allow these to be transformed into keyboard shortcuts. Rather than a long dropdown menu the user must scroll through, allow for fuzzy search on the list of labels.  Even when restricted to just typing, find ways to minimize the number of keystrokes needed.  For example, offer a text autocomplete function for common phrases or inputs.&lt;/p&gt;
+
+&lt;p&gt;Prevent users from making mistakes, but if they do, then allow those users to fix them easily.  We can instantiate these principles through distinct elements in the user interface.  Buttons meant to be clicked should seem clickable (e.g. bolded, shaded), whereas buttons meant to be avoided should not (e.g. grayed out).  If a user clicks on a button that causes irreverisible changes or destructive actions (e.g. delete all annotations), show a warning dialog to check if this action is something they actually wanted to perform.  If a user &lt;em&gt;does&lt;/em&gt; click on something accidentally, provide an option to easily recover from the error; for example, a back button to return to the previous example.&lt;/p&gt;
+
+&lt;h3 id=&quot;system-architecture&quot;&gt;System architecture&lt;/h3&gt;
+&lt;p&gt;Real world data collection tasks don’t just end when the text has been annotated.  We should be desiging for the end-to-end data collection pipeline from ideation to shipping into production.  Is there anything that allows researchers or engineers to quickly spin up new experiments?  Perhaps it is very common for you to perform human evaluation on new iterations of your dialogue model.  Templates can be put into place to easily spin up new evaluation rounds.  This can even be automated such that whenever a new model is fully trained, automatically kick off qualitative evaluation (e.g. coherency, fluency) the same way you might kick off quantitative evaluation (e.g. BLEU, perplexity).&lt;/p&gt;
+
+&lt;p&gt;Automation can work in reverse as well.  Suppose the task is sentiment analysis where given an input utterance, you want to classify as either positive, negative or neutral.  After finishing a round of data collection, the system will automatically pass the labels to an in-house annotation team to QA.  High confidence labels can be directly integrated into data store to immediately start-up a new cycle of model training.&lt;/p&gt;
+
+&lt;h2 id=&quot;annotation-process&quot;&gt;Annotation Process&lt;/h2&gt;
+
+&lt;h3 id=&quot;labeling-platforms&quot;&gt;Labeling platforms&lt;/h3&gt;
+&lt;p&gt;When performing data collection, realize that a wide spectrum of services are available to do the actual annotation.  Starting with the broadest audience, serices such as &lt;a href=&quot;https://toloka.yandex.com/&quot;&gt;Toloka&lt;/a&gt; and &lt;a href=&quot;https://www.mturk.com/&quot;&gt;Amazon Mechnical Turk&lt;/a&gt; allow you to tap into a much wider pool for NLP annotation tasks.&lt;sup id=&quot;fnref:3&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:3&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;  Large commerical vendors are also an option, but frankly I would only recommend them when there are strict PII requirements, such as dealing with medical or enterprise data, since otherwise their high price points aren’t justified.  The next level involves working with contractors such as those found through &lt;a href=&quot;https://www.upwork.com/&quot;&gt;upwork&lt;/a&gt; or &lt;a href=&quot;https://www.fiverr.com/&quot;&gt;fiverr&lt;/a&gt;.  The benefit is the ability to retain knowledge over time, at the cost of a higher upfront investment to vet for quality workers.&lt;/p&gt;
+
+&lt;p&gt;If you have the budget, then moving the entire process in-house would obviously be preferred.  An in-house annotation team can be guided to the exact task you prefer and will always be available.  The internal communication can also allow for side-by-side iteration on the task design and data collection, since the ontology can often shift due to feedback from the raw data.  Finally, if you can afford to hire a handful of PhD linguists or a team of in-house experts to perform annotation, then you are probably a FAANG company.  In all seriousness, expert annotation was the traditional method of obtaining labels, but fails to scale to the size needed to train modern ML models.&lt;/p&gt;
+
+&lt;h3 id=&quot;task-design&quot;&gt;Task Design&lt;/h3&gt;
+&lt;p&gt;If you can formulate your problem in a simple manner, then you can obviate the need for subject matter experts and take full advantage of crowd-source workers to scale the effort.  For example, rather than offering a long list of options to choose from for a label, offer just a few multiple choice options.  Even with a limited ontology, annotation can still be difficult when dealing with multi-class and multi-label tasks (ie. many intents can be present in a single dialogue utterance). One ingenious method is to break down the labeling task into a series of simple choices, effectively turning the annotator into a human decision tree where the number of choices for a single HIT is equivalent to the branching factor.&lt;sup id=&quot;fnref:4&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:4&quot; class=&quot;footnote&quot;&gt;4&lt;/a&gt;&lt;/sup&gt;  Another technique is to minimize the cognitive load so you can build a semantic parser&lt;sup id=&quot;fnref:5&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:5&quot; class=&quot;footnote&quot;&gt;5&lt;/a&gt;&lt;/sup&gt; or dialogue agent overnight.&lt;sup id=&quot;fnref:6&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:6&quot; class=&quot;footnote&quot;&gt;6&lt;/a&gt;&lt;/sup&gt; The authors transformed the task by reversing the process.  Rather than providing an utterance and asking for a label, the task starts with a known label and asking the worker to paraphrase a template associated with the known label into a natural language utterance.&lt;/p&gt;
+
+&lt;p&gt;If you can transform the problem into binary selection, perhaps with a contrastive learning algorithm, the task becomes that much easier to label and review.  But even more than the time savings, there is a certain level of simplicity where the task can rely on System I rather than System II processing.  Whereas human eyes and brains are naturally pre-disposed to perform image classification, concious effort must be made to parse speech and perform contextual reasoning.  Labeling then becomes a task the annotator can simply react to rather than think about conciously, which more closely matches how a neural network operates. In other words, effort spent on task simplication may offer exponential gains on model improvement.&lt;/p&gt;
+
+&lt;h3 id=&quot;active-learning&quot;&gt;Active learning&lt;/h3&gt;
+&lt;p&gt;A common idea to appears when trying to improve the annotation process is to be more intelligent about how we select what to label.  While active learning does seem to provide noticeable benefits,&lt;sup id=&quot;fnref:7&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:7&quot; class=&quot;footnote&quot;&gt;7&lt;/a&gt;&lt;/sup&gt; much of the research suggests that the gains are inconsistent&lt;sup id=&quot;fnref:8&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:8&quot; class=&quot;footnote&quot;&gt;8&lt;/a&gt;&lt;/sup&gt; or limited&lt;sup id=&quot;fnref:9&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:9&quot; class=&quot;footnote&quot;&gt;9&lt;/a&gt;&lt;/sup&gt;.  More recent work has shown that the cause might be due to the fact that active learning often picks up on outliers which are hard or even impossible to learn from.&lt;sup id=&quot;fnref:10&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:10&quot; class=&quot;footnote&quot;&gt;10&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;p&gt;Given the difficulties of getting things to work well in practice, it is my opinion that active learning might not be a great avenue to explore.  While you may see gains of a few weeks in speed-up for example selection, it will cost you a few weeks to set up the process as well.  Assuming there are problems along the way, you might even end up in a net-negative position in terms of annotation speed.  In conclusion, if there are obvious cases where certain examples need extra labels (eg. a brand new class was added to the ontology), then some focused annotation might be worthwhile. But in general, active learning might not be worth the effort.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;Effective data collection is a skill and an art.  Depending on the nature of the task, certain methods may help speed up the process, but we want to careful that efficiency gains aren’t occuring at local maxima.  Ultimately, investments in data collection will pay great dividends and should be taken seriously by any company desiring to become AI-first.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://aclanthology.org/2021.naacl-main.239/&quot;&gt;Action-Based Conversations Dataset&lt;/a&gt; (Chen et al., 2021) &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt; &lt;a href=&quot;#fnref:1:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:2&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://aclanthology.org/2021.acl-long.98/&quot;&gt;Effective Crowdsourcing Protocol for Data Collection&lt;/a&gt; (Nangia et al., 2021) &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:3&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://aclanthology.org/D08-1027/&quot;&gt;Evaluating Non-Expert Annotations for NLP Tasks&lt;/a&gt; (Snow et al., 2008) &lt;a href=&quot;#fnref:3&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:4&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://aclanthology.org/2021.eacl-main.94/&quot;&gt;MIDAS: A Dialog Act Annotation Scheme&lt;/a&gt; (Dian Yu and Zhou Yu, 2020) &lt;a href=&quot;#fnref:4&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:5&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://aclanthology.org/P15-1129/&quot;&gt;Building a Semantic Parser Overnight&lt;/a&gt; (Wang et al., 2015) &lt;a href=&quot;#fnref:5&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:6&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://aclanthology.org/N18-3006/&quot;&gt;Building a Conversational Agent Overnight&lt;/a&gt; (Shah et al., 2018) &lt;a href=&quot;#fnref:6&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:7&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://openreview.net/forum?id=ryghZJBKPS&quot;&gt;BADGE: Deep Batch Active Learning&lt;/a&gt; (Ash et al., 2020) &lt;a href=&quot;#fnref:7&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:8&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://aclanthology.org/D19-1003/&quot;&gt;Practical Obstacles to Deploying Active Learning&lt;/a&gt; (Lowell et al., 2019) &lt;a href=&quot;#fnref:8&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:9&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://aclanthology.org/2020.emnlp-main.638/&quot;&gt;Active Learning for BERT&lt;/a&gt; (Ein-Dor et al., 2021) &lt;a href=&quot;#fnref:9&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:10&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://aclanthology.org/2021.acl-long.564/&quot;&gt;Investigating the Negative Impact of Outliers for VQA&lt;/a&gt; (Karamcheti et al., 2021) &lt;a href=&quot;#fnref:10&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;</content><author><name></name></author><category term="ai" /><category term="data-strategy" /><category term="explainer" /><category term="lists" /><summary type="html">The first step to truly becoming an AI-first company is to adopt a data-centric view, which naturally implies taking data collection seriously as a core competency of the business. Even before involving any sophistcated algorithms to improve data quality, there are already many best practices to consider when performing manual data collection. At a high level, this can be broken down into improvements</summary></entry><entry><title type="html">Proper Assessment of Data Value</title><link href="https://derekchen14.github.io/2021/07/24/proper-assessment-data.html" rel="alternate" type="text/html" title="Proper Assessment of Data Value" /><published>2021-07-24T00:00:00-04:00</published><updated>2021-07-24T00:00:00-04:00</updated><id>https://derekchen14.github.io/2021/07/24/proper-assessment-data</id><content type="html" xml:base="https://derekchen14.github.io/2021/07/24/proper-assessment-data.html">&lt;p&gt;Data is the new oil.  It underpins an undeniable aspect of growth in the popularity and dominance of deep learning.  But is all data created equal? What makes some data points worth more than others?  How could we go about calculating what each data point is worth?  If data is so important, we should certainly want to have a proper way to assess its value.  To do so, we should begin by recognizing that
  &lt;!--more--&gt;
 some data is worth more than others.&lt;/p&gt;
 
@@ -478,117 +596,4 @@ Saving the best for last, one of the most promising methods for generating a con
 
 &lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt;
 
-&lt;p&gt;If we’re honest, then we have to admit that we have punted on the main question since the analysis above mostly highlights what we &lt;em&gt;would&lt;/em&gt; see if AI is the new foundation.  We have not really identified the factors that would enable AI to be new electricity.  Some promising examples that this might happen include the ability to identify objects, translate languages and generate images with super-human skill.  Additionally, the explosion of BERT and friends for various NLP tasks is an interesting starting point for exploration.  Ultimately, the future will be determined by those with a vision for turning these research advances into new ways of interacting with the world.&lt;/p&gt;</content><author><name></name></author><summary type="html">For awhile from 2015 to 2020 it seemed as if every start-up touted itself to be powered by AI.  The buzz around artificial intelligence has faded a bit, probably because it’s clear that AGI is not just around the corner and also because the media is always looking for the next shiny thing to discuss.  But for those of us in the trenches thinking about AI research every day, there remains a critical question to ask - is this latest round of AI, namely around deep learning with SGD, merely a feature to sprinkle onto existing tools and services, or is this truly a new foundation on which to build new technologies?</summary></entry><entry><title type="html">Phases of Dialogue Adoption</title><link href="https://derekchen14.github.io/2019/06/04/phases-of-dialogue-adoption.html" rel="alternate" type="text/html" title="Phases of Dialogue Adoption" /><published>2019-06-04T14:55:16-04:00</published><updated>2019-06-04T14:55:16-04:00</updated><id>https://derekchen14.github.io/2019/06/04/phases-of-dialogue-adoption</id><content type="html" xml:base="https://derekchen14.github.io/2019/06/04/phases-of-dialogue-adoption.html">&lt;p&gt;Dialogue systems and chatbots are going through the same cycle of adoption seen in previous technology growth curves.  As a quick primer, we note that mobile experienced the same four phases as it has expanded from technical oddity to ubiquitous usage.  In particular, in the first phase, you had a limited number of forerunners who used large brick phones.  This certainly didn’t live up the promise of mobile, but it was also certainly distinct from its predecessor of the corded phone. In the second phase, there was a shift to enterprise with Palm Pre, Blackberry and other PDAs.  In the third phase, we had the original iPhone which lacked an App Store and other key functionality, but at this point you knew mobile was going to take over the world.  Finally, in the fourth phase, there was also Android, long-lasting phones with giant screens, and all the bells and whistles we expect today.&lt;/p&gt;
-
-&lt;p&gt;Moving our focus on dialogue systems, it seems the same pattern is playing out again:&lt;/p&gt;
-
-&lt;!--kg-card-begin: markdown--&gt;
-&lt;ol&gt;
-  &lt;li&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Phase One: recognize basic intents to execute actions&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Alexa, Siri, Cortana (2015 - 2019)&lt;/li&gt;
-  &lt;li&gt;This is mainly characterized by taking a single utterance as input an resulting in the desired response&lt;/li&gt;
-  &lt;li&gt;On the enterprise side: schedule a meeting or call, manage a todo list, transcribe meeting notes&lt;/li&gt;
-  &lt;li&gt;On the consumer side: turn on the lights, set an alarm, what is the weather
-    &lt;ol&gt;
-      &lt;li&gt;&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Phase Two: responds to requests, asks for clarification, access to KB&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Interface to apps and services (2019 - 2023)&lt;/li&gt;
-  &lt;li&gt;The agent is now able to handle multi-turn conversation and hold onto context over many exchanges. The size of the ontology also becomes largely unbounded, with the structure focused only on the dialogue acts.&lt;/li&gt;
-  &lt;li&gt;On the enterprise side: suggested phrases for customer service or call centers, automated scripts for sales teams, resolving helpdesk tickets for IT&lt;/li&gt;
-  &lt;li&gt;On the consumer side: purchasing tickets for an event or movie, ordering food for common menu items, make a flight booking or restaurant reservation
-    &lt;ol&gt;
-      &lt;li&gt;&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Phase Three: makes recommendations and pushes notifications, proactive nature&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Virtual Assistant (2023 - 2027)&lt;/li&gt;
-  &lt;li&gt;The agent remembers your context from past conversations and has a basic understanding of who you are and your preferences. It is thus able to make simple recommendations without being too annoying.&lt;/li&gt;
-  &lt;li&gt;On the enterprise side: onboarding for new employees, read and compose short emails, we noticed everyone in your department signed up for X, would you like to as well?&lt;/li&gt;
-  &lt;li&gt;On the consumer side: recommend what news to read or shows to watch, give suggestion on what place to eat taking into account previously stated dietary preferences
-    &lt;ol&gt;
-      &lt;li&gt;&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Phase Four: converses based on personalized context&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Executive Assistant (2027 - ?), timeline on this could be way off&lt;/li&gt;
-  &lt;li&gt;The agent is able to handle more high level tasks and has low level commonsense baked into everything it does. It is able to infer from context what is the most likely intent for high performance in zero-shot learning settings.&lt;/li&gt;
-  &lt;li&gt;On the enterprise side: research a subject online to generate a summary, intuitive interaction for booking a flight, almost like talking to a co-worker&lt;/li&gt;
-  &lt;li&gt;On the consumer side: user no longer needs to adapt when giving instructions and can converse in natural language. This is reading into the future, so I will leave this vague …
-&lt;!--kg-card-end: markdown--&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Sometimes, the best way to understand is with an example.  So, on a more concrete level, the way this might play out:&lt;/p&gt;
-
-&lt;!--kg-card-begin: markdown--&gt;
-
-&lt;p&gt;&lt;em&gt;Phase 1:&lt;/em&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&amp;lt;Turn on TV&amp;gt;&lt;/li&gt;
-  &lt;li&gt;I’d like to watch the game.&lt;/li&gt;
-  &lt;li&gt;Got it, the Game Portal is on channel 312. Would you like to go there?&lt;/li&gt;
-  &lt;li&gt;No&lt;/li&gt;
-  &lt;li&gt;OK, what would you like me to do?&lt;/li&gt;
-  &lt;li&gt;Watch basketball game.&lt;/li&gt;
-  &lt;li&gt;OK, switching to channel 253. &amp;lt;Shows a replay of NCAA FInal Four game.&amp;gt;&lt;/li&gt;
-  &lt;li&gt;Argh, not that one!&lt;/li&gt;
-  &lt;li&gt;I’m sorry, I didn’t get that.&lt;/li&gt;
-  &lt;li&gt;&amp;lt;Manually flips through TV guide&amp;gt;&lt;/li&gt;
-  &lt;li&gt;Please go to channel 261&lt;/li&gt;
-  &lt;li&gt;OK, switching to channel 261.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;em&gt;Phase 2:&lt;/em&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&amp;lt;Turn on TV&amp;gt;&lt;/li&gt;
-  &lt;li&gt;I’d like to watch the game.&lt;/li&gt;
-  &lt;li&gt;Which game?&lt;/li&gt;
-  &lt;li&gt;Basketball&lt;/li&gt;
-  &lt;li&gt;Did you mean the NBA playoffs?&lt;/li&gt;
-  &lt;li&gt;Yes&lt;/li&gt;
-  &lt;li&gt;There are two series currently playing: Bucks vs Raptors and Warriors vs Blazers, which one do you prefer?&lt;/li&gt;
-  &lt;li&gt;Umm, the Warriors and Blazers&lt;/li&gt;
-  &lt;li&gt;Ok, switching to channel 261&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;em&gt;Phase 3:&lt;/em&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&amp;lt;Turn on TV&amp;gt;&lt;/li&gt;
-  &lt;li&gt;I’d like to watch the game.&lt;/li&gt;
-  &lt;li&gt;You mean the Warriors game?&lt;/li&gt;
-  &lt;li&gt;Yes, that’s perfect!&lt;/li&gt;
-  &lt;li&gt;Ok, switching to channel 261&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;em&gt;Phase 4:&lt;/em&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&amp;lt;Turn on TV&amp;gt;&lt;/li&gt;
-  &lt;li&gt;Would you like to watch the Warriors game?&lt;/li&gt;
-  &lt;li&gt;Oh, that’d be great!&lt;/li&gt;
-  &lt;li&gt;Ok, switching to channel 261
-&lt;!--kg-card-end: markdown--&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Open to thoughts and comments below!&lt;/p&gt;</content><author><name></name></author><summary type="html">Dialogue systems and chatbots are going through the same cycle of adoption seen in previous technology growth curves.  As a quick primer, we note that mobile experienced the same four phases as it has expanded from technical oddity to ubiquitous usage.  In particular, in the first phase, you had a limited number of forerunners who used large brick phones.  This certainly didn’t live up the promise of mobile, but it was also certainly distinct from its predecessor of the corded phone. In the second phase, there was a shift to enterprise with Palm Pre, Blackberry and other PDAs.  In the third phase, we had the original iPhone which lacked an App Store and other key functionality, but at this point you knew mobile was going to take over the world.  Finally, in the fourth phase, there was also Android, long-lasting phones with giant screens, and all the bells and whistles we expect today.</summary></entry></feed>
+&lt;p&gt;If we’re honest, then we have to admit that we have punted on the main question since the analysis above mostly highlights what we &lt;em&gt;would&lt;/em&gt; see if AI is the new foundation.  We have not really identified the factors that would enable AI to be new electricity.  Some promising examples that this might happen include the ability to identify objects, translate languages and generate images with super-human skill.  Additionally, the explosion of BERT and friends for various NLP tasks is an interesting starting point for exploration.  Ultimately, the future will be determined by those with a vision for turning these research advances into new ways of interacting with the world.&lt;/p&gt;</content><author><name></name></author><summary type="html">For awhile from 2015 to 2020 it seemed as if every start-up touted itself to be powered by AI.  The buzz around artificial intelligence has faded a bit, probably because it’s clear that AGI is not just around the corner and also because the media is always looking for the next shiny thing to discuss.  But for those of us in the trenches thinking about AI research every day, there remains a critical question to ask - is this latest round of AI, namely around deep learning with SGD, merely a feature to sprinkle onto existing tools and services, or is this truly a new foundation on which to build new technologies?</summary></entry></feed>
