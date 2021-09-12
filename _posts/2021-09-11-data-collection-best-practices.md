@@ -6,9 +6,7 @@ excerpt_separator: <!--more-->
 ---
 
 The first step to truly becoming an [AI-first](https://morethanoneturn.com/2021/05/23/embracing-ai-first.html) company is to adopt a [data-centric](http://datacentricai.org/) view, which naturally implies taking data collection seriously as a core competency of the business.  Even before involving any sophistcated algorithms to improve data quality, there are already many best practices to consider when performing manual data collection.  At a high level, this can be broken down into improvements 
-
 <!--more-->
-
 on the people, the tools and the process itself.  In total, they constitute a basic checklist of items to consider when performing data labeling for NLP tasks.
 
 ## Annotator Training
