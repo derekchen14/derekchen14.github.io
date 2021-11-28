@@ -1,6 +1,7 @@
 ---
 layout: post
 title: AI as Feature or Foundation
+tags: [ai, startups]
 date: '2020-01-01 23:53:56'
 ---
 
