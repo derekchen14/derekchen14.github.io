@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<!--
+    Type on Strap jekyll theme v2.3.1
+    Copyright 2016-2020 Sylhare
+    Theme free for personal and commercial use under the MIT license
+    https://github.com/sylhare/Type-on-Strap/blob/master/LICENSE
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer src="/assets/js/main.min.js"></script>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/assets/css/main.css">
+
+    <!--Favicon-->
+    <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="More Than One Turn" href="https://derekchen14.github.io/feed.xml"/>
+    
+    
+
+    <!-- KaTeX 0.12.0 -->
+    
+    <script defer src="/assets/js/vendor/katex.min.js"></script>
+    <script defer src="/assets/js/vendor/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+    
+
+    <!-- Mermaid 8.8.2 -->
+    
+    <!-- <script src=”https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.8.2/mermaid.min.js" onload="mermaid.initialize({startOnLoad:true});"></script> -->
+    <script defer src="/assets/js/vendor/mermaid.min.js" onload="mermaid.initialize({startOnLoad:true});"></script>
+    
+
+    <!-- Simple-Jekyll-Search 1.17.12 -->
+    <script src="/assets/js/vendor/simple-jekyll-search.min.js" type="text/javascript"></script>
+
+    <!-- Google Analytics / Cookie Consent -->
+    <script>
+      const cookieName = 'cookie-notice-dismissed-https://derekchen14.github.io';
+      const isCookieConsent = 'false';
+      const analyticsName = 'G-KGN8PKZ5K7';
+    </script>
+
+    
+    
+        <!-- Global site tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-KGN8PKZ5K7"></script>
+        <!-- Page analysis (analytics.js) -->
+        <script async src='https://www.google-analytics.com/analytics.js'></script>
+    
+
+    <!-- seo tags -->
+    <meta property="og:image" content="https://derekchen14.github.io/assets/img/feature-img/triangular.jpeg">
+    
+    <meta property="og:type" content="website" />
+    
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Data Augmentation for Scalable Product Development | More Than One Turn</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Data Augmentation for Scalable Product Development" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Data augmentation methods are a staple when training computer vision models, with methods like flipping, resizing, cropping and blurring used so ubiquitously that they are a foregone conclusion in most systems.1 These methods help improve model robustness such that anyway you change the image of a cat, the model still recognizes the item in the picture as a cat. This is relatively straight forward since all aforementioned techniques keep the main object the same such that a cat remains a cat, and does not somehow magically morph into a dog. But does this work for NLP as well? Chen et al. (2020), A Simple Framework for Contrastive Learning of Visual Representations &#8617;" />
+<meta property="og:description" content="Data augmentation methods are a staple when training computer vision models, with methods like flipping, resizing, cropping and blurring used so ubiquitously that they are a foregone conclusion in most systems.1 These methods help improve model robustness such that anyway you change the image of a cat, the model still recognizes the item in the picture as a cat. This is relatively straight forward since all aforementioned techniques keep the main object the same such that a cat remains a cat, and does not somehow magically morph into a dog. But does this work for NLP as well? Chen et al. (2020), A Simple Framework for Contrastive Learning of Visual Representations &#8617;" />
+<link rel="canonical" href="https://derekchen14.github.io/2022/03/11/data-augmentation-for-scalable-product.html" />
+<meta property="og:url" content="https://derekchen14.github.io/2022/03/11/data-augmentation-for-scalable-product.html" />
+<meta property="og:site_name" content="More Than One Turn" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-03-11T00:00:00-05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Data Augmentation for Scalable Product Development" />
+<script type="application/ld+json">
+{"description":"Data augmentation methods are a staple when training computer vision models, with methods like flipping, resizing, cropping and blurring used so ubiquitously that they are a foregone conclusion in most systems.1 These methods help improve model robustness such that anyway you change the image of a cat, the model still recognizes the item in the picture as a cat. This is relatively straight forward since all aforementioned techniques keep the main object the same such that a cat remains a cat, and does not somehow magically morph into a dog. But does this work for NLP as well? Chen et al. (2020), A Simple Framework for Contrastive Learning of Visual Representations &#8617;","headline":"Data Augmentation for Scalable Product Development","dateModified":"2022-03-11T00:00:00-05:00","datePublished":"2022-03-11T00:00:00-05:00","url":"https://derekchen14.github.io/2022/03/11/data-augmentation-for-scalable-product.html","mainEntityOfPage":{"@type":"WebPage","@id":"https://derekchen14.github.io/2022/03/11/data-augmentation-for-scalable-product.html"},"@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- RSS -->
+    <link type="application/atom+xml" rel="alternate" href="https://derekchen14.github.io/feed.xml" title="More Than One Turn" />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="Data Augmentation for Scalable Product Development">
+    <meta name="twitter:description" content="Data augmentation methods are a staple when training computer vision models, with methods like flipping, resizing, cropping and blurring used so ubiquitously...">
+    
+    <meta name="twitter:creator" content="@derekchen14">
+    <meta name="twitter:site" content="@derekchen14">
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:image" content="https://derekchen14.github.io/assets/img/feature-img/triangular.jpeg">
+    <meta name="twitter:image:alt" content="Data Augmentation for Scalable Product Development">
+</head>
+
+  <body>
+    <header class="site-header">
+
+    <!-- Logo and title -->
+	<div class="branding">
+        
+		<a href="/">
+			<img alt="logo img" class="avatar" src="/assets/img/triangle.png" />
+		</a>
+        
+        <a class="site-title" aria-label="More Than One Turn" href="/">
+        More Than One Turn
+		</a>
+	</div>
+
+    <!-- Toggle menu -->
+    <nav class="clear">
+    <a aria-label="pull" id="pull" class="toggle" href="#">
+    <i class="fa fa-bars fa-lg"></i>
+    </a>
+
+    <!-- Menu -->
+    <ul class="hide">
+        
+
+        
+            
+            
+        
+            
+            <li class="separator"> | </li>
+            <li>
+                <a class="clear" aria-label="About Me" title="About Me" href="/about/">
+                     About Me 
+                </a>
+            </li>
+            
+            
+        
+            
+            <li class="separator"> | </li>
+            <li>
+                <a class="clear" aria-label="Contact" title="Contact" href="/contact/">
+                     Contact 
+                </a>
+            </li>
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            <li class="separator"> | </li>
+            <li>
+                <a class="clear" aria-label="Resume" title="Resume" href="/resume/">
+                     Resume 
+                </a>
+            </li>
+            
+            
+        
+            
+            
+        
+            
+            <li class="separator"> | </li>
+            <li>
+                <a class="clear" aria-label="Search" title="Search" href="/search/">
+                     <i class="fa fa-search" aria-hidden="true"></i>
+                    
+                </a>
+            </li>
+            
+            
+        
+            
+            <li class="separator"> | </li>
+            <li>
+                <a class="clear" aria-label="Tags" title="Tags" href="/tags/">
+                     <i class="fa fa-tags" aria-hidden="true"></i>
+                    
+                </a>
+            </li>
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+    </ul>
+
+	</nav>
+</header>
+
+    <div class="content">
+      <article >
+  <header id="main" style="">
+    <div class="title-padder">
+      
+      <h1 id="Data+Augmentation+for+Scalable+Product+Development" class="title">Data Augmentation for Scalable Product Development</h1>
+      
+
+
+<div class="post-info">
+    <p class="meta">
+      March 11, 2022
+    </p></div>
+
+      
+    </div>
+  </header>
+
+  <section class="post-content">
+  
+      <p>Data augmentation methods are a staple when training computer vision models, with methods like flipping, resizing, cropping and blurring used so ubiquitously that they are a foregone conclusion in most systems.<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup> These methods help improve model robustness such that anyway you change the image of a cat, the model still recognizes the item in the picture as a cat.  This is relatively straight forward since all aforementioned techniques keep the main object the same such that a cat remains a cat, and does not somehow magically morph into a dog.  But does this work for NLP as well?</p>
+
+<p><!--more--></p>
+
+<h2 id="naive-data-augmentation">Naive Data Augmentation</h2>
+
+<p>Text is composed of discrete tokens rather than continous vectors, so what does blurring or flipping even mean in this setting?  It turns out that cropping and rotation can be approximated by first converting a sentence into a dependency parse and then pruning branches or shifting them around.<sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote">2</a></sup> If we define blurring as finding nearby pixels for mixing, then we can view swapping tokens within a sentence as an analogous operation.  Swapping is part of Easy Data Augmentation (EDA) which also includes randomly inserting or deleting tokens, as well as synonym replacement.<sup id="fnref:3" role="doc-noteref"><a href="#fn:3" class="footnote">3</a></sup> Auto-augment for images automatically learns an optimal mixture of augmentations<sup id="fnref:4" role="doc-noteref"><a href="#fn:4" class="footnote">4</a></sup>, which has inspired similar forms of automatically designing augmentation policies for dialogue.<sup id="fnref:5" role="doc-noteref"><a href="#fn:5" class="footnote">5</a></sup>  These all roughly fall under the umbrella of <em>surface form alteration</em> which changes the actual tokens of text to create new examples.</p>
+
+<p>Another popular family of augmentation techniques is <em>latent perturbation</em> where the raw text is first mapped into some hidden state before being transformed back to natural langauge.  Variational Auto-encoders (VAEs) fit nicely into this paradigm since you can perturb the latent state before decoding to theoretically generate an arbitrary number of augmentations.<sup id="fnref:6" role="doc-noteref"><a href="#fn:6" class="footnote">6</a></sup> Posterier collapse aside, such a generative model can be hard to train since it requires learning the entire distribution of outcomes.  Oftentimes, it is much easier to learn a direct mapping from one piece of raw text to another, where the hidden state is untouched.  This is basically paraphrasing.<sup id="fnref:7" role="doc-noteref"><a href="#fn:7" class="footnote">7</a></sup> If we jump to a pivot langauge in the middle of encoding and decoding, this is Round Trip Translation (RTT).<sup id="fnref:8" role="doc-noteref"><a href="#fn:8" class="footnote">8</a></sup>  There are countless other techniques in the realm (see <sup id="fnref:10" role="doc-noteref"><a href="#fn:10" class="footnote">9</a></sup> for one survey), but a last one worth mentioning is Mix-match which interpolates the hidden states of two examples and also the hidden states of their labels to produce new examples.<sup id="fnref:9" role="doc-noteref"><a href="#fn:9" class="footnote">10</a></sup> Temperature sharpening may also be applied.</p>
+
+<p>While all these methods have seen some success in NLP, naively applying them to intent classification and other dialogue tasks may not be so straightforward because they can easily alter the semantic meaning of an utterance. To see why, take for example the sentence “I would prefer not to eat Indian food, it’s too spicy”.  Suppose we were to perform word replacement, and switch Indian to American: “I would prefer not to eat American food, it’s too spicy”.  Then the utterance doesn’t make a lot of sense, and the user’s intent has also been altered.  Suppose token dropout were used instead: “I would prefer to eat Indian food”.  Now the user’s preference has been completely inverted!  Unlike in the image setting, tiny perturbations can cause large semantic shifts in text.</p>
+
+<h2 id="label-preserving-data-augmentation">Label Preserving Data Augmentation</h2>
+
+<p>To preserve semantics as we generate new examples, the augmentation technique ought to have an awareness of the importance of certain entities or phrases before performing its transformation.  For example, rather than dropping random tokens, this can be accomplished more intelligently by only focusing on stopwords or other low order segments as determined by a POS tagger.  When operating in a latent space, <em>consistency training</em> induces robustness applying general perturbations around a region of a label, while encouraging the model to still maintain the same prediction.<sup id="fnref:11" role="doc-noteref"><a href="#fn:11" class="footnote">11</a></sup> A typical loss function to enforce matching predictions can be a cross entropy loss.  Others have also tried MSE, KL-divergence, JSD or any other distance metric.<sup id="fnref:17" role="doc-noteref"><a href="#fn:17" class="footnote">12</a></sup></p>
+
+<p>Taking this a step further, rather than operating at the token-level, we can expand this to encompass entire segments where different phrase fragments are shuffled or recombined to form new utterances as part of compositional augmentation.<sup id="fnref:12" role="doc-noteref"><a href="#fn:12" class="footnote">13</a></sup> Typically, the focus is on the unimportant spans in order to avoid accidentally changing the label, but if we have access to an ontology, we can actually target the label by switching known values for slot-filling with other values belonging to that same slot.<sup id="fnref:2:1" role="doc-noteref"><a href="#fn:2" class="footnote">2</a></sup></p>
+
+<p>If the goal is to make sure the label is preserved, we can actually work on the problem in reverse as well!  Concretely, we can consider creating new examples from scratch starting from the labels themselves using <em>text generation</em> methods.  Language model (LM) decoding pre-trains a language model to auto-regressively predict a text span composed of a label followed by a corresponding utterance. During inference, the model is fed the label alone and asked to produce a novel example.<sup id="fnref:13" role="doc-noteref"><a href="#fn:13" class="footnote">14</a></sup> Alternatively, we can use the label set to write out templates which are then paraphrased by humans into natural language.<sup id="fnref:14" role="doc-noteref"><a href="#fn:14" class="footnote">15</a></sup> This can be applied to the dialogue setting by having entire conversations written out in template format before paraphrasing into natural text.<sup id="fnref:15" role="doc-noteref"><a href="#fn:15" class="footnote">16</a></sup></p>
+
+<p>Even though the methods now preserve labels, they still face a host of other issues. To start, there is no single method that is reliably useful.<sup id="fnref:16" role="doc-noteref"><a href="#fn:16" class="footnote">17</a></sup>  This lack of consistency holds not only when dealing with a wide range of NLP tasks, but even when optimizing just for specific tasks such as intent classification.<sup id="fnref:17:1" role="doc-noteref"><a href="#fn:17" class="footnote">12</a></sup>  Moreover, most methods have only been studied on classification, rather than on complicated tasks such as dialogue state tracking. Consequently, there is no consensus to how well these augmentation methods work in practice. But what if the goal isn’t even model robustness on in-domain examples?  What if what we really want is to build scalable dialogue systems that can survive the complexity of real-life conversations?</p>
+
+<h2 id="data-augmentation-for-diversity">Data Augmentation for Diversity</h2>
+
+<p>Using data augmentation to achieve robustness on out-of-domain (OOD) examples requires a shift in mindset from targeting label quality towards focusing on label diversity.  Template paraphrasing may generate high quality annotations since we know the labels unfront, but the breadth of coverage is limited by the number of manually crafted templates.  LM decoding fine-tuned on your dataset may start to overfit to the distribution it has encountered. In order to produce novel examples then, we must inject some alternate prior into the data distribution.</p>
+
+<p><em>Auxilliary supervision</em> techniques obtain data following a different distribution by literally using a separate dataset. Essentially, some small seed set can be used to query a large pool of unlabeled utterances to find examples that are close enough to maintain the label, but far away enough to expand the coverage.<sup id="fnref:18" role="doc-noteref"><a href="#fn:18" class="footnote">18</a></sup>  In order to maintain the label preserving properties, an additional filtering process can be applied.  An alternative to moving towards a different distribution is to add noise to the data manifold, which has also been shown to improve out-of-domain robustness.<sup id="fnref:19" role="doc-noteref"><a href="#fn:19" class="footnote">19</a></sup></p>
+
+<p>Text generation based on large-scale pretrained LMs may be especially well-suited for promote diversity since it was (likely) trained on data unrelated to the downstream task, yet can still output coherent examples.  To extract the information stored in its billions of parameters, we can lean on tricks such as beam search, nucleus sampling, or top-k sampling when applied to LM decoding.<sup id="fnref:10:1" role="doc-noteref"><a href="#fn:10" class="footnote">9</a></sup>  Text in-filling with a masked language model (MLM) can also be utilized in a similar manner.<sup id="fnref:16:1" role="doc-noteref"><a href="#fn:16" class="footnote">17</a></sup> And although it hasn’t happened yet, using prompt-based methods to generate new examples is likely right around the corner.  These method resolve OOD issues to some extent, but are unsatisfying because they fail to cover all possible conversational scenarios. But since the space of possible topics is infinite, does that mean data augmentation is fundamentally flawed?</p>
+
+<p>To see how this may work, we first have to recognize that the limitation in coverage is not a flaw of data augmentation, but rather a general difficulty of building dialogue systems. So to make things practical, we will not aim to build systems that can discuss any topic.  Instead, we limit the conversations to pertinent aspects helpful for solving specific use cases (ie. buy a chair, find an email, book a flight).  Additionally, we set expectations by letting users know that the chatbot has its limitations.  However, this leads to a new issue since the current techniques expand coverage of the solution space in an arbitrary manner, and while we no longer need to expand to an infinitely large horizon, we still have to expand to new domains in a targeted and controllable manner.</p>
+
+<h2 id="augmentation-as-conditional-generation">Augmentation as Conditional Generation</h2>
+
+<p>Controllable data augmentation allows for scaling to new domains and use cases in a reliable manner, which is absolutely essential for building products on top of this technology.  To achieve this, we must first clearly define what we mean by use cases.  Specifically, use cases can be considered individual skills (ie. find a restaurant, make a reservation, update a reservation to add more peoeple, cancel a reservation) that all belong to some domain (ie. restaurant reservation management). Suppose we are able to build a dialogue system that can handle three use cases, but we would now like to expand into a fourth.  More than just haphazard data augmentation, we would like to synthesize new training examples in a scalable fashion targeted to help the model learn this fourth skill.</p>
+
+<p>By conditioning on the new use case we care about when performing generation, we should be able to create new examples for model training that specifically fit our criteria.  Concretely, suppose the fourth skill we want to add is the ability for the dialogue system to converse about restaurant cancellations.  Then, we outline the actions agents must take to handle cancellations.<sup id="fnref:20" role="doc-noteref"><a href="#fn:20" class="footnote">20</a></sup>  The discrete actions can be translated into templates using automated means, which are then paraphrased into natural language.  In contrast to direct paraphrasing, the goal here would be to produce examples in totally new directions rather than re-hashing the existing data.</p>
+
+<p>Once we have some starting examples, we can then use data augmentation in a traditional manner to produce many more.  In conclusion, in order to make data augmenation useful for scalable product development, we moved away from using it as a means of promoting robustness, and instead as an alternate form of data collection.  The only step left is making this entire process operate efficiently, which is admittedly easier said than done.</p>
+
+<h2 id="data-augmentation-taxonomy">Data Augmentation Taxonomy</h2>
+
+<p>To recap, we have explored a whirlwind of data augmentation options, starting with ideas inspired from computer vision and gradually moved closer to techniques specialized for scaling development of dialogue systems.  What we discovered along the way is that key application of data augmentation is not necessarily for improving model performance, but rather for dealing with long-tail out-of-domain use cases.  To wrap up, we now organize the smorgasboard of augmentation techniques into a more formal structure for future study.</p>
+
+<p>One way to organize all the different types of augmentation methods is to think of the end goal in mind —- namely the newly formed training example.  A key benefit is this allows us to formulate the solution space with a directed acyclic graph (DAG) which ensures that our taxonomy is collectively exhaustive.  In doing so we end up with the diagram above which outlines five key categories of data augmentation.</p>
+
+<p><img src="/assets/img/data-aug.png" alt="Data Augmentation Taxonomy" /></p>
+<ul>
+  <li>Surface Form Alteration (A –&gt; B): EDA, Character Swapping, Synonym Replacement, Rules-based Systems</li>
+  <li>Latent Perturbation (A –&gt; C –&gt; B): Pivot languages, VAEs, GANs, Direct paraphrasing</li>
+  <li>Text Generation (C –&gt; B): LM Decoding, Text In-filling, User Simulation</li>
+  <li>Auxiliary Supervision (D –&gt; B): External data pool, kNN retrieval on unlabeled utterances, Weak supervision</li>
+  <li>Template Paraphrasing (D –&gt; C –&gt; B): M2M, Overnight</li>
+</ul>
+
+<p>An interesting observation is that while template paraphrasing seems like a subgroup, according to the DAG it is a parent level method.  Ultimately it seems that while all methods are useful, but some are more useful than others.</p>
+
+<hr />
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>Chen et al. (2020), <a href="http://proceedings.mlr.press/v119/chen20j/chen20j.pdf">A Simple Framework for Contrastive Learning of Visual Representations</a> <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:2" role="doc-endnote">
+      <p>Louvan and Magnini, 2020), <a href="https://aclanthology.org/2020.paclic-1.20/">Lightweight Data Augmentation for Low Resource Slot Filling and Intent Classification</a> <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a> <a href="#fnref:2:1" class="reversefootnote" role="doc-backlink">&#8617;<sup>2</sup></a></p>
+    </li>
+    <li id="fn:3" role="doc-endnote">
+      <p>Wei and Zou (2019), <a href="https://aclanthology.org/D19-1670/">Easy Data Augmentation Techniques for Boosting Performance on Text Classification Tasks</a> <a href="#fnref:3" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:4" role="doc-endnote">
+      <p>Cubuk et al. (2020), <a href="https://openaccess.thecvf.com/content_CVPR_2019/papers/Cubuk_AutoAugment_Learning_Augmentation_Strategies_From_Data_CVPR_2019_paper.pdf">AutoAugment: Learning Augmentation Policies from Data</a> <a href="#fnref:4" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:5" role="doc-endnote">
+      <p>Niu and Bansal (2019), <a href="https://aclanthology.org/D19-1132/">Automatically Learning Data Augmentation Policies for Dialogue Tasks</a> <a href="#fnref:5" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:6" role="doc-endnote">
+      <p>Zhao et al. (2017), <a href="https://aclanthology.org/P17-1061/">Learning Discourse-level Diversity for Neural Dialog Models using Conditional VAEs</a> <a href="#fnref:6" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:7" role="doc-endnote">
+      <p>Prakash et al. (2016), <a href="https://aclanthology.org/C16-1275/">Neural Paraphrase Generation with Stacked Residual LSTM Networks</a> <a href="#fnref:7" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:8" role="doc-endnote">
+      <p>Sennrich et al. (2016), <a href="https://aclanthology.org/P16-1009/">Improving Neural Machine Translation Models with Monolingual Data</a> <a href="#fnref:8" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:10" role="doc-endnote">
+      <p>Feng et al. (2021), <a href="https://aclanthology.org/2021.findings-acl.84/">A Survey of Data Augmentation Approaches for NLP</a> <a href="#fnref:10" class="reversefootnote" role="doc-backlink">&#8617;</a> <a href="#fnref:10:1" class="reversefootnote" role="doc-backlink">&#8617;<sup>2</sup></a></p>
+    </li>
+    <li id="fn:9" role="doc-endnote">
+      <p>Berthelot et al. (2020), <a href="http://papers.neurips.cc/paper/8749-mixmatch-a-holistic-approach-to-semi-supervised-learning.pdf">MixMatch: A Holistic Approach to Semi-Supervised Learning</a> <a href="#fnref:9" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:11" role="doc-endnote">
+      <p>Xie et al. (2020), <a href="https://proceedings.neurips.cc/paper/2020/file/44feb0096faa8326192570788b38c1d1-Paper.pdf">Unsupervised data augmentation for consistency training</a> <a href="#fnref:11" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:17" role="doc-endnote">
+      <p>Chen et al. (2021), <a href="https://openreview.net/forum?id=4DXQP8laTU2">An Empirical Survey of Data Augmentation for Limited Data Learning in NLP</a> <a href="#fnref:17" class="reversefootnote" role="doc-backlink">&#8617;</a> <a href="#fnref:17:1" class="reversefootnote" role="doc-backlink">&#8617;<sup>2</sup></a></p>
+    </li>
+    <li id="fn:12" role="doc-endnote">
+      <p>Jacob Andreas (2020), <a href="https://aclanthology.org/2020.acl-main.676/">Good-Enough Compositional Data Augmentation</a> <a href="#fnref:12" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:13" role="doc-endnote">
+      <p>Anaby-Tavor et al. (2020), <a href="https://aaai.org/ojs/index.php/AAAI/article/view/6233">Do not have enough data? Deep learning to the rescue!</a> <a href="#fnref:13" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:14" role="doc-endnote">
+      <p>Wang et al. (2015), <a href="https://aclanthology.org/P15-1129/">Building a Semantic Parser Overnight</a> <a href="#fnref:14" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:15" role="doc-endnote">
+      <p>Shah et al. (2018), <a href="https://aclanthology.org/N18-3006/">Bootstrapping a Neural Conversational Agent with Dialogue Self-Play</a> <a href="#fnref:15" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:16" role="doc-endnote">
+      <p>Chen and Yin (2021), <a href="https://datacentricai.org/neurips21/papers/138_CameraReady_Data_Aug_v5.pdf">Data Augmentation for Intent Classification</a> <a href="#fnref:16" class="reversefootnote" role="doc-backlink">&#8617;</a> <a href="#fnref:16:1" class="reversefootnote" role="doc-backlink">&#8617;<sup>2</sup></a></p>
+    </li>
+    <li id="fn:18" role="doc-endnote">
+      <p>Chen and Yu (2021), <a href="https://aclanthology.org/2021.emnlp-main.35/">GOLD: Improving Out-of-Scope Detection in Dialogues using Data Augmentation</a> <a href="#fnref:18" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:19" role="doc-endnote">
+      <p>Ng et al. (2020), <a href="https://aclanthology.org/2020.emnlp-main.97/">SSMBA: Self-Supervised Manifold Based Data Augmentation for Improving OOD Robustness</a> <a href="#fnref:19" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:20" role="doc-endnote">
+      <p>Chen et al. (2021), <a href="https://aclanthology.org/2021.naacl-main.239/">ABCD: Action-Based Conversations Dataset</a> <a href="#fnref:20" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+    
+  </section>
+
+  <!-- Social media shares -->
+  <!-- 
+
+<div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fderekchen14.github.io%2F2022%2F03%2F11%2Fdata-augmentation-for-scalable-product.html" target="_blank" title=" Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?text=Data+Augmentation+for+Scalable+Product+Development%20https%3A%2F%2Fderekchen14.github.io%2F2022%2F03%2F11%2Fdata-augmentation-for-scalable-product.html" target="_blank" title="">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="http://www.reddit.com/submit?url=https://derekchen14.github.io/2022/03/11/data-augmentation-for-scalable-product.html&title=Data+Augmentation+for+Scalable+Product+Development%20%7C%20More+Than+One+Turn" target="_blank" title=" Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=Data+Augmentation+for+Scalable+Product+Development%20%7C%20More+Than+One+Turn&body=:%20https://derekchen14.github.io/2022/03/11/data-augmentation-for-scalable-product.html" target="_blank" title="">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+
+ -->
+
+   <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/tags#data-strategy">
+      <p><i class="fa fa-tag fa-fw"></i> data-strategy</p>
+    </a>
+    
+    <a class="button" href="/tags#product-strategy">
+      <p><i class="fa fa-tag fa-fw"></i> product-strategy</p>
+    </a>
+    
+    <a class="button" href="/tags#startups">
+      <p><i class="fa fa-tag fa-fw"></i> startups</p>
+    </a>
+    
+  </div>
+</footer>
+
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+    
+
+    
+    <div id="next-post">
+        <a alt="Designing Meaning Representations for Dialogue Systems" href="/2021/11/26/designing-meaning-representation.html">
+            <p>Next post</p>
+            Designing Meaning Representations for Dialogue Systems
+        </a>
+    </div>
+    
+</div>
+
+
+
+<!-- To change color of links in the page -->
+<style>
+  
+
+  header#main {
+    background-repeat:no-repeat;
+  
+  }
+</style>
+
+    </div>
+    <footer class="site-footer">
+    <p class="text">
+        Aut viam inveniam aut faciam.</p>
+            <div class="footer-icons">
+                <ul>
+                <!-- Social icons from Font Awesome, if enabled -->
+                
+
+<li>
+    <a href="mailto:derekchen14@gmail.com" title="Email">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-square fa-stack-2x"></i>
+            <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+        </span>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+    <a href="https://github.com/derekchen14" title="Follow on GitHub">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-square fa-stack-2x" style="color:#333333"></i>
+            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+        </span>
+    </a>
+</li>
+
+
+
+
+
+
+
+<li>
+    <a href="https://www.linkedin.com/in/derekchen14/" title="Follow on LinkedIn">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-square fa-stack-2x" style="color:#2867B2"></i>
+            <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+        </span>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+
+<li>
+    <a feed.xml href="/feed.xml"
+       title="Follow RSS feed">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-square fa-stack-2x" style="color:orange"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+    <a class="type" href="https://twitter.com/derekchen14"
+       title="Follow on Twitter">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-square fa-stack-2x" style="color:#1DA1F2"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+                </ul>
+            </div>
+</footer>
+
+
+
+  </body>
+</html>

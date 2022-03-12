@@ -2,8 +2,7 @@
 layout: post
 title: The Hype of Machine Learning
 date: '2015-11-22 02:01:00'
-tags:
-- machine-learning
+tags: [machine-learning, trends]
 ---
 
 Many folks in the tech industry are [skeptical](http://www.kdnuggets.com/2015/01/deep-learning-flaws-universal-machine-learning.html) about the hype of machine learning, since the world has been promised to them before, but the reality hasn't really panned out.  In fact this has happened so many times, there is a term for this in the machine learning community called an [AI Winter](https://en.wikipedia.org/wiki/AI_winter "AI Winter"). A number of fundamental factors are different though in 2015 that warrant taking a closer look this time around.

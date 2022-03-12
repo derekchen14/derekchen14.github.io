@@ -2,6 +2,7 @@
 layout: post
 title: Data Collection Best Practices
 tags: [ai, data-strategy, explainer, lists]
+color: blue
 excerpt_separator: <!--more-->
 ---
 
@@ -85,15 +86,15 @@ Effective data collection is a skill and an art.  Depending on the nature of the
 
 ---
 
-[^1]: [Action-Based Conversations Dataset](https://aclanthology.org/2021.naacl-main.239/) (Chen et al., 2021)
-[^2]: [Effective Crowdsourcing Protocol for Data Collection](https://aclanthology.org/2021.acl-long.98/) (Nangia et al., 2021)
-[^3]: [Evaluating Non-Expert Annotations for NLP Tasks](https://aclanthology.org/D08-1027/) (Snow et al., 2008)
-[^4]: [MIDAS: A Dialog Act Annotation Scheme](https://aclanthology.org/2021.eacl-main.94/) (Dian Yu and Zhou Yu, 2020)
-[^5]: [Building a Semantic Parser Overnight](https://aclanthology.org/P15-1129/) (Wang et al., 2015)
-[^6]: [Building a Conversational Agent Overnight](https://aclanthology.org/N18-3006/) (Shah et al., 2018)
-[^7]: [BADGE: Deep Batch Active Learning](https://openreview.net/forum?id=ryghZJBKPS) (Ash et al., 2020)
-[^8]: [Practical Obstacles to Deploying Active Learning](https://aclanthology.org/D19-1003/) (Lowell et al., 2019)
-[^9]: [Active Learning for BERT](https://aclanthology.org/2020.emnlp-main.638/) (Ein-Dor et al., 2021)
-[^10]: [Investigating the Negative Impact of Outliers for VQA](https://aclanthology.org/2021.acl-long.564/) (Karamcheti et al., 2021)
+[^1]: Chen et al. (2021), [Action-Based Conversations Dataset](https://aclanthology.org/2021.naacl-main.239/)
+[^2]: Nangia et al. (2021), [Effective Crowdsourcing Protocol for Data Collection](https://aclanthology.org/2021.acl-long.98/)
+[^3]: Snow et al. (2008), [Evaluating Non-Expert Annotations for NLP Tasks](https://aclanthology.org/D08-1027/)
+[^4]: Dian Yu and Zhou Yu (2020), [MIDAS: A Dialog Act Annotation Scheme](https://aclanthology.org/2021.eacl-main.94/)
+[^5]: Wang et al. (2015), [Building a Semantic Parser Overnight](https://aclanthology.org/P15-1129/)
+[^6]: Shah et al. (2018), [Building a Conversational Agent Overnight](https://aclanthology.org/N18-3006/)
+[^7]: Ash et al. (2020), [BADGE: Deep Batch Active Learning](https://openreview.net/forum?id=ryghZJBKPS)
+[^8]: Lowell et al. (2019), [Practical Obstacles to Deploying Active Learning](https://aclanthology.org/D19-1003/)
+[^9]: Ein-Dor et al. (2021), [Active Learning for BERT](https://aclanthology.org/2020.emnlp-main.638/)
+[^10]: Karamcheti et al. (2021),  [Investigating the Negative Impact of Outliers for VQA](https://aclanthology.org/2021.acl-long.564/)
 
 

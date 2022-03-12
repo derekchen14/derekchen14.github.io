@@ -2,6 +2,7 @@
 layout: post
 title: 100 Research Papers in 100 Days (LM Edition)
 date: '2017-03-29 22:05:21'
+tags: [nlp, research, lists, trends]
 ---
 
 This is Part III of 100 in 100 series:

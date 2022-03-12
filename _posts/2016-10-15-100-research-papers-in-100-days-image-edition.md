@@ -3,8 +3,9 @@ layout: post
 title: 100 Research Papers in 100 Days (Image Edition)
 date: '2016-10-15 14:04:00'
 tags:
-- cnn
-- image-recognition
+- modeling
+- research
+- lists
 ---
 
 ### Computer Vision (CNNs)

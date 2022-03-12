@@ -5,7 +5,7 @@ featured: true
 date: '2017-05-03 16:18:00'
 tags:
 - nlp
-- seq2seq
+- modeling
 - research
 ---
 

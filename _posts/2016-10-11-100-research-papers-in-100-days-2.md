@@ -4,9 +4,8 @@ title: 100 Research Papers in 100 Days (NLP Edition)
 date: '2016-10-11 03:30:18'
 tags:
 - nlp
-- language-modeling
-- machine-translation
-- word-embeddings
+- lists
+- research
 ---
 
 The pace of machine learning research is advancing at such a breakneck pace, the only way to keep up is to read every single day.  So awhile back, 100 days ago to be exact, I decided to read one paper every single day - the first thing to tackle every morning.  The organization is split up into two posts (NLP and Images) to make a gigantic blog post into two really large ones. Please note, this is written by a student and may contain errors. Without further ado:
