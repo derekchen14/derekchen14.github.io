@@ -24,6 +24,8 @@ TO use a Latex, add two dollar signs like so:
 
 API here: https://artofproblemsolving.com/wiki/index.php/LaTeX:Symbols
 
+Add images with ![Image Text]({{"/assets/img/image-name.png"}})
+
 ### Local Development
 To serve locally, run `bundle exec jekyll serve`, then head to http://localhost:4000 to view
 
