@@ -29,7 +29,7 @@ Even though the methods now preserve labels, they still face a host of other iss
 
 ## Data Augmentation for Diversity
 
-Using data augmentation to achieve robustness on out-of-domain (OOD) examples requires a shift in mindset from targeting label quality towards focusing on label diversity.  Template paraphrasing may generate high quality annotations since we know the labels unfront, but the breadth of coverage is limited by the number of manually crafted templates.  LM decoding fine-tuned on your dataset may start to overfit to the distribution it has encountered. In order to produce novel examples then, we must inject some alternate prior into the data distribution.
+Using data augmentation to achieve robustness on out-of-domain (OOD) examples requires a shift in mindset from targeting label quality towards focusing on label diversity.  This mirrors a similar shift in computer vision in optimizing for both Affinity and Diversity.[^21] Template paraphrasing may generate high quality annotations since we know the labels unfront, but the breadth of coverage is limited by the number of manually crafted templates.  LM decoding fine-tuned on your dataset may start to overfit to the distribution it has encountered. In order to produce novel examples then, we must inject some alternate prior into the data distribution.
 
 *Auxilliary supervision* techniques obtain data following a different distribution by literally using a separate dataset. Essentially, some small seed set can be used to query a large pool of unlabeled utterances to find examples that are close enough to maintain the label, but far away enough to expand the coverage.[^18]  In order to maintain the label preserving properties, an additional filtering process can be applied.  An alternative to moving towards a different distribution is to add noise to the data manifold, which has also been shown to improve out-of-domain robustness.[^19]
 
@@ -82,3 +82,4 @@ An interesting observation is that while template paraphrasing seems like a subg
 [^18]: Chen and Yu (2021), [GOLD: Improving Out-of-Scope Detection in Dialogues using Data Augmentation](https://aclanthology.org/2021.emnlp-main.35/)
 [^19]: Ng et al. (2020), [SSMBA: Self-Supervised Manifold Based Data Augmentation for Improving OOD Robustness](https://aclanthology.org/2020.emnlp-main.97/)
 [^20]: Chen et al. (2021), [ABCD: Action-Based Conversations Dataset](https://aclanthology.org/2021.naacl-main.239/)
+[^21]: Lopes et al. (2021), [Tradeoffs in Data Augmentation: An Empirical Study](https://openreview.net/forum?id=ZcKPWuhG6wy)
