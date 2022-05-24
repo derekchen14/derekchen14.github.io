@@ -247,10 +247,19 @@
 
 <p>Our second insight is that our user simulator does not need a terribly complex policy manager.  Instead, we can enumerate them with a set of rules to produce all combinations of user intents.  We can then sample from this set to produce plausible scenarios.  To see how this works, let’s look at an example.  Suppose we are dealing with the a flight domain.  A user may want to book a flight, cancel a flight, check on an existing flight or ask about some FAQs.  In reality, there are maybe a dozen more actions that user would want to take, but not that much more.</p>
 
-<p>What makes emulating / understanding the user difficult is the number of values they provide and the way in which they provide them.  For example, when booking a flight, the user may choose from thousands of (departure/destination) locations and times.  This can lead to millions of values, but there are only four possible slot combinations.  Taking into account edge cases such as price requirements, seating requests and airline preferences, we might expand this into a total of 100 slots for a given domain.  Ultimately though, the number of slots is relatively small to the values.  (Further notice that the slots in a given domain are often re-used across intents.)   We separately mentioned that the way the user’s express a preference have lots of variation: there are a hundred ways to say that you want to “Fly from San Diego to Miami on Saturday morning”.  What all these permutations have in common though is that all the complexity is in how to express the exact request.</p>
+<p>What makes emulating and/or understanding the user difficult is the number of values they provide and the way in which they provide them.  For example, when booking a flight, the user may choose from thousands of (departure/destination) locations and times.  This can lead to millions of values, but there are only four possible slot combinations.  Taking into account edge cases such as price requirements, seating requests and airline preferences, we might expand this into a total of 100 slots for a given domain.  Ultimately though, the number of slots is relatively small compared to the number of values.<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup>  We separately mentioned that the way the user’s express a preference have lots of variation: there are a hundred ways to say that you want to “Fly from San Diego to Miami on Saturday morning”.  What all these permutations have in common though is that all the complexity is in how to express the exact request.</p>
 
 <p>In other words, with a limited number of domains, slots and intents it is not particularly hard to design a policy which can scale to as many combinations as you want since the heavy lifting is actually within the text generation component.  And what existing models are great at generating text given a context?  Open-domain chatbots.  Such models can already directly query the internet and read through millions of Wikipedia pages.  Trying to parse a few dozen parameters before generating a natural language response should be a walk in the park.</p>
 
+<hr />
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>Further notice that the slots in a given domain are often re-used across intents which dramatically simplifies the task. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
 
     
   </section>
