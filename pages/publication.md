@@ -7,6 +7,8 @@ permalink: /publication/
 
 [<u>Clean or Annotate: Learning with Noisy Labels through Targeted Relabeling</u>](https://arxiv.org/abs/2110.08355) **Derek Chen**, Zhou Yu, Samuel R. Bowman  (Accepted at NAACL ‘22 with Best Paper Award in Low-Resource NLP workshop)
 
+[<u>DG^2: Data Augmentation Through Document Grounded Dialogue Generation</u>](https://arxiv.org/abs/2112.08342) Qingyang Wu, Song Feng, **Derek Chen**, Sachindra Joshi, Luis Lastras and Zhou Yu  (Accepted at SIGDial ‘22)
+
 [<u>GOLD: Improving Out-of-Scope Detection in Dialogues using Data Augmentation</u>](https://arxiv.org/abs/2109.03079) **Derek Chen**, Zhou Yu [[Code](https://github.com/asappresearch/gold)] (Accepted as long paper at EMNLP ‘21)
 
 [<u>Data Augmentation for Intent Classification</u>](https://arxiv.org/abs/2206.05790) **Derek Chen**, Claire Yin  (Accepted into NeurIPs '21 Data-Centric AI)
