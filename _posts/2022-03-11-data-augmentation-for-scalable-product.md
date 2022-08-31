@@ -56,9 +56,9 @@ One way to organize all the different types of augmentation methods is to think 
  - Latent Perturbation (A --> C --> B): Pivot languages, VAEs, GANs, Direct paraphrasing
  - Text Generation (C --> B): LM Decoding, Text In-filling, User Simulation
  - Auxiliary Supervision (D --> B): External data pool, kNN retrieval on unlabeled utterances, Weak supervision
- - Template Paraphrasing (D --> C --> B): M2M, Overnight
+ - Template Paraphrasing (D --> C --> B): M2M, Overnight, Agenda-based Simulators
 
-An interesting observation is that while template paraphrasing seems like a subgroup, according to the DAG it is a parent level method.  Ultimately it seems that while all methods are useful, but some are more useful than others.
+An interesting observation is that while template paraphrasing seems like a subgroup, according to the DAG it is a parent level method.  Ultimately it seems that while all methods are useful, some are more useful than others.
 
 ---
 
