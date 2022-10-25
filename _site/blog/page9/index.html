@@ -239,6 +239,35 @@
         <span>
           <header>
             <h2>
+              <a aria-label="Optimizing RecSys Training" class="post-link" href="/2016/06/23/optimizing-recsys-training.html">
+                Optimizing RecSys Training
+              </a>
+            </h2>
+            
+
+
+<div class="post-info">
+    <p class="meta">
+      June 23, 2016
+    </p></div>
+
+          </header>
+          
+              <div class="excerpt">
+                  
+                     Given the goal of creating an optimal recommendation system, one could consider using a neural turing machine (NTM) with a “programmable” head performing read/write operations on the various inputs in order to generate a prediction.  The inputs would be encoding of the situation (shopping for clothes), encodings of the options (sweater, jacket, T-shirt, dress shirt) along with their features of those options (blue/green, soft, polyester, wool), tons of other previously collected data points, and obviously a vector embedding of the individual for whom we are making the recommendation.  The predictions would just the result of softmax classifier with thousands of possibilities, each one representing a cluster of clothing items.  (There is no need to recommend just one item because eve a mobile UI can display 7-10 items fairly easily to let the customer make the final decision.)
+
+                  
+              </div>
+          
+      </span>
+    </div>
+    
+    <div class="post-teaser">
+        
+        <span>
+          <header>
+            <h2>
               <a aria-label="What Paul Graham looks for in a start-up" class="post-link" href="/2016/06/21/what-paul-graham-looks-for-in-a-start-up.html">
                 What Paul Graham looks for in a start-up
               </a>
@@ -343,35 +372,6 @@
               <div class="excerpt">
                   
                      For my Stanford Convolutional Neural Networks course, I partnered with a brilliant friend of mine to analyze images from a collection of 40,000 digitized works of art by classifying them according to artist, genre, and location.  After some standard pre-processing, we employed a modified VGGNet architecture to achieve better than state-of-the-art results on artist and genre classification. Along the way though, we hit a number of roadblocks, and saw Error allocating 86118400 bytes of device memory (out of memory). Driver report 32735232 bytes free and 4294770688 bytes total.  Segmentation fault (core dumped) more times than we would like to remember.  In getting our network to  run to properly, we encountered a number of problems and their solutions.
-
-                  
-              </div>
-          
-      </span>
-    </div>
-    
-    <div class="post-teaser">
-        
-        <span>
-          <header>
-            <h2>
-              <a aria-label="Difference between LSTM and GRU for RNNs" class="post-link" href="/2016/02/19/difference-between-lstm-and-gru-for-rnns.html">
-                Difference between LSTM and GRU for RNNs
-              </a>
-            </h2>
-            
-
-
-<div class="post-info">
-    <p class="meta">
-      February 19, 2016
-    </p></div>
-
-          </header>
-          
-              <div class="excerpt">
-                  
-                     So if you’ve started studying RNNs, and you heard that LSTMs and GRUs at the type of RNNs you should use because vanilla RNNs suffer from the vanishing gradient problem.  That makes sense because the hidden state is passed along for each iteration, so when back-propagating, the same Jacobian matrix is multiplied by itself over and over again.  If that matrix has a principal eigenvalue less than one, then we have a vanishing gradient.  Incidentally, if the matrix has a principal eigenvalue greater than one: exploding gradient.
 
                   
               </div>
