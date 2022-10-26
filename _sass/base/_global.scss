@@ -145,9 +145,11 @@ img[align=right] {
 blockquote {
   border-left: 2px solid darken($blockquote-color, 20%);
   margin: 1em 1em;
-  padding: 0.75em 1em;
+  padding: 1em 1.25em;
   background-color: $blockquote-color;
   box-shadow: 0 2px 2px $border-color;
+  font-size: 1.4em;
+  font-style: italic;
 }
 
 blockquote *:last-child,

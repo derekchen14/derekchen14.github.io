@@ -1,16 +1,17 @@
 ---
 layout: post
-title: Machine-Assisted Data Labeling
+title: Solving the Long Tail of Data Annotation
 tags: [data-strategy, product-strategy, research, startups]
 color: blue
 excerpt_separator: <!--more-->
 ---
 
-Large language models are Few-Shot Learners.[^1] And Zero-Shot Learners.[^2] And Zero-shot Reasoners too, why not?[^3]  So why hasn't AI [taken over the world](https://www.gwern.net/fiction/Clippy) yet? Well, apocalyptic scenarios aside, applying AI to real world problems just isn't that simple. The deep learning revolution was kicked off not by intelligent algorithms alone, but also with the help of powerful compute and access to data.[^4] While the models have continued to improve and the [compute power has continued to advance](https://blogs.nvidia.com/blog/2022/09/20/keynote-gtc-nvidia-ceo/), the data problem remains unsolved. If you're a real business whose survival depends on providing tangible value to customers, the importance of the data can't simply be swept under the rug.
+<!-- Large language models are Few-Shot Learners.[^1] And Zero-Shot Learners.[^2] And Zero-shot Reasoners too, why not?[^3]  So why hasn't AI [taken over the world](https://www.gwern.net/fiction/Clippy) yet? Well, apocalyptic scenarios aside, applying AI to real world problems just isn't that simple. -->
+The deep learning revolution was initiated not by intelligent algorithms alone, but with the help of powerful compute and access to data.[^1] While models have continued to improve and [compute power has continued to advance](https://blogs.nvidia.com/blog/2022/09/20/keynote-gtc-nvidia-ceo/), progress on data collection has not been so fortunate.  Data labeling companies would have you believe that they alone are the solution to all our data problems -- provided, of course, that we pay their exorbitant fees.  However, relying on vendors avoids the core issue since the underlying cost and complexity of gathering high quality data remains untouched.  As things currently stand, the effort needed to annotate each additional batch of data _increases_ over time as the examples reach the long tail of the distribution. Any company able to figure out a way to transform data annotation from a cost-center into an area of innovation gains an enviable competitive advantage. But how?
 
  <!--more-->
 
-## AI is Different from Traditional Software
+## The Long Tail of Data Annotation
 
 <!-- ![Jedi IQ on Labeled Data]({{"/assets/img/jedi_labeled_data.png"}}) -->
 
@@ -26,7 +27,7 @@ A sizable number of incumbents already exist in the data labeling industry, prov
 
 At first glance, it does seem like such businesses should play an important role in moving the field forward.  They have invested heavily into streamlining their processes, in addition to designing high-usability platforms to make the annotation experience as smooth as possible.  There is no doubt that they will eventually build ML driven data augmentation right into the annotation process if they haven't already done so.  And there's a growing body of research to suggest that such machine-assisted labeling is indeed the way of the future.
 
-As a quick aside, let's visit just a handful of examples.  To start, it might not be surprising that if you "Want To Reduce Labeling Costs, GPT-3 Can Help" through pseudo-labeling.[^5]  You can also use the model to generate the datasets, including synthesized inputs and outputs.[^6]  Others have showed that using GPT-3 followed by human verification improves Extractive QA.[^7] You can even use models to help with the verification process as well.[^8]
+As a quick aside, let's visit just a handful of examples.  To start, it might not be surprising that if you "Want To Reduce Labeling Costs, GPT-3 Can Help" through pseudo-labeling.[^2]  You can also use the model to generate the datasets, including synthesized inputs and outputs.[^3]  Others have showed that using GPT-3 followed by human verification improves Extractive QA.[^4] You can even use models to help with the verification process as well.[^5]
 
 Now, back to the data labeling effort.  Does machine-in-the-loop annotation solve our problem?  [Let's think step-by-step](https://twitter.com/arankomatsuzaki/status/1529278580189908993).  An AI revolution requires scalable access to labeled data.  Data labeling companies outsource the effort to overseas workers, lowering their costs.  They employ technology to lower the costs further.  Now the cost of dealing with the long-tail is much lower than before. But the negative feedback cycle still remains.
 
@@ -34,9 +35,13 @@ The issue has been mitigated, but not eliminated.
 
 Now, let's be clear.  If you are running a firm or department in charge of annotating large amounts of data, you should certainly make an effort to take full advantage of the current state-of-the-art techniques.  The point is not that machine-assistance is bad, but more that machine-assistance is not enough.
 
-Data labeling firms generate a profit by farming tasks out to lower paid crowdsource workers, taking advantage of labor arbitrage.  Notably, they are _not_ taking advantage of economies of scale since the cost of annotating each marginal data point doesn't budge.[^9]  AI-assisted annotations certainly helps, but improved GUIs and task reformulation are likely to help just as much.
+<blockquote>
+"We must flip the script such that the burden of annotation is placed on the machine, with humans merely assisting."
+</blockquote>
 
-At the end of the day, the humans are still driving the bulk of the effort, while the machines are just helping.  In order to tackle the core problem, we would have to shift the burden of responsibility onto the machine.  Only then would we be able to invert the negative flywheel into a positive loop.
+Data labeling firms generate a profit by farming tasks out to lower paid crowdsource workers, taking advantage of labor arbitrage.  Notably, they are _not_ taking advantage of economies of scale since the cost of annotating each marginal data point doesn't budge.[^6]  AI-assisted annotations certainly helps, but improved GUIs and task reformulation are likely to help just as much.
+
+In order for an AI-first company to survive, we have to move from a _machine-assisted_ data labeling process to a _machine-driven_ one. At the moment, humans still bear the bulk of the annotation effort, and machines just help where possible. Instead, we must flip the script such that the burden of annotation is placed in the machine, with humans merely assisting.  Only then would we be able to invert the negative flywheel into a positive loop.
 
 ## Towards a Human-in-the-Loop Paradigm
 
@@ -55,19 +60,23 @@ Why hasn't this already happened?  Looking back, we notice that this world start
 
 ## Controllable, Reliable, Explainable
 
-Large, pre-trained LMs are capable of generating high quality, high fluency text.  Fantastic performance is possible even without explicit training through in-context learning.  But their gargantuan size can make them hard to control,[^10] lexically or semantically.  When they work well, all is fine, but when predictions are incorrect or generations are toxic, there's not much that can be done about it.  Fine-tuning is impractical at best, and unattainable at worst since the model is hidden behind a pay-to-play API.  With training already this difficult, probing for explanations is effectively impossible.
+Large, pre-trained LMs are capable of generating high quality, high fluency text.  Fantastic performance is possible even without explicit training through in-context learning.  But their gargantuan size can make them hard to control,[^7] lexically or semantically.  When they work well, all is fine, but when predictions are incorrect or generations are toxic, there's not much that can be done about it.  Fine-tuning is impractical at best, and unattainable at worst since the model is hidden behind a pay-to-play API.  With training already this difficult, probing for explanations is effectively impossible.
 
 Human annotators on the other hand are also able to produce fluent and coherent text.  They are relatively easy to control through guidelines and training manuals.  They behave in well understood ways and often make a good faith effort to be correct.  Critically, when mistakes are inevitably made, human annotators can easily explain their thought process and quickly adapt to changing circumstances.
 
 If we're willing to look past the hype, we see that LLMs still have a way to go before matching human performance on data labeling.  They fall short on three key desiderata: controllability, reliability and explainability.
 
-Is there a way out?  The key insight is to control the output of the LLM enough to be able to generate label-preserving training data.  We then fine-tune smaller, more manageable models on this data for downstream applications.
+<blockquote>
+"By leveraging large LMs as data generators rather than directly as classifiers, a number of strategic benefits are now unlocked."
+</blockquote>
 
-Unlike using the model for direct prediction, the labeled data is now discrete which means we can further manipulate it as needed.  If the diversity generated data is too low, we can apply additional data augmentation procedures.  If the noise of the generated data is too high, we can apply data denoising or data filtering techniques.  This format allows us to reliably produce high quantity and high quality data since we can repeat the process indefinitely until we have converged on a result we are satisfied with.
+Is there a way out?  The key insight is to control the output of the LLM enough to be able to generate label-preserving training data.  We then fine-tune smaller, more manageable models on this data for downstream applications.  By leveraging large LMs indirectly as data generators rather than directly as classifiers, a number of strategic benefits are now unlocked.
+
+Rather than using the model directly for prediction, we now have access to tangible data which can be further molded and manipulated as desired.  If the diversity generated data is too low, we can apply additional data augmentation procedures.  If the noise of the generated data is too high, we can apply data denoising or data filtering techniques.  This format allows us to reliably produce high quantity and high quality data since we can repeat the process indefinitely until we have converged on a result we are satisfied with.
 
 The discrete nature of the outputs means we can also directly observe what the large LM is thinking (to a certain extent).  If it starts to generate biased text, we can deal with it right away before feeding to the downstream model.  If we're exploring a new area due to domain shift, we can see interpretable examples of what the LLM believes is right.  This gets us the best of both worlds - automated, scalable data annotation leading directly to improved downstream model performance.
 
-But where did the control of the large model come from?  While it's true that we can't fine-tune the entire model (ie. CTRL), we can nudge it in the right direction using soft-prompting and adapters. The outputs aren't perfect, but they don't have to be.  The augmented data is directly manageable so we can clean and denoise until it fits our goals.  The research on how to make this happen is an active, ongoing direction.[^12]
+But where did the control of the large model come from?  While it's true that we can't fine-tune the entire model (ie. CTRL),[^8] we can nudge it in the right direction using soft-prompting and adapters. The outputs aren't perfect, but they don't have to be.  The augmented data is directly manageable so we can clean and denoise until it fits our goals.  The research on how to make this happen is an active, ongoing direction.[^9]
 
 Finally, and maybe most critically, we can use the improved data to train better models.  The improved models interact with humans, collecting more real-world cases that are then fed back to the large LM for labeling.  For the first time, we have a truly positive feedback loop, where AI genuinely gets better the more it is used.
 
@@ -77,15 +86,12 @@ Machine-assisted data labeling naturally hit limitations due to the complexities
 
 ---
 
-[^1]: GPT3 (Brown et al., 2020) [Language Models are Few-Shot Learners](https://arxiv.org/abs/2005.14165)
-[^2]: FLAN (Wei et al., 2021) [Finetuned Language Models Are Zero-Shot Learners](https://arxiv.org/abs/2109.01652)
-[^3]: CoT (Kojima et al., 2022) [Large Language Models are Zero-Shot Reasoners](https://arxiv.org/abs/2205.11916)
-[^4]: (Sun et al., 2017) [Revisiting Unreasonable Effectiveness of Data in Deep Learning Era](https://arxiv.org/abs/1707.02968)
-[^5]: (Wang et al., 2021) [Want To Reduce Labeling Costs, GPT-3 Can Help](https://aclanthology.org/2021.findings-emnlp.354/)
-[^6]: WANLI (Liu et al., 2021) [Worker and AI Collaboration for NLI Dataset Creation](https://arxiv.org/abs/2201.05955)
-[^7]: DADC (Bartolo et al., 2022) [Models in the Loop: Aiding Crowdworkers with Generative Annotation Assistants](https://aclanthology.org/2022.naacl-main.275.pdf)
-[^8]: (Wiegreffe et al., 2022) [Reframing Human-AI Collaboration for Generating Free-Text Explanations](https://aclanthology.org/2022.naacl-main.47/)
-[^9]: Data labeling companies are possibly the _least_ likely group to innovate a novel method of data annotation.  Their business model incentives them to maintain the status quo since any deviation risks depreciating the tremendous investment poured into their current infrastructure, including their network of crowdworkers, optimized onboarding routines and refined sales copy.  This pushback is common whenever a new way of doing things makes the old way obsolete.
-[^10]: Prefix-tuning (Li and Liang, 2021) [Prefix-Tuning: Optimizing Continuous Prompts for Generation](https://aclanthology.org/2021.acl-long.353/)
-[^11]: CTRL (Keskar et al., 2019) [A Conditional Transformer Language Model for Controllable Generation](https://arxiv.org/abs/1909.05858)
-[^12]: Driven by yours truly
+[^1]: (Sun et al., 2017) [Revisiting Unreasonable Effectiveness of Data in Deep Learning Era](https://arxiv.org/abs/1707.02968)
+[^2]: (Wang et al., 2021) [Want To Reduce Labeling Costs, GPT-3 Can Help](https://aclanthology.org/2021.findings-emnlp.354/)
+[^3]: WANLI (Liu et al., 2021) [Worker and AI Collaboration for NLI Dataset Creation](https://arxiv.org/abs/2201.05955)
+[^4]: DADC (Bartolo et al., 2022) [Models in the Loop: Aiding Crowdworkers with Generative Annotation Assistants](https://aclanthology.org/2022.naacl-main.275.pdf)
+[^5]: (Wiegreffe et al., 2022) [Reframing Human-AI Collaboration for Generating Free-Text Explanations](https://aclanthology.org/2022.naacl-main.47/)
+[^6]: Data labeling companies are possibly the _least_ likely group to innovate a novel method of data annotation.  Their business model incentives them to maintain the status quo since any deviation risks depreciating the tremendous investment poured into their current infrastructure, including their network of crowdworkers, optimized onboarding routines and refined sales copy.  This pushback is common whenever a new way of doing things makes the old way obsolete.
+[^7]: Prefix-tuning (Li and Liang, 2021) [Prefix-Tuning: Optimizing Continuous Prompts for Generation](https://aclanthology.org/2021.acl-long.353/)
+[^8]: CTRL (Keskar et al., 2019) [A Conditional Transformer Language Model for Controllable Generation](https://arxiv.org/abs/1909.05858)
+[^9]: Driven by yours truly
