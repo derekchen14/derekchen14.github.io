@@ -1,15 +1,16 @@
 ---
 layout: post
-title: Solving the Long Tail of Data Annotation
+title: Solving the Long Tail of Data Acquisition
 tags: [data-strategy, product-strategy, research, startups]
 color: blue
-excerpt_separator: <!--more-->
 ---
 
-<!-- Large language models are Few-Shot Learners.[^1] And Zero-Shot Learners.[^2] And Zero-shot Reasoners too, why not?[^3]  So why hasn't AI [taken over the world](https://www.gwern.net/fiction/Clippy) yet? Well, apocalyptic scenarios aside, applying AI to real world problems just isn't that simple. -->
-The deep learning revolution was initiated not by intelligent algorithms alone, but with the help of powerful compute and access to data.[^1] While models have continued to improve and [compute power has continued to advance](https://blogs.nvidia.com/blog/2022/09/20/keynote-gtc-nvidia-ceo/), progress on data collection has not been so fortunate.  Data labeling companies would have you believe that they alone are the solution to all our data problems -- provided, of course, that we pay their exorbitant fees.  However, relying on vendors avoids the core issue since the underlying cost and complexity of gathering high quality data remains untouched.  As things currently stand, the effort needed to annotate each additional batch of data _increases_ over time as the examples reach the long tail of the distribution. Any company able to figure out a way to transform data annotation from a cost-center into an area of innovation gains an enviable competitive advantage. But how?
+<div class="hidden">The deep learning revolution was initiated not by intelligent algorithms alone, but with the help of powerful compute and access to data. While models have continued to improve and compute power has continued to advance, progress on data collection has not been so fortunate.  Data labeling companies would have you believe that they alone are the solution to all our data problems - provided, of course, that we pay their exorbitant fees.  However, relying on vendors avoids the core issue since the underlying cost and complexity of gathering high quality data remains untouched.  As things currently stand, the effort needed to annotate each additional batch of data increases over time as the examples reach the long tail of the distribution. Any company able to figure out a way to transform data annotation from a cost-center into an area of innovation gains an enviable competitive advantage. But how?</div>
 
  <!--more-->
+
+The deep learning revolution was initiated not by intelligent algorithms alone, but with the help of powerful compute and access to data.[^1] While models have continued to improve and [compute power has continued to advance](https://blogs.nvidia.com/blog/2022/09/20/keynote-gtc-nvidia-ceo/), progress on data collection has not been so fortunate.  Data labeling companies would have you believe that they alone are the solution to all our data problems -- provided, of course, that we pay their exorbitant fees.  However, relying on vendors avoids the core issue since the underlying cost and complexity of gathering high quality data remains untouched.  As things currently stand, the effort needed to annotate each additional batch of data _increases_ over time as the examples reach the long tail of the distribution. Any company able to figure out a way to transform data annotation from a cost-center into an area of innovation gains an enviable competitive advantage. But how?
+
 
 ## The Long Tail of Data Annotation
 
@@ -83,6 +84,8 @@ Finally, and maybe most critically, we can use the improved data to train better
 ### Conclusion
 
 Machine-assisted data labeling naturally hit limitations due to the complexities of real-life scenarios.  Machine-driven data labeling is required instead to cover the long tail, where humans are in the loop simply to verify.  This allows AI-first companies to scale into the future long after the funding and hype have faded away.
+
+<!-- Large language models are Few-Shot Learners.[^1] And Zero-Shot Learners.[^2] And Zero-shot Reasoners too, why not?[^3]  So why hasn't AI [taken over the world](https://www.gwern.net/fiction/Clippy) yet? Well, apocalyptic scenarios aside, applying AI to real world problems just isn't that simple. -->
 
 ---
 
