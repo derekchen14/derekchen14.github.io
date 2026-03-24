@@ -63,8 +63,6 @@ The integration challenge is that we need all three solutions working together, 
 
 The path forward requires us to shift our focus from climbing leaderboards to navigating ambiguity. Instead of celebrating another percentage point on standardized tests, we should be building systems that can handle the messy, implicit, and frankly brokenness nature of human work. Until we acknowledge that there are always more unknown details in reality, we will fail to address this complexity, and AGI will remain a distant dream rather than an imminent reality. Progress is possible though when we realize that our goal is not to solve all tasks, but just to make helpful progress on specific tasks. Ultimately, real breakthroughs will come from those willing to grapple with the full complexity of the challenge.
 
-Thanks for reading More Than One Turn! Subscribe for free to receive new posts and support my work.
-
 ---
 
 [^1]: Who among us isn’t using AI assistance for coding? Personally, I hit up against credit limits at least once a week.
