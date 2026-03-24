@@ -1,6 +1,7 @@
 # SITE CONFIGURATION
 baseurl: ""
 url: "https://derekchen14.github.io"
+timezone: America/New_York
 
 # THEME-SPECIFIC CONFIGURATION
 title: More Than One Turn                                    # site's title

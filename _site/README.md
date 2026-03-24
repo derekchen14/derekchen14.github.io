@@ -29,9 +29,13 @@ Add links with [Clarity Project](https://github.clarity-project.com).
 
 ### Local Development
 To serve locally, run `bundle exec jekyll serve`, then head to http://localhost:4000 to view
+You might need to update the theme with `bundle update` if there are any errors.
 
 ### Remote Deployment
+You must bundle update locally and check that everything looks okay before pushing.
 To publish to the web, simply commit changes and push to Github!
 
 ## More Resources
 Look within the how_to_use folder for the documenation file
+
+gem install eventmachine -v '1.2.7' -- --with-cppflags=-I$(brew --prefix openssl@3)/include --with-ldflags=-L$(brew --prefix openssl@3)/lib
