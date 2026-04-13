@@ -9,7 +9,7 @@ The market for AI agent toolkits in 2026 is booming. LangGraph, CrewAI, Agno, Cl
 
 <!--more-->
 
-The popular tools optimize for the happy path: clear input, well-structured requests, cooperative users. But equally important is optimizing for the _unhappy_ path. The reality is that most people won't learn to prompt, won't provide complete information, and will probably just bail when the agent gets confused.  A solution to this has been hiding under our nose for years: **Natural Language Understanding** (NLU). This post examines whether taking an explicit NLU approach is a relic of the pre-LLM era or whether it's solving problems the rest of the industry is ignoring.
+The popular tools optimize for the happy path: clear input, well-structured requests, cooperative users. But equally important is optimizing for the _unhappy_ path. The reality is that most people won't learn to prompt, won't read the documentation, and will probably just bail when the agent gets confused.  A solution to this has been hiding under our nose for years: **Natural Language Understanding** (NLU). This post examines whether taking an explicit NLU approach is a relic of the pre-LLM era or whether it's solving problems the rest of the industry is ignoring.
 
 ## Trending AI Agent Architectures
 
@@ -79,7 +79,7 @@ NLU does carry some real baggage. The POMDP framing (observations, hidden states
 
 The popular agent frameworks in 2026 are solving a real problem: making it easy for developers to build agents that call tools, follow workflows, and produce results. They solve it well. If your users are developers, power users, or anyone who can articulate a clear request, these frameworks will serve you.
 
-But there's a different problem that almost nobody is working on: users who can't articulate clear requests, who provide half the information, and then contradict themselves. Real users will say 'fix it' and expect the agent to know what 'it' means without providing any context. For any agent that serves the general public, this *is* the primary use case. Most people will never learn prompting best practices, will never read documentation, and really don't care about being cooperative. Understanding the user suddenly becomes incredibly difficult, and tackling ambiguity becomes a primary concern, rather than an afterthought.
+But there's a different problem that almost nobody is working on: users who can't articulate clear requests, who provide half the information, and then contradict themselves. Real users will say 'fix it' and expect the agent to know what 'it' means without providing any context. For any agent that serves the general public, this *is* the primary use case. Understanding the user suddenly becomes incredibly difficult, and tackling ambiguity becomes a primary concern, rather than an afterthought.
 
 The 2018-era conversational AI systems (Rasa, Dialogflow, Watson) learned this the hard way and built machinery to handle it: intent classification, slot-filling, dialogue state tracking, conversation repair. Then LLMs arrived, the industry decided that machinery was obsolete, and a new generation of frameworks started from scratch. The issues it solved never went away. The industry just stopped noticing them in favor of newer, shinier problems. They threw out the baby with the bathwater.
 
