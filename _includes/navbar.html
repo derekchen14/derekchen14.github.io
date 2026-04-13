@@ -22,6 +22,11 @@
     <ul class="hide">
         {% assign name_page = "" %}
 
+        {% if page.title == "About Me" %}
+        <li>
+            <a class="clear" href="{{ '/' | relative_url }}">Posts</a>
+        </li>
+        {% endif%}
         {% for page in site.pages %}
             {% unless page.title == null or page.hide or name_page contains page.title %}
             <li class="separator"> | </li>
