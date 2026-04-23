@@ -1,19 +1,65 @@
 ---
 layout: post
 title: "Using Multi-modal Models to Improve AI Agents"
-date: '2026-04-23 16:12:51'
+date: '2026-04-23 17:40:53'
 tags: []
 color: 
 excerpt_separator: <!--more-->
 ---
 
 ## Motivation
-Text-only agents are blind to visual context, and that blind spot costs them across a broad range of real-world tasks. A broken-UI screenshot, a slide deck diagram, or the tone of a spoken meeting all carry meaning that text transcriptions simply drop. Multi-modal models are now widely available, making visual integration practical for teams of any size. User expectations are catching up fast: agents that can see feel meaningfully more capable, and that gap is becoming difficult to overlook.
-## Process
-With those application ideas in hand, turning them into a working system requires deliberate engineering choices. The first step is selecting a vision encoder — such as CLIP or ViT — suited to the agent's target domain. Once chosen, visual embeddings are fused with language representations at the planning layer, so image inputs are routed through the encoder before any context is passed to the LLM backbone. This keeps the perception and reasoning stages cleanly separated while still allowing the model to reason jointly over text and visuals. From there, the practical workflow follows a tight loop: pick a vision encoder, wire it to the planner, fine-tune on UI traces, evaluate on held-out workflows, and ship behind a feature flag. Prompt templates should be iterated carefully to instruct the agent how to reason over visual tokens, and perception-to-action pipelines should be validated against task-specific benchmarks before any wider rollout. Concretely, the vision encoder converts raw pixels into a fixed-size embedding vector; a lightweight projection head (typically a linear layer or small MLP) then maps that embedding into the same dimensionality as the LLM's token embeddings, so the planner sees visual information as if it were just another sequence of tokens it can attend over. During the planning step, cross-attention between those visual tokens and the language context lets the model selectively weight the most task-relevant regions of the image — meaning the planner isn't consuming a monolithic "image summary" but is actively querying spatial and semantic features as it generates each reasoning step.
-## Ideas
-That perception gap opens up a rich space of practical applications worth exploring before committing to an implementation path. One of the most immediate is giving agents access to live screen captures for GUI automation and debugging — treating screenshots not as passive records but as a tool the agent can actively call. Video frame sampling opens another frontier, enabling agents to understand temporal sequences such as tutorials and walkthroughs. On the retrieval side, visual memory indexed alongside text lets agents surface relevant images or frames during reasoning, and tool-use patterns that invoke vision APIs on demand are particularly promising — teams with tight latency budgets can fall back to text-only processing when needed.
-## Takeaways
-Multi-modal grounding measurably reduces hallucination on visually-anchored tasks — when an agent can see what it's reasoning about, it makes fewer unsupported leaps. Perhaps counterintuitively, fusion strategy tends to matter more than encoder choice for most downstream use cases, so it's worth investing time in how modalities are combined rather than chasing the latest vision backbone.
+Text-only agents lack the visual grounding needed to interpret screenshots, diagrams, and real-world scene data.
 
-The practical advice is to start narrow: introduce one modality at a time before attempting full multi-modal pipelines. And before shipping to production, latency and cost trade-offs require careful profiling — what works in a notebook can look very different under real traffic conditions.
+Multi-modal perception dramatically broadens the input space an agent can reason over.
+
+Early benchmarks show vision-augmented agents outperform text-only baselines on navigation and UI tasks.
+
+Business and research pressure to build agents that operate in richer, less structured environments.
+
+
+## Process
+Select a pre-trained vision encoder (e.g. CLIP, SigLIP) and decide how it integrates with the language backbone.
+
+Align visual embeddings with the token space the planner already understands via a projection layer or adapter.
+
+Feed combined vision + text context into the policy model at each decision step.
+
+Evaluate the loop: capture observations → encode → plan → act → repeat.
+
+Instrument tracing so visual inputs and their downstream actions can be inspected and debugged.
+
+Pick a vision encoder.
+
+Wire it to the planner.
+
+Fine-tune on UI traces.
+
+Evaluate on held-out workflows.
+
+Ship behind a flag.
+
+## Ideas
+Use video frames or gif sequences instead of static screenshots to give agents temporal context.
+
+Let the agent generate its own visual "scratchpad" by rendering intermediate states back to images.
+
+Experiment with interleaved image-text reasoning (similar to chain-of-thought but with visual anchors).
+
+Probe cross-modal attention maps to understand which visual regions influence decisions.
+
+Fine-tune the vision encoder on domain-specific imagery rather than relying solely on general pretraining.
+
+Using video for temporal grounding.
+
+Treating screenshots as a tool the agent can call.
+
+Falling back to text-only when latency budget is tight.
+
+## Takeaways
+Multi-modal input is most valuable when the task genuinely requires visual context; avoid it otherwise.
+
+Adapter-based integration beats full fine-tuning for teams with limited compute.
+
+Evaluation is the bottleneck: invest early in visual replay tooling to make debugging tractable.
+
+Expect latency costs — batching and caching visual embeddings are essential for production agents.
