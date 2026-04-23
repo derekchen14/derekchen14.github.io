@@ -1,65 +1,17 @@
 ---
 layout: post
 title: "Using Multi-modal Models to Improve AI Agents"
-date: '2026-04-23 17:51:11'
+date: '2026-04-23 17:56:22'
 tags: []
 color: 
 excerpt_separator: <!--more-->
 ---
 
 ## Motivation
-Text-only agents lack the visual grounding needed to interpret screenshots, diagrams, and real-world scene data.
-
-Multi-modal perception dramatically broadens the input space an agent can reason over.
-
-Early benchmarks show vision-augmented agents outperform text-only baselines on navigation and UI tasks.
-
-Business and research pressure to build agents that operate in richer, less structured environments.
-
-
-## Process
-Select a pre-trained vision encoder (e.g. CLIP, SigLIP) and decide how it integrates with the language backbone.
-
-Align visual embeddings with the token space the planner already understands via a projection layer or adapter.
-
-Feed combined vision + text context into the policy model at each decision step.
-
-Evaluate the loop: capture observations → encode → plan → act → repeat.
-
-Instrument tracing so visual inputs and their downstream actions can be inspected and debugged.
-
-Pick a vision encoder.
-
-Wire it to the planner.
-
-Fine-tune on UI traces.
-
-Evaluate on held-out workflows.
-
-Ship behind a flag.
-
+For too long, AI agents have been limited to text and structured inputs — a narrow slice of the world. Multi-modal models change that. They give agents the ability to process images, audio, video, and text together, enabling sharper reasoning and better decisions. The real world doesn't communicate in one format, and neither should the agents working within it.
 ## Ideas
-Use video frames or gif sequences instead of static screenshots to give agents temporal context.
-
-Let the agent generate its own visual "scratchpad" by rendering intermediate states back to images.
-
-Experiment with interleaved image-text reasoning (similar to chain-of-thought but with visual anchors).
-
-Probe cross-modal attention maps to understand which visual regions influence decisions.
-
-Fine-tune the vision encoder on domain-specific imagery rather than relying solely on general pretraining.
-
-Using video for temporal grounding.
-
-Treating screenshots as a tool the agent can call.
-
-Falling back to text-only when latency budget is tight.
-
+One compelling application is screenshot understanding, which lets agents navigate graphical user interfaces and web environments autonomously — no structured API required. Combining speech input with visual context opens another avenue: more natural, fluid human-agent collaboration where the agent responds to what it both hears and sees in real time. Video frame analysis adds a temporal dimension, allowing agents to track progress across long-horizon tasks and detect meaningful changes in their environment. Each of these possibilities, however, only becomes achievable once the right architecture and integration strategy are in place.
+## Process
+With those application areas in mind, the question becomes how to actually build a system that delivers on them. Building a multi-modal agent starts with selecting the right backbone — whether that's a vision-language model, an audio-language model, or a hybrid architecture that spans both. Once the model is chosen, the critical engineering challenge is integrating multi-modal perception directly into the agent's action-decision loop, rather than treating it as an afterthought. Visual and audio observations must be grounded into language representations that the planning layer can actually consume and reason over. Finally, rigorous evaluation — comparing agent performance with and without multi-modal inputs on established benchmark tasks — is essential to validate that the added complexity is paying off. The vision encoder is the first stage of that grounding pipeline: it processes raw image or video frames through a series of convolutional or transformer-based layers, producing a dense set of patch embeddings that capture spatial layout, object identities, and scene semantics. Those embeddings are then projected — typically via a learned linear adapter or a cross-attention bridge — into the same token space the language-based planner operates in, so the planner can treat visual context just like it treats text tokens. Inside the planner, these visual tokens attend to the task description and prior action history simultaneously, allowing the model to make decisions that are directly conditioned on what the agent currently sees; for example, if the encoder detects a door is closed, the planner can insert an "open door" sub-goal before continuing toward the final objective.
 ## Takeaways
-Multi-modal input is most valuable when the task genuinely requires visual context; avoid it otherwise.
-
-Adapter-based integration beats full fine-tuning for teams with limited compute.
-
-Evaluation is the bottleneck: invest early in visual replay tooling to make debugging tractable.
-
-Expect latency costs — batching and caching visual embeddings are essential for production agents.
+Multi-modal perception is one of the most direct paths to closing the gap between today's AI agents and human-level environmental understanding. The evidence strongly suggests that the biggest performance gains come from tightly integrating modalities into the core architecture — not bolting them on as a post-processing layer. That said, latency and compute cost remain real barriers to deployment at scale, making model distillation and intelligent caching important areas of ongoing research. Looking ahead, it seems increasingly likely that future agents will treat modality-agnostic perception not as an optional feature, but as a first-class architectural concern from the ground up.
