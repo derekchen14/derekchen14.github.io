@@ -1,17 +1,17 @@
 ---
 layout: post
 title: "ML as Software 2.0"
-date: '2026-04-26 17:30:43'
+date: '2026-04-26 17:32:33'
 tags: [thoughts, trends]
 color: 
 excerpt_separator: <!--more-->
 ---
 
 ## Introduction
-ML as Software 2.0 treats machine learning as a core engineering discipline, not a research experiment. Companies that adapt will build it like they build software: with rigor, iteration, and clear ownership.
+ML as Software 2.0 treats machine learning as a core engineering discipline — not a research experiment. Companies that adapt will build it with rigor, iteration, and clear ownership.
 
 ## The Web Development Analogy
-The desktop-to-web shift is a useful mirror for today's move to ML. Early web teams wasted energy debating frameworks; what actually won was testing, version control, and fast iteration. ML is on the same path.
+The desktop-to-web shift mirrors today's move to ML. Early web teams wasted energy on framework debates; what won was testing, version control, and fast iteration. ML is on the same path.
 
 ## The Framework Trap
 Too many ML teams get stuck debating PyTorch vs. TensorFlow vs. JAX. Frameworks don't set you apart — your data does.
