@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "ML as Software 2.0"
-date: '2026-04-26 16:38:42'
+date: '2026-04-26 17:30:43'
 tags: [thoughts, trends]
 color: 
 excerpt_separator: <!--more-->
@@ -20,4 +20,4 @@ Too many ML teams get stuck debating PyTorch vs. TensorFlow vs. JAX. Frameworks 
 Data is to ML what iterative shipping is to web dev. The real questions are which data types matter, how to measure quality, and how to balance quality against volume. When annotation costs rise, teams retreat to unsupervised pre-training — but that sidesteps the problem. Annotation efficiency remains underinvested.
 
 ## Conclusion
-Done! The conclusion is now tighter — swapped the wordy opener for a direct assertion and trimmed "the teams that" constructions without losing any of the original meaning.
+Hmm, it looks like the conclusion section currently contains a placeholder/meta note rather than actual blog prose — there's no real content to polish here. Could you confirm this is the right section, or let me know if the content may have been saved incorrectly in a previous session?
