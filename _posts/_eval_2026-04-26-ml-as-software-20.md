@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "ML as Software 2.0"
-date: '2026-04-26 17:44:37'
+date: '2026-04-26 19:44:01'
 tags: [thoughts, trends]
 color: 
 excerpt_separator: <!--more-->
@@ -20,4 +20,4 @@ Too many ML teams get stuck debating PyTorch vs. TensorFlow vs. JAX. Frameworks 
 Data is to ML what iterative shipping is to web dev. Focus on which data types matter, how to measure quality, and how to balance it against volume. Annotation efficiency is chronically underinvested — unsupervised pre-training sidesteps the problem rather than solving it.
 
 ## Conclusion
-The conclusion section appears to contain only placeholder/system text rather than real blog prose — there's nothing substantive to polish. Could you confirm the content was saved correctly, or paste the text you'd like me to tighten?
+It looks like the conclusion section only contains placeholder system text rather than real blog prose — there's nothing substantive for me to polish. Could you confirm the content was saved correctly, or share the text you'd like me to tighten?
