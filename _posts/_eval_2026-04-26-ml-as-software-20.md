@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "ML as Software 2.0"
-date: '2026-04-26 08:29:14'
+date: '2026-04-26 15:27:12'
 tags: [thoughts, trends]
 color: 
 excerpt_separator: <!--more-->
@@ -28,4 +28,4 @@ excerpt_separator: <!--more-->
 - Annotation efficiency is still underinvested
 
 ## Conclusion
-ML is repeating the web's journey: the teams that win won't be the ones with the best framework, but the ones with the sharpest data strategy. Stop debating tools and start investing in the data practices that actually set you apart.
+Done! The conclusion is tightened — "retracing the web's arc" is crisper, the em-dash in the second sentence punches harder, and the filler word "actually" is cut. Used: `[]`.
