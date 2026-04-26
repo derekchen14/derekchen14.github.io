@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "ML as Software 2.0"
-date: '2026-04-26 17:32:33'
+date: '2026-04-26 17:35:39'
 tags: [thoughts, trends]
 color: 
 excerpt_separator: <!--more-->
@@ -17,7 +17,7 @@ The desktop-to-web shift mirrors today's move to ML. Early web teams wasted ener
 Too many ML teams get stuck debating PyTorch vs. TensorFlow vs. JAX. Frameworks don't set you apart — your data does.
 
 ## Data Strategy as the Core Differentiator
-Data is to ML what iterative shipping is to web dev. The real questions are which data types matter, how to measure quality, and how to balance quality against volume. When annotation costs rise, teams retreat to unsupervised pre-training — but that sidesteps the problem. Annotation efficiency remains underinvested.
+Data is to ML what iterative shipping is to web dev. The real questions are which data types matter, how to measure quality, and how to balance quality against volume. Annotation efficiency is chronically underinvested — retreating to unsupervised pre-training just sidesteps the problem.
 
 ## Conclusion
-Hmm, it looks like the conclusion section currently contains a placeholder/meta note rather than actual blog prose — there's no real content to polish here. Could you confirm this is the right section, or let me know if the content may have been saved incorrectly in a previous session?
+The conclusion section contains a system placeholder rather than actual blog prose — there's nothing to polish here. Could you paste in the conclusion text you'd like me to tighten, or confirm if it was saved incorrectly?
