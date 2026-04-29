@@ -1,0 +1,30 @@
+---
+layout: post
+title: "Observability for Long-Running AI Agents"
+date: '2026-04-29 07:22:25'
+tags: []
+color: 
+excerpt_separator: <!--more-->
+---
+
+## Motivation
+Long-running agents have a habit of drifting silently for hours before anyone notices. There is no obvious crash, no stack trace — just subtle goal deviation that compounds quietly in the background. The direct catalyst for this work was a billing surprise discovered on a Monday morning: an agent had run over the weekend, and the cost spike only became visible after the fact, when the damage was already done.
+
+The trouble is that traditional monitoring tools were never built for this kind of workload. They miss the failure modes that matter most for agents: infinite loops, processing stalls, and context-window exhaustion. Without purpose-built observability, you are flying blind, with no reliable way to distinguish an agent that is making slow but steady progress from one that has simply hung.
+
+## Latency Targets
+A single end-to-end SLO will miss the stalls that matter most: a p99 tail spike on one tool call or one LLM inference step can silently drag an entire session past acceptable limits. Tool-call round-trips and LLM inference have fundamentally different latency profiles, so they need separate per-step budgets and independent alerting thresholds. Tracking p50, p95, and p99 latencies gives you the resolution needed to surface tail issues, particularly those caused by retries or rate-limiting that would otherwise be invisible in the average. Correlating latency spikes with prompt length is also worth building in early, since it is one of the clearest signals of context-window pressure building up over a session. Setting explicit p50 versus p99 budgets per turn lets you draw a meaningful line between typical slowdowns and genuine outliers worth investigating. For pinpointing where time is actually lost, it helps to break down latency both end-to-end and per-tool-call. Beyond alerting, you should also define a hard ceiling that triggers a kill switch if any single turn exceeds an absolute time limit — a last line of defense against a stalled agent burning time indefinitely.
+
+## Token Accounting
+Token accounting only works if you log input and output tokens at every agent step, not just at session end. Waiting until a session closes to tally usage means you lose the granularity needed to understand what drove costs up or triggered a context-window limit. Breaking usage down by role — system prompt, memory injection, tool responses, and model output — shows exactly which part of the context is growing fastest. Set per-step and cumulative budgets with alerts that fire before you cross a limit, not after; token counts become a leading indicator of runaway growth rather than a post-mortem metric. Watch cache-hit rates to gauge context reuse, and pay particular attention to tool-result tokens — they tend to dominate the context and drive up costs in ways that are easy to miss.
+
+## Cost Modeling
+Translating token counts into real-time dollar costs, attributed by task type and agent role, connects technical metrics directly to business impact. A retry loop on an overnight batch job once consumed forty times the expected token budget before anyone noticed, and the end-of-month invoice was the only alert. That incident made cost observability a first-class runtime concern, not a reporting footnote. Projecting spend at the current burn rate gives the agent enough information to self-terminate before breaching a budget ceiling. Post-run analysis introduced cost-per-completed-task as a metric, which revealed that verbose trace sampling inflated per-task cost by up to thirty percent on high-volume workflows with no meaningful observability gain. The team replaced it with a tiered policy, cutting average cost-per-completed-task across production while preserving full-fidelity traces where they actually matter.
+
+## Dashboards
+A useful starting point for observability dashboards is a live run-view that shows active agent count, steps completed, tokens consumed, and cost to date in a single glance. Alongside that, a per-session timeline that traces each tool call, LLM call, and decision branch gives you the full sequence of events needed to reconstruct what an agent was doing at any point in its run. Anomaly panels round out the picture by surfacing unusual token spikes, latency outliers, and repeated tool failures that might not stand out in aggregate views. It is also worth making these dashboards accessible to non-engineers — product managers and finance teams need to understand agent behavior too, and plain-language summaries lower the barrier without sacrificing the signal that engineers rely on. A dedicated latency-percentile panel — plotting p50, p95, and p99 side by side across agent steps — makes tail latency visible at a glance and lets you immediately see whether a slowdown is widespread or confined to edge cases. Per-tool token panels complement this by breaking down context consumption tool by tool, so you can spot which integrations are quietly inflating the context window before they become a cost problem.
+
+## Takeaways
+Observability for agents is a fundamentally different problem than observability for traditional services. Step-level granularity is not optional — request and response logging alone will not capture the loops, stalls, and context drift that characterize agent failures. Combining latency, token, and cost signals into a unified view is what gives you a complete picture of agent health rather than three separate dashboards that each tell only part of the story.
+
+If you are not sure where to start, a billing alert is the fastest path to catching runaway agents in production. It requires minimal setup and immediately surfaces the class of failure that is hardest to detect any other way. More broadly, the lesson from building this out is that observability should be treated as a first-class feature from the start, not something bolted on after an incident has already cost you time and money.
