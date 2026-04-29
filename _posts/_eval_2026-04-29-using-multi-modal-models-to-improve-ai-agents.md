@@ -1,14 +1,24 @@
 ---
 layout: post
 title: "Using Multi-modal Models to Improve AI Agents"
-date: '2026-04-29 04:54:35'
+date: '2026-04-29 07:17:24'
 tags: []
 color: 
 excerpt_separator: <!--more-->
 ---
 
-## The Good
+## Motivation
+Text-only agents cannot perceive the visual context that web navigation, document parsing, and UI interaction all depend on, and that gap widens as tasks grow more complex. Multi-modal models fix this directly by unifying language and image understanding in a single pass. Because perception and language are handled together, agents see and read simultaneously without a separate vision pipeline or hand-off overhead, much the way humans naturally do.
 
-## The Bad
+## Ideas
+One of the quickest ways to add visual awareness without overhauling your architecture is grounded captioning: generate text descriptions of screenshots and feed them to a text-only planner as a fallback. It is not as accurate as a native multi-modal model, but it lets you validate the value of visual context before committing to a heavier build. A related technique is chain-of-thought with visual anchors, where you attach cropped image regions directly to individual reasoning steps so the model can tie its conclusions back to specific parts of the screen. For teams that want more flexibility, tool-use augmentation treats vision as a discrete capability the agent invokes on demand. This pairs naturally with hybrid architectures that freeze the vision encoder and train only lightweight adapter layers, avoiding the cost of end-to-end fine-tuning. Two other ideas are worth exploring as your system matures. Passing short frame sequences instead of individual screenshots enables temporal grounding, allowing the model to reason about state changes that a single static image would obscure. And building in a graceful text-only fallback means that when latency budgets are tight or the vision pathway is unavailable, the agent can degrade cleanly rather than failing outright. Once you have settled on an approach, the real work begins: choosing the right components, wiring them together, and hardening the system for production.
 
-## The Ugly
+## Process
+With a shortlist of approaches in hand, the next step is turning one of them into a working system. The first decision is choosing a vision encoder that fits your latency and accuracy requirements. Models like CLIP and ViT are common starting points, but the right choice depends on how fast your agent needs to respond and how much headroom you have in your inference budget. Once you have a candidate, pre-process visual inputs into embeddings that can travel alongside text tokens, and route agent observations through the encoder before each action selection step. Wiring the encoder to the language planner means exposing image embeddings as additional context tokens, either in the prompt or directly in the model's input layer. Concretely, the encoder runs a forward pass over each observation frame and outputs a fixed-length embedding vector — typically 768 or 1024 dimensions depending on the backbone. Those vectors are projected into the planner's token embedding space via a small learned linear layer (often called a vision adapter or bridge layer), so they sit on the same numerical scale as the text tokens the planner already understands. The planner then receives a sequence that interleaves these visual tokens with the text tokens describing the current task and history; positional encodings mark them as coming from the visual stream so the planner can attend to them selectively. In practice, placing the image tokens at the very beginning of the context window — before the task instruction — tends to give the planner an anchored spatial map it can reference throughout its chain-of-thought, rather than having to reconstruct scene layout from scattered references later in the sequence. From there, fine-tune or prompt-engineer the combined model on task-specific examples to align the two modalities. UI traces collected from real or simulated task walkthroughs work well here, because they ground the model in the environments it will actually encounter. Before shipping, evaluate on held-out workflows that were excluded from fine-tuning so you get an honest measure of generalization rather than memorization. When you deploy, put the vision pathway behind a feature flag so you can toggle it off quickly if latency or cost spikes in production.
+
+## Takeaways
+Adding multi-modal capabilities meaningfully boosts agent accuracy on visually grounded tasks, but the best path to that improvement depends on your constraints. Tool-use approaches that invoke vision on demand tend to be more practical in production because they keep latency and cost manageable, while end-to-end encoders deliver higher accuracy when you can afford the overhead.
+
+Architecture alone does not determine quality. How you surface visual information to the language planner — through prompt structure, token placement, or caption formatting — matters just as much as the model you choose. A well-designed prompt that gives the planner clear visual context will often outperform a more sophisticated architecture with a poorly structured input.
+
+The most pragmatic starting point is grounded captioning, which delivers quick wins with minimal infrastructure change. When your benchmarks plateau and you have the data and compute to go further, that is the right moment to invest in full multi-modal fine-tuning.
