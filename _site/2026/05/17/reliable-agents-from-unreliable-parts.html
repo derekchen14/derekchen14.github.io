@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<!--
+    Type on Strap jekyll theme v2.3.1
+    Copyright 2016-2020 Sylhare
+    Theme free for personal and commercial use under the MIT license
+    https://github.com/sylhare/Type-on-Strap/blob/master/LICENSE
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer src="/assets/js/main.min.js"></script>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/assets/css/main.css">
+
+    <!--Favicon-->
+    <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="More Than One Turn" href="https://derekchen14.github.io/feed.xml"/>
+    
+    
+
+    <!-- KaTeX 0.12.0 -->
+    
+    <script defer src="/assets/js/vendor/katex.min.js"></script>
+    <script defer src="/assets/js/vendor/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+    
+
+    <!-- Mermaid 8.8.2 -->
+    
+    <!-- <script src=”https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.8.2/mermaid.min.js" onload="mermaid.initialize({startOnLoad:true});"></script> -->
+    <script defer src="/assets/js/vendor/mermaid.min.js" onload="mermaid.initialize({startOnLoad:true});"></script>
+    
+
+    <!-- Simple-Jekyll-Search 1.17.12 -->
+    <script src="/assets/js/vendor/simple-jekyll-search.min.js" type="text/javascript"></script>
+
+    <!-- Google Analytics / Cookie Consent -->
+    <script>
+      const cookieName = 'cookie-notice-dismissed-https://derekchen14.github.io';
+      const isCookieConsent = 'false';
+      const analyticsName = 'G-KGN8PKZ5K7';
+    </script>
+
+    
+    
+        <!-- Global site tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-KGN8PKZ5K7"></script>
+        <!-- Page analysis (analytics.js) -->
+        <script async src='https://www.google-analytics.com/analytics.js'></script>
+    
+
+    <!-- seo tags -->
+    <meta property="og:image" content="https://derekchen14.github.io/assets/img/feature-img/triangular.jpeg">
+    
+    <meta property="og:type" content="website" />
+    
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Reliable Agents from Unreliable Parts | More Than One Turn</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Reliable Agents from Unreliable Parts" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="AI agents live on a jagged frontier where some days entire features are built while you’re on a coffee break, and other days they spin for an hour only to confidently delete a file you explicitly told not to touch. Furthermore, modern agents are composed of many parts, each one expanding the surface area of compounding failure. While a 95%-reliable component sounds fine, chaining ten of them together results in something closer to a coin flip than a finished product. Given such probabilistic components, is it possible to increase the trustworthiness of an agent when each part is so decidedly untrustworthy?" />
+<meta property="og:description" content="AI agents live on a jagged frontier where some days entire features are built while you’re on a coffee break, and other days they spin for an hour only to confidently delete a file you explicitly told not to touch. Furthermore, modern agents are composed of many parts, each one expanding the surface area of compounding failure. While a 95%-reliable component sounds fine, chaining ten of them together results in something closer to a coin flip than a finished product. Given such probabilistic components, is it possible to increase the trustworthiness of an agent when each part is so decidedly untrustworthy?" />
+<link rel="canonical" href="https://derekchen14.github.io/2026/05/17/reliable-agents-from-unreliable-parts.html" />
+<meta property="og:url" content="https://derekchen14.github.io/2026/05/17/reliable-agents-from-unreliable-parts.html" />
+<meta property="og:site_name" content="More Than One Turn" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-05-17T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Reliable Agents from Unreliable Parts" />
+<script type="application/ld+json">
+{"url":"https://derekchen14.github.io/2026/05/17/reliable-agents-from-unreliable-parts.html","dateModified":"2026-05-17T00:00:00-04:00","datePublished":"2026-05-17T00:00:00-04:00","description":"AI agents live on a jagged frontier where some days entire features are built while you’re on a coffee break, and other days they spin for an hour only to confidently delete a file you explicitly told not to touch. Furthermore, modern agents are composed of many parts, each one expanding the surface area of compounding failure. While a 95%-reliable component sounds fine, chaining ten of them together results in something closer to a coin flip than a finished product. Given such probabilistic components, is it possible to increase the trustworthiness of an agent when each part is so decidedly untrustworthy?","headline":"Reliable Agents from Unreliable Parts","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://derekchen14.github.io/2026/05/17/reliable-agents-from-unreliable-parts.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- RSS -->
+    <link type="application/atom+xml" rel="alternate" href="https://derekchen14.github.io/feed.xml" title="More Than One Turn" />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="Reliable Agents from Unreliable Parts">
+    <meta name="twitter:description" content="AI agents live on a jagged frontier where some days entire features are built while you’re on a coffee break, and other days they spin for an hour only to co...">
+    
+    <meta name="twitter:creator" content="@derekchen14">
+    <meta name="twitter:site" content="@derekchen14">
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:image" content="https://derekchen14.github.io/assets/img/feature-img/triangular.jpeg">
+    <meta name="twitter:image:alt" content="Reliable Agents from Unreliable Parts">
+</head>
+
+  <body>
+    <header class="site-header">
+
+    <!-- Logo and title -->
+	<div class="branding">
+        
+		<a href="/">
+			<img alt="logo img" class="avatar" src="/assets/img/triangle.png" />
+		</a>
+        
+        <a class="site-title" aria-label="More Than One Turn" href="/">
+        More Than One Turn
+		</a>
+	</div>
+
+    <!-- Toggle menu -->
+    <nav class="clear">
+    <a aria-label="pull" id="pull" class="toggle" href="#">
+    <i class="fa fa-bars fa-lg"></i>
+    </a>
+
+    <!-- Menu -->
+    <ul class="hide">
+        
+
+        
+        
+            
+            
+        
+            
+            <li class="separator"> | </li>
+            <li>
+                <a class="clear" aria-label="About Me" title="About Me" href="/about/">
+                     About Me 
+                </a>
+            </li>
+            
+            
+        
+            
+            <li class="separator"> | </li>
+            <li>
+                <a class="clear" aria-label="Contact" title="Contact" href="/contact/">
+                     Contact 
+                </a>
+            </li>
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            <li class="separator"> | </li>
+            <li>
+                <a class="clear" aria-label="Publications" title="Publications" href="/publication/">
+                     Publications 
+                </a>
+            </li>
+            
+            
+        
+            
+            <li class="separator"> | </li>
+            <li>
+                <a class="clear" aria-label="Search" title="Search" href="/search/">
+                     <i class="fa fa-search" aria-hidden="true"></i>
+                    
+                </a>
+            </li>
+            
+            
+        
+            
+            <li class="separator"> | </li>
+            <li>
+                <a class="clear" aria-label="Tags" title="Tags" href="/tags/">
+                     <i class="fa fa-tags" aria-hidden="true"></i>
+                    
+                </a>
+            </li>
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+    </ul>
+
+	</nav>
+</header>
+
+    <div class="content">
+      <article class="feature-image" >
+  <header id="main" style="">
+    <div class="title-padder">
+      
+      <h1 id="Reliable+Agents+from+Unreliable+Parts" class="title">Reliable Agents from Unreliable Parts</h1>
+      
+
+
+<div class="post-info">
+    <p class="meta">
+      May 17, 2026
+    </p></div>
+
+      
+    </div>
+  </header>
+
+  <section class="post-content">
+  
+      <p>AI agents live on a jagged frontier where some days entire features are built while you’re on a coffee break, and other days they spin for an hour only to confidently delete a file you explicitly told not to touch. Furthermore, modern agents are composed of many parts, each one expanding the surface area of compounding failure. While a 95%-reliable component sounds fine, chaining ten of them together results in something closer to a coin flip than a finished product. Given such probabilistic components, is it possible to increase the trustworthiness of an agent when each part is so decidedly untrustworthy?</p>
+
+<!--more-->
+<p>Naive approaches (ie. eat more tokens, revise the prompt) struggle because per-step gains run into diminishing returns before the agent as a whole becomes reliable. Instead, the solution is structural. While our task may seem daunting, it turns out to be a problem we have solved before. We just need to disconnect ourselves from the software setting.</p>
+
+<p>Organizations must routinely produce output from people who are themselves unreliable. Individual employees get tired, miss details, misunderstand instructions, take vacations, and eventually leave for other jobs, and yet the company as a whole keeps shipping work that customers depend on. When it works, it may seem like magic, but the reality can be pretty mundane. Well-run orgs have accumulated decades of best practices around hiring, workflows, audits, hand-offs, and escalation paths. This same playbook translates surprisingly well to agents built from unpredictable models. Rather than trying to perfect each part, we can engineer the workplace.</p>
+
+<h2 id="hiring-and-onboarding">Hiring and Onboarding</h2>
+
+<p>Let’s walk through the lifecycle of bringing a single employee (ie. single model) up to speed within an organization.</p>
+
+<h3 id="recruiting">Recruiting</h3>
+
+<p>Companies don’t pin their hopes on a single hire. When a job is critical, they staff multiple people (and possibly even redundant teams) to work on the same project. Having more than one person doing the same thing is somewhat wasteful, but what we lose in headcount efficiency we make up for in fault tolerance. Any individual hire can take a vacation, miss a meeting, or pursue a bad idea. A resilient org must be able to absorb such events to stay productive. Separately, strategic hiring involves recruiting qualified employees at different salary bands who take on varying levels of responsibility. A single project might have junior workers and senior managers, along with a director, and maybe a handful of interns.</p>
+
+<p>Reliable AI agents run multiple instances of the same model on the same input and combine the results through voting, consensus sampling, or ensemble judgment. This same high-level idea drives error-correcting methods such as Hamming codes, where multiple noisy signals are combined to recover a more reliable answer. Concretely, suppose we want to classify the user’s intent for sub-agent routing. We can have 5 models vote rather than relying on a single model, and then combine those votes in an intelligent manner. Applying a weighted voting structure for <a href="https://www.assistantfactory.io">Assistant Factory</a> led to accuracy gains of 15-20% during evaluation. The other half of the hiring decision is choosing the right base model for each role, with frontier models reserved for steps that genuinely require strong reasoning and smaller, faster models used for high-volume routine work. Over-hiring is expensive and under-hiring is unreliable, so the dial worth tuning is which roles deserve the budget and which can turn to a more junior worker.</p>
+
+<h3 id="training">Training</h3>
+
+<p>Even a capable hire performs better as a specialist than as a generalist, and the companies that take employee growth seriously invest here deliberately. Some of this investment is direct, in the form of an onboarding program, whereas some of it is ongoing: stipends for conferences and seminars, internal training guides, time set aside for tinkering or hackathons. The reasoning is simple. Given enough practice in a narrower domain, the same person makes fewer mistakes and recovers faster when something does go wrong. They don’t need to start from scratch for every new task. Dedicated focus compounds in a way that simply providing better instructions never will.</p>
+
+<p>AI models can undergo supervised fine-tuning on domain-specific data, which shapes the model toward the behaviors the role actually demands. Reinforcement learning or preference optimization with task-specific reward signals refines decision-making in ways that context engineering cannot reach, since the weights themselves are changing in response to outcomes. Distillation belongs in this same family, where a frontier model that already performs the role well is compressed into a smaller, faster specialist that runs at a fraction of the cost. The reliability gain from specialization opens access to behaviors the generalist simply cannot produce, which is the kind of return that even sophisticated prompt tuning has no path to matching. Dedicated focus compounds in a way that simply writing better prompts never will.</p>
+
+<h3 id="equipping-for-the-unknown">Equipping for the Unknown</h3>
+
+<p>No training program covers every situation, and even the most thoroughly prepared employee will eventually run into a situation they’ve never seen. The companies that ship reliably under those conditions teach their people what to do when this happens. The skill in question is self-awareness, specifically the ability to recognize the edge of one’s own competence and respond appropriately. An employee who admits when something is unfamiliar, takes the time to look it up, asks a colleague, or escalates to a manager produces more reliable outcomes than one who fills the gap with confident guessing. Organizations that reward this behavior outperform those that punish it, since punishment teaches employees to hide uncertainty when surfacing it would have been the safer move.</p>
+
+<p>The agent translation begins with the model’s ability to recognize uncertainty in its own outputs, through calibration techniques, abstention training, or explicit confidence estimation. Assistants built at Assistant Factory attach a confidence score to every model prediction for exactly this reason. Once ambiguity is detected, the worker has options that look very much like the ones a junior employee would reach for, including spending more compute on the same problem through extended reasoning, looking up documentation through retrieval, handing off to a separate sub-agent better suited to handling the task, or escalating to a manager for clarification (ie. human-in-the-loop). Agent architectures that explicitly handle ambiguity outperform those that assume LLMs can simply handle anything, since ignoring the problem teaches models to fill the gap with confident guessing when surfacing it would have been the safer move.</p>
+
+<h2 id="rules-of-engagement">Rules of Engagement</h2>
+
+<p>Hiring well is only a piece of the reliability equation. Even capable employees benefit from processes that make the right action easy and the wrong action hard to attempt.</p>
+
+<p>Department feedback and 360 Reviews are collected through forms and surveys with consistent fields. Timesheets, expense reports, and bug tickets all use predefined templates so the organization or CRM can process them without worry. Rigid reports eschew free-form responses, but the benefit is that every downstream consumer can rely on it without layers of checks, which removes a substantial class of errors before they ever occur. Structured generation through JSON schemas and typed function calls are a good start. An even better practice is to figure out how two sub-agents engage with each other. While the <a href="https://a2a-protocol.org/latest/">A2A protocol</a> provides a high-level structure, it’s still up to the agent developer to decide what goes into the task or message payload. It <em>does</em> take upfront investment to design this dialogue state: What exactly is the contract that two sub-agent components can expect? But the pay-off is worth it. Guardrails can reject malformed outputs on sight; post-policy hooks can validate artifacts before passing off to the next agent. Problems are resolved before the user even knows they existed.</p>
+
+<p>When the stakes of a single action are high enough, companies require more than one set of eyes before the action can be authorized. Wire transfers above a threshold require sign-off, production deploys require code review, hiring decisions go through a committee, and significant contracts require approval from legal and finance before they are executed. No single moment of poor judgment can bring down the house. The same principle appears in agent design as scoped tool permissions, multi-step authorization flows, and verifier agents that check the work of other agents before any irreversible action is committed. Recognizing the <a href="https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/">lethal trifecta</a> means no single agent should ever simultaneously hold access to private data, untrusted content, and external communication. The defense lives across models, rather than depending on the individual brilliance of any one LLM call.</p>
+
+<p>Beyond single actions, companies also impose structure on sequences of actions. Hiring has a known process (phone screen -&gt; technical interview -&gt; team-fit), customer outreach has a playbook (prospecting -&gt; discovery call -&gt; product demo -&gt; close the sale), and incident response has a runbook (paging on-call -&gt; triage -&gt; mitigation -&gt; postmortem). The reason for enforcing these sequences is that order of operations matters. A technical interview before the phone screen wastes senior eng time on weak candidates; skipping triage produces fixes for the wrong problem. The same idea carries over to agents through deterministic policies and scripted multi-step flows, where the agent advances through well-defined transitions and an LLM is consulted only if its judgment is genuinely needed. A policy that wants to skip a step or move out of order can be denied by the orchestrator, keeping the trajectory predictable even when individual model outputs are not.</p>
+
+<h2 id="standard-operating-procedure">Standard Operating Procedure</h2>
+
+<p>We shouldn’t forget about standard reliability best practices for AI agents, which are all around observability and monitoring. These also align with the organization analogy. Just as well-designed agents are tested thoroughly well before reaching prod, good companies do not assess employees only during end-of-year performance reviews.</p>
+
+<p>Strong managers define metrics tied to the work itself (revenue closed, tickets resolved, code reviews completed, customer satisfaction scores), track those metrics over time, and use the trend lines to decide who gets a raise or who needs more support. Explicit measurement provides crucial information about what is going well and what needs attention. Agents earn the same kind of discipline through evals at three levels of granularity. The narrowest is the individual model prediction, where <strong>model unit tests</strong> measure intent classification accuracy, entity extraction precision, or sub-agent routing decisions. The middle level includes <strong>traces and trajectories</strong>, which captures a full series of decisions across tool calls, retrievals, and intermediate steps within a single task. The widest level is the <strong>E2E agent evaluation</strong> that collapses the intermediate decisions and asks only whether the agent produced the right outcome for the task given the user utterance. Each level catches a different class of failure: unit tests catch regressions on a specific skill, traces catch compounding errors, and end-to-end evals catch agents that fail to satisfy the user request even when every intermediate step looked plausible.</p>
+
+<p>Beyond the periodic review cycle, companies also invest in continuous monitoring through internal audit teams, executive dashboards, weekly business reviews, and exception reports that flag transactions outside the usual pattern. The point is to surface a problem early enough that someone can intervene before it’s too late. Live telemetry plays the same role for an agent: capturing each trajectory of tool-calls, tracking token costs, and storing structured states that make a single bad run reconstructible after the fact. A dashboard that shows cost per session, success rate per workflow, and latency at each step is straightforward to create, but provides critical visibility needed to trust the system enough to leave it running with minimal supervision.</p>
+
+<h2 id="beyond-the-call-of-duty">Beyond the Call of Duty</h2>
+
+<p>Sometimes AI can go Super Saiyan. As the agent leans towards the deterministic side of its neuro-symbolic nature, it remembers that certain pathways can produce the same output every time, without ever making a mistake. Parsing, persistence, validation, retry logic, and tool execution can all follow this pattern. Every step you move from model into code is a step that stops contributing to compounding error probability, and into rock-solid predictability. Code does not have an off day, does not need to be persuaded, and does not need to be recognized with a little awards ceremony at the end of the quarter for their hard work.</p>
+
+<p>Human committees coordinate projects over the course of weeks. Reviewers for a single document schedule meetings, reconcile notes, and haggle over the final wording. An agent can run three independent LLMs-as-judges on the same input in parallel: no scheduling overhead, no inter-reviewer dynamics, and a verdict in seconds. If three models in parallel aren’t enough, we can go with brute force. Finding a specific data point across 25 tables, with 40 columns and 10,000 rows would take months for a human. Exhaustively trying every option is a legitimate technique for an agent swarm. Ten million cells get searched in minutes.</p>
+
+<p>A final advantage is that the environment in which an agent operates is controllable. The most stubborn problem in a company is rarely caused by lack of skill. Politics cause ego-based coalitions, bias toward manager preferences, and distorted news as information is passed along in a drawn-out game of telephone. The cost of this distortion is especially hard to quantify when the people in the meeting don’t even agree on a shared goal. Analogously, agents face context poisoning, where irrelevant documents, contradictory instructions, or adversarially injected content leak into the prompt. But the agent designer holds the lever directly, since retrieval, memory, and explicit validation are all within their control. Agent settings can be configured once and reliably enforced everywhere. If only human co-workers behaved the same!</p>
+
+<hr />
+
+<p>So yes, we <em>can</em> make agents much more reliable in as far as organizations composed of unreliable employees has always been achievable. Neither produces perfection, and neither needs to. Both produce an outcome you can depend on which is what really matters.</p>
+
+    
+  </section>
+
+  <!-- Social media shares -->
+  <!-- 
+
+<div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fderekchen14.github.io%2F2026%2F05%2F17%2Freliable-agents-from-unreliable-parts.html" target="_blank" title=" Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?text=Reliable+Agents+from+Unreliable+Parts%20https%3A%2F%2Fderekchen14.github.io%2F2026%2F05%2F17%2Freliable-agents-from-unreliable-parts.html" target="_blank" title="">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="http://www.reddit.com/submit?url=https://derekchen14.github.io/2026/05/17/reliable-agents-from-unreliable-parts.html&title=Reliable+Agents+from+Unreliable+Parts%20%7C%20More+Than+One+Turn" target="_blank" title=" Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=Reliable+Agents+from+Unreliable+Parts%20%7C%20More+Than+One+Turn&body=:%20https://derekchen14.github.io/2026/05/17/reliable-agents-from-unreliable-parts.html" target="_blank" title="">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+
+ -->
+
+   <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/tags#agents">
+      <p><i class="fa fa-tag fa-fw"></i> agents</p>
+    </a>
+    
+    <a class="button" href="/tags#ai">
+      <p><i class="fa fa-tag fa-fw"></i> ai</p>
+    </a>
+    
+    <a class="button" href="/tags#ideas">
+      <p><i class="fa fa-tag fa-fw"></i> ideas</p>
+    </a>
+    
+    <a class="button" href="/tags#product-strategy">
+      <p><i class="fa fa-tag fa-fw"></i> product-strategy</p>
+    </a>
+    
+    <a class="button" href="/tags#reliability">
+      <p><i class="fa fa-tag fa-fw"></i> reliability</p>
+    </a>
+    
+    <a class="button" href="/tags#trustworthy">
+      <p><i class="fa fa-tag fa-fw"></i> trustworthy</p>
+    </a>
+    
+  </div>
+</footer>
+
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+    
+
+    
+    <div id="next-post">
+        <a alt="Beyond Guardrails: Why Understanding Users Still Matters" href="/2026/03/23/beyond-guardrails.html">
+            <p>Next post</p>
+            Beyond Guardrails: Why Understanding Users Still Matters
+        </a>
+    </div>
+    
+</div>
+
+
+
+<!-- To change color of links in the page -->
+<style>
+  
+  .feature-image a { color: rgb(13, 46, 99) !important; }
+  div#post-nav a { color: rgb(13, 46, 99) !important; }
+  footer a { color: rgb(13, 46, 99) !important; }
+  .site-header nav a:hover {  color: rgb(13, 46, 99) !important; }
+  header#main { background-color: rgb(13, 46, 99) !important; }
+  
+
+  header#main {
+    background-repeat:no-repeat;
+  background-image: url('/assets/img/lineart.png');  
+  }
+</style>
+
+    </div>
+    <footer class="site-footer">
+    <p class="text">
+        Aut viam inveniam aut faciam.</p>
+            <div class="footer-icons">
+                <ul>
+                <!-- Social icons from Font Awesome, if enabled -->
+                
+
+<li>
+    <a href="mailto:derekchen14@gmail.com" title="Email">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-square fa-stack-2x"></i>
+            <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+        </span>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+    <a href="https://github.com/derekchen14" title="Follow on GitHub">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-square fa-stack-2x" style="color:#333333"></i>
+            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+        </span>
+    </a>
+</li>
+
+
+
+
+
+
+
+<li>
+    <a href="https://www.linkedin.com/in/derekchen14/" title="Follow on LinkedIn">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-square fa-stack-2x" style="color:#2867B2"></i>
+            <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+        </span>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+
+<li>
+    <a feed.xml href="/feed.xml"
+       title="Follow RSS feed">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-square fa-stack-2x" style="color:orange"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+    <a class="type" href="https://twitter.com/derekchen14"
+       title="Follow on Twitter">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-square fa-stack-2x" style="color:#1DA1F2"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+                </ul>
+            </div>
+</footer>
+
+
+
+  </body>
+</html>

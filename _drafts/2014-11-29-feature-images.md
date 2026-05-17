@@ -6,7 +6,33 @@ thumbnail: "assets/img/thumbnails/feature-img/desk-messy.jpeg"
 tags: [Test, Lorem]
 ---
 
-Hopefully you will find enough information about how to set images in your blog here.
+## How to add color
+
+Basically you need to add just one thing, the color:
+
+```yml
+---
+layout: post
+title: Color Post
+color: brown
+---
+```
+
+It can either be a html color like `brown` (which look like red to me). Or with the rgb:
+
+```yml
+---
+layout: post
+title: Color Post
+color: rgb(165,42,42)
+---
+```
+
+The background used is `lineart.png` from [xukimseven](https://github.com/xukimseven) you can edit it in the config file. 
+If you want another one, put it in `/assets/img` as well. 
+> ⚠️ It's a bit hacking the css in the `post.html`
+
+## How to add images
 This is an example of a post which includes a feature image specified in the front matter of the post. 
 The feature image spans the full-width of the page, and is shown with the title on permalink pages:
 
