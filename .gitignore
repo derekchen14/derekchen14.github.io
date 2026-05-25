@@ -3,3 +3,5 @@
 .jekyll-cache/
 how_to_use/
 assets/agents/
+assets/sdk/
+_site/
