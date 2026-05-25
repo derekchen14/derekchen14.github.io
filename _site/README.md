@@ -16,7 +16,7 @@ Each post will have the following key fields:
   tags: [A Tag, Test, Lorem, Ipsum]
   excerpt_separator: <!--more-->
 
-  * The actual content goes here *
+  *The actual content goes here*
 
 TO use a Latex, add two dollar signs like so:
 
@@ -39,3 +39,12 @@ To publish to the web, simply commit changes and push to Github!
 Look within the how_to_use folder for the documenation file
 
 gem install eventmachine -v '1.2.7' -- --with-cppflags=-I$(brew --prefix openssl@3)/include --with-ldflags=-L$(brew --prefix openssl@3)/lib
+
+### Publication Checklist
+
+  * Editor Guidelines
+  * Main Blog
+  * Substack
+  * Twitter
+  * LinkedIn
+  
