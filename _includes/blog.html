@@ -22,7 +22,14 @@
                   {% if site.excerpt == "truncate" %}
                      {{ post.content | strip_html | truncate: '250' | escape }}
                   {% else %}
-                     {{ post.excerpt | strip_html | escape }}
+                     {% assign no_footnotes = post.excerpt | split: '<div class="footnotes"' | first %}
+                     {% assign sup_parts = no_footnotes | split: '<sup' %}
+                     {% assign clean_excerpt = sup_parts | first %}
+                     {% for part in sup_parts offset:1 %}
+                       {% assign tail = part | split: '</sup>' | last %}
+                       {% assign clean_excerpt = clean_excerpt | append: tail %}
+                     {% endfor %}
+                     {{ clean_excerpt | strip_html | escape }}
                   {% endif %}
               </div>
           {% endif %}
