@@ -5,7 +5,7 @@ timezone: America/New_York
 
 # THEME-SPECIFIC CONFIGURATION
 title: More Than One Turn                                    # site's title
-description: "Blog about dialogue modeling and data efficiency"      # used by search engines
+description: "Blog about AI Agents and Managing Ambiguity"   # used by search engines
 avatar: assets/img/triangle.png                         # Empty for no avatar in navbar
 favicon: assets/favicon.ico                             # Icon displayed in the tab
 
@@ -13,7 +13,7 @@ favicon: assets/favicon.ico                             # Icon displayed in the 
 # you can use html in the header  <code>_config.yml</code>
 header_text: More Than One Turn                         # Change Blog header text
 header_feature_image: assets/img/feature-img/triangular.jpeg
-footer_text: Aut viam inveniam aut faciam.
+footer_text: Aut viam inveniam aut faciam.              # "I shall either find a way or make one"
 # >   Made with <3 in San Francisco
 
 # Blog
