@@ -7,4 +7,12 @@ img[alt=profile_pic] {
   padding: 3% 5% 0% 0%;
 }
 
+.title-padder .subtitle {
+  font-size: 1.25rem;
+  font-style: italic;
+  opacity: 0.85;
+  margin: -0.5em 0 1.5em 0;
+  line-height: 1.3;
+}
+
 @import "type-on-strap";

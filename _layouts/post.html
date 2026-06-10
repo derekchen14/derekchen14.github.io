@@ -8,6 +8,9 @@ layout: default
       <div class="feature-image-padding"></div>
       {% else %}
       <h1 id="{{ page.title | cgi_escape }}" class="title">{{ page.title }}</h1>
+      {% if page.subtitle %}
+      <h3 class="subtitle">{{ page.subtitle }}</h3>
+      {% endif %}
       {% include post_info.html author=page.author date=page.date %}
       {% endif %}
     </div>

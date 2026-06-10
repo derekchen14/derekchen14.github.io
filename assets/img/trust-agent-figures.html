@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Figures - How Much Can You Trust Your Agent?</title>
+<style>
+  body {
+    background: #1c2128;
+    color: #e6e9ee;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 40px 20px;
+  }
+  .figure-card {
+    background: #0f1419;
+    border: 1px solid #2a323f;
+    border-radius: 10px;
+    max-width: 860px;
+    margin: 0 auto 48px auto;
+    padding: 28px 32px;
+  }
+  .figure-card h2 {
+    margin: 0 0 4px 0;
+    font-size: 17px;
+    color: #e6e9ee;
+  }
+  .figure-card p.sub {
+    margin: 0 0 18px 0;
+    font-size: 13px;
+    color: #7c8696;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+  }
+  th {
+    text-align: left;
+    color: #aab3c0;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    border-bottom: 2px solid #2a323f;
+    padding: 8px 10px;
+  }
+  td {
+    border-bottom: 1px solid #232a35;
+    padding: 9px 10px;
+    vertical-align: top;
+    color: #cdd3dc;
+    font-size: 12px;
+  }
+  td:first-child {
+    color: #e6e9ee;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr.af td { background: rgba(255, 143, 171, 0.06); }
+  tr.af td:first-child { color: #ff8fab; }
+  code {
+    font-family: "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 12px;
+    background: #1a212b;
+    border-radius: 4px;
+    padding: 1px 5px;
+    color: #9ec1f7;
+  }
+</style>
+</head>
+<body>
+
+<div class="figure-card" id="fig-topology">
+  <h2>Figure 1 &middot; Sub-agent Composition and Communication</h2>
+  <p class="sub">The five topologies at a glance. The middle column is the trust decision and the right column is its consequence.</p>
+  <table>
+    <thead>
+      <tr><th>Framework</th><th>Topology</th><th>Who picks the next unit of work</th><th>What gets passed along</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Google ADK</td><td>Deterministic graph</td><td>The developer, through edges validated at build time</td><td>Typed state dict with scoped key prefixes</td></tr>
+      <tr><td>LangGraph</td><td>Deterministic graph, cycles allowed</td><td>The developer, through conditional edges run in super-steps</td><td>Typed channels, each merged by its own reducer</td></tr>
+      <tr><td>OpenAI Agents</td><td>Decentralized swarm</td><td>The model, by emitting <code>transfer_to_X</code> at runtime</td><td>Strict JSON handoff payload plus a typed item log</td></tr>
+      <tr class="af"><td>Assistant Factory</td><td>Stack of Flows</td><td>The model ensemble, by pushing and popping Flows</td><td>Typed belief state plus a shared session scratchpad</td></tr>
+      <tr><td>Claude Agent SDK</td><td>Hub-and-spoke</td><td>The orchestrator model, by spawning subagents</td><td>Prose results, with a fresh context per spoke</td></tr>
+      <tr><td>OpenCode</td><td>Hub-and-spoke</td><td>The primary agent, through a task tool</td><td>Typed envelope wrapping a prose payload</td></tr>
+      <tr><td>Cortex Code</td><td>Hub-and-spoke</td><td>The orchestrator model, fenced by data rails</td><td>Markdown and SQL</td></tr>
+      <tr><td>Pi</td><td>Single loop</td><td>Nobody, since there are no sub-agents</td><td>A flat message list</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="figure-card" id="fig-scatter">
+  <h2>Figure 2 &middot; The Trust Spectrum</h2>
+  <p class="sub">Trust in the model plotted against the effort it takes to get running. The empty corners show that nobody has decoupled control from onboarding cost.</p>
+  <svg viewBox="0 0 760 575" width="100%" role="img" aria-label="Scatter plot of trust in the model versus ease of use across eight agent SDKs" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif">
+    <rect x="70" y="30" width="660" height="460" fill="none" stroke="#2a323f"/>
+    <line x1="235" y1="30" x2="235" y2="490" stroke="#2a323f" stroke-dasharray="3 4"/>
+    <line x1="400" y1="30" x2="400" y2="490" stroke="#2a323f" stroke-dasharray="3 4"/>
+    <line x1="565" y1="30" x2="565" y2="490" stroke="#2a323f" stroke-dasharray="3 4"/>
+    <line x1="70" y1="375" x2="730" y2="375" stroke="#2a323f" stroke-dasharray="3 4"/>
+    <line x1="70" y1="260" x2="730" y2="260" stroke="#2a323f" stroke-dasharray="3 4"/>
+    <line x1="70" y1="145" x2="730" y2="145" stroke="#2a323f" stroke-dasharray="3 4"/>
+    <text x="60" y="494" text-anchor="end" fill="#7c8696" font-size="12">1 &middot; none</text>
+    <text x="60" y="379" text-anchor="end" fill="#7c8696" font-size="12">2 &middot; low</text>
+    <text x="60" y="264" text-anchor="end" fill="#7c8696" font-size="12">3 &middot; average</text>
+    <text x="60" y="149" text-anchor="end" fill="#7c8696" font-size="12">4 &middot; high</text>
+    <text x="60" y="34" text-anchor="end" fill="#7c8696" font-size="12">5 &middot; full</text>
+    <text x="70" y="510" text-anchor="middle" fill="#7c8696" font-size="12">1</text>
+    <text x="70" y="524" text-anchor="middle" fill="#7c8696" font-size="11">dead simple</text>
+    <text x="235" y="510" text-anchor="middle" fill="#7c8696" font-size="12">2</text>
+    <text x="235" y="524" text-anchor="middle" fill="#7c8696" font-size="11">easy</text>
+    <text x="400" y="510" text-anchor="middle" fill="#7c8696" font-size="12">3</text>
+    <text x="400" y="524" text-anchor="middle" fill="#7c8696" font-size="11">average</text>
+    <text x="565" y="510" text-anchor="middle" fill="#7c8696" font-size="12">4</text>
+    <text x="565" y="524" text-anchor="middle" fill="#7c8696" font-size="11">hard</text>
+    <text x="730" y="510" text-anchor="middle" fill="#7c8696" font-size="12">5</text>
+    <text x="730" y="524" text-anchor="middle" fill="#7c8696" font-size="11">steep curve</text>
+    <text x="400" y="552" text-anchor="middle" fill="#aab3c0" font-size="13" font-weight="600">Ease of use &mdash; effort to get up and running (1 = minutes, 5 = needs a workshop)</text>
+    <text x="20" y="260" text-anchor="middle" fill="#aab3c0" font-size="13" font-weight="600" transform="rotate(-90 20 260)">Trust in the model (how much autonomy it is given)</text>
+    <circle cx="317.5" cy="30" r="6" fill="#6ea8fe"/>
+    <text x="327.5" y="34" fill="#e6e9ee" font-size="13" font-weight="600">Pi</text>
+    <circle cx="235" cy="87.5" r="6" fill="#6ea8fe"/>
+    <text x="245" y="91.5" fill="#e6e9ee" font-size="13" font-weight="600">Claude</text>
+    <circle cx="152.5" cy="145" r="6" fill="#6ea8fe"/>
+    <text x="162.5" y="149" fill="#e6e9ee" font-size="13" font-weight="600">OpenAI</text>
+    <circle cx="400" cy="260" r="6" fill="#6ea8fe"/>
+    <text x="410" y="264" fill="#e6e9ee" font-size="13" font-weight="600">Snowflake</text>
+    <circle cx="400" cy="317.5" r="6" fill="#6ea8fe"/>
+    <text x="410" y="321.5" fill="#e6e9ee" font-size="13" font-weight="600">OpenCode</text>
+    <circle cx="482.5" cy="375" r="6" fill="#6ea8fe"/>
+    <text x="492.5" y="379" fill="#e6e9ee" font-size="13" font-weight="600">Google ADK</text>
+    <circle cx="647.5" cy="432.5" r="6" fill="#6ea8fe"/>
+    <text x="637.5" y="436.5" text-anchor="end" fill="#e6e9ee" font-size="13" font-weight="600">LangGraph</text>
+    <circle cx="482.5" cy="260" r="9" fill="#ff8fab" stroke="#0f1419" stroke-width="2"/>
+    <circle cx="482.5" cy="260" r="13" fill="none" stroke="#ff8fab" stroke-opacity="0.45"/>
+    <text x="496" y="264" fill="#ff8fab" font-size="13" font-weight="700">Assistant Factory</text>
+  </svg>
+</div>
+
+<div class="figure-card" id="fig-matrix">
+  <h2>Figure 3 &middot; Appendix: The Cross-Cutting View</h2>
+  <p class="sub">The five dimensions of the comparison, compressed to one line per framework.</p>
+  <table>
+    <thead>
+      <tr><th>Framework</th><th>Philosophy</th><th>Composition</th><th>Ambiguity</th><th>Memory</th><th>Observability</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Claude Agent SDK</td><td>Thin wrapper, model owns the loop</td><td>Hub-and-spoke subagents</td><td>Model-initiated <code>AskUserQuestion</code></td><td>Markdown files plus JSONL transcript</td><td>Per-turn cost and usage, no scorers</td></tr>
+      <tr><td>OpenAI Agents</td><td>Minimal scaffolding, model-driven</td><td>Handoffs and agent-as-tool</td><td>Guardrails and approval gates</td><td>Session transcript plus sandbox markdown</td><td>Tracing on by default, no scorers</td></tr>
+      <tr><td>Google ADK</td><td>Build-validated graph</td><td>Explicit nodes and edges</td><td><code>RequestInput</code> interrupt</td><td>Typed prefixed state plus memory service</td><td>OTel-native plus prebuilt scorers</td></tr>
+      <tr><td>LangGraph</td><td>Developer-owned Pregel runtime</td><td>Typed channels and conditional edges</td><td>Developer-placed <code>interrupt()</code></td><td>Checkpointer plus document store</td><td>Routed to paid LangSmith</td></tr>
+      <tr><td>Pi</td><td>One loop, four tools</td><td>None, single agent</td><td>None in core</td><td>Flat transcript plus markdown</td><td>Typed events, no OTel</td></tr>
+      <tr><td>OpenCode</td><td>Client/server, explicit wiring</td><td>Primary and subagent modes</td><td>Permission gates</td><td><code>AGENTS.md</code> plus session history</td><td>Event bus plus per-call cost</td></tr>
+      <tr><td>Cortex Code</td><td>Claude-style loop fenced for data</td><td>Markdown subagents plus data tools</td><td>Permission gates plus reflection</td><td>Markdown inside the warehouse</td><td>TruLens judges in-account</td></tr>
+      <tr class="af"><td>Assistant Factory</td><td>Deterministic shell, model in Skills</td><td>Stack of Flows</td><td>Four-level ambiguity gradient</td><td>Three-tier typed cache</td><td>Signal envelopes plus three-level evals</td></tr>
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>
