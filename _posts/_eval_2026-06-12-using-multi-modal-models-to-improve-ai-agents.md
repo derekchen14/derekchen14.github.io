@@ -1,20 +1,20 @@
 ---
 layout: post
 title: "Using Multi-modal Models to Improve AI Agents"
-date: '2026-06-12 08:13:44'
+date: '2026-06-12 08:21:16'
 tags: []
 color: 
 excerpt_separator: <!--more-->
 ---
 
 ## Motivation
-While text-only agents have made significant strides, they often struggle when operating in inherently visual environments where spatial context is paramount. Direct visual feedback is a fundamental necessity for completing complex tasks, such as navigating user interfaces or physical spaces. Direct visual feedback is not just a luxury but a crucial requirement for completing complex tasks that involve navigating user interfaces or physical spaces. This limitation highlights a growing gap between the reasoning capabilities of modern large language models and the requirements for truly embodied AI that can perceive and act in the world as humans do.
+Text-only agents often struggle when interacting with a world that is inherently visual, hitting a ceiling when they cannot perceive the context of a user interface or physical environment. Grounding language models in visual perception is not just an improvement but a critical requirement for truly effective task automation. The core vision behind VisionPo is to bridge this gap between sight and action, creating a seamless loop where the agent understands what it sees and acts accordingly.
 
 ## Ideas
-Looking ahead, there are several promising avenues for enhancing these systems, such as exploring cross-modal transfer learning to improve performance on novel vision tasks. One practical approach is to treat screenshots as a specific tool that the agent can call upon when needed, or even using video for better temporal grounding during long-running tasks. To maintain performance, we are also researching more efficient visual tokenization methods and implementing logic to fall back to text-only processing when the latency budget is tight. These efforts, combined with a focus on scaling laws for vision-augmented preference optimization, will define the next generation of multi-modal agents.
+We are exploring several promising directions, including the implementation of a multi-modal reward function to provide more accurate feedback during the learning process. There is also significant potential for zero-shot transfer capabilities to unseen visual interfaces, which could revolutionize web-based automation and accessibility. Furthermore, we are investigating the use of video for temporal grounding and treating screenshots as a specific tool the agent can call upon. To ensure performance remains high, we are developing logic to fall back to text-only processing when the latency budget is particularly tight.
 
 ## Process
-The development process begins with a robust data collection pipeline designed to capture high-quality visual demonstrations. After securing data, we wire a vision encoder—typically a pre-trained ViT—into the agent's planner. This allows the policy network to project visual features and textual tokens into a shared latent space, enabling the planner to ground its next-step decisions in the current UI state. We then fine-tune on UI traces for accuracy before moving to RL loops. Each iteration is tested for generalizability, then shipped behind a flag for real-world testing.
+The development process began with intensive data collection, navigating the significant hurdles of visual dataset curation to ensure the agent had a diverse range of interfaces to learn from. We aligned visual tokens with policy outputs and refined the agent through simulated testing. Specifically, the vision encoder processes raw screen pixels into high-level semantic tokens that represent UI elements like buttons and text fields. These tokens are then fed into the LLM-based planner, providing a structured visual context that allows the model to predict the next logical action based on both the user's goal and the current screen state. This direct mapping ensures the agent can react to dynamic changes in the interface in real-time. Next, we integrated a vision encoder with the planner, fine-tuned on real UI traces, and validated performance on held-out workflows before a controlled rollout.
 
 ## Takeaways
-The performance gains observed in VisionPo over baseline models demonstrate the clear advantage of integrating multi-modal capabilities into agentic workflows. However, these improvements come with significant hardware requirements that must be carefully managed during deployment. As we look toward the future, our roadmap focuses on refining multi-modal agent alignment to ensure these increasingly capable systems remain safe and effective in diverse environments.
+Our key findings highlight the superior efficiency of visual prompting compared to traditional text-only methods for complex UI tasks. Throughout the project, we gathered valuable lessons on the complexities of scaling multi-modal models for real-time applications. Looking ahead, our future research will focus on enhancing spatial reasoning and depth perception to make VisionPo even more capable in dynamic environments.
