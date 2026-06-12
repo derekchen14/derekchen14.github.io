@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Using Multi-modal Models to Improve AI Agents"
-date: '2026-06-12 03:25:51'
+date: '2026-06-12 03:27:06'
 tags: []
 color: 
 excerpt_separator: <!--more-->
