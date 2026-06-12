@@ -1,20 +1,20 @@
 ---
 layout: post
 title: "Using Multi-modal Models to Improve AI Agents"
-date: '2026-06-12 07:53:02'
+date: '2026-06-12 07:58:03'
 tags: []
 color: 
 excerpt_separator: <!--more-->
 ---
 
 ## Motivation
-Text-only agents often struggle when interacting with complex visual interfaces that rely on more than just structured data. As autonomous web navigation becomes more sophisticated, there is a growing need for multimodal capabilities that can interpret visual cues. VisionPo bridges this gap by converting raw pixels into actionable intent, allowing agents to understand the context of a page beyond simple text. This visual grounding significantly improves reliability and increases task success rates in dynamic environments.
+Text-only agents often struggle with the complexities of spatial and visual contexts, leading to significant limitations in their ability to navigate real-world interfaces. To bridge this gap, multi-modal capabilities have become a necessity for executing complex tasks that require an understanding of what is happening on a screen. While several vision-language models exist, a notable deficit remains in open-source options specifically optimized for agentic workflows. The VisionPo project addresses this visual gap by developing specialized models that can interpret and act upon visual data with the same precision as textual instructions.
 
 ## Ideas
-There are several promising avenues for future development, including the exploration of few-shot learning to help agents adapt to entirely novel app layouts. We are also investigating the potential for zero-shot generalization across different operating systems to make the agent more versatile. To address privacy concerns, we are looking into architectures that process visual data locally on the edge. Other hybrid ideas include combining VisionPo with traditional DOM-based approaches or using video for better temporal grounding. We are even considering treating screenshots as a specific tool the agent can call or falling back to text-only modes when the latency budget is particularly tight.
+The potential applications for VisionPo extend into automated web navigation and deep integration with robotic process automation tools. One promising direction involves using video for temporal grounding, which allows the agent to maintain situational awareness over time rather than relying on static images. Another approach is treating screenshots as a specific tool that the agent can call upon when visual confirmation is required. To manage performance, the system can fall back to text-only processing when the latency budget is tight, ensuring reliability. Future iterations may even involve 3D environment mapping to expand the agent's reach into physical or simulated spaces.
 
 ## Process
-We started by collecting UI screenshots and aligning visual tokens with language model outputs. The vision encoder processes high-resolution image frames, extracting hierarchical visual features that represent the UI layout. These features are then projected into the same embedding space as the planner's text tokens, allowing the LLM-based planner to 'see' visual elements as part of its sequential input for decision making. By integrating OCR and element detection, we refined the policy network for better spatial awareness. Finally, we fine-tuned the planner on real-world traces and shipped the feature behind a flag for testing.
+Development begins by selecting a compatible visual encoder and LLM backbone. Once wired into the planner, we fine-tune the model on vision-centric instructions and UI traces to align visual tokens with textual intent. Finally, the system is evaluated on held-out workflows before an incremental rollout via feature flags.
 
 ## Takeaways
-Our implementation of VisionPo has shown significant performance gains, particularly in environments containing dynamic or non-textual elements. Throughout this journey, we have gathered valuable lessons from common failure modes in visual reasoning, which will inform our next steps. Looking ahead, we plan to scale these capabilities to handle more complex, multi-step workflows. This work represents a fundamental shift from text-centric to vision-centric agent design, paving the way for more intuitive AI assistants.
+Testing phases have revealed substantial performance gains, underscoring the critical importance of high-quality and diverse visual instruction data. For developers interested in these capabilities, we have provided a clear roadmap for integrating VisionPo into existing technology stacks. These advancements suggest broader implications for the future of AI, moving toward agents that can truly see and interact with the digital world as humans do. By prioritizing multi-modal integration, we are setting the stage for a more intuitive and capable generation of artificial intelligence.
