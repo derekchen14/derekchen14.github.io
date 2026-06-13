@@ -84,48 +84,47 @@ The other end replaces that machinery with the model's own judgment, which can a
 
 <figure>
 <svg viewBox="0 0 760 575" width="100%" role="img" aria-label="Scatter plot of trust in the model versus ease of use across eight agent SDKs" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif">
-  <rect x="0" y="0" width="760" height="575" rx="10" fill="#0f1419"/>
-  <rect x="70" y="30" width="660" height="460" fill="none" stroke="#2a323f"/>
-  <line x1="235" y1="30" x2="235" y2="490" stroke="#2a323f" stroke-dasharray="3 4"/>
-  <line x1="400" y1="30" x2="400" y2="490" stroke="#2a323f" stroke-dasharray="3 4"/>
-  <line x1="565" y1="30" x2="565" y2="490" stroke="#2a323f" stroke-dasharray="3 4"/>
-  <line x1="70" y1="375" x2="730" y2="375" stroke="#2a323f" stroke-dasharray="3 4"/>
-  <line x1="70" y1="260" x2="730" y2="260" stroke="#2a323f" stroke-dasharray="3 4"/>
-  <line x1="70" y1="145" x2="730" y2="145" stroke="#2a323f" stroke-dasharray="3 4"/>
-  <text x="60" y="494" text-anchor="end" fill="#7c8696" font-size="12">1 &middot; none</text>
-  <text x="60" y="379" text-anchor="end" fill="#7c8696" font-size="12">2 &middot; low</text>
-  <text x="60" y="264" text-anchor="end" fill="#7c8696" font-size="12">3 &middot; average</text>
-  <text x="60" y="149" text-anchor="end" fill="#7c8696" font-size="12">4 &middot; high</text>
-  <text x="60" y="34" text-anchor="end" fill="#7c8696" font-size="12">5 &middot; full</text>
-  <text x="70" y="510" text-anchor="middle" fill="#7c8696" font-size="12">1</text>
-  <text x="70" y="524" text-anchor="middle" fill="#7c8696" font-size="11">dead simple</text>
-  <text x="235" y="510" text-anchor="middle" fill="#7c8696" font-size="12">2</text>
-  <text x="235" y="524" text-anchor="middle" fill="#7c8696" font-size="11">easy</text>
-  <text x="400" y="510" text-anchor="middle" fill="#7c8696" font-size="12">3</text>
-  <text x="400" y="524" text-anchor="middle" fill="#7c8696" font-size="11">average</text>
-  <text x="565" y="510" text-anchor="middle" fill="#7c8696" font-size="12">4</text>
-  <text x="565" y="524" text-anchor="middle" fill="#7c8696" font-size="11">hard</text>
-  <text x="730" y="510" text-anchor="middle" fill="#7c8696" font-size="12">5</text>
-  <text x="730" y="524" text-anchor="middle" fill="#7c8696" font-size="11">steep curve</text>
-  <text x="400" y="552" text-anchor="middle" fill="#aab3c0" font-size="13" font-weight="600">Ease of use &mdash; effort to get up and running (1 = minutes, 5 = needs a workshop)</text>
-  <text x="20" y="260" text-anchor="middle" fill="#aab3c0" font-size="13" font-weight="600" transform="rotate(-90 20 260)">Trust in the model (how much autonomy it is given)</text>
-  <circle cx="317.5" cy="30" r="6" fill="#6ea8fe"/>
-  <text x="327.5" y="34" fill="#e6e9ee" font-size="13" font-weight="600">Pi</text>
-  <circle cx="235" cy="87.5" r="6" fill="#6ea8fe"/>
-  <text x="245" y="91.5" fill="#e6e9ee" font-size="13" font-weight="600">Claude</text>
-  <circle cx="152.5" cy="145" r="6" fill="#6ea8fe"/>
-  <text x="162.5" y="149" fill="#e6e9ee" font-size="13" font-weight="600">OpenAI</text>
-  <circle cx="400" cy="260" r="6" fill="#6ea8fe"/>
-  <text x="410" y="264" fill="#e6e9ee" font-size="13" font-weight="600">Snowflake</text>
-  <circle cx="400" cy="317.5" r="6" fill="#6ea8fe"/>
-  <text x="410" y="321.5" fill="#e6e9ee" font-size="13" font-weight="600">OpenCode</text>
-  <circle cx="482.5" cy="375" r="6" fill="#6ea8fe"/>
-  <text x="492.5" y="379" fill="#e6e9ee" font-size="13" font-weight="600">Google ADK</text>
-  <circle cx="647.5" cy="432.5" r="6" fill="#6ea8fe"/>
-  <text x="637.5" y="436.5" text-anchor="end" fill="#e6e9ee" font-size="13" font-weight="600">LangGraph</text>
-  <circle cx="482.5" cy="260" r="9" fill="#ff8fab" stroke="#0f1419" stroke-width="2"/>
-  <circle cx="482.5" cy="260" r="13" fill="none" stroke="#ff8fab" stroke-opacity="0.45"/>
-  <text x="496" y="264" fill="#ff8fab" font-size="13" font-weight="700">Assistant Factory</text>
+  <rect x="70" y="30" width="660" height="460" fill="none" stroke="#d5dce4"/>
+  <line x1="235" y1="30" x2="235" y2="490" stroke="#d5dce4" stroke-dasharray="3 4"/>
+  <line x1="400" y1="30" x2="400" y2="490" stroke="#d5dce4" stroke-dasharray="3 4"/>
+  <line x1="565" y1="30" x2="565" y2="490" stroke="#d5dce4" stroke-dasharray="3 4"/>
+  <line x1="70" y1="375" x2="730" y2="375" stroke="#d5dce4" stroke-dasharray="3 4"/>
+  <line x1="70" y1="260" x2="730" y2="260" stroke="#d5dce4" stroke-dasharray="3 4"/>
+  <line x1="70" y1="145" x2="730" y2="145" stroke="#d5dce4" stroke-dasharray="3 4"/>
+  <text x="60" y="494" text-anchor="end" fill="#5f6b78" font-size="12">1 &middot; none</text>
+  <text x="60" y="379" text-anchor="end" fill="#5f6b78" font-size="12">2 &middot; low</text>
+  <text x="60" y="264" text-anchor="end" fill="#5f6b78" font-size="12">3 &middot; avg</text>
+  <text x="60" y="149" text-anchor="end" fill="#5f6b78" font-size="12">4 &middot; high</text>
+  <text x="60" y="34" text-anchor="end" fill="#5f6b78" font-size="12">5 &middot; full</text>
+  <text x="70" y="510" text-anchor="middle" fill="#5f6b78" font-size="12">1</text>
+  <text x="70" y="524" text-anchor="middle" fill="#5f6b78" font-size="11">dead simple</text>
+  <text x="235" y="510" text-anchor="middle" fill="#5f6b78" font-size="12">2</text>
+  <text x="235" y="524" text-anchor="middle" fill="#5f6b78" font-size="11">easy</text>
+  <text x="400" y="510" text-anchor="middle" fill="#5f6b78" font-size="12">3</text>
+  <text x="400" y="524" text-anchor="middle" fill="#5f6b78" font-size="11">average</text>
+  <text x="565" y="510" text-anchor="middle" fill="#5f6b78" font-size="12">4</text>
+  <text x="565" y="524" text-anchor="middle" fill="#5f6b78" font-size="11">hard</text>
+  <text x="730" y="510" text-anchor="middle" fill="#5f6b78" font-size="12">5</text>
+  <text x="730" y="524" text-anchor="middle" fill="#5f6b78" font-size="11">steep curve</text>
+  <text x="400" y="552" text-anchor="middle" fill="#1e4669" font-size="13" font-weight="600">Ease of use (effort to get up and running) </text>
+  <text x="20" y="260" text-anchor="middle" fill="#1e4669" font-size="13" font-weight="600" transform="rotate(-90 20 260)">Trust (how much model autonomy)</text>
+  <circle cx="317.5" cy="30" r="6" fill="#2f6fb3"/>
+  <text x="327.5" y="34" fill="#2d333b" font-size="13" font-weight="600">Pi</text>
+  <circle cx="235" cy="57" r="6" fill="#2f6fb3"/>
+  <text x="245" y="61" fill="#2d333b" font-size="13" font-weight="600">Claude</text>
+  <circle cx="152.5" cy="145" r="6" fill="#2f6fb3"/>
+  <text x="162.5" y="149" fill="#2d333b" font-size="13" font-weight="600">OpenAI</text>
+  <circle cx="390" cy="255" r="6" fill="#2f6fb3"/>
+  <text x="400" y="260" fill="#2d333b" font-size="13" font-weight="600">Snowflake</text>
+  <circle cx="400" cy="317.5" r="6" fill="#2f6fb3"/>
+  <text x="410" y="321.5" fill="#2d333b" font-size="13" font-weight="600">OpenCode</text>
+  <circle cx="482.5" cy="375" r="6" fill="#2f6fb3"/>
+  <text x="492.5" y="379" fill="#2d333b" font-size="13" font-weight="600">Google ADK</text>
+  <circle cx="647.5" cy="432.5" r="6" fill="#2f6fb3"/>
+  <text x="637.5" y="436.5" text-anchor="end" fill="#2d333b" font-size="13" font-weight="600">LangGraph</text>
+  <circle cx="482.5" cy="210" r="7" fill="#d6336c" stroke="#ffffff" stroke-width="2"/>
+  <circle cx="482.5" cy="210" r="11" fill="none" stroke="#d6336c" stroke-opacity="0.45"/>
+  <text x="496" y="214" fill="#d6336c" font-size="13" font-weight="600">Assistant Factory</text>
 </svg>
 <figcaption><em>How much each framework trusts the model, plotted against the effort it takes to get running. The points trend along the diagonal because the same scaffolding that constrains the model is what a newcomer has to learn. The empty corners are the real finding, since nobody has decoupled control from onboarding cost.</em></figcaption>
 </figure>
@@ -166,7 +165,7 @@ What exists today is a set of distinct, internally coherent philosophies, each b
 
 ## Appendix: The Cross-Cutting View
 
-The five dimensions of the comparison, compressed to one line per framework. Each cell condenses the code-level read behind the sections above, and the footnotes throughout the post carry the receipts.
+The five dimensions of the comparison with one line per framework:
 
 <div class="table-wide" markdown="1">
 
