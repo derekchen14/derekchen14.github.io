@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Why Most Beginner Gardens Die in July"
-date: '2026-07-04 05:09:20'
+date: '2026-07-04 06:18:43'
 tags: []
 color: 
 excerpt_separator: <!--more-->
