@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Roman Concrete Heals Itself; Ours Just Crumbles"
-date: '2026-07-09 02:16:25'
+date: '2026-07-09 05:50:51'
 tags: [roman, concrete, engineering, ancient, materials, history, rome]
 color: 
 excerpt_separator: <!--more-->
