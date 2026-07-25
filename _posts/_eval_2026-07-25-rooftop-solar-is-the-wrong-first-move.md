@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Rooftop Solar Is the Wrong First Move"
-date: '2026-07-25 11:52:24'
+date: '2026-07-25 12:30:08'
 tags: [energy, clean energy, solar, rooftop solar, efficiency, home, electric]
 color: 
 excerpt_separator: <!--more-->
@@ -27,4 +27,4 @@ The envelope comes first because it sets the baseline everything else is measure
 Reverse the order and you are sizing a solar system against energy use that is still being wasted. A system built for an inefficient house comes out oversized once that house is tightened up. Sequenced correctly, the system ends up smaller, cheaper, and matched to what the house actually needs.
 
 ## When Solar Makes Sense
-Solar pays back fastest once the envelope is sealed and the heating system is efficient, because then it only has to offset a smaller, known load instead of guessing at a leaky one. Geography changes the math. The U.S. Energy Information Administration tracks residential electricity rates by state, and Arizona and Southern California sit among the highest in the country, often 15 to 20 cents per kilowatt-hour; paired with heavy sun, a well-sized system there can pay for itself in six to eight years. In Ohio and the Pacific Northwest, where clouds are common and rates run closer to 8 to 10 cents per kilowatt-hour, payback stretches to twelve to fifteen years. In sunny states with strong incentives, starting with solar will not bankrupt anyone. Even there, efficiency upgrades still pay back faster. Panels make sense as the closing move, not the opening one. Buy solar first and you usually pay for capacity the house never needed. Buy it last, after the load is trimmed, and you save on both the system and your bills. Buy it last, after the load is trimmed, and both the wallet and the electricity bill show the difference.
+Solar pays back fastest once the envelope is sealed and the heating system is efficient, because then it only has to offset a smaller, known load instead of guessing at a leaky one. Geography changes the math. The U.S. Energy Information Administration tracks residential electricity rates by state, and Arizona and Southern California sit among the highest in the country, often 15 to 20 cents per kilowatt-hour; paired with heavy sun, a well-sized system there can pay for itself in six to eight years. In Ohio and the Pacific Northwest, where clouds are common and rates run closer to 8 to 10 cents per kilowatt-hour, payback stretches to twelve to fifteen years. In sunny states with strong incentives, starting with solar will not bankrupt anyone. Even there, efficiency upgrades still pay back faster. Panels make sense as the closing move, not the opening one. Buy solar first and you usually pay for capacity the house never needed. Buy it last, after the load is trimmed, and you maximize your savings on both sides. Buy it last, after the load is trimmed, and both the wallet and the electricity bill show the difference.
