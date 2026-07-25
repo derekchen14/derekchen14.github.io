@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Heat Pumps Work Fine in the Cold"
-date: '2026-07-25 07:56:11'
+date: '2026-07-25 07:59:46'
 tags: [energy, clean energy, heat pumps, cold-climate heating, heating, electric, winter]
 color: 
 excerpt_separator: <!--more-->
@@ -28,6 +28,4 @@ Performance and cost both get worse during the coldest snaps, and skeptics are r
 That cost concentrates in a small number of hours each year. Sealing air leaks and adding attic insulation does more for comfort on a cold night than any compressor upgrade, and most states now offer rebates covering part of the panel work. The skeptics have the extremes right and are wrong to treat the extremes as the whole story.
 
 ## Running Costs in Winter
-At $0.15 per kWh and a coefficient of performance of 2.5, a heat pump heats for less per BTU than oil or propane, and the gap widens as the electric grid gets cleaner. Running costs rise as the temperature drops, since the compressor works harder for the same coefficient of performance, so a January bill and a November bill from the same house can look very different. Compare against local fuel prices, since propane costs vary widely by region.
-
-My own numbers back this up: a properly sized heat pump beat my old propane furnace by about 30 percent over one winter, counting the handful of nights the backup strips ran.
+At $0.15 per kWh and a coefficient of performance of 2.5, a heat pump heats for less per BTU than oil or propane, and the gap widens as the electric grid gets cleaner. Because dropping winter temperatures force the compressor to work harder, a January heating bill can look much higher than a November bill for the same house. Running costs rise as the temperature drops, since the compressor works harder for the same coefficient of performance, so a January bill and a November bill from the same house can look very different. Compare against local fuel prices, since propane costs vary widely by region. My own numbers back this up: a properly sized heat pump beat my old propane furnace by about 30 percent over one winter, counting the handful of nights the backup strips ran.
