@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "You Don't Need Immersion; You Need Output"
-date: '2026-07-29 03:37:42'
+date: '2026-07-29 06:42:15'
 tags: [language, language learning, immersion, output, speaking, fluency]
 color: 
 excerpt_separator: <!--more-->
