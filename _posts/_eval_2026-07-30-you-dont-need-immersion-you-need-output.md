@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "You Don't Need Immersion; You Need Output"
-date: '2026-07-30 15:44:38'
+date: '2026-07-30 15:46:18'
 tags: [language, language learning, immersion, output, speaking, fluency]
 color: 
 excerpt_separator: <!--more-->
@@ -28,7 +28,4 @@ Start speaking on day one, badly, before you feel ready, because you will never 
 Most learners postpone speaking until they hit some comprehension threshold that never arrives. Early production carries real risk: mispronunciation, wrong conjugations, a native speaker who has to ask you to repeat yourself. That friction is worth more than another hour of listening. A confused look on someone's face sticks in memory longer than a grammar rule copied into a notebook.
 
 ## A Weekly Routine
-
-Pick three days for short speaking drills and two days for writing something a native speaker can correct. Cap each session at twenty minutes so you actually show up, and make sure you produce more than you consume every time. Close out each week by deliberately reusing the mistakes you made in the last one.
-
-Consistency beats volume. A twenty-minute speaking drill three times a week, kept up for months, outperforms a weekend immersion bootcamp, because retrieval practice repeated under real time pressure is what builds fluency. Most classroom courses get this backward: they front-load comprehension for months and delay speaking until the end, when the order should run the other way.
+Pick three days for short speaking drills and two days for writing something a native speaker can correct. Cap each session at twenty minutes so you actually show up, and make sure you produce more than you consume every time. Close out each week by deliberately reusing the mistakes you made in the last one. Consistency beats volume. A twenty-minute speaking drill three times a week, kept up for months, outperforms a weekend immersion bootcamp, because retrieval practice repeated under real time pressure is what builds fluency. Most classroom courses get this backward, front-loading comprehension for months and delaying speaking until the end. Flip that order: start speaking in week one, and let comprehension catch up along the way.
